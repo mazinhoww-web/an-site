@@ -35,7 +35,7 @@ const fontWeights = [
 
 export default function TokensPage() {
   return (
-    <main className="mx-auto max-w-container px-6 py-16 md:px-12 lg:px-16">
+    <div className="mx-auto max-w-container px-6 py-16 md:px-12 lg:px-16">
       {/* Header */}
       <header className="mb-20">
         <h1 className="text-display-l font-heading">
@@ -182,6 +182,6 @@ export default function TokensPage() {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

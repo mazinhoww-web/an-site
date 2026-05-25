@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Nav } from '@/components/layout/Nav';
+import { Footer } from '@/components/layout/Footer';
 import './globals.css';
 
 const spaceGrotesk = Space_Grotesk({
@@ -41,7 +43,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <body className="bg-bone text-ink font-sans antialiased">
-        {children}
+        <Nav />
+        <main className="pt-14 md:pt-16">{children}</main>
+        <Footer />
         <Analytics />
         <SpeedInsights />
       </body>
