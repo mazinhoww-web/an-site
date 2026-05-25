@@ -35,7 +35,12 @@ Descritor: **LOYALTY × FINTECH × INNOVATION** (com `×`, nunca `+` nem `&`).
 
 - **Framework:** Next.js 14 App Router + TypeScript estrito
 - **Estilo:** Tailwind CSS + shadcn/ui
-- **DB + Auth + Storage:** Supabase
+- **DB:** Vercel Postgres (Neon) + Drizzle ORM
+- **Auth:** Auth.js v5 + Resend magic link
+- **Storage:** Vercel Blob
+- **Cache/KV:** Vercel KV
+- **Feature flags:** Vercel Edge Config
+- **Analytics:** Vercel Analytics + Vercel Speed Insights
 - **Email:** Resend
 - **Hosting:** Vercel
 - **Forms:** React Hook Form + Zod
@@ -74,7 +79,7 @@ Padrao de commit:
 ```
 feat(M2.3): adiciona pagina /projetos com filtro por tag
 fix(M3.2): corrige cookie do email gate em mobile Safari
-chore(M1.4): atualiza tipos do Supabase apos migration
+chore(M1.4): atualiza schema Drizzle apos migration
 docs(M1): atualiza README com instrucoes de seed
 ```
 
@@ -115,11 +120,11 @@ docs(M1): atualiza README com instrucoes de seed
 │   │   ├── projects/
 │   │   ├── skills/
 │   │   └── admin/
+│   ├── db/
+│   │   ├── schema.ts
+│   │   └── index.ts
 │   ├── lib/
-│   │   ├── supabase/
-│   │   │   ├── server.ts
-│   │   │   ├── client.ts
-│   │   │   └── admin.ts
+│   │   ├── auth.ts
 │   │   ├── resend/
 │   │   ├── validators/        # schemas Zod
 │   │   └── utils.ts
@@ -129,11 +134,9 @@ docs(M1): atualiza README com instrucoes de seed
 │   │   ├── downloads.ts
 │   │   └── newsletter.ts
 │   ├── types/
-│   │   └── database.types.ts  # gerado por supabase gen types
+│   │   └── next-auth.d.ts
 │   └── middleware.ts
-├── supabase/
-│   ├── migrations/
-│   └── seed.sql
+├── drizzle/
 ├── public/
 ├── PROJECT.md
 ├── REQUIREMENTS.md
@@ -170,7 +173,7 @@ docs(M1): atualiza README com instrucoes de seed
 - Mutations via Server Actions, nao API Routes (exceto webhooks e unsubscribe).
 
 ### Data fetching
-- Server Components leem direto do Supabase server client.
+- Server Components leem direto do Drizzle client (db.select...).
 - Client Components usam Server Actions ou SWR para revalidacao.
 
 ### Forms
@@ -205,12 +208,10 @@ pnpm type-check
 # lint
 pnpm lint
 
-# Supabase local
-supabase start
-supabase db reset           # zera DB local + aplica migrations + seed
-supabase migration new <nome>
-supabase db push --linked   # aplica em prod (cuidado)
-supabase gen types typescript --linked > src/types/database.types.ts
+# Drizzle (DB migrations)
+pnpm db:generate     # gera migration SQL a partir do schema.ts
+pnpm db:migrate      # aplica migrations no Vercel Postgres
+pnpm db:studio       # abre Drizzle Studio (GUI do banco)
 
 # Vercel
 vercel              # deploy preview
@@ -223,7 +224,7 @@ vercel --prod       # deploy prod (preferir via git push)
 
 1. NAO usar `getServerSideProps` (estamos em App Router).
 2. NAO criar API Route quando Server Action serve.
-3. NAO expor `SUPABASE_SERVICE_ROLE_KEY` ao client.
+3. NAO expor `POSTGRES_URL` ou `AUTH_SECRET` ao client.
 4. NAO hardcodar cores; usar tokens.
 5. NAO inventar fontes; apenas Space Grotesk, Inter, JetBrains Mono.
 6. NAO criar tabelas sem atualizar `DATABASE.md` e gerar migration.
@@ -253,12 +254,12 @@ NUNCA assuma estado. Sempre confirme antes de comecar mudanca grande.
 
 | # | Decisao | Onde |
 |---|---|---|
-| 1 | Stack Next.js 14 + Supabase + Resend + Vercel | PROJECT.md secao 6 |
+| 1 | Stack Next.js 14 + Vercel Postgres + Drizzle + Auth.js + Blob/KV + Resend | STACK-V5.md |
 | 2 | App Router only, sem Pages Router | PROJECT.md secao 7 |
 | 3 | Server Actions para mutations | PROJECT.md secao 7 |
-| 4 | RLS ativada em todas tabelas | DATABASE.md secao 4 |
+| 4 | RBAC server-side em todas Server Actions | STACK-V5.md secao 3.2 |
 | 5 | Email gate com cookie 30d | REQUIREMENTS.md R8.4-R8.5 |
-| 6 | Admin via magic link + allow-list | REQUIREMENTS.md R12.2 |
+| 6 | Admin via Auth.js magic link + allow-list ADMIN_EMAILS | STACK-V5.md secao 3.3 |
 | 7 | Sem comentarios, sem likes em v1 | PROJECT.md secao 4.1 |
 | 8 | LGPD: double opt-in, export, delete | REQUIREMENTS.md R13 |
 | 9 | Tokens de cor/fonte do brand book AN. v1.0 | DESIGN.md secao 2 |

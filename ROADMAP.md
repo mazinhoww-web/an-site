@@ -15,8 +15,8 @@ Ordem de execução é estrita: nenhum slice avança com tasks pendentes do ante
 - [ ] T1.1.1 Criar repo `mazinhoww-web/an-website` (privado).
 - [ ] T1.1.2 `npx create-next-app@latest` com TypeScript estrito, Tailwind, App Router, ESLint, src/ dir.
 - [ ] T1.1.3 Configurar `eslint`, `prettier`, `lint-staged`, `husky` pre-commit.
-- [ ] T1.1.4 Criar `.env.example`, `.gitignore` (Next.js + Supabase + macOS).
-- [ ] T1.1.5 Configurar `next.config.js` com `images.remotePatterns` para Supabase Storage.
+- [ ] T1.1.4 Criar `.env.example`, `.gitignore` (Next.js + Drizzle + macOS).
+- [ ] T1.1.5 Configurar `next.config.js` com `images.remotePatterns` para Vercel Blob.
 - [ ] T1.1.6 Primeiro commit `chore: bootstrap project`.
 
 **Pronto quando:** `pnpm dev` roda na 3000, type-check verde, primeiro deploy preview Vercel rodando "Hello".
@@ -41,16 +41,16 @@ Ordem de execução é estrita: nenhum slice avança com tasks pendentes do ante
 
 **Pronto quando:** layout shell renderiza em todas viewports (375, 768, 1280) sem CLS.
 
-### Slice 1.4 — Supabase init e schema
+### Slice 1.4 — Vercel Postgres + Drizzle init
 
-- [ ] T1.4.1 Criar projeto Supabase `an-website-prod` + `an-website-dev`.
-- [ ] T1.4.2 Rodar SQL completo do DATABASE.md em ambos via SQL editor.
-- [ ] T1.4.3 Habilitar RLS e aplicar policies do DATABASE.md.
-- [ ] T1.4.4 Criar bucket Storage `skills` (privado) e `media` (público).
-- [ ] T1.4.5 Configurar `@supabase/ssr` no Next.js (server + client).
-- [ ] T1.4.6 Helpers `lib/supabase/server.ts`, `lib/supabase/client.ts`, `lib/supabase/admin.ts`.
+- [ ] T1.4.1 Provisionar Vercel Postgres (an-site-db) + KV + Blob via dashboard Vercel.
+- [ ] T1.4.2 Criar `src/db/schema.ts` com schema Drizzle completo conforme STACK-V5.md secao 4.2.
+- [ ] T1.4.3 Criar `src/db/index.ts` com Drizzle client conectando via @vercel/postgres.
+- [ ] T1.4.4 Configurar `drizzle.config.ts` apontando para POSTGRES_URL.
+- [ ] T1.4.5 Rodar `pnpm db:generate` e `pnpm db:migrate` para aplicar schema.
+- [ ] T1.4.6 Configurar `src/lib/auth.ts` com Auth.js v5 + DrizzleAdapter + Resend provider.
 
-**Pronto quando:** consulta SELECT em qualquer tabela do server retorna []` sem erro de policy.
+**Pronto quando:** `pnpm db:migrate` aplica sem erro e `db.select().from(skills)` retorna [].
 
 ---
 
@@ -128,7 +128,7 @@ Ordem de execução é estrita: nenhum slice avança com tasks pendentes do ante
 - [ ] T3.2.1 Modal `<DownloadGate>` aberto pelo botão de download.
 - [ ] T3.2.2 Se cookie `an_email_verified` válido (30d), exibe botão direto.
 - [ ] T3.2.3 Senão, form com email + checkbox `consent_newsletter` (opcional) + checkbox `consent_lgpd` (obrigatório).
-- [ ] T3.2.4 Server Action `requestSkillDownload`: upserta `subscribers`, cria `downloads` row, gera signed URL Supabase Storage válida 10min.
+- [ ] T3.2.4 Server Action `requestSkillDownload`: upserta `subscribers`, cria `downloads` row, gera signed URL Vercel Blob valida 10min.
 - [ ] T3.2.5 Set cookie `an_email_verified` httpOnly 30d.
 - [ ] T3.2.6 Disparar email de confirmação (double opt-in) se `consent_newsletter = true`.
 - [ ] T3.2.7 Incrementar `download_count` na skill.
@@ -151,7 +151,7 @@ Ordem de execução é estrita: nenhum slice avança com tasks pendentes do ante
 
 ### Slice 4.1 — Auth e shell admin
 
-- [ ] T4.1.1 Página `/admin/login` (magic link via Supabase Auth).
+- [ ] T4.1.1 Pagina `/admin/login` (magic link via Auth.js v5 + Resend).
 - [ ] T4.1.2 Middleware `middleware.ts` protege `/admin/*` e checa allow-list `ADMIN_EMAILS`.
 - [ ] T4.1.3 Layout `/admin/layout.tsx` com sidebar (Dashboard, Projetos, Skills, Notícias, Subscribers, Mensagens, Newsletter).
 - [ ] T4.1.4 Logout via Server Action.
@@ -250,7 +250,7 @@ Ordem de execução é estrita: nenhum slice avança com tasks pendentes do ante
 - [ ] T5.5.1 Domínio configurado (DNS para Vercel).
 - [ ] T5.5.2 Variáveis de produção configuradas em Vercel.
 - [ ] T5.5.3 Resend domain verified (DKIM, SPF).
-- [ ] T5.5.4 Backup Supabase ativado.
+- [ ] T5.5.4 Backup Vercel Postgres verificado (managed by Neon).
 - [ ] T5.5.5 Smoke test em produção (todos forms, download, magic link).
 - [ ] T5.5.6 Tag `v1.0.0`.
 
