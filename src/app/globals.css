@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bone: #f5f4ef;
+    --color-paper: #ffffff;
+    --color-ink: #0a0a0a;
+    --color-graphite: #4a4a4a;
+    --color-smoke: #8a8a8a;
+    --color-hairline: #e5e3dc;
+    --color-lime: #ccff00;
+    --color-lime-deep: #9fcc00;
+    --color-success: #1f7a3a;
+    --color-error: #8b1f2e;
+  }
+
+  ::selection {
+    @apply bg-lime text-ink;
+  }
+
+  *:focus-visible {
+    @apply outline-2 outline-lime outline-offset-2;
+  }
+}

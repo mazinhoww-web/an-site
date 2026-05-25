@@ -33,5 +33,8 @@ Thumbs.db
 npm-debug.log*
 pnpm-debug.log*
 
+# TypeScript
+tsconfig.tsbuildinfo
+
 # Drizzle
 drizzle/meta
