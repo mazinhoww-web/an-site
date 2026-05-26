@@ -12,7 +12,6 @@ import {
   LogOut,
 } from 'lucide-react';
 import { auth, signOut } from '@/lib/auth';
-import { redirect } from 'next/navigation';
 import { Mark } from '@/components/brand/Mark';
 import { Label } from '@/components/brand/Label';
 
@@ -35,18 +34,22 @@ const NAV_ITEMS = [
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
 
+  // Se não há sessão, renderiza só o children (a página de login se cuida)
+  // O auth check fica em cada page protegida, não no layout
   if (!session?.user) {
-    redirect('/admin/login');
+    return <>{children}</>;
   }
 
   const adminEmails = process.env.ADMIN_EMAILS?.split(',') ?? [];
-  if (!adminEmails.includes(session.user.email ?? '')) {
-    redirect('/admin/login');
+  const isAuthorized = adminEmails.includes(session.user.email ?? '');
+
+  // Se logado mas não autorizado, também só renderiza children
+  if (!isAuthorized) {
+    return <>{children}</>;
   }
 
   return (
     <div className="flex min-h-screen">
-      {/* Sidebar */}
       <aside className="fixed left-0 top-0 z-30 hidden h-full w-56 flex-col border-r border-hairline bg-paper md:flex">
         <div className="flex h-14 items-center px-6">
           <Mark size="sm" asLink />
@@ -87,7 +90,6 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         </div>
       </aside>
 
-      {/* Main content */}
       <main className="flex-1 md:ml-56">
         <div className="mx-auto max-w-5xl px-6 py-8">{children}</div>
       </main>
