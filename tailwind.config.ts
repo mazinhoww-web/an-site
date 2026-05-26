@@ -5,16 +5,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bone: '#F5F4EF',
-        paper: '#FFFFFF',
-        ink: '#0A0A0A',
-        graphite: '#4A4A4A',
-        smoke: '#8A8A8A',
-        hairline: '#E5E3DC',
-        lime: '#CCFF00',
-        'lime-deep': '#9FCC00',
-        success: '#1F7A3A',
-        error: '#8B1F2E',
+        bone: 'rgb(var(--color-bone) / <alpha-value>)',
+        paper: 'rgb(var(--color-paper) / <alpha-value>)',
+        ink: 'rgb(var(--color-ink) / <alpha-value>)',
+        graphite: 'rgb(var(--color-graphite) / <alpha-value>)',
+        smoke: 'rgb(var(--color-smoke) / <alpha-value>)',
+        hairline: 'rgb(var(--color-hairline) / <alpha-value>)',
+        lime: 'rgb(var(--color-lime) / <alpha-value>)',
+        'lime-deep': 'rgb(var(--color-lime-deep) / <alpha-value>)',
+        success: 'rgb(var(--color-success) / <alpha-value>)',
+        error: 'rgb(var(--color-error) / <alpha-value>)',
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
@@ -81,7 +81,7 @@ const config: Config = {
         wide: '0.04em',
       },
       borderColor: {
-        DEFAULT: '#E5E3DC',
+        DEFAULT: 'rgb(var(--color-hairline))',
       },
       keyframes: {
         'fade-in': {

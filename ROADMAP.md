@@ -256,14 +256,152 @@ Ordem de execução é estrita: nenhum slice avança com tasks pendentes do ante
 
 ---
 
-## Pós-v1 (backlog priorizado)
+## Milestone M7 — Funcional Core (semana 7-8)
 
-| Prioridade | Item |
-|---|---|
-| Alta | Versão EN dos textos (i18n com `next-intl`) |
-| Alta | RSS feed para notícias |
-| Média | Comentários em notícias (Giscus via GitHub Discussions) |
-| Média | Página `/agora` (now page) |
-| Média | Integração LinkedIn auto-post de notícias |
-| Baixa | Search global (Algolia ou Postgres full-text) |
-| Baixa | Tema dark explícito (hoje é "ink section") |
+**Goal:** Admin e downloads funcionando de verdade, conectados ao banco e storage.
+
+### Slice 7.1 — DownloadGate real
+
+- [ ] T7.1.1 Server Action `requestSkillDownload`: upsert em `subscribers`, cria row em `downloads`, gera signed URL Vercel Blob (10 min).
+- [ ] T7.1.2 Set cookie `an_email_verified` httpOnly 30d no response.
+- [ ] T7.1.3 Se `consent_newsletter = true`, disparar email de confirmacao (double opt-in) via Resend.
+- [ ] T7.1.4 Incrementar `download_count` na skill apos download concluido.
+- [ ] T7.1.5 Conectar `<DownloadGate>` ao Server Action real (remover setTimeout mock).
+
+**Pronto quando:** primeiro download exige email, segundo download (mesmo browser) baixa direto, contador incrementa no banco.
+
+### Slice 7.2 — Admin CRUDs reais
+
+- [ ] T7.2.1 CRUD Projetos: `/admin/projetos` lista + `/admin/projetos/novo` form + `/admin/projetos/[id]/editar`. Server Actions para create/update/delete. Toggle `is_featured`, `is_published`.
+- [ ] T7.2.2 CRUD Skills: `/admin/skills` lista + form com upload `.skill` (ate 5MB) para Vercel Blob bucket privado + thumbnail para bucket publico. Validacao extensao.
+- [ ] T7.2.3 CRUD Noticias: `/admin/noticias` lista + form com title, slug, body MD, categoria, cover image, published_at. Preview ao lado do editor.
+- [ ] T7.2.4 CRUD Eventos: `/admin/eventos` lista + form com campos do schema atual.
+- [ ] T7.2.5 Dashboard real: cards lendo `count(*)` de subscribers confirmados, downloads totais, mensagens nao-lidas. Tabelas com 5 ultimas mensagens e 5 ultimos downloads.
+- [ ] T7.2.6 Delete com confirmacao dupla em todos os CRUDs.
+
+**Pronto quando:** criar/editar/publicar/deletar funciona end-to-end para projetos, skills, noticias e eventos. Dashboard reflete dados reais.
+
+### Slice 7.3 — Newsletter dispatch
+
+- [ ] T7.3.1 `/admin/newsletter/nova` editor markdown + subject + preview HTML renderizado.
+- [ ] T7.3.2 Server Action `dispatchNewsletter`: le subscribers `confirmed=true AND unsubscribed=false`, dispara em batches de 100 via Resend.
+- [ ] T7.3.3 Grava em `newsletter_campaigns` log com `recipient_count`, `status`, `sent_at`.
+- [ ] T7.3.4 `/admin/newsletter` lista campanhas anteriores com status.
+- [ ] T7.3.5 Unsubscribe endpoint `/api/unsubscribe/[token]` marca `unsubscribed=true` e renderiza pagina de confirmacao.
+
+**Pronto quando:** teste de envio para 3 emails chega na inbox com unsubscribe funcional.
+
+### Slice 7.4 — Subscribers e LGPD
+
+- [ ] T7.4.1 `/admin/subscribers` tabela com busca, filtro confirmed/unsubscribed, paginacao.
+- [ ] T7.4.2 Export CSV (Server Action gera CSV, retorna como download).
+- [ ] T7.4.3 `/admin/mensagens` tabela com marcar-como-lido, link `mailto` para responder.
+- [ ] T7.4.4 Soft-delete subscriber via botao "Apagar dados" (LGPD Art. 18).
+
+**Pronto quando:** export CSV abre no Excel, marcar-como-lido persiste, soft-delete remove dados pessoais.
+
+### Slice 7.5 — Pagina /projetos
+
+- [ ] T7.5.1 Pagina `/projetos` lista paginada (12 por pagina) com card: thumbnail, titulo, tags, ano.
+- [ ] T7.5.2 Filtro por tag via querystring `?tag=fintech`.
+- [ ] T7.5.3 Pagina `/projetos/[slug]` detalhe com sumario, descricao MD, tags, links, galeria, projetos relacionados.
+- [ ] T7.5.4 `generateMetadata` e OG image por projeto.
+
+**Pronto quando:** seed com 6 projetos, navegacao lista <-> detalhe funcional.
+
+---
+
+## Milestone M8 — Qualidade e Integracao (semana 9-10)
+
+**Goal:** Performance, acessibilidade, comentarios e integracao LinkedIn.
+
+### Slice 8.1 — Performance audit
+
+- [ ] T8.1.1 Bundle analyzer (`@next/bundle-analyzer`), remover deps nao utilizadas ou >100kb sem justificativa.
+- [ ] T8.1.2 Confirmar `next/image` em 100% das imagens.
+- [ ] T8.1.3 Static generation onde possivel, ISR onde dinamico (`revalidate: 60`).
+- [ ] T8.1.4 Confirmar LCP <2.5s em mobile real (PageSpeed Insights).
+- [ ] T8.1.5 Lighthouse Performance >= 90 em mobile e desktop.
+
+**Pronto quando:** Lighthouse Performance >= 90, LCP <2.5s, CLS <0.1 em producao.
+
+### Slice 8.2 — Acessibilidade audit
+
+- [ ] T8.2.1 Auditoria axe-core em todas as paginas publicas, zero erros AA.
+- [ ] T8.2.2 Testes manuais de teclado em todos forms, modais, accordion, filtros.
+- [ ] T8.2.3 Confirmar `prefers-reduced-motion` desativa animacoes (nav, hero, hairline, photo frame).
+- [ ] T8.2.4 Confirmar alvos de toque >= 44x44px em mobile.
+- [ ] T8.2.5 Lighthouse Accessibility >= 95 em todas as paginas.
+
+**Pronto quando:** axe-core zero erros, Lighthouse Accessibility >= 95, navegacao 100% por teclado.
+
+### Slice 8.3 — Comentarios via Giscus
+
+- [ ] T8.3.1 Criar repositorio GitHub Discussions (ou ativar no repo existente).
+- [ ] T8.3.2 Instalar e configurar `@giscus/react` com tema customizado (bone/ink, sem sombra).
+- [ ] T8.3.3 Adicionar bloco de comentarios em `/noticias/[slug]` abaixo do conteudo.
+- [ ] T8.3.4 Estilizar iframe do Giscus para alinhar com design system (hairline borders, fontes do brand).
+- [ ] T8.3.5 `prefers-color-scheme` sincroniza tema do Giscus.
+
+**Pronto quando:** comentarios aparecem em noticias, login via GitHub, tema visual alinhado ao brand.
+
+### Slice 8.4 — LinkedIn auto-post
+
+- [ ] T8.4.1 Server Action `postToLinkedIn` usando LinkedIn API v2 (OAuth 2.0, scope `w_member_social`).
+- [ ] T8.4.2 Armazenar tokens OAuth em Vercel KV (access_token + refresh_token).
+- [ ] T8.4.3 Botao "Publicar no LinkedIn" no admin de noticias (post-publish trigger).
+- [ ] T8.4.4 Template de post: titulo + excerpt + link + hashtags automaticos a partir das tags.
+- [ ] T8.4.5 Log de posts enviados em tabela `linkedin_posts` (noticia_id, posted_at, linkedin_post_id).
+
+**Pronto quando:** publicar noticia no admin dispara post no LinkedIn com link correto e hashtags.
+
+---
+
+## Milestone M9 — Expansao (backlog)
+
+**Goal:** Features de longo prazo que expandem alcance e experiencia.
+
+### Slice 9.1 — Dark mode
+
+- [ ] T9.1.1 Adicionar tokens dark no `tailwind.config.ts` conforme DESIGN.md secao 2.1.
+- [ ] T9.1.2 Toggle de tema no nav (sun/moon icon) com persistencia em localStorage.
+- [ ] T9.1.3 `prefers-color-scheme: dark` como default se nao ha preferencia salva.
+- [ ] T9.1.4 Auditar todas as paginas em dark mode: contraste, borders, lime sobre dark bone.
+- [ ] T9.1.5 Giscus e OG images respeitam tema.
+
+**Pronto quando:** toggle funciona, dark mode legivel em todas paginas, sem regressao visual.
+
+### Slice 9.2 — i18n (EN)
+
+- [ ] T9.2.1 Instalar e configurar `next-intl` com routing `/en/...` e `/pt/...` (default PT).
+- [ ] T9.2.2 Extrair todas strings de copy para arquivos de mensagens `messages/pt.json` e `messages/en.json`.
+- [ ] T9.2.3 Traduzir conteudo estatico (home, sobre, trajetoria, contato, privacidade, como-usar).
+- [ ] T9.2.4 Conteudo dinamico (projetos, noticias, skills) mantem PT por enquanto, com campo `locale` no schema para futuro.
+- [ ] T9.2.5 Switcher de idioma no nav.
+
+**Pronto quando:** `/en` renderiza site completo em ingles, `/pt` em portugues, default PT.
+
+### Slice 9.3 — RSS feed
+
+- [ ] T9.3.1 `app/feed.xml/route.ts` gera RSS 2.0 com noticias.
+- [ ] T9.3.2 `<link rel="alternate" type="application/rss+xml">` no head.
+- [ ] T9.3.3 Link para RSS no footer.
+
+**Pronto quando:** feed valida no W3C Feed Validator, readers (Feedly, etc) conseguem se inscrever.
+
+### Slice 9.4 — Search global
+
+- [ ] T9.4.1 Postgres full-text search com `tsvector` em projetos, noticias, skills.
+- [ ] T9.4.2 Componente `<SearchModal>` (Cmd+K) com resultados agrupados por tipo.
+- [ ] T9.4.3 Highlight de termos nos resultados.
+- [ ] T9.4.4 Debounce de 300ms no input.
+
+**Pronto quando:** Cmd+K abre modal, busca retorna resultados relevantes em <200ms.
+
+### Slice 9.5 — Pagina /agora
+
+- [ ] T9.5.1 Pagina `/agora` (now page) com conteudo editavel via admin.
+- [ ] T9.5.2 Secoes: no que estou trabalhando, o que estou lendo, proximos eventos, foco do trimestre.
+- [ ] T9.5.3 Formato markdown editavel no admin.
+
+**Pronto quando:** pagina renderiza, editavel via admin, link no nav.

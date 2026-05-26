@@ -8,6 +8,7 @@ import {
   Users,
   MessageSquare,
   Send,
+  FolderKanban,
   LogOut,
 } from 'lucide-react';
 import { auth, signOut } from '@/lib/auth';
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
 
 const NAV_ITEMS = [
   { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+  { label: 'Projetos', href: '/admin/projetos', icon: FolderKanban },
   { label: 'Eventos', href: '/admin/eventos', icon: CalendarDays },
   { label: 'Skills', href: '/admin/skills', icon: FileText },
   { label: 'Noticias', href: '/admin/noticias', icon: Newspaper },

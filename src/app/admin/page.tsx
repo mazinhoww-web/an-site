@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import type { Metadata } from 'next';
 import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';

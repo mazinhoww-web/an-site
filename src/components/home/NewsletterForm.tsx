@@ -2,17 +2,28 @@
 
 import { useState } from 'react';
 import { Send, Loader2, CheckCircle } from 'lucide-react';
+import { subscribeNewsletter } from '@/server-actions/subscribers';
 
-type FormState = 'idle' | 'submitting' | 'success';
+type FormState = 'idle' | 'submitting' | 'success' | 'error';
 
 export function NewsletterForm() {
   const [state, setState] = useState<FormState>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setState('submitting');
-    await new Promise((r) => setTimeout(r, 1000));
-    setState('success');
+    setErrorMsg('');
+
+    const fd = new FormData(e.currentTarget);
+    const result = await subscribeNewsletter(fd);
+
+    if (result.success) {
+      setState('success');
+    } else {
+      setErrorMsg(result.error ?? 'Erro ao registrar');
+      setState('error');
+    }
   }
 
   if (state === 'success') {
@@ -48,6 +59,9 @@ export function NewsletterForm() {
           </>
         )}
       </button>
+      {state === 'error' && (
+        <p className="text-body-s text-error sm:hidden">{errorMsg}</p>
+      )}
     </form>
   );
 }

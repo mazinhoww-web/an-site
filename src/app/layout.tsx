@@ -39,8 +39,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="pt-BR"
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
     >
-      <body className="bg-bone text-ink font-sans antialiased">
+      <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "try{if(localStorage.getItem('theme')==='ink')document.documentElement.classList.add('theme-ink')}catch(e){}",
+          }}
+        />
         {children}
         <Analytics />
         <SpeedInsights />

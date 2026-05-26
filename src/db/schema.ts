@@ -241,6 +241,42 @@ export const frameworks = pgTable('frameworks', {
 });
 
 // ---------------------------------------------------------------------------
+// Projects
+// ---------------------------------------------------------------------------
+
+export const projects = pgTable('projects', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  slug: text('slug').unique().notNull(),
+  title: text('title').notNull(),
+  summary: text('summary').notNull(),
+  contentMd: text('content_md'),
+  tags: json('tags').$type<string[]>().default([]),
+  year: integer('year'),
+  externalUrl: text('external_url'),
+  imageUrl: text('image_url'),
+  isFeatured: boolean('is_featured').default(false),
+  isPublished: boolean('is_published').default(false),
+  publishedAt: timestamp('published_at'),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});
+
+// ---------------------------------------------------------------------------
+// Newsletter campaigns
+// ---------------------------------------------------------------------------
+
+export const newsletterCampaigns = pgTable('newsletter_campaigns', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  subject: text('subject').notNull(),
+  contentMd: text('content_md').notNull(),
+  contentHtml: text('content_html'),
+  recipientCount: integer('recipient_count').default(0),
+  status: text('status').default('draft'),
+  sentAt: timestamp('sent_at'),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+// ---------------------------------------------------------------------------
 // Analytics tables
 // ---------------------------------------------------------------------------
 

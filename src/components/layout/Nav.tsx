@@ -14,10 +14,12 @@ import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Mark } from '@/components/brand/Mark';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const NAV_ITEMS = [
   { label: 'Sobre', href: '/sobre' },
   { label: 'Trajetória', href: '/trajetoria' },
+  { label: 'Projetos', href: '/projetos' },
   { label: 'Eventos', href: '/eventos' },
   { label: 'Skills', href: '/skills' },
   { label: 'Notícias', href: '/noticias' },
@@ -102,6 +104,7 @@ export function Nav() {
                 </Link>
               );
             })}
+            <ThemeToggle />
           </div>
 
           {/* Mobile hamburger */}
