@@ -129,7 +129,7 @@ export function DownloadGate({ skillSlug, skillName, isOpen, onClose }: Download
               type="button"
               onClick={handleDirectDownload}
               disabled={state === 'submitting'}
-              className="inline-flex items-center gap-2 bg-ink px-8 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-lime transition-colors duration-150 hover:bg-lime hover:text-ink disabled:opacity-50"
+              className="inline-flex items-center gap-2 bg-ink px-8 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-bone transition-colors duration-200 hover:text-lime disabled:opacity-50"
             >
               {state === 'submitting' ? (
                 <Loader2 size={16} strokeWidth={1.5} className="animate-spin" />
@@ -198,7 +198,7 @@ export function DownloadGate({ skillSlug, skillName, isOpen, onClose }: Download
               <button
                 type="submit"
                 disabled={state === 'submitting'}
-                className="inline-flex w-full items-center justify-center gap-2 bg-ink px-8 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-lime transition-colors duration-150 hover:bg-lime hover:text-ink disabled:opacity-50"
+                className="inline-flex w-full items-center justify-center gap-2 bg-ink px-8 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-bone transition-colors duration-200 hover:text-lime disabled:opacity-50"
               >
                 {state === 'submitting' ? (
                   <>

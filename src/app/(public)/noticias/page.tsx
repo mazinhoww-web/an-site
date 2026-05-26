@@ -49,7 +49,7 @@ export default function NoticiasPage() {
               <Link
                 key={item.slug}
                 href={`/noticias/${item.slug}`}
-                className="group border border-hairline p-8 transition-colors duration-200 hover:border-lime"
+                className="group border border-hairline p-8 transition-colors duration-200 hover:border-ink"
               >
                 <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
                   {item.date}

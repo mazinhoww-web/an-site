@@ -197,7 +197,7 @@ export default function EventoDetailPage({ params }: Props) {
                   <Link
                     key={r.slug}
                     href={`/eventos/${r.slug}`}
-                    className="group border border-hairline p-6 transition-colors duration-200 hover:border-lime"
+                    className="group border border-hairline p-6 transition-colors duration-200 hover:border-ink"
                   >
                     <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
                       {r.date}
@@ -223,7 +223,7 @@ export default function EventoDetailPage({ params }: Props) {
           </p>
           <Link
             href="/contato"
-            className="mt-8 inline-flex items-center gap-2 bg-ink px-8 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-lime transition-colors duration-150 hover:bg-lime hover:text-ink"
+            className="mt-8 inline-flex items-center gap-2 bg-ink px-8 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-bone transition-colors duration-200 hover:text-lime"
           >
             CONVIDAR PARA UM EVENTO
             <Send size={16} strokeWidth={1.5} />

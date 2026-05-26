@@ -134,7 +134,7 @@ export default function TrajetoriaPage() {
             {HIGHLIGHTS.map((item) => (
               <div
                 key={item.label}
-                className="border border-hairline p-6 transition-colors duration-200 hover:border-lime"
+                className="border border-hairline p-6 transition-colors duration-200 hover:border-ink"
               >
                 <p className="font-mono text-h1 font-bold">{item.metric}</p>
                 <p className="mt-2 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
@@ -218,7 +218,7 @@ export default function TrajetoriaPage() {
             {FRAMEWORKS.map((fw) => (
               <div
                 key={fw.name}
-                className="border border-hairline p-8 transition-colors duration-200 hover:border-lime"
+                className="border border-hairline p-8 transition-colors duration-200 hover:border-ink"
               >
                 <h3 className="font-heading text-h3">{fw.name}</h3>
                 <p className="mt-1 text-body-s text-graphite">{fw.subtitle}</p>
@@ -248,14 +248,14 @@ export default function TrajetoriaPage() {
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
               href="/contato"
-              className="inline-flex items-center gap-2 bg-ink px-8 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-lime transition-colors duration-150 hover:bg-lime hover:text-ink"
+              className="inline-flex items-center gap-2 bg-ink px-8 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-bone transition-colors duration-200 hover:text-lime"
             >
               ENVIAR MENSAGEM
               <ArrowRight size={16} strokeWidth={1.5} />
             </Link>
             <Link
               href="/skills"
-              className="inline-flex items-center gap-2 border border-ink px-8 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-ink transition-colors duration-150 hover:border-lime hover:text-lime"
+              className="inline-flex items-center gap-2 border border-ink px-8 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-ink transition-all duration-200 hover:shadow-[inset_0_-2px_0_var(--color-lime)]"
             >
               VER SKILLS
             </Link>

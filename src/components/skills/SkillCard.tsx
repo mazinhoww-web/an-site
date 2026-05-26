@@ -28,13 +28,13 @@ export function SkillCard({
     <Link
       href={`/skills/${slug}`}
       className={cn(
-        'group relative flex flex-col border p-6 transition-colors duration-200 hover:border-lime',
-        featured ? 'border-lime/40' : 'border-hairline',
+        'group relative flex flex-col border p-6 transition-colors duration-200 hover:border-ink',
+        featured ? 'border-hairline' : 'border-hairline',
         className,
       )}
     >
       {badge && (
-        <span className="absolute right-4 top-4 bg-lime px-2 py-0.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-ink">
+        <span className="absolute right-4 top-4 border border-lime px-2 py-0.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-ink">
           {badge}
         </span>
       )}
