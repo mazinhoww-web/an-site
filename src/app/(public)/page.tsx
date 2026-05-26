@@ -114,35 +114,63 @@ export default function HomePage() {
       {/* Bloco 1: Quem sou eu */}
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
-          <SectionHead
-            eyebrow="QUEM"
-            title="Construo produto em mercados que não perdoam improviso."
-          />
-          <div className="max-w-prose space-y-4 text-body text-graphite">
-            <p>
-              Comecei em operação no agro, passei por adquirência, mercados de capitais
-              e hoje trabalho na maior companhia aérea da América Latina. O que muda entre
-              uma fase e outra é a indústria. O que segue igual é o triângulo: produto
-              que entende o usuário, parceria que destrava capital, regulação que cabe no
-              desenho.
-            </p>
-            <p>
-              A pegada autoral começou cedo. Frameworks como Método Jet Ski, GSD2 e
-              Innovation2Business foram construídos para sair da teoria e operar em squad
-              real, com OKR mensurável e profit share por iniciativa.
-            </p>
+          <Eyebrow className="mb-4 block">QUEM</Eyebrow>
+          <h2 className="font-heading text-display-m">
+            Construo produto em mercados que{' '}
+            <span className="md:block">não perdoam improviso.</span>
+          </h2>
+          <Hairline className="mt-8" />
+
+          <div className="mt-12 grid gap-12 md:mt-16 md:grid-cols-2 md:gap-16">
+            {/* LEFT: texto */}
+            <div>
+              <div className="space-y-6 text-[17px] leading-[1.6] text-graphite">
+                <p>
+                  Comecei em operação no agro, passei por adquirência,
+                  mercados de capitais e hoje trabalho na maior companhia
+                  aérea da América Latina. O que muda entre uma fase e outra
+                  é a indústria. O que segue igual é o triângulo: produto
+                  que entende o usuário, parceria que destrava capital,
+                  regulação que cabe no desenho.
+                </p>
+                <p>
+                  A pegada autoral começou cedo. Frameworks como Método
+                  Jet Ski, GSD2 e Innovation2Business foram construídos
+                  para sair da teoria e operar em squad real, com OKR
+                  mensurável e profit share por iniciativa.
+                </p>
+              </div>
+              <Link
+                href="/trajetoria"
+                className="link-editorial group mt-8 inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.12em]"
+              >
+                LER TRAJETÓRIA COMPLETA
+                <ArrowRight
+                  size={16}
+                  strokeWidth={1.5}
+                  className="transition-transform duration-200 group-hover:translate-x-1"
+                />
+              </Link>
+            </div>
+
+            {/* RIGHT: metadados */}
+            <div className="space-y-0">
+              <div className="border-b border-hairline py-6">
+                <p className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-graphite">ATUAL</p>
+                <p className="mt-2 font-heading text-[20px]">LATAM Pass Brasil</p>
+                <p className="mt-1 font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-smoke">desde 2024</p>
+              </div>
+              <div className="border-b border-hairline py-6">
+                <p className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-graphite">ANTERIORES</p>
+                <p className="mt-2 font-heading text-[20px]">CRDC · CERC · Stone</p>
+              </div>
+              <div className="py-6">
+                <p className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-graphite">BASE</p>
+                <p className="mt-2 font-heading text-[20px]">Cuiabá, MT</p>
+                <p className="mt-1 font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-smoke">remoto para SP</p>
+              </div>
+            </div>
           </div>
-          <Link
-            href="/trajetoria"
-            className="link-editorial group mt-8 inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.12em]"
-          >
-            LER TRAJETÓRIA COMPLETA
-            <ArrowRight
-              size={16}
-              strokeWidth={1.5}
-              className="transition-transform duration-200 group-hover:translate-x-1"
-            />
-          </Link>
         </div>
       </section>
 
