@@ -57,8 +57,22 @@ export default function NoticiaDetailPage({ params }: Props) {
   const item = NEWS.find((n) => n.slug === params.slug);
   if (!item) notFound();
 
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: item.title,
+    description: item.excerpt,
+    datePublished: item.date,
+    author: { '@type': 'Person', name: 'Aurimar Nogueira' },
+    publisher: { '@type': 'Person', name: 'Aurimar Nogueira' },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       {/* Hero */}
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">

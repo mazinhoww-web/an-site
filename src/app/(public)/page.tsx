@@ -53,9 +53,27 @@ const LATEST_NEWS = [
   },
 ] as const;
 
+const PERSON_JSONLD = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Aurimar Nogueira',
+  jobTitle: 'Coordenador Senior de Negocios Financeiros',
+  worksFor: { '@type': 'Organization', name: 'LATAM Pass' },
+  url: 'https://aurimarnogueira.com.br',
+  sameAs: [
+    'https://linkedin.com/in/aurimarnogueira',
+    'https://github.com/mazinhoww-web',
+  ],
+  address: { '@type': 'PostalAddress', addressLocality: 'Cuiaba', addressRegion: 'MT', addressCountry: 'BR' },
+};
+
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_JSONLD) }}
+      />
       {/* Hero */}
       <section className="flex min-h-[80vh] flex-col justify-center px-6 py-24 md:px-12 lg:px-16">
         <div className="mx-auto w-full max-w-container">
@@ -278,7 +296,8 @@ export default function HomePage() {
           </p>
           <NewsletterForm />
           <p className="mt-6 text-body-s text-smoke">
-            Seus dados ficam comigo. Nao compartilho com ninguem. LGPD aplicada.
+            Seus dados ficam comigo. Nao compartilho com ninguem.{' '}
+            <a href="/privacidade" className="underline decoration-lime transition-colors hover:text-bone">LGPD aplicada</a>.
           </p>
         </div>
       </section>

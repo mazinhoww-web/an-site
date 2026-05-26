@@ -215,7 +215,8 @@ export function DownloadGate({ skillSlug, skillName, isOpen, onClose }: Download
             </form>
 
             <p className="mt-4 text-center text-body-s text-smoke">
-              Seus dados ficam comigo. Nao compartilho com ninguem. LGPD aplicada.
+              Seus dados ficam comigo. Nao compartilho com ninguem.{' '}
+              <a href="/privacidade" className="underline decoration-lime transition-colors hover:text-ink">LGPD aplicada</a>.
             </p>
           </>
         )}
