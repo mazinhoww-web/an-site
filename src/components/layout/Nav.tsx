@@ -17,10 +17,10 @@ import { Mark } from '@/components/brand/Mark';
 
 const NAV_ITEMS = [
   { label: 'Sobre', href: '/sobre' },
-  { label: 'Trajetoria', href: '/trajetoria' },
+  { label: 'Trajetória', href: '/trajetoria' },
   { label: 'Eventos', href: '/eventos' },
   { label: 'Skills', href: '/skills' },
-  { label: 'Noticias', href: '/noticias' },
+  { label: 'Notícias', href: '/noticias' },
   { label: 'Contato', href: '/contato' },
 ] as const;
 
@@ -70,7 +70,7 @@ export function Nav() {
 
       {/* Nav bar */}
       <nav
-        aria-label="Navegacao principal"
+        aria-label="Navegação principal"
         className="fixed left-0 right-0 top-0 z-40 border-b border-hairline bg-bone/95 pt-[2px] backdrop-blur-sm"
       >
         <div className="mx-auto flex h-14 max-w-container items-center justify-between px-6 md:h-16 md:px-12 lg:px-16">

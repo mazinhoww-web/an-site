@@ -5,7 +5,7 @@ import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
 
 export const metadata: Metadata = {
-  title: 'Noticias',
+  title: 'Notícias',
   description: 'Leituras recomendadas e updates de Aurimar Nogueira.',
 };
 
@@ -13,16 +13,16 @@ const NEWS = [
   {
     slug: 'summit-sicredi-2026',
     date: '22 MAI 2026',
-    title: 'Painel no Summit de Inovacao Sicredi Central Centro-Norte',
+    title: 'Painel no Summit de Inovação Sicredi Central Centro-Norte',
     excerpt:
-      'Participacao como speaker no Summit de Inovacao da Sicredi em 21-22 de maio, com video promocional gravado em parceria com LATAM Pass.',
+      'Participação como speaker no Summit de Inovação da Sicredi em 21-22 de maio, com vídeo promocional gravado em parceria com LATAM Pass.',
   },
   {
     slug: 'embedded-credit-cubo-itau',
     date: '11 MAI 2026',
-    title: 'Painel Embedded Credit no Cubo Itau',
+    title: 'Painel Embedded Credit no Cubo Itaú',
     excerpt:
-      'Apresentacao no evento GYRA+ sobre tendencias de credito embarcado e o papel de programas de fidelidade como originadores de valor financeiro.',
+      'Apresentação no evento GYRA+ sobre tendências de crédito embarcado e o papel de programas de fidelidade como originadores de valor financeiro.',
   },
 ] as const;
 
@@ -32,10 +32,10 @@ export default function NoticiasPage() {
       {/* Hero */}
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
-          <Label withTab className="mb-4 block">NOTICIAS</Label>
+          <Label withTab className="mb-4 block">NOTÍCIAS</Label>
           <h1 className="font-heading text-display-m">Leituras recomendadas e updates</h1>
           <p className="mt-4 max-w-prose text-body-l text-graphite">
-            Artigos, participacoes em eventos e reflexoes sobre loyalty, fintech e inovacao.
+            Artigos, participações em eventos e reflexões sobre loyalty, fintech e inovação.
           </p>
           <Hairline className="mt-8" />
         </div>

@@ -8,20 +8,20 @@ import { SectionHead } from '@/components/ui/SectionHead';
 
 export const metadata: Metadata = {
   title: 'Sobre',
-  description: 'Quem eh Aurimar Nogueira. Loyalty, fintech e inovacao aplicada.',
+  description: 'Quem é Aurimar Nogueira. Loyalty, fintech e inovação aplicada.',
 };
 
 const TIMELINE_ITEMS = [
-  { year: '2024', company: 'LATAM Pass', role: 'Coordenador Sr. Negocios Financeiros', current: true as const },
-  { year: '2022', company: 'CERC', role: 'Head de Novos Negocios', current: false as const },
-  { year: '2020', company: 'TAG Investimentos', role: 'Gerente Comercial', current: false as const },
-  { year: '2018', company: 'Agronegocio MT', role: 'Operacoes e Comercial', current: false as const },
+  { year: '2024', company: 'LATAM Pass', role: 'Coordenador Sr. Negócios Financeiros', current: true as const },
+  { year: '2023', company: 'CRDC', role: 'Product Owner Recebíveis Agro', current: false as const },
+  { year: '2021', company: 'CERC', role: 'Officer de Produtos / PM Recebíveis', current: false as const },
+  { year: '2019', company: 'Stone Pagamentos', role: 'Key Account Manager', current: false as const },
 ] as const;
 
 const FRAMEWORKS = [
-  { name: 'Metodo Jet Ski', desc: 'Execucao agil de produtos em mercados regulados.' },
+  { name: 'Método Jet Ski', desc: 'Execução ágil de produtos em mercados regulados.' },
   { name: 'GSD2', desc: 'Getting Shit Done Doubled. Milestone, Slice, Task.' },
-  { name: 'Innovation2Business', desc: 'Do ideation ao revenue da inovacao.' },
+  { name: 'Innovation2Business', desc: 'Do ideation ao revenue da inovação.' },
 ] as const;
 
 export default function SobrePage() {
@@ -31,7 +31,7 @@ export default function SobrePage() {
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
           <Label withTab className="mb-4 block">SOBRE</Label>
-          <h1 className="font-heading text-display-m">Quem eh Aurimar Nogueira</h1>
+          <h1 className="font-heading text-display-m">Quem é Aurimar Nogueira</h1>
           <Hairline className="mt-8" />
         </div>
       </section>
@@ -44,13 +44,13 @@ export default function SobrePage() {
             <PhotoFrame alt="Aurimar Nogueira" />
             <div className="mt-6 space-y-2">
               <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
-                Cuiaba, MT, Brasil
+                Cuiabá, MT, Brasil
               </p>
               <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
-                Coord. Sr. Negocios Financeiros
+                Coord. Sr. Negócios Financeiros
               </p>
               <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
-                Onde estrategia vira sistema.
+                Onde estratégia vira sistema.
               </p>
             </div>
           </div>
@@ -59,20 +59,23 @@ export default function SobrePage() {
           <div className="md:col-span-8">
             <div className="max-w-prose space-y-6 text-body text-graphite">
               <p>
-                Comecei em operacao no agro em Mato Grosso, passei por adquirencia na CERC
-                (registradora de recebiveis com R$ 70B+ em ativos), liderando expansao
-                comercial e fechando 60% de market share em CPR.
+                Comecei em operação no agro em Mato Grosso, passei por adquirência na Stone,
+                mercados de capitais na CERC (registradora de recebíveis com R$ 70B+ em
+                ativos, liderando expansão comercial e fechando 60% de market share em CPR)
+                e CRDC. Hoje coordeno novas frentes de negócios financeiros na LATAM Pass,
+                combinando produtos próprios, parcerias estratégicas e inovação aplicada ao
+                maior programa de fidelidade da América Latina.
               </p>
               <p>
-                Na TAG Investimentos, estruturei um case de NPV de R$ 88M e participei da
-                primeira CPR Verde do Brasil. Hoje coordeno novas frentes de negocios
-                financeiros na LATAM Pass, combinando produtos proprios, parcerias estrategicas
-                e inovacao aplicada ao maior programa de fidelidade da America Latina.
+                O case do registro da primeira CPR Verde do Brasil, ainda na CERC, ilustra
+                o tipo de entrega que persigo: produto que cria categoria nova dentro da
+                regulação existente, com participantes alinhados desde o desenho.
               </p>
               <p>
-                O fio condutor eh sempre o mesmo: produto que entende o usuario, parceria que
-                destrava capital, regulacao que cabe no desenho. Frameworks autorais como Metodo
-                Jet Ski, GSD2 e Innovation2Business traduzem essa visao em execucao de squad.
+                O fio condutor é sempre o mesmo: produto que entende o usuário, parceria
+                que destrava capital, regulação que cabe no desenho. Frameworks autorais
+                como Método Jet Ski, GSD2 e Innovation2Business traduzem essa visão em
+                execução de squad.
               </p>
             </div>
           </div>
@@ -83,7 +86,7 @@ export default function SobrePage() {
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
           <SectionHead
-            eyebrow="METODOS AUTORAIS"
+            eyebrow="MÉTODOS AUTORAIS"
             title="Frameworks que uso em projeto"
           />
           <div className="grid gap-6 md:grid-cols-3">
@@ -115,7 +118,7 @@ export default function SobrePage() {
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
           <SectionHead
-            eyebrow="TRAJETORIA"
+            eyebrow="TRAJETÓRIA"
             title="Marcos principais"
           />
           <div className="relative space-y-8 border-l border-hairline pl-8">
@@ -139,7 +142,7 @@ export default function SobrePage() {
             href="/trajetoria"
             className="group mt-8 inline-flex items-center gap-2 text-body-s text-ink"
           >
-            Ver trajetoria completa
+            Ver trajetória completa
             <ArrowRight
               size={16}
               strokeWidth={1.5}
@@ -196,7 +199,7 @@ export default function SobrePage() {
               href="/contato"
               className="inline-flex items-center gap-2 bg-ink px-8 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-lime transition-colors duration-150 hover:bg-lime hover:text-ink"
             >
-              COMECAR CONVERSA
+              COMEÇAR CONVERSA
               <ArrowRight size={16} strokeWidth={1.5} />
             </Link>
             <Link

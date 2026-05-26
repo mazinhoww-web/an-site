@@ -14,13 +14,13 @@ const EVENTS = [
     type: 'SUMMIT',
     role: 'PALESTRANTE',
     roleHighlight: true,
-    title: 'Summit de Inovacao Sicredi Central Centro-Norte',
-    topic: 'Loyalty como ativo financeiro em cooperativas de credito',
+    title: 'Summit de Inovação Sicredi Central Centro-Norte',
+    topic: 'Loyalty como ativo financeiro em cooperativas de crédito',
     description:
-      'Participacao como speaker no Summit de Inovacao da Sicredi, com video promocional gravado em parceria com LATAM Pass.',
-    city: 'Cuiaba, MT',
+      'Participação como speaker no Summit de Inovação da Sicredi, com vídeo promocional gravado em parceria com LATAM Pass.',
+    city: 'Cuiabá, MT',
     organizer: 'Sicredi',
-    tags: ['Loyalty', 'Cooperativas', 'Inovacao'],
+    tags: ['Loyalty', 'Cooperativas', 'Inovação'],
   },
   {
     slug: 'embedded-credit-cubo-itau',
@@ -28,13 +28,13 @@ const EVENTS = [
     type: 'PAINEL',
     role: 'PAINELISTA',
     roleHighlight: false,
-    title: 'Painel Embedded Credit no Cubo Itau',
-    topic: 'Credito embarcado e programas de fidelidade como originadores de valor',
+    title: 'Painel Embedded Credit no Cubo Itaú',
+    topic: 'Crédito embarcado e programas de fidelidade como originadores de valor',
     description:
-      'Apresentacao no evento GYRA+ sobre tendencias de credito embarcado e o papel de programas de fidelidade como originadores de valor financeiro.',
-    city: 'Sao Paulo, SP',
+      'Apresentação no evento GYRA+ sobre tendências de crédito embarcado e o papel de programas de fidelidade como originadores de valor financeiro.',
+    city: 'São Paulo, SP',
     organizer: 'GYRA+',
-    tags: ['Fintech', 'Credito', 'Embedded Finance'],
+    tags: ['Fintech', 'Crédito', 'Embedded Finance'],
   },
   {
     slug: 'inclusao-produtiva-segundo-voo',
@@ -42,13 +42,13 @@ const EVENTS = [
     type: 'MESA-REDONDA',
     role: 'MEDIADOR',
     roleHighlight: false,
-    title: 'Inclusao Produtiva Segundo Voo',
-    topic: 'Programas de inclusao via fidelidade e aviacao',
+    title: 'Inclusão Produtiva Segundo Voo',
+    topic: 'Programas de inclusão via fidelidade e aviação',
     description:
-      'Mesa redonda sobre modelos de inclusao produtiva via programas de fidelidade com foco em populacoes de baixa renda.',
-    city: 'Brasilia, DF',
+      'Mesa redonda sobre modelos de inclusão produtiva via programas de fidelidade com foco em populações de baixa renda.',
+    city: 'Brasília, DF',
     organizer: 'LATAM Airlines',
-    tags: ['Inclusao', 'Loyalty', 'Social'],
+    tags: ['Inclusão', 'Loyalty', 'Social'],
   },
 ] as const;
 
@@ -67,10 +67,10 @@ export default function EventosPage() {
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
           <Label withTab className="mb-4 block">EVENTOS</Label>
-          <h1 className="font-heading text-display-m">Palestras, paineis e mesas</h1>
+          <h1 className="font-heading text-display-m">Palestras, painéis e mesas</h1>
           <p className="mt-4 max-w-prose text-body-l text-graphite">
-            Paineis, palestras, mentorias e mesas em que estive como representante de uma
-            frente que defendo. Em ordem cronologica reversa.
+            Painéis, palestras, mentorias e mesas em que estive como representante de uma
+            frente que defendo. Em ordem cronológica reversa.
           </p>
           <Hairline className="mt-8" />
         </div>

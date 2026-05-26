@@ -6,64 +6,97 @@ import { Hairline } from '@/components/brand/Hairline';
 import { SectionHead } from '@/components/ui/SectionHead';
 
 export const metadata: Metadata = {
-  title: 'Trajetoria',
-  description: 'Uma decada de execucao em fintech e loyalty.',
+  title: 'Trajetória',
+  description: 'Uma década de execução em fintech e loyalty.',
 };
 
 const HIGHLIGHTS = [
-  { metric: 'R$ 70B+', label: 'ATIVOS REGISTRADOS EM LOYALTY' },
+  { metric: 'R$ 70B+', label: 'ATIVOS REGISTRADOS NA CERC' },
   { metric: '60%', label: 'MARKET SHARE EM CPR' },
-  { metric: '1ª', label: 'CPR VERDE BRASIL' },
-  { metric: 'R$ 88M', label: 'NPV GERADO NO CASE TAG' },
+  { metric: '1ª', label: 'CPR VERDE DO BRASIL' },
+  { metric: '264+', label: 'RESTAURANTES (HARKHARK, AUS)' },
   { metric: '15+', label: 'PALESTRAS E EVENTOS' },
   { metric: '40+', label: 'PROFISSIONAIS MENTORADOS' },
 ] as const;
 
 const CHAPTERS = [
   {
-    period: '2024 / ATUAL',
-    company: 'LATAM Pass',
-    role: 'Coordenador Senior de Negocios Financeiros',
+    period: 'AGO 2024 / ATUAL',
+    company: 'LATAM Pass Brasil',
+    role: 'Coordenador Sênior de Negócios Financeiros',
+    location: 'São Paulo, SP (remoto Cuiabá)',
     description:
-      'Squad eLoyalty / New Business. Estruturacao de produtos financeiros proprios, parcerias estrategicas com infraestrutura financeira e inteligencia competitiva. Foco em transformar loyalty de beneficio de marketing em ativo financeiro.',
-    tags: ['Loyalty', 'Fintech', 'Negocios'],
+      'Squad eLoyalty / New Business. Estruturação de produtos financeiros próprios em parceria com infraestrutura nacional e internacional. Modelagem completa de unit economics. Discovery de vendors com critérios técnicos e regulatórios. Frameworks autorais aplicados no dia a dia (Método Jet Ski, GSD2, Innovation2Business).',
+    result:
+      'Frentes de negócio ativas em estágio avançado de validação. Pipeline de parcerias estratégicas em curso. Inteligência competitiva contínua sobre o mercado de loyalty no Brasil.',
+    learning:
+      'Em ecossistema regulado, parceria não é commodity. Quem entra antes na modelagem regulatória trava vantagem estrutural difícil de reverter.',
+    tags: ['Loyalty', 'Fintech', 'Negócios'],
     current: true,
   },
   {
-    period: '2022 / 2024',
+    period: 'OUT 2023 / AGO 2024',
+    company: 'CRDC',
+    role: 'Product Owner Recebíveis Agro',
+    location: 'São Paulo, SP',
+    description:
+      'Registradora autorizada pelo Banco Central operando no segmento de recebíveis do agronegócio. Owner do produto de Recebíveis Agro. Discovery com bancos, traders e produtores. Especificação de requisitos funcionais e regulatórios. Coordenação de squad técnica.',
+    result:
+      'Produto entregue em condição de operar registro de recebíveis do agro dentro da regulação BCB vigente, com fluxo auditável e integrável a sistemas externos de bancos parceiros.',
+    learning:
+      'Em produtos regulados, especificação não é luxo. É o que separa entrega que opera de entrega que precisa ser refeita após auditoria.',
+    tags: ['Recebíveis', 'Agro', 'Regulação'],
+    current: false,
+  },
+  {
+    period: 'MAI 2021 / SET 2023',
     company: 'CERC',
-    role: 'Head de Novos Negocios',
+    role: 'Officer de Produtos / Product Manager Recebíveis',
+    location: 'São Paulo, SP',
     description:
-      'Registradora de recebiveis com R$ 70B+ em ativos. Expansao comercial com 60% de market share em CPR. Desenvolvimento da primeira CPR Verde do Brasil. Relacionamento com regulador (CVM/BCB) e originadores.',
-    tags: ['Capital Markets', 'Recebiveis', 'Regulacao'],
+      'Registradora autorizada pelo BCB disputando market share contra a B3 no registro de recebíveis. Owner de produtos no eixo de recebíveis e títulos: CCB, CPR, CPR Verde, CDCA e Registro Digital. Lançamento do primeiro registro de CPR Verde do Brasil. Crescimento de market share até atingir 60% do segmento.',
+    result:
+      'R$ 70 bilhões em ativos registrados sob o produto CPR Registry. Market share de 60% no segmento de CPR contra a B3. Primeira CPR Verde do Brasil registrada.',
+    learning:
+      'Marca não vence por marketing em mercado regulado. Vence por entrega de produto que opera dentro da norma, com tempo de processamento menor e documentação rastreável.',
+    tags: ['Capital Markets', 'Recebíveis', 'Regulação'],
     current: false,
   },
   {
-    period: '2020 / 2022',
-    company: 'TAG Investimentos',
-    role: 'Gerente Comercial',
+    period: 'ABR 2019 / MAI 2021',
+    company: 'Stone Pagamentos',
+    role: 'Key Account Manager / Especialista em Produtos',
+    location: 'São Paulo, SP',
     description:
-      'Estruturacao de case com NPV de R$ 88M. Gestao de carteira institucional e desenvolvimento de novos produtos de investimento. Interface entre area comercial e mesa de operacoes.',
-    tags: ['Investimentos', 'Comercial', 'NPV'],
+      'Adquirente em alta velocidade de crescimento. Gestão de carteira de redes e franquias na plataforma ABC. Estruturação de produtos sob medida para grandes varejistas. Negociação de condições comerciais com redes nacionais.',
+    result:
+      'Carteira de redes e franquias ativa e crescente. Casos de sucesso usados internamente como referência para estruturação de novos produtos para varejistas de grande porte.',
+    learning:
+      'Atendimento técnico não é despesa. Em varejo de alto volume, é o que sustenta a relação além do preço.',
+    tags: ['Pagamentos', 'Varejo', 'Adquirência'],
     current: false,
   },
   {
-    period: '2018 / 2020',
-    company: 'Agronegocio MT',
-    role: 'Operacoes e Comercial',
+    period: '2014 / 2020',
+    company: 'Início internacional e formação',
+    role: 'Cuiabá MT, Brisbane Austrália, São Paulo SP',
+    location: '',
     description:
-      'Inicio da carreira em operacoes no agronegocio mato-grossense. Logistica, comercializacao de graos e gestao de contratos. Base operacional que fundamentou a visao de produto.',
-    tags: ['Agro', 'Operacoes', 'Logistica'],
+      '99Taxis em Cuiabá: operação local de expansão da plataforma de mobilidade. Syngenta em Cuiabá: experiência inicial em agronegócio com foco em distribuição e operação comercial regional. HarkHark em Brisbane (Austrália): coordenação operacional de plataforma de delivery com USD 2M+ em GMV e 264+ restaurantes parceiros. Formação: graduação em Administração na UniC (Cuiabá), MBA, curso na Tera, curso na FGV, intercâmbio na IH Brisbane.',
+    result: '',
+    learning:
+      'A combinação de operação no agro, mobilidade e marketplace internacional montou um repertório raro: regulação, distribuição física e produto digital no mesmo currículo.',
+    tags: ['Agro', 'Marketplace', 'Internacional'],
     current: false,
   },
 ] as const;
 
 const FRAMEWORKS = [
   {
-    name: 'Metodo Jet Ski',
-    subtitle: 'Execucao agil de produtos em mercados regulados',
+    name: 'Método Jet Ski',
+    subtitle: 'Execução ágil de produtos em mercados regulados',
     description:
-      'Framework de inovacao em 3 fases: Diagnostico da Oportunidade, Prototipacao Agil, Visao Transformadora. Aplicado em squads de inovacao corporativa.',
+      'Framework de inovação em 3 fases: Diagnóstico da Oportunidade, Prototipação Ágil, Visão Transformadora. Aplicado em squads de inovação corporativa.',
   },
   {
     name: 'GSD2',
@@ -73,9 +106,9 @@ const FRAMEWORKS = [
   },
   {
     name: 'Innovation2Business',
-    subtitle: 'Do ideation ao revenue da inovacao',
+    subtitle: 'Do ideation ao revenue da inovação',
     description:
-      'Metodologia para transformar ideias em negocios viaveis dentro de squads corporativas, conectando Discovery, Business Case e Go-to-Market.',
+      'Metodologia para transformar ideias em negócios viáveis dentro de squads corporativas, conectando Discovery, Business Case e Go-to-Market.',
   },
 ] as const;
 
@@ -85,9 +118,9 @@ export default function TrajetoriaPage() {
       {/* Hero */}
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
-          <Label withTab className="mb-4 block">TRAJETORIA</Label>
+          <Label withTab className="mb-4 block">TRAJETÓRIA</Label>
           <h1 className="max-w-3xl font-heading text-display-m">
-            Uma decada de execucao em fintech e loyalty
+            Uma década de execução em fintech e loyalty
           </h1>
           <Hairline className="mt-8" />
         </div>
@@ -96,7 +129,7 @@ export default function TrajetoriaPage() {
       {/* Highlights */}
       <section className="px-6 pb-20 md:px-12 md:pb-32 lg:px-16">
         <div className="mx-auto max-w-container">
-          <SectionHead eyebrow="EM NUMEROS" title="Resultados que importam." />
+          <SectionHead eyebrow="EM NÚMEROS" title="Resultados que importam." />
           <div className="grid grid-cols-2 gap-6 md:grid-cols-3">
             {HIGHLIGHTS.map((item) => (
               <div
@@ -116,7 +149,7 @@ export default function TrajetoriaPage() {
       {/* Timeline */}
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
-          <SectionHead eyebrow="CAPITULOS" title="Linha do tempo profissional." />
+          <SectionHead eyebrow="CAPÍTULOS" title="Linha do tempo profissional." />
           <div className="relative space-y-12 border-l-2 border-lime pl-8 md:pl-12">
             {CHAPTERS.map((chapter) => (
               <div key={chapter.period} className="relative">
@@ -126,7 +159,7 @@ export default function TrajetoriaPage() {
                   }`}
                 />
                 <div className="flex items-center gap-3">
-                  <p className="font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-lime">
+                  <p className="font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-smoke">
                     {chapter.period}
                   </p>
                   {chapter.current && (
@@ -139,9 +172,25 @@ export default function TrajetoriaPage() {
                 <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
                   {chapter.role}
                 </p>
+                {chapter.location && (
+                  <p className="mt-1 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
+                    {chapter.location}
+                  </p>
+                )}
                 <p className="mt-4 max-w-prose text-body text-graphite">
                   {chapter.description}
                 </p>
+                {chapter.result && (
+                  <div className="mt-4">
+                    <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">RESULTADO</p>
+                    <p className="mt-1 max-w-prose text-body-s text-graphite">{chapter.result}</p>
+                  </div>
+                )}
+                {chapter.learning && (
+                  <div className="mt-4 border-l-2 border-hairline pl-4">
+                    <p className="max-w-prose text-body-s italic text-graphite">{chapter.learning}</p>
+                  </div>
+                )}
                 <div className="mt-4 flex flex-wrap gap-2">
                   {chapter.tags.map((tag) => (
                     <span
@@ -162,7 +211,7 @@ export default function TrajetoriaPage() {
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
           <SectionHead
-            eyebrow="METODOS CRIADOS"
+            eyebrow="MÉTODOS CRIADOS"
             title="Frameworks transformados em skills."
           />
           <div className="grid gap-6 md:grid-cols-3">

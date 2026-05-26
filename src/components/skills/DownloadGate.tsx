@@ -12,7 +12,7 @@ const COOKIE_NAME = 'an_email_verified';
 const COOKIE_DAYS = 30;
 
 const gateSchema = z.object({
-  email: z.string().email('Email invalido'),
+  email: z.string().email('Email inválido'),
   consent_lgpd: z.literal(true, 'Aceite os termos para continuar'),
   consent_newsletter: z.boolean().optional(),
 });
@@ -112,10 +112,10 @@ export function DownloadGate({ skillSlug, skillName, isOpen, onClose }: Download
             <CheckCircle size={32} strokeWidth={1.5} className="text-lime" />
             <h3 className="font-heading text-h2">Download iniciado.</h3>
             <p className="text-body-s text-graphite">
-              O arquivo {skillName} sera baixado em instantes.
+              O arquivo {skillName} será baixado em instantes.
             </p>
             <p className="text-body-s text-smoke">
-              Link valido por 10 minutos.
+              Link válido por 10 minutos.
             </p>
           </div>
         ) : hasVerified ? (
@@ -123,7 +123,7 @@ export function DownloadGate({ skillSlug, skillName, isOpen, onClose }: Download
             <Label withTab>DOWNLOAD</Label>
             <h3 className="font-heading text-h2">{skillName}</h3>
             <p className="text-body-s text-graphite">
-              Email ja verificado. Clique para baixar.
+              Email já verificado. Clique para baixar.
             </p>
             <button
               type="button"
@@ -146,7 +146,7 @@ export function DownloadGate({ skillSlug, skillName, isOpen, onClose }: Download
             <Label withTab className="mb-4 block">DOWNLOAD</Label>
             <h3 className="font-heading text-h2">{skillName}</h3>
             <p className="mt-2 text-body-s text-graphite">
-              Informe seu email para baixar. Voce nao precisara informar novamente por 30 dias.
+              Informe seu email para baixar. Você não precisará informar novamente por 30 dias.
             </p>
 
             <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
@@ -188,7 +188,7 @@ export function DownloadGate({ skillSlug, skillName, isOpen, onClose }: Download
                   {...register('consent_lgpd', { required: true })}
                 />
                 <span className="text-body-s text-graphite">
-                  Concordo com a politica de privacidade e tratamento de dados (obrigatorio)
+                  Concordo com a política de privacidade e tratamento de dados (obrigatório)
                 </span>
               </label>
               {errors.consent_lgpd && (
@@ -215,7 +215,7 @@ export function DownloadGate({ skillSlug, skillName, isOpen, onClose }: Download
             </form>
 
             <p className="mt-4 text-center text-body-s text-smoke">
-              Seus dados ficam comigo. Nao compartilho com ninguem.{' '}
+              Seus dados ficam comigo. Não compartilho com ninguém.{' '}
               <a href="/privacidade" className="underline decoration-lime transition-colors hover:text-ink">LGPD aplicada</a>.
             </p>
           </>

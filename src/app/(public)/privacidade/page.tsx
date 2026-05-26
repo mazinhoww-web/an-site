@@ -3,8 +3,8 @@ import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
 
 export const metadata: Metadata = {
-  title: 'Politica de Privacidade',
-  description: 'Politica de privacidade e tratamento de dados pessoais do site AN.',
+  title: 'Política de Privacidade',
+  description: 'Política de privacidade e tratamento de dados pessoais do site AN.',
 };
 
 export default function PrivacidadePage() {
@@ -13,7 +13,7 @@ export default function PrivacidadePage() {
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
           <Label withTab className="mb-4 block">LGPD</Label>
-          <h1 className="font-heading text-display-m">Politica de Privacidade</h1>
+          <h1 className="font-heading text-display-m">Política de Privacidade</h1>
           <p className="mt-4 text-body-s text-smoke">
             Ultima atualizacao: {new Date().getFullYear()}
           </p>
@@ -25,21 +25,21 @@ export default function PrivacidadePage() {
         <div className="mx-auto max-w-container">
           <div className="mx-auto max-w-prose space-y-8 text-body text-graphite">
             <div>
-              <h2 className="mb-3 font-heading text-h2">1. Responsavel</h2>
+              <h2 className="mb-3 font-heading text-h2">1. Responsável</h2>
               <p>
-                Aurimar Nogueira, pessoa fisica, domiciliado em Cuiaba, MT, Brasil.
+                Aurimar Nogueira, pessoa física, domiciliado em Cuiabá, MT, Brasil.
                 Email de contato: contato@aurimarnogueira.com.br.
               </p>
             </div>
 
             <div>
               <h2 className="mb-3 font-heading text-h2">2. Dados coletados</h2>
-              <p>Este site coleta apenas os dados que voce fornece voluntariamente:</p>
+              <p>Este site coleta apenas os dados que você fornece voluntariamente:</p>
               <ul className="mt-2 list-inside list-disc space-y-1 text-body-s">
                 <li>Nome e email (formulario de contato)</li>
                 <li>Email (download de skills, newsletter)</li>
                 <li>Consentimento de newsletter e WhatsApp (checkboxes explicitos)</li>
-                <li>Endereco IP anonimizado e user-agent (logs de acesso)</li>
+                <li>Endereço IP anonimizado e user-agent (logs de acesso)</li>
               </ul>
             </div>
 
@@ -56,7 +56,7 @@ export default function PrivacidadePage() {
             <div>
               <h2 className="mb-3 font-heading text-h2">4. Base legal</h2>
               <p>
-                Consentimento do titular (Art. 7, I da LGPD). Voce pode revogar
+                Consentimento do titular (Art. 7, I da LGPD). Você pode revogar
                 seu consentimento a qualquer momento.
               </p>
             </div>
@@ -64,23 +64,23 @@ export default function PrivacidadePage() {
             <div>
               <h2 className="mb-3 font-heading text-h2">5. Compartilhamento</h2>
               <p>
-                Seus dados nao sao compartilhados com terceiros. Os servicos utilizados
-                (Vercel, Resend, Neon) processam dados exclusivamente para operacao tecnica
+                Seus dados não são compartilhados com terceiros. Os serviços utilizados
+                (Vercel, Resend, Neon) processam dados exclusivamente para operação técnica
                 do site e envio de emails.
               </p>
             </div>
 
             <div>
-              <h2 className="mb-3 font-heading text-h2">6. Retencao</h2>
+              <h2 className="mb-3 font-heading text-h2">6. Retenção</h2>
               <p>
-                Dados de contato e subscriber sao mantidos enquanto houver relacao ativa.
-                Ao solicitar exclusao, seus dados sao removidos em ate 30 dias.
+                Dados de contato e subscriber são mantidos enquanto houver relação ativa.
+                Ao solicitar exclusão, seus dados são removidos em até 30 dias.
               </p>
             </div>
 
             <div>
               <h2 className="mb-3 font-heading text-h2">7. Seus direitos</h2>
-              <p>Conforme a LGPD (Lei 13.709/2018), voce tem direito a:</p>
+              <p>Conforme a LGPD (Lei 13.709/2018), você tem direito a:</p>
               <ul className="mt-2 list-inside list-disc space-y-1 text-body-s">
                 <li>Confirmar a existencia de tratamento de dados</li>
                 <li>Acessar seus dados pessoais</li>
@@ -98,16 +98,16 @@ export default function PrivacidadePage() {
               <h2 className="mb-3 font-heading text-h2">8. Cookies</h2>
               <p>
                 Este site utiliza um cookie funcional (an_email_verified) para lembrar
-                que voce ja informou seu email para download de skills. Validade: 30 dias.
-                Nao utilizamos cookies de rastreamento ou marketing.
+                que você já informou seu email para download de skills. Validade: 30 dias.
+                Não utilizamos cookies de rastreamento ou marketing.
               </p>
             </div>
 
             <div>
-              <h2 className="mb-3 font-heading text-h2">9. Alteracoes</h2>
+              <h2 className="mb-3 font-heading text-h2">9. Alterações</h2>
               <p>
-                Esta politica pode ser atualizada periodicamente. A data da ultima
-                atualizacao sera sempre exibida no topo desta pagina.
+                Esta política pode ser atualizada periodicamente. A data da última
+                atualização será sempre exibida no topo desta página.
               </p>
             </div>
           </div>

@@ -80,10 +80,10 @@ const CONNECT_LINKS: ConnectLink[] = [
 
 const SITE_LINKS = [
   { label: 'Sobre', href: '/sobre' },
-  { label: 'Trajetoria', href: '/trajetoria' },
+  { label: 'Trajetória', href: '/trajetoria' },
   { label: 'Eventos', href: '/eventos' },
   { label: 'Skills', href: '/skills' },
-  { label: 'Noticias', href: '/noticias' },
+  { label: 'Notícias', href: '/noticias' },
   { label: 'Contato', href: '/contato' },
 ] as const;
 
@@ -144,7 +144,7 @@ export function Footer() {
           <div className="space-y-4">
             <Label withTab>LOCALIDADE</Label>
             <p className="text-body-s text-graphite">
-              Cuiaba, MT, Brasil
+              Cuiabá, MT, Brasil
             </p>
             <Label tone="default">
               LOYALTY {'×'} FINTECH {'×'} INNOVATION
@@ -157,7 +157,7 @@ export function Footer() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <Mark size="sm" />
           <p className="text-body-s text-smoke">
-            {'©'} {year} Aurimar Nogueira. Cuiaba, MT. Onde estrategia vira sistema.
+            {'©'} {year} Aurimar Nogueira. Cuiabá, MT. Onde estratégia vira sistema.
           </p>
         </div>
       </div>

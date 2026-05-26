@@ -6,35 +6,35 @@ import { SectionHead } from '@/components/ui/SectionHead';
 import { NewsletterForm } from '@/components/home/NewsletterForm';
 
 const HIGHLIGHTS = [
-  { metric: 'R$ 70B+', label: 'ATIVOS REGISTRADOS' },
+  { metric: 'R$ 70B+', label: 'ATIVOS REGISTRADOS NA CERC' },
   { metric: '60%', label: 'MARKET SHARE CPR' },
-  { metric: '1ª', label: 'CPR VERDE BRASIL' },
-  { metric: 'R$ 88M', label: 'NPV CASE TAG' },
+  { metric: '1ª', label: 'CPR VERDE DO BRASIL' },
+  { metric: '264+', label: 'RESTAURANTES (HARKHARK)' },
 ] as const;
 
 const SCENARIO_CARDS = [
   {
     label: 'PRODUTOS FINANCEIROS',
-    title: 'Estruturacao de produtos proprios',
+    title: 'Estruturação de produtos próprios',
     description:
-      'Modelagem de unit economics, escolha de stack, integracao regulatoria e desenho de produto para escalar dentro de ecossistema loyalty.',
+      'Modelagem de unit economics, escolha de stack, integração regulatória e desenho de produto para escalar dentro de ecossistema loyalty.',
   },
   {
-    label: 'PARCERIAS ESTRATEGICAS',
-    title: 'Negociacao com infraestrutura financeira',
+    label: 'PARCERIAS ESTRATÉGICAS',
+    title: 'Negociação com infraestrutura financeira',
     description:
-      'Discovery e selecao de vendors, modelos de profit share, governanca de risco e contratos estruturados para parceiros nacionais e internacionais.',
+      'Discovery e seleção de vendors, modelos de profit share, governança de risco e contratos estruturados para parceiros nacionais e internacionais.',
   },
   {
-    label: 'INTELIGENCIA COMPETITIVA',
-    title: 'Monitoramento continuo de mercado',
+    label: 'INTELIGÊNCIA COMPETITIVA',
+    title: 'Monitoramento contínuo de mercado',
     description:
-      'Acompanhamento de programas concorrentes com metodologia proprietaria, leitura de movimentos do setor e geracao de insumos para decisao executiva.',
+      'Acompanhamento de programas concorrentes com metodologia proprietária, leitura de movimentos do setor e geração de insumos para decisão executiva.',
   },
 ] as const;
 
 const FEATURED_SKILLS = [
-  { slug: 'metodo-jet-ski', name: 'Metodo Jet Ski', category: 'Framework' },
+  { slug: 'metodo-jet-ski', name: 'Método Jet Ski', category: 'Framework' },
   { slug: 'gsd2-methodology', name: 'GSD2', category: 'Framework' },
   { slug: 'gtm-engineering', name: 'GTM Engineering', category: 'Go-to-Market' },
   { slug: 'automation-data-platforms', name: 'Automation & Data', category: 'Data' },
@@ -44,12 +44,12 @@ const LATEST_NEWS = [
   {
     slug: 'summit-sicredi-2026',
     date: '22 MAI 2026',
-    title: 'Painel no Summit de Inovacao Sicredi',
+    title: 'Painel no Summit de Inovação Sicredi',
   },
   {
     slug: 'embedded-credit-cubo-itau',
     date: '11 MAI 2026',
-    title: 'Painel Embedded Credit no Cubo Itau',
+    title: 'Painel Embedded Credit no Cubo Itaú',
   },
 ] as const;
 
@@ -57,14 +57,14 @@ const PERSON_JSONLD = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Aurimar Nogueira',
-  jobTitle: 'Coordenador Senior de Negocios Financeiros',
+  jobTitle: 'Coordenador Sênior de Negócios Financeiros',
   worksFor: { '@type': 'Organization', name: 'LATAM Pass' },
   url: 'https://aurimarnogueira.com.br',
   sameAs: [
     'https://linkedin.com/in/aurimarnogueira',
     'https://github.com/mazinhoww-web',
   ],
-  address: { '@type': 'PostalAddress', addressLocality: 'Cuiaba', addressRegion: 'MT', addressCountry: 'BR' },
+  address: { '@type': 'PostalAddress', addressLocality: 'Cuiabá', addressRegion: 'MT', addressCountry: 'BR' },
 };
 
 export default function HomePage() {
@@ -81,12 +81,12 @@ export default function HomePage() {
             LOYALTY {'×'} FINTECH {'×'} INNOVATION
           </Label>
           <h1 className="max-w-4xl font-heading text-display-xl">
-            Onde estrategia{' '}
+            Onde estratégia{' '}
             <span className="text-lime">vira</span> sistema.
           </h1>
           <p className="mt-6 max-w-prose text-body-l text-graphite">
-            Aurimar Nogueira. Coordenador Senior de Negocios Financeiros na LATAM Pass.
-            Loyalty, fintech e inovacao aplicada em ecossistemas regulados.
+            Aurimar Nogueira. Coordenador Sênior de Negócios Financeiros na LATAM Pass.
+            Loyalty, fintech e inovação aplicada em ecossistemas regulados.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
@@ -115,27 +115,27 @@ export default function HomePage() {
         <div className="mx-auto max-w-container">
           <SectionHead
             eyebrow="QUEM"
-            title="Construo produto em mercados que nao perdoam improviso."
+            title="Construo produto em mercados que não perdoam improviso."
           />
           <div className="max-w-prose space-y-4 text-body text-graphite">
             <p>
-              Comecei em operacao no agro, passei por adquirencia, mercados de capitais
-              e hoje trabalho na maior companhia aerea da America Latina. O que muda entre
-              uma fase e outra eh a industria. O que segue igual eh o triangulo: produto
-              que entende o usuario, parceria que destrava capital, regulacao que cabe no
+              Comecei em operação no agro, passei por adquirência, mercados de capitais
+              e hoje trabalho na maior companhia aérea da América Latina. O que muda entre
+              uma fase e outra é a indústria. O que segue igual é o triângulo: produto
+              que entende o usuário, parceria que destrava capital, regulação que cabe no
               desenho.
             </p>
             <p>
-              A pegada autoral comecou cedo. Frameworks como Metodo Jet Ski, GSD2 e
-              Innovation2Business foram construidos para sair da teoria e operar em squad
-              real, com OKR mensuravel e profit share por iniciativa.
+              A pegada autoral começou cedo. Frameworks como Método Jet Ski, GSD2 e
+              Innovation2Business foram construídos para sair da teoria e operar em squad
+              real, com OKR mensurável e profit share por iniciativa.
             </p>
           </div>
           <Link
             href="/trajetoria"
             className="group mt-8 inline-flex items-center gap-2 text-body-s text-ink"
           >
-            Ler trajetoria completa
+            Ler trajetória completa
             <ArrowRight
               size={16}
               strokeWidth={1.5}
@@ -152,7 +152,7 @@ export default function HomePage() {
           <SectionHead
             eyebrow="AGORA"
             title="Coordenando novas frentes na LATAM Pass."
-            subtitle="Trabalho na squad eLoyalty / New Business, combinando produtos financeiros proprios, parcerias estrategicas e inovacao aplicada."
+            subtitle="Trabalho na squad eLoyalty / New Business, combinando produtos financeiros próprios, parcerias estratégicas e inovação aplicada."
           />
           <div className="grid gap-6 md:grid-cols-3">
             {SCENARIO_CARDS.map((card) => (
@@ -173,8 +173,8 @@ export default function HomePage() {
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
           <SectionHead
-            eyebrow="EM NUMEROS"
-            title="Uma decada de execucao."
+            eyebrow="EM NÚMEROS"
+            title="Uma década de execução."
           />
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
             {HIGHLIGHTS.map((item) => (
@@ -193,7 +193,7 @@ export default function HomePage() {
             href="/trajetoria"
             className="group mt-8 inline-flex items-center gap-2 text-body-s text-ink"
           >
-            Ver trajetoria completa
+            Ver trajetória completa
             <ArrowRight
               size={16}
               strokeWidth={1.5}
@@ -208,7 +208,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-container">
           <SectionHead
             eyebrow="FERRAMENTAS"
-            title="Metodos transformados em codigo que o Claude executa."
+            title="Métodos transformados em código que o Claude executa."
           />
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {FEATURED_SKILLS.map((skill) => (
@@ -242,7 +242,7 @@ export default function HomePage() {
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
           <SectionHead
-            eyebrow="NOTICIAS"
+            eyebrow="NOTÍCIAS"
             title="Updates recentes."
           />
           <div className="space-y-0">
@@ -272,7 +272,7 @@ export default function HomePage() {
             href="/noticias"
             className="group mt-4 inline-flex items-center gap-2 text-body-s text-ink"
           >
-            Ver todas as noticias
+            Ver todas as notícias
             <ArrowRight
               size={16}
               strokeWidth={1.5}
@@ -292,11 +292,11 @@ export default function HomePage() {
             Recebe quando algo novo sai.
           </h2>
           <p className="mt-4 max-w-prose text-body text-smoke">
-            No maximo 2 emails por mes. Skill nova, fala em evento, leitura recomendada.
+            No máximo 2 emails por mês. Skill nova, fala em evento, leitura recomendada.
           </p>
           <NewsletterForm />
           <p className="mt-6 text-body-s text-smoke">
-            Seus dados ficam comigo. Nao compartilho com ninguem.{' '}
+            Seus dados ficam comigo. Não compartilho com ninguém.{' '}
             <a href="/privacidade" className="underline decoration-lime transition-colors hover:text-bone">LGPD aplicada</a>.
           </p>
         </div>

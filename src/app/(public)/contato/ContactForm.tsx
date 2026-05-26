@@ -139,7 +139,7 @@ export function ContactForm() {
       </button>
 
       <p className="text-body-s text-smoke">
-        Seus dados ficam comigo. Nao compartilho com ninguem.{' '}
+        Seus dados ficam comigo. Não compartilho com ninguém.{' '}
         <a href="/privacidade" className="underline decoration-lime transition-colors hover:text-ink">LGPD aplicada</a>.
       </p>
     </form>

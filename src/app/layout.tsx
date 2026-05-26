@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     default: 'AN. | Aurimar Nogueira',
     template: '%s | AN.',
   },
-  description: 'Onde estrategia vira sistema. LOYALTY × FINTECH × INNOVATION.',
+  description: 'Onde estratégia vira sistema. LOYALTY × FINTECH × INNOVATION.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://aurimarnogueira.com.br'),
 };
 

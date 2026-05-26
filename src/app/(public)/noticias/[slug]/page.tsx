@@ -19,20 +19,20 @@ const NEWS: NewsItem[] = [
   {
     slug: 'summit-sicredi-2026',
     date: '22 Mai 2026',
-    title: 'Painel no Summit de Inovacao Sicredi Central Centro-Norte',
+    title: 'Painel no Summit de Inovação Sicredi Central Centro-Norte',
     excerpt:
-      'Participacao como speaker no Summit de Inovacao da Sicredi em 21-22 de maio.',
+      'Participação como speaker no Summit de Inovação da Sicredi em 21-22 de maio.',
     content:
-      'O Summit de Inovacao da Sicredi Central Centro-Norte reuniu cooperativas de credito de Mato Grosso, Goias e Distrito Federal para discutir o futuro dos servicos financeiros cooperativos. O painel "Loyalty como ativo financeiro" explorou como programas de fidelidade podem deixar de ser apenas beneficios de marketing e se tornar instrumentos financeiros com valor proprio.\n\nA apresentacao mostrou casos reais de como a LATAM Pass esta estruturando produtos financeiros proprios, usando a base de dados de comportamento do consumidor como materia-prima para originacao de credito, seguros e investimentos. O modelo de profit share com parceiros financeiros foi detalhado, mostrando como cooperativas podem replicar a logica em escala regional.',
+      'O Summit de Inovação da Sicredi Central Centro-Norte reuniu cooperativas de crédito de Mato Grosso, Goiás e Distrito Federal para discutir o futuro dos serviços financeiros cooperativos. O painel "Loyalty como ativo financeiro" explorou como programas de fidelidade podem deixar de ser apenas benefícios de marketing e se tornar instrumentos financeiros com valor próprio.\n\nA apresentação mostrou casos reais de como a LATAM Pass está estruturando produtos financeiros próprios, usando a base de dados de comportamento do consumidor como matéria-prima para originação de crédito, seguros e investimentos. O modelo de profit share com parceiros financeiros foi detalhado, mostrando como cooperativas podem replicar a lógica em escala regional.',
   },
   {
     slug: 'embedded-credit-cubo-itau',
     date: '11 Mai 2026',
-    title: 'Painel Embedded Credit no Cubo Itau',
+    title: 'Painel Embedded Credit no Cubo Itaú',
     excerpt:
-      'Apresentacao sobre credito embarcado e programas de fidelidade.',
+      'Apresentação sobre crédito embarcado e programas de fidelidade.',
     content:
-      'O evento organizado pela GYRA+ no Cubo Itau reuniu fintechs, bancos e plataformas para discutir as tendencias de credito embarcado (embedded credit) no Brasil. O painel focou em como plataformas nao-financeiras podem oferecer produtos de credito integrados a sua experiencia de uso.\n\nA participacao abordou especificamente o papel de programas de fidelidade como originadores de valor financeiro, demonstrando como dados de comportamento do consumidor (frequencia de compra, ticket medio, engajamento com o programa) podem ser transformados em sinais de credito compativeis com modelos de risco regulados.',
+      'O evento organizado pela GYRA+ no Cubo Itaú reuniu fintechs, bancos e plataformas para discutir as tendências de crédito embarcado (embedded credit) no Brasil. O painel focou em como plataformas não financeiras podem oferecer produtos de crédito integrados a sua experiência de uso.\n\nA participação abordou especificamente o papel de programas de fidelidade como originadores de valor financeiro, demonstrando como dados de comportamento do consumidor (frequência de compra, ticket médio, engajamento com o programa) podem ser transformados em sinais de crédito compatíveis com modelos de risco regulados.',
   },
 ];
 
@@ -46,7 +46,7 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: Props): Metadata {
   const item = NEWS.find((n) => n.slug === params.slug);
-  if (!item) return { title: 'Noticia nao encontrada' };
+  if (!item) return { title: 'Notícia não encontrada' };
   return {
     title: item.title,
     description: item.excerpt,
@@ -119,7 +119,7 @@ export default function NoticiaDetailPage({ params }: Props) {
               strokeWidth={1.5}
               className="transition-transform duration-200 group-hover:-translate-x-1"
             />
-            Ver todas as noticias
+            Ver todas as notícias
           </Link>
         </div>
       </section>

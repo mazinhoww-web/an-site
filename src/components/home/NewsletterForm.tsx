@@ -19,7 +19,7 @@ export function NewsletterForm() {
     return (
       <div className="mt-8 flex items-center gap-3">
         <CheckCircle size={20} strokeWidth={1.5} className="text-lime" />
-        <p className="text-body text-bone">Inscrito. Voce recebera um email de confirmacao.</p>
+        <p className="text-body text-bone">Inscrito. Você receberá um email de confirmação.</p>
       </div>
     );
   }

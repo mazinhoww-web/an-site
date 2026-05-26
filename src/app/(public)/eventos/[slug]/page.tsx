@@ -28,16 +28,16 @@ const EVENTS: Event[] = [
     type: 'SUMMIT',
     role: 'PALESTRANTE',
     roleHighlight: true,
-    title: 'Summit de Inovacao Sicredi Central Centro-Norte',
-    topic: 'Loyalty como ativo financeiro em cooperativas de credito',
+    title: 'Summit de Inovação Sicredi Central Centro-Norte',
+    topic: 'Loyalty como ativo financeiro em cooperativas de crédito',
     description:
-      'Participacao como speaker no Summit de Inovacao da Sicredi, com video promocional gravado em parceria com LATAM Pass.',
-    city: 'Cuiaba, MT',
+      'Participação como speaker no Summit de Inovação da Sicredi, com vídeo promocional gravado em parceria com LATAM Pass.',
+    city: 'Cuiabá, MT',
     organizer: 'Sicredi',
     audienceSize: '~300',
     content:
-      'O convite surgiu da relacao construida entre LATAM Pass e o sistema Sicredi, que busca ampliar sua oferta de valor para associados atraves de programas de fidelidade. O painel discutiu como cooperativas de credito podem usar loyalty como alavanca financeira, saindo do modelo tradicional de beneficio de marketing para operar como ativo financeiro de fato.',
-    tags: ['Loyalty', 'Cooperativas', 'Inovacao'],
+      'O convite surgiu da relação construída entre LATAM Pass e o sistema Sicredi, que busca ampliar sua oferta de valor para associados através de programas de fidelidade. O painel discutiu como cooperativas de crédito podem usar loyalty como alavanca financeira, saindo do modelo tradicional de benefício de marketing para operar como ativo financeiro de fato.',
+    tags: ['Loyalty', 'Cooperativas', 'Inovação'],
   },
   {
     slug: 'embedded-credit-cubo-itau',
@@ -45,16 +45,16 @@ const EVENTS: Event[] = [
     type: 'PAINEL',
     role: 'PAINELISTA',
     roleHighlight: false,
-    title: 'Painel Embedded Credit no Cubo Itau',
-    topic: 'Credito embarcado e programas de fidelidade como originadores de valor',
+    title: 'Painel Embedded Credit no Cubo Itaú',
+    topic: 'Crédito embarcado e programas de fidelidade como originadores de valor',
     description:
-      'Apresentacao no evento GYRA+ sobre tendencias de credito embarcado e o papel de programas de fidelidade como originadores de valor financeiro.',
-    city: 'Sao Paulo, SP',
+      'Apresentação no evento GYRA+ sobre tendências de crédito embarcado e o papel de programas de fidelidade como originadores de valor financeiro.',
+    city: 'São Paulo, SP',
     organizer: 'GYRA+',
     audienceSize: '~150',
     content:
-      'O painel explorou como credito embarcado (embedded credit) esta mudando a cadeia de valor financeira, permitindo que plataformas nao-financeiras ofereçam produtos de credito integrados. A discussao focou no papel de programas de fidelidade como LATAM Pass na originacao de valor, combinando dados de comportamento do consumidor com infraestrutura financeira regulada.',
-    tags: ['Fintech', 'Credito', 'Embedded Finance'],
+      'O painel explorou como crédito embarcado (embedded credit) está mudando a cadeia de valor financeira, permitindo que plataformas não financeiras ofereçam produtos de crédito integrados. A discussão focou no papel de programas de fidelidade como LATAM Pass na originação de valor, combinando dados de comportamento do consumidor com infraestrutura financeira regulada.',
+    tags: ['Fintech', 'Crédito', 'Embedded Finance'],
   },
   {
     slug: 'inclusao-produtiva-segundo-voo',
@@ -62,15 +62,15 @@ const EVENTS: Event[] = [
     type: 'MESA-REDONDA',
     role: 'MEDIADOR',
     roleHighlight: false,
-    title: 'Inclusao Produtiva Segundo Voo',
-    topic: 'Programas de inclusao via fidelidade e aviacao',
+    title: 'Inclusão Produtiva Segundo Voo',
+    topic: 'Programas de inclusão via fidelidade e aviação',
     description:
-      'Mesa redonda sobre modelos de inclusao produtiva via programas de fidelidade com foco em populacoes de baixa renda.',
-    city: 'Brasilia, DF',
+      'Mesa redonda sobre modelos de inclusão produtiva via programas de fidelidade com foco em populações de baixa renda.',
+    city: 'Brasília, DF',
     organizer: 'LATAM Airlines',
     content:
-      'A mesa redonda reuniu representantes de programas sociais, companhias aereas e fintechs para discutir como programas de fidelidade podem ser transformados em ferramentas de inclusao produtiva. O debate abordou modelos em que o acumulo de pontos nao depende de consumo, mas de comportamentos produtivos como educacao financeira e capacitacao profissional.',
-    tags: ['Inclusao', 'Loyalty', 'Social'],
+      'A mesa redonda reuniu representantes de programas sociais, companhias aéreas e fintechs para discutir como programas de fidelidade podem ser transformados em ferramentas de inclusão produtiva. O debate abordou modelos em que o acúmulo de pontos não depende de consumo, mas de comportamentos produtivos como educação financeira e capacitação profissional.',
+    tags: ['Inclusão', 'Loyalty', 'Social'],
   },
 ];
 
@@ -84,7 +84,7 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: Props): Metadata {
   const event = EVENTS.find((e) => e.slug === params.slug);
-  if (!event) return { title: 'Evento nao encontrado' };
+  if (!event) return { title: 'Evento não encontrado' };
   return {
     title: event.title,
     description: event.topic,
@@ -154,7 +154,7 @@ export default function EventoDetailPage({ params }: Props) {
       <section className="px-6 pb-20 md:px-12 md:pb-32 lg:px-16">
         <div className="mx-auto grid max-w-container gap-12 md:grid-cols-12">
           <div className="md:col-span-8">
-            <h2 className="font-heading text-h2">Sobre esta participacao</h2>
+            <h2 className="font-heading text-h2">Sobre esta participação</h2>
             <p className="mt-4 max-w-prose text-body text-graphite">{event.content}</p>
 
             <div className="mt-8 flex flex-wrap gap-2">
@@ -178,7 +178,7 @@ export default function EventoDetailPage({ params }: Props) {
                 <p><span className="font-medium text-ink">Tipo:</span> {event.type}</p>
                 <p><span className="font-medium text-ink">Organizador:</span> {event.organizer}</p>
                 {event.audienceSize && (
-                  <p><span className="font-medium text-ink">Audiencia:</span> {event.audienceSize} pessoas</p>
+                  <p><span className="font-medium text-ink">Audiência:</span> {event.audienceSize} pessoas</p>
                 )}
               </div>
             </div>
@@ -221,7 +221,7 @@ export default function EventoDetailPage({ params }: Props) {
           <h2 className="font-heading text-h2">Tem um evento? Vamos conversar.</h2>
           <p className="mt-4 max-w-prose text-body text-graphite">
             Posso participar como palestrante, painelista, jurado ou mentor em
-            iniciativas alinhadas com loyalty, fintech ou inovacao.
+            iniciativas alinhadas com loyalty, fintech ou inovação.
           </p>
           <Link
             href="/contato"
@@ -265,7 +265,7 @@ export default function EventoDetailPage({ params }: Props) {
               >
                 <div>
                   <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
-                    PROXIMO EVENTO
+                    PRÓXIMO EVENTO
                   </p>
                   <p className="mt-0.5">{next.title}</p>
                 </div>

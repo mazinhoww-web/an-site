@@ -5,7 +5,7 @@ import { ContactForm } from './ContactForm';
 
 export const metadata: Metadata = {
   title: 'Contato',
-  description: 'Envie sua mensagem, proposta ou duvida para Aurimar Nogueira.',
+  description: 'Envie sua mensagem, proposta ou dúvida para Aurimar Nogueira.',
 };
 
 function LinkedinIcon() {
@@ -36,7 +36,7 @@ export default function ContatoPage() {
           <Label withTab className="mb-4 block">CONTATO</Label>
           <h1 className="font-heading text-display-m">Vamos conversar</h1>
           <p className="mt-4 max-w-prose text-body-l text-graphite">
-            Envie sua mensagem, proposta ou duvida.
+            Envie sua mensagem, proposta ou dúvida.
           </p>
           <Hairline className="mt-8" />
         </div>
@@ -87,9 +87,9 @@ export default function ContatoPage() {
                 </a>
               </div>
               <Hairline className="my-6" />
-              <h4 className="font-heading text-body-s font-medium">Horario de resposta</h4>
+              <h4 className="font-heading text-body-s font-medium">Horário de resposta</h4>
               <p className="mt-1 text-body-s text-graphite">
-                Seg a Sex, 9h as 18h (horario de Brasilia).
+                Seg a Sex, 9h às 18h (horário de Brasília).
               </p>
             </div>
           </div>
