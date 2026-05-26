@@ -6,6 +6,7 @@ import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
 import { ShareButtons } from './ShareButtons';
 import { MarkdownContent } from './MarkdownContent';
+import { GiscusComments } from '@/components/GiscusComments';
 
 type NewsItem = {
   slug: string;
@@ -102,6 +103,16 @@ export default function NoticiaDetailPage({ params }: Props) {
           <div className="mx-auto max-w-[720px]">
             <Hairline className="mb-6" />
             <ShareButtons title={item.title} />
+          </div>
+        </div>
+      </section>
+
+      {/* Comments */}
+      <section className="px-6 pb-20 md:px-12 md:pb-32 lg:px-16">
+        <div className="mx-auto max-w-container">
+          <div className="mx-auto max-w-[720px]">
+            <Hairline className="mb-8" />
+            <GiscusComments />
           </div>
         </div>
       </section>

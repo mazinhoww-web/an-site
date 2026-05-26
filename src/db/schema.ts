@@ -277,6 +277,19 @@ export const newsletterCampaigns = pgTable('newsletter_campaigns', {
 });
 
 // ---------------------------------------------------------------------------
+// LinkedIn posts log
+// ---------------------------------------------------------------------------
+
+export const linkedinPosts = pgTable('linkedin_posts', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  newsId: uuid('news_id').references(() => news.id),
+  linkedinPostId: text('linkedin_post_id'),
+  status: text('status').default('pending'),
+  postedAt: timestamp('posted_at'),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+// ---------------------------------------------------------------------------
 // Analytics tables
 // ---------------------------------------------------------------------------
 

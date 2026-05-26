@@ -148,6 +148,7 @@ export function Nav() {
 
             {/* Mobile links */}
             <div className="flex flex-1 flex-col items-center justify-center gap-8">
+              <ThemeToggle />
               {NAV_ITEMS.map((item) => {
                 const active = isActive(item.href);
                 return (
