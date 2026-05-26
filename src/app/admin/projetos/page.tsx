@@ -2,34 +2,34 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Plus } from 'lucide-react';
 import { db } from '@/db';
-import { events } from '@/db/schema';
+import { projects } from '@/db/schema';
 import { desc } from 'drizzle-orm';
 import { Label } from '@/components/brand/Label';
-import { DeleteEventButton } from './actions-buttons';
+import { DeleteProjectButton } from './actions-buttons';
 
-export const metadata: Metadata = { title: 'Eventos' };
+export const metadata: Metadata = { title: 'Projetos' };
 
-export default async function AdminEventosPage() {
-  const allEvents = await db.select().from(events).orderBy(desc(events.createdAt));
+export default async function AdminProjetosPage() {
+  const allProjects = await db.select().from(projects).orderBy(desc(projects.createdAt));
 
   return (
     <>
       <div className="flex items-center justify-between">
-        <h1 className="font-heading text-h1 mb-8">Eventos</h1>
+        <h1 className="font-heading text-h1 mb-8">Projetos</h1>
         <Link
-          href="/admin/eventos/novo"
+          href="/admin/projetos/novo"
           className="inline-flex items-center gap-2 bg-ink px-6 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-bone transition-colors duration-200 hover:text-lime"
         >
           <Plus size={14} strokeWidth={1.5} />
-          Novo Evento
+          Novo Projeto
         </Link>
       </div>
 
-      {allEvents.length === 0 ? (
+      {allProjects.length === 0 ? (
         <div className="border border-hairline bg-paper p-8">
           <Label className="mb-2 block">SEM DADOS</Label>
           <p className="text-body-s text-smoke">
-            Nenhum evento cadastrado. Crie o primeiro.
+            Nenhum projeto cadastrado. Crie o primeiro.
           </p>
         </div>
       ) : (
@@ -41,13 +41,13 @@ export default async function AdminEventosPage() {
                   Título
                 </th>
                 <th className="text-left font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke pb-3">
-                  Tipo
+                  Ano
                 </th>
                 <th className="text-left font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke pb-3">
-                  Role
+                  Featured
                 </th>
                 <th className="text-left font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke pb-3">
-                  Data
+                  Publicado
                 </th>
                 <th className="text-left font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke pb-3">
                   Ações
@@ -55,18 +55,22 @@ export default async function AdminEventosPage() {
               </tr>
             </thead>
             <tbody>
-              {allEvents.map((ev) => (
-                <tr key={ev.id} className="font-mono">
-                  <td className="py-3 border-t border-hairline">{ev.title}</td>
-                  <td className="py-3 border-t border-hairline">{ev.eventType}</td>
-                  <td className="py-3 border-t border-hairline">{ev.role}</td>
-                  <td className="py-3 border-t border-hairline whitespace-nowrap">
-                    {ev.eventDate
-                      ? new Date(ev.eventDate).toLocaleDateString('pt-BR')
-                      : '-'}
+              {allProjects.map((p) => (
+                <tr key={p.id} className="font-mono">
+                  <td className="py-3 border-t border-hairline">{p.title}</td>
+                  <td className="py-3 border-t border-hairline">{p.year ?? '-'}</td>
+                  <td className="py-3 border-t border-hairline">
+                    <span className={p.isFeatured ? 'text-lime' : 'text-smoke'}>
+                      {p.isFeatured ? 'sim' : 'nao'}
+                    </span>
                   </td>
                   <td className="py-3 border-t border-hairline">
-                    <DeleteEventButton id={ev.id} title={ev.title} />
+                    <span className={p.isPublished ? 'text-lime' : 'text-smoke'}>
+                      {p.isPublished ? 'sim' : 'nao'}
+                    </span>
+                  </td>
+                  <td className="py-3 border-t border-hairline">
+                    <DeleteProjectButton id={p.id} title={p.title} />
                   </td>
                 </tr>
               ))}

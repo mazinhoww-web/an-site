@@ -4,17 +4,7 @@ import { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { createSkill } from '@/server-actions/admin/skills';
-
-const CATEGORIES = [
-  'Go-to-Market',
-  'Framework',
-  'Data',
-  'Operations',
-  'Product',
-  'Agile',
-  'LATAM Pass',
-] as const;
+import { createProject } from '@/server-actions/admin/projects';
 
 function slugify(text: string): string {
   return text
@@ -25,15 +15,15 @@ function slugify(text: string): string {
     .replace(/(^-|-$)/g, '');
 }
 
-export default function AdminNovaSkillPage() {
+export default function AdminNovoProjetoPage() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
-  const [name, setName] = useState('');
+  const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
 
-  function handleNameChange(value: string) {
-    setName(value);
+  function handleTitleChange(value: string) {
+    setTitle(value);
     setSlug(slugify(value));
   }
 
@@ -43,9 +33,9 @@ export default function AdminNovaSkillPage() {
     const formData = new FormData(e.currentTarget);
 
     startTransition(async () => {
-      const result = await createSkill(formData);
+      const result = await createProject(formData);
       if (result.success) {
-        router.push('/admin/skills');
+        router.push('/admin/projetos');
       } else {
         setError(result.error ?? 'Erro desconhecido');
       }
@@ -55,7 +45,7 @@ export default function AdminNovaSkillPage() {
   return (
     <>
       <Link
-        href="/admin/skills"
+        href="/admin/projetos"
         className="group mb-4 inline-flex items-center gap-2 text-body-s text-graphite transition-colors hover:text-ink"
       >
         <ArrowLeft
@@ -65,7 +55,7 @@ export default function AdminNovaSkillPage() {
         />
         Voltar
       </Link>
-      <h1 className="font-heading text-h1 mb-8">Nova Skill</h1>
+      <h1 className="font-heading text-h1 mb-8">Novo Projeto</h1>
 
       {error && (
         <div className="mb-6 border border-red-300 bg-red-50 px-4 py-3 text-body-s text-red-700">
@@ -74,20 +64,20 @@ export default function AdminNovaSkillPage() {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Name */}
+        {/* Title */}
         <div>
-          <label htmlFor="name" className="mb-2 block font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
-            Nome
+          <label htmlFor="title" className="mb-2 block font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
+            Título
           </label>
           <input
-            id="name"
-            name="name"
+            id="title"
+            name="title"
             type="text"
             required
-            value={name}
-            onChange={(e) => handleNameChange(e.target.value)}
+            value={title}
+            onChange={(e) => handleTitleChange(e.target.value)}
             className="w-full border border-hairline bg-paper px-4 py-3 text-body text-ink placeholder:text-smoke/40 focus:border-lime focus:outline-none"
-            placeholder="Ex: Loyalty Canvas v2"
+            placeholder="Título do projeto"
           />
         </div>
 
@@ -104,86 +94,98 @@ export default function AdminNovaSkillPage() {
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
             className="w-full border border-hairline bg-paper px-4 py-3 text-body text-ink placeholder:text-smoke/40 focus:border-lime focus:outline-none"
-            placeholder="loyalty-canvas-v2"
+            placeholder="titulo-do-projeto"
           />
         </div>
 
-        {/* Description */}
+        {/* Summary */}
         <div>
-          <label htmlFor="description" className="mb-2 block font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
-            Descrição
+          <label htmlFor="summary" className="mb-2 block font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
+            Resumo
           </label>
           <textarea
-            id="description"
-            name="description"
+            id="summary"
+            name="summary"
             required
             rows={3}
             className="w-full border border-hairline bg-paper px-4 py-3 text-body text-ink placeholder:text-smoke/40 focus:border-lime focus:outline-none"
-            placeholder="Descrição curta da skill"
+            placeholder="Resumo do projeto (min. 10 caracteres)"
           />
         </div>
 
-        {/* Content */}
+        {/* Content Markdown */}
         <div>
-          <label htmlFor="content" className="mb-2 block font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
-            Conteúdo
+          <label htmlFor="contentMd" className="mb-2 block font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
+            Conteúdo (Markdown)
           </label>
           <textarea
-            id="content"
-            name="content"
-            required
-            rows={8}
+            id="contentMd"
+            name="contentMd"
+            rows={10}
             className="w-full border border-hairline bg-paper px-4 py-3 text-body text-ink placeholder:text-smoke/40 focus:border-lime focus:outline-none"
-            placeholder="Descrição longa / instruções de uso"
+            placeholder="Descrição detalhada em Markdown (opcional)"
           />
         </div>
 
-        {/* Category */}
+        {/* Tags */}
         <div>
-          <label htmlFor="category" className="mb-2 block font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
-            Categoria
-          </label>
-          <select
-            id="category"
-            name="category"
-            required
-            className="w-full border border-hairline bg-paper px-4 py-3 text-body text-ink focus:border-lime focus:outline-none"
-          >
-            <option value="">Selecione</option>
-            {CATEGORIES.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Version */}
-        <div>
-          <label htmlFor="version" className="mb-2 block font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
-            Versão
+          <label htmlFor="tags" className="mb-2 block font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
+            Tags (separadas por vírgula)
           </label>
           <input
-            id="version"
-            name="version"
+            id="tags"
+            name="tags"
             type="text"
-            defaultValue="1.0.0"
             className="w-full border border-hairline bg-paper px-4 py-3 text-body text-ink placeholder:text-smoke/40 focus:border-lime focus:outline-none"
+            placeholder="loyalty, fintech, next.js"
           />
         </div>
 
-        {/* File upload */}
+        {/* Year */}
         <div>
-          <label htmlFor="file" className="mb-2 block font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
-            Arquivo (.skill)
+          <label htmlFor="year" className="mb-2 block font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
+            Ano
           </label>
           <input
-            id="file"
-            name="file"
-            type="file"
-            accept=".skill"
-            className="w-full border border-hairline bg-paper px-4 py-3 text-body text-ink file:mr-4 file:border-0 file:bg-ink file:px-3 file:py-1 file:font-mono file:text-[10px] file:uppercase file:tracking-[0.08em] file:text-bone focus:border-lime focus:outline-none"
+            id="year"
+            name="year"
+            type="number"
+            min={2014}
+            max={2030}
+            className="w-full border border-hairline bg-paper px-4 py-3 text-body text-ink placeholder:text-smoke/40 focus:border-lime focus:outline-none"
+            placeholder="2026"
           />
+        </div>
+
+        {/* External URL */}
+        <div>
+          <label htmlFor="externalUrl" className="mb-2 block font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
+            URL Externa
+          </label>
+          <input
+            id="externalUrl"
+            name="externalUrl"
+            type="url"
+            className="w-full border border-hairline bg-paper px-4 py-3 text-body text-ink placeholder:text-smoke/40 focus:border-lime focus:outline-none"
+            placeholder="https://..."
+          />
+        </div>
+
+        {/* Featured */}
+        <div className="flex items-center gap-3">
+          <input
+            id="featured-checkbox"
+            type="checkbox"
+            onChange={(e) => {
+              const hidden = document.getElementById('isFeatured-hidden') as HTMLInputElement;
+              if (hidden) hidden.value = e.target.checked ? 'true' : 'false';
+            }}
+            className="h-4 w-4 border border-hairline accent-lime"
+          />
+          <input id="isFeatured-hidden" name="isFeatured" type="hidden" defaultValue="false" />
+          <label htmlFor="featured-checkbox" className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
+            Featured
+          </label>
         </div>
 
         {/* Published */}
@@ -191,14 +193,13 @@ export default function AdminNovaSkillPage() {
           <input
             id="published-checkbox"
             type="checkbox"
-            defaultChecked
             onChange={(e) => {
-              const hidden = document.getElementById('published-hidden') as HTMLInputElement;
+              const hidden = document.getElementById('isPublished-hidden') as HTMLInputElement;
               if (hidden) hidden.value = e.target.checked ? 'true' : 'false';
             }}
             className="h-4 w-4 border border-hairline accent-lime"
           />
-          <input id="published-hidden" name="published" type="hidden" defaultValue="true" />
+          <input id="isPublished-hidden" name="isPublished" type="hidden" defaultValue="false" />
           <label htmlFor="published-checkbox" className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
             Publicado
           </label>
@@ -210,7 +211,7 @@ export default function AdminNovaSkillPage() {
           disabled={isPending}
           className="bg-ink px-6 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-bone transition-colors duration-200 hover:text-lime disabled:opacity-40"
         >
-          {isPending ? 'Salvando...' : 'Criar Skill'}
+          {isPending ? 'Salvando...' : 'Criar Projeto'}
         </button>
       </form>
     </>

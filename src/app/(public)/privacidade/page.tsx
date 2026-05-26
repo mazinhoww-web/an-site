@@ -15,7 +15,7 @@ export default function PrivacidadePage() {
           <Eyebrow className="mb-4 block">LGPD</Eyebrow>
           <h1 className="font-heading text-display-m">Política de Privacidade</h1>
           <p className="mt-4 text-body-s text-smoke">
-            Ultima atualizacao: {new Date().getFullYear()}
+            Última atualização: {new Date().getFullYear()}
           </p>
           <Hairline className="mt-8" />
         </div>
@@ -36,9 +36,9 @@ export default function PrivacidadePage() {
               <h2 className="mb-3 font-heading text-h2">2. Dados coletados</h2>
               <p>Este site coleta apenas os dados que você fornece voluntariamente:</p>
               <ul className="mt-2 list-inside list-disc space-y-1 text-body-s">
-                <li>Nome e email (formulario de contato)</li>
+                <li>Nome e email (formulário de contato)</li>
                 <li>Email (download de skills, newsletter)</li>
-                <li>Consentimento de newsletter e WhatsApp (checkboxes explicitos)</li>
+                <li>Consentimento de newsletter e WhatsApp (checkboxes explícitos)</li>
                 <li>Endereço IP anonimizado e user-agent (logs de acesso)</li>
               </ul>
             </div>
@@ -46,10 +46,10 @@ export default function PrivacidadePage() {
             <div>
               <h2 className="mb-3 font-heading text-h2">3. Finalidade</h2>
               <ul className="list-inside list-disc space-y-1 text-body-s">
-                <li>Responder mensagens recebidas via formulario de contato</li>
-                <li>Enviar emails de newsletter (somente com consentimento explicito)</li>
+                <li>Responder mensagens recebidas via formulário de contato</li>
+                <li>Enviar emails de newsletter (somente com consentimento explícito)</li>
                 <li>Disponibilizar download de arquivos .skill</li>
-                <li>Melhorar a experiencia do site via analytics anonimizados</li>
+                <li>Melhorar a experiência do site via analytics anonimizados</li>
               </ul>
             </div>
 
@@ -82,10 +82,10 @@ export default function PrivacidadePage() {
               <h2 className="mb-3 font-heading text-h2">7. Seus direitos</h2>
               <p>Conforme a LGPD (Lei 13.709/2018), você tem direito a:</p>
               <ul className="mt-2 list-inside list-disc space-y-1 text-body-s">
-                <li>Confirmar a existencia de tratamento de dados</li>
+                <li>Confirmar a existência de tratamento de dados</li>
                 <li>Acessar seus dados pessoais</li>
                 <li>Corrigir dados incompletos ou desatualizados</li>
-                <li>Solicitar anonimizacao, bloqueio ou eliminacao</li>
+                <li>Solicitar anonimização, bloqueio ou eliminação</li>
                 <li>Revogar consentimento</li>
                 <li>Solicitar portabilidade dos dados</li>
               </ul>
