@@ -107,6 +107,8 @@ export const skills = pgTable('skills', {
   category: text('category').notNull(),
   version: text('version').default('1.0.0'),
   blobUrl: text('blob_url').notNull(),
+  assetBlobKey: text('asset_blob_key'),
+  assetFilename: text('asset_filename'),
   downloads: integer('downloads').default(0),
   published: boolean('published').default(true),
   createdAt: timestamp('created_at').defaultNow(),
@@ -132,13 +134,13 @@ export const downloads = pgTable('downloads', {
   skillId: uuid('skill_id')
     .notNull()
     .references(() => skills.id),
+  subscriberId: uuid('subscriber_id')
+    .references(() => subscribers.id),
   email: text('email').notNull(),
-  name: text('name'),
-  phone: text('phone'),
-  consentNewsletter: boolean('consent_newsletter').default(false),
-  consentWhatsapp: boolean('consent_whatsapp').default(false),
+  token: text('token').unique(),
+  expiresAt: timestamp('expires_at'),
+  usedAt: timestamp('used_at'),
   ipAnonymized: text('ip_anonymized'),
-  userAgent: text('user_agent'),
   createdAt: timestamp('created_at').defaultNow(),
 });
 

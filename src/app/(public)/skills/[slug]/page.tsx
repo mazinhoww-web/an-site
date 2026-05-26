@@ -248,6 +248,7 @@ export default function SkillDetailPage({ params }: { params: { slug: string } }
       <DownloadGate
         skillSlug={skill.slug}
         skillName={skill.name}
+        hasAsset={false}
         isOpen={gateOpen}
         onClose={closeGate}
       />

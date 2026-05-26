@@ -55,7 +55,6 @@ export async function requestSkillDownload(formData: FormData): Promise<ActionRe
     await db.insert(downloads).values({
       skillId: skill[0].id,
       email,
-      consentNewsletter,
     });
 
     await db.update(skills).set({
