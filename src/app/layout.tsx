@@ -32,19 +32,22 @@ export const metadata: Metadata = {
     template: '%s · AN.',
   },
   description: 'Loyalty, fintech e inovação aplicada em ecossistemas regulados. Site pessoal de Aurimar Nogueira.',
+  alternates: {
+    types: { 'application/rss+xml': '/feed.xml' },
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="pt-BR"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} theme-ink`}
       suppressHydrationWarning
     >
       <body>
         <script
           dangerouslySetInnerHTML={{
-            __html: "try{if(localStorage.getItem('theme')==='ink')document.documentElement.classList.add('theme-ink')}catch(e){}",
+            __html: "try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.remove('theme-ink')}catch(e){}",
           }}
         />
         {children}

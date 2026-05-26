@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "sobre": "Sobre",
+    "trajetoria": "Trajetória",
+    "projetos": "Projetos",
+    "eventos": "Eventos",
+    "skills": "Skills",
+    "noticias": "Notícias",
+    "contato": "Contato",
+    "agora": "Agora"
+  },
+  "hero": {
+    "eyebrow": "LOYALTY × FINTECH × INNOVATION",
+    "title": "Onde estratégia vira sistema.",
+    "subtitle": "Aurimar Nogueira. Coordenador Sênior de Negócios Financeiros na LATAM Pass. Loyalty, fintech e inovação aplicada em ecossistemas regulados.",
+    "cta_primary": "CONHECER",
+    "cta_secondary": "FALAR COMIGO"
+  },
+  "footer": {
+    "copyright": "Aurimar Nogueira. Cuiabá, MT. Onde estratégia vira sistema.",
+    "connect": "CONECTAR",
+    "navigate": "NAVEGAR",
+    "location": "LOCALIDADE"
+  },
+  "newsletter": {
+    "title": "Recebe quando algo novo sai.",
+    "description": "No máximo 2 emails por mês. Skill nova, fala em evento, leitura recomendada.",
+    "placeholder": "seu@email.com",
+    "submit": "INSCREVER",
+    "success": "Inscrito. Você receberá um email de confirmação.",
+    "privacy": "Seus dados ficam comigo. Não compartilho com ninguém."
+  },
+  "search": {
+    "placeholder": "Buscar skills, notícias, projetos, eventos...",
+    "no_results": "Nenhum resultado para",
+    "searching": "Buscando..."
+  }
+}

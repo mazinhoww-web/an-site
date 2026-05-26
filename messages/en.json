@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "sobre": "About",
+    "trajetoria": "Career",
+    "projetos": "Projects",
+    "eventos": "Events",
+    "skills": "Skills",
+    "noticias": "News",
+    "contato": "Contact",
+    "agora": "Now"
+  },
+  "hero": {
+    "eyebrow": "LOYALTY × FINTECH × INNOVATION",
+    "title": "Where strategy becomes system.",
+    "subtitle": "Aurimar Nogueira. Senior Financial Business Coordinator at LATAM Pass. Loyalty, fintech, and applied innovation in regulated ecosystems.",
+    "cta_primary": "LEARN MORE",
+    "cta_secondary": "GET IN TOUCH"
+  },
+  "footer": {
+    "copyright": "Aurimar Nogueira. Cuiabá, MT. Where strategy becomes system.",
+    "connect": "CONNECT",
+    "navigate": "NAVIGATE",
+    "location": "LOCATION"
+  },
+  "newsletter": {
+    "title": "Get notified when something new drops.",
+    "description": "At most 2 emails per month. New skill, event talk, recommended read.",
+    "placeholder": "your@email.com",
+    "submit": "SUBSCRIBE",
+    "success": "Subscribed. You will receive a confirmation email.",
+    "privacy": "Your data stays with me. I don't share with anyone."
+  },
+  "search": {
+    "placeholder": "Search skills, news, projects, events...",
+    "no_results": "No results for",
+    "searching": "Searching..."
+  }
+}
