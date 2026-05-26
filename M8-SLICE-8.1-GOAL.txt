@@ -1,0 +1,39 @@
+Missão: implementar slice 8.1 (DownloadGate funcional) conforme M8-FUNDACAO.md. Spec é fonte de verdade. Separar fase técnica e editorial, não misturar.
+
+PRE-FLIGHT (pare ao primeiro erro): git status limpo em main; M8-FUNDACAO.md presente; RESEND_API_KEY, BLOB_READ_WRITE_TOKEN, NEXT_PUBLIC_BASE_URL em .env.local; validar Blob e Resend via tsx -e antes de seguir.
+
+FASE A (código sem asset): implementar migration (asset_blob_key, asset_filename em skills), server action requestDownload, página /baixar/[token], DownloadGate UI, cookie consent_lgpd_email 30d, rate limit KV. Skill sem asset exibe "Em breve", nunca quebra. Validar type-check + lint + build. Commit + push antes de seguir.
+
+FASE B (inventário): criar scripts/inventory-skills.ts se não existir, listar slug/name/has_asset/asset_filename. PARAR e mostrar resultado antes de C.
+
+FASE C (sourcing, ordem rígida por skill sem asset):
+1) ./assets/skills/[slug].pdf existe? Usar.
+2) Aurimar tem original em Drive/Notion/Slack/Dropbox? PARAR e pedir.
+3) Versão pública com licença permissiva EXPLÍCITA (CC0/CC-BY/MIT/domínio público) declarada na fonte? Baixar + preencher asset_attribution.
+4) Criar do zero? Gerar rascunho em ./assets/skills/_drafts/[slug].md com header "<!-- RASCUNHO POR CLAUDE EM YYYY-MM-DD. NAO PUBLICAR SEM REVIEW -->". PARAR e pedir review. Só converter para PDF após OK explícito do Aurimar.
+
+REGRAS INVIOLÁVEIS:
+- Nunca baixar PDF de terceiro sem licença explícita. "Achei no Google" não é licença.
+- Nunca reproduzir conteúdo de paywall (HBR, McKinsey, MIT Sloan, etc).
+- Nunca publicar conteúdo gerado por IA sem review aprovada.
+- Nunca usar logos/gráficos/screenshots de terceiros nos PDFs sem autorização.
+- Atribuição obrigatória quando usar material de terceiros.
+- Estilo do rascunho: técnico, direto, PT-BR, sem em-dash, sem emoji, 4-8 páginas, sem inventar dados.
+
+Conversão MD→PDF aprovada: pandoc --pdf-engine=xelatex -V mainfont=Inter -V monofont="JetBrains Mono" -V fontsize=11pt -V geometry:margin=2cm.
+
+FASE D (upload + bind): para cada PDF aprovado, rodar scripts/upload-asset.ts e UPDATE skills SET asset_blob_key, asset_filename WHERE slug.
+
+FASE E (dry-run obrigatório em produção): escolher 1 skill com asset. Em janela incógnita: pedir download com email real, receber email do Resend, clicar link, baixar PDF, clicar segunda vez (deve mostrar "Link já usado"), validar downloads.used_at no Neon e cookie consent_lgpd_email no DevTools. Falhou? PARAR.
+
+FASE F (rollout): repetir D para skills restantes aprovadas. Skills pendentes ficam asset_blob_key null e exibem "Em breve" no site.
+
+COMMIT FINAL: listar quais skills foram populadas, quais ainda dependem de sourcing, atribuições de licença aplicáveis.
+
+PARAR E PERGUNTAR se: pre-flight falhar; inventário pronto (B); skill exige material só do Aurimar (C2); rascunho aguarda review (C4); dry-run falhar em qualquer passo (E); dúvida de licença (na dúvida, NÃO use); erro inesperado de Resend, Vercel Blob ou Neon.
+
+NÃO FAZER: mockar Resend com console.log; expor URLs públicas do Blob sem token; criar tabela nova; mexer em schema fora de skills; popular conteúdo de terceiros sem atribuição; publicar rascunho sem OK explícito; inflar slice com CRUD admin (isso é 8.2); mexer em copy ou UI fora do necessário pro DownloadGate.
+
+DONE quando: Fase A commitada e em produção; inventário compartilhado com Aurimar; pelo menos 1 skill com asset e dry-run end-to-end validado em produção; skills sem asset exibem "Em breve" sem quebrar; commit final descritivo no histórico; lista clara de pendências de sourcing entregue ao Aurimar.
+
+Comece pelo PRE-FLIGHT. Não pule fases.
