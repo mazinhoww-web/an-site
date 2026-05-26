@@ -8,7 +8,7 @@ export default auth((req) => {
   if (isAuthRoute) return NextResponse.next();
 
   if (isAdminRoute && !req.auth) {
-    return NextResponse.redirect(new URL('/api/auth/signin', req.url));
+    return NextResponse.redirect(new URL('/admin/login', req.url));
   }
 
   return NextResponse.next();

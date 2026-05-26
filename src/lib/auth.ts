@@ -11,6 +11,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       from: process.env.RESEND_FROM,
     }),
   ],
+  pages: {
+    signIn: '/admin/login',
+    verifyRequest: '/admin/login?check=email',
+    error: '/admin/login?error=',
+  },
   callbacks: {
     async session({ session, user }) {
       const adminEmails = process.env.ADMIN_EMAILS?.split(',') ?? [];
