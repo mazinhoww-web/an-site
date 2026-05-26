@@ -1,13 +1,11 @@
-import type { Metadata } from 'next';
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import { MapPin, Building2, ArrowUpRight } from 'lucide-react';
 import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
-
-export const metadata: Metadata = {
-  title: 'Eventos',
-  description: 'Paineis, palestras e mesas em que Aurimar participou.',
-};
+import { cn } from '@/lib/utils';
 
 const EVENTS = [
   {
@@ -54,7 +52,15 @@ const EVENTS = [
   },
 ] as const;
 
+const ROLES = ['TODOS', 'PALESTRANTE', 'PAINELISTA', 'MEDIADOR', 'JURADO'] as const;
+
 export default function EventosPage() {
+  const [activeFilter, setActiveFilter] = useState('TODOS');
+
+  const filtered = activeFilter === 'TODOS'
+    ? EVENTS
+    : EVENTS.filter((e) => e.role === activeFilter);
+
   return (
     <>
       {/* Hero */}
@@ -70,12 +76,40 @@ export default function EventosPage() {
         </div>
       </section>
 
+      {/* Filters */}
+      <section className="px-6 md:px-12 lg:px-16">
+        <div className="mx-auto max-w-container">
+          <div className="flex flex-wrap gap-2">
+            {ROLES.map((role) => (
+              <button
+                key={role}
+                type="button"
+                onClick={() => setActiveFilter(role)}
+                className={cn(
+                  'px-4 py-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] transition-colors duration-150',
+                  activeFilter === role
+                    ? 'border border-lime bg-lime/10 text-lime'
+                    : 'border border-hairline text-smoke hover:border-ink hover:text-ink',
+                )}
+              >
+                {role}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Event list */}
-      <section className="px-6 pb-20 md:px-12 md:pb-32 lg:px-16">
+      <section className="px-6 pb-20 pt-8 md:px-12 md:pb-32 lg:px-16">
         <div className="mx-auto max-w-container space-y-0">
-          {EVENTS.map((event, i) => (
+          {filtered.length === 0 && (
+            <p className="py-12 text-center text-body text-smoke">
+              Nenhum evento com esse filtro.
+            </p>
+          )}
+          {filtered.map((event, i) => (
             <div key={event.slug}>
-              {i > 0 && <Hairline className="my-0" />}
+              {i > 0 && <Hairline />}
               <Link
                 href={`/eventos/${event.slug}`}
                 className="group block py-8 md:py-10"

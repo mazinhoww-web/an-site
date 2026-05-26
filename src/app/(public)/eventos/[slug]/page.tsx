@@ -186,6 +186,34 @@ export default function EventoDetailPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Eventos relacionados */}
+      {(() => {
+        const related = EVENTS.filter((e) => e.slug !== event.slug).slice(0, 2);
+        if (related.length === 0) return null;
+        return (
+          <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
+            <div className="mx-auto max-w-container">
+              <Label withTab className="mb-6 block">RELACIONADOS</Label>
+              <div className="grid gap-6 md:grid-cols-2">
+                {related.map((r) => (
+                  <Link
+                    key={r.slug}
+                    href={`/eventos/${r.slug}`}
+                    className="group border border-hairline p-6 transition-colors duration-200 hover:border-lime"
+                  >
+                    <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
+                      {r.date}
+                    </p>
+                    <h3 className="mt-2 font-heading text-h3">{r.title}</h3>
+                    <p className="mt-1 text-body-s text-graphite">{r.topic}</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })()}
+
       {/* CTA */}
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">

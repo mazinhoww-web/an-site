@@ -1,11 +1,12 @@
-'use client';
-
-import { useState } from 'react';
-import { Send, Loader2, CheckCircle } from 'lucide-react';
+import type { Metadata } from 'next';
 import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
+import { ContactForm } from './ContactForm';
 
-type FormState = 'idle' | 'submitting' | 'success' | 'error';
+export const metadata: Metadata = {
+  title: 'Contato',
+  description: 'Envie sua mensagem, proposta ou duvida para Aurimar Nogueira.',
+};
 
 function LinkedinIcon() {
   return (
@@ -27,16 +28,6 @@ function GithubIcon() {
 }
 
 export default function ContatoPage() {
-  const [formState, setFormState] = useState<FormState>('idle');
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setFormState('submitting');
-    // Server Action sera conectada quando M4 for implementado
-    await new Promise((r) => setTimeout(r, 1500));
-    setFormState('success');
-  }
-
   return (
     <>
       {/* Hero */}
@@ -54,114 +45,8 @@ export default function ContatoPage() {
       {/* Form + Info */}
       <section className="px-6 pb-20 md:px-12 md:pb-32 lg:px-16">
         <div className="mx-auto grid max-w-container gap-12 md:grid-cols-12">
-          {/* Form */}
           <div className="md:col-span-7">
-            {formState === 'success' ? (
-              <div className="flex flex-col items-center gap-4 border border-lime p-12 text-center">
-                <CheckCircle size={32} strokeWidth={1.5} className="text-lime" />
-                <h2 className="font-heading text-h2">Mensagem enviada.</h2>
-                <p className="text-body text-graphite">Vou responder em breve.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="mb-2 block font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke"
-                  >
-                    NOME
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    minLength={3}
-                    placeholder="Seu nome"
-                    disabled={formState === 'submitting'}
-                    className="w-full border border-hairline bg-paper px-4 py-3 text-body text-ink placeholder:text-smoke/40 focus:border-lime focus:outline-none disabled:opacity-50"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="mb-2 block font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke"
-                  >
-                    EMAIL
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="seu@email.com"
-                    disabled={formState === 'submitting'}
-                    className="w-full border border-hairline bg-paper px-4 py-3 text-body text-ink placeholder:text-smoke/40 focus:border-lime focus:outline-none disabled:opacity-50"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="subject"
-                    className="mb-2 block font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke"
-                  >
-                    ASSUNTO
-                  </label>
-                  <select
-                    id="subject"
-                    name="subject"
-                    required
-                    disabled={formState === 'submitting'}
-                    className="w-full border border-hairline bg-paper px-4 py-3 text-body text-ink focus:border-lime focus:outline-none disabled:opacity-50"
-                  >
-                    <option value="">Selecione</option>
-                    <option value="contato">Contato pessoal</option>
-                    <option value="evento">Proposta de evento</option>
-                    <option value="consultoria">Consultoria</option>
-                    <option value="outro">Outro</option>
-                  </select>
-                </div>
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="mb-2 block font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke"
-                  >
-                    MENSAGEM
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    minLength={20}
-                    rows={5}
-                    placeholder="Conte mais..."
-                    disabled={formState === 'submitting'}
-                    className="w-full resize-none border border-hairline bg-paper px-4 py-3 text-body text-ink placeholder:text-smoke/40 focus:border-lime focus:outline-none disabled:opacity-50"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={formState === 'submitting'}
-                  className="inline-flex w-full items-center justify-center gap-2 bg-ink px-8 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-lime transition-colors duration-150 hover:bg-lime hover:text-ink disabled:opacity-50"
-                >
-                  {formState === 'submitting' ? (
-                    <>
-                      <Loader2 size={16} strokeWidth={1.5} className="animate-spin" />
-                      ENVIANDO
-                    </>
-                  ) : (
-                    <>
-                      ENVIAR MENSAGEM
-                      <Send size={16} strokeWidth={1.5} />
-                    </>
-                  )}
-                </button>
-
-                <p className="text-body-s text-smoke">
-                  Seus dados ficam comigo. Nao compartilho com ninguem. LGPD aplicada.
-                </p>
-              </form>
-            )}
+            <ContactForm />
           </div>
 
           {/* Info sidebar */}

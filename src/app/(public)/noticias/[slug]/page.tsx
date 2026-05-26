@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
 import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
+import { ShareButtons } from './ShareButtons';
+import { MarkdownContent } from './MarkdownContent';
 
 type NewsItem = {
   slug: string;
@@ -72,12 +74,20 @@ export default function NoticiaDetailPage({ params }: Props) {
       </section>
 
       {/* Content */}
+      <section className="px-6 pb-12 md:px-12 md:pb-20 lg:px-16">
+        <div className="mx-auto max-w-container">
+          <div className="mx-auto max-w-[720px]">
+            <MarkdownContent content={item.content} />
+          </div>
+        </div>
+      </section>
+
+      {/* Share */}
       <section className="px-6 pb-20 md:px-12 md:pb-32 lg:px-16">
         <div className="mx-auto max-w-container">
-          <div className="mx-auto max-w-[720px] space-y-6 text-body text-graphite">
-            {item.content.split('\n\n').map((paragraph, i) => (
-              <p key={i}>{paragraph}</p>
-            ))}
+          <div className="mx-auto max-w-[720px]">
+            <Hairline className="mb-6" />
+            <ShareButtons title={item.title} />
           </div>
         </div>
       </section>

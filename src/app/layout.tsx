@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: '%s | AN.',
   },
   description: 'Onde estrategia vira sistema. LOYALTY × FINTECH × INNOVATION.',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aurimarnogueira.com.br'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://aurimarnogueira.com.br'),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -149,6 +149,43 @@ export default function SobrePage() {
         </div>
       </section>
 
+      {/* Links externos */}
+      <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
+        <div className="mx-auto max-w-container">
+          <SectionHead eyebrow="CONECTAR" title="Onde me encontrar" />
+          <div className="flex flex-wrap gap-6">
+            <a
+              href="https://linkedin.com/in/aurimarnogueira"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Abrir LinkedIn em nova aba"
+              className="group flex items-center gap-2 border border-hairline px-6 py-3 text-body-s text-graphite transition-colors duration-150 hover:border-lime hover:text-ink"
+            >
+              LinkedIn
+              <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-200 group-hover:translate-x-1" />
+            </a>
+            <a
+              href="https://github.com/mazinhoww-web"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Abrir GitHub em nova aba"
+              className="group flex items-center gap-2 border border-hairline px-6 py-3 text-body-s text-graphite transition-colors duration-150 hover:border-lime hover:text-ink"
+            >
+              GitHub
+              <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-200 group-hover:translate-x-1" />
+            </a>
+            <a
+              href="mailto:contato@aurimarnogueira.com.br"
+              aria-label="Enviar email"
+              className="group flex items-center gap-2 border border-hairline px-6 py-3 text-body-s text-graphite transition-colors duration-150 hover:border-lime hover:text-ink"
+            >
+              Email
+              <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-200 group-hover:translate-x-1" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
