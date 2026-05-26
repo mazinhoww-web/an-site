@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Calendar, MapPin, Building2, Users, ArrowLeft, ArrowRight, Send } from 'lucide-react';
+import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
 
@@ -113,11 +114,8 @@ export default function EventoDetailPage({ params }: Props) {
           <div className="flex flex-wrap items-center gap-3">
             <Label>{event.type}</Label>
             <span className="text-smoke">{'·'}</span>
-            <span
-              className={`font-mono text-[10px] font-medium uppercase tracking-[0.08em] ${
-                event.roleHighlight ? 'text-lime' : 'text-ink'
-              }`}
-            >
+            <span className="inline-flex items-center gap-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-ink">
+              {event.roleHighlight && <span className="text-lime leading-none">{'•'}</span>}
               {event.role}
             </span>
           </div>
@@ -171,7 +169,7 @@ export default function EventoDetailPage({ params }: Props) {
 
           <div className="md:col-span-4">
             <div className="border border-hairline bg-paper p-6">
-              <Label withTab className="mb-4 block">DETALHES</Label>
+              <Eyebrow className="mb-4 block">DETALHES</Eyebrow>
               <div className="space-y-3 text-body-s text-graphite">
                 <p><span className="font-medium text-ink">Data:</span> {event.date}</p>
                 <p><span className="font-medium text-ink">Local:</span> {event.city}</p>
@@ -193,7 +191,7 @@ export default function EventoDetailPage({ params }: Props) {
         return (
           <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
             <div className="mx-auto max-w-container">
-              <Label withTab className="mb-6 block">RELACIONADOS</Label>
+              <Eyebrow className="mb-6 block">RELACIONADOS</Eyebrow>
               <div className="grid gap-6 md:grid-cols-2">
                 {related.map((r) => (
                   <Link

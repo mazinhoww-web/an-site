@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Label } from '@/components/brand/Label';
+import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Hairline } from '@/components/brand/Hairline';
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export default function PrivacidadePage() {
     <>
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
-          <Label withTab className="mb-4 block">LGPD</Label>
+          <Eyebrow className="mb-4 block">LGPD</Eyebrow>
           <h1 className="font-heading text-display-m">Política de Privacidade</h1>
           <p className="mt-4 text-body-s text-smoke">
             Ultima atualizacao: {new Date().getFullYear()}

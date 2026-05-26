@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { Label } from '@/components/brand/Label';
+import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Hairline } from '@/components/brand/Hairline';
 import { PhotoFrame } from '@/components/brand/PhotoFrame';
 import { SectionHead } from '@/components/ui/SectionHead';
@@ -30,7 +30,7 @@ export default function SobrePage() {
       {/* Hero */}
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
-          <Label withTab className="mb-4 block">SOBRE</Label>
+          <Eyebrow className="mb-4 block">SOBRE</Eyebrow>
           <h1 className="font-heading text-display-m">Quem é Aurimar Nogueira</h1>
           <Hairline className="mt-8" />
         </div>
@@ -129,7 +129,8 @@ export default function SobrePage() {
                     item.current ? 'bg-lime' : 'bg-hairline'
                   }`}
                 />
-                <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-lime">
+                <p className="inline-flex items-center gap-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
+                  {item.current && <span className="text-lime leading-none">{'•'}</span>}
                   {item.year}
                   {item.current && ' / ATUAL'}
                 </p>

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
 import { SectionHead } from '@/components/ui/SectionHead';
@@ -77,12 +78,12 @@ export default function HomePage() {
       {/* Hero */}
       <section className="flex min-h-[80vh] flex-col justify-center px-6 py-24 md:px-12 lg:px-16">
         <div className="mx-auto w-full max-w-container">
-          <Label withTab className="mb-6 block">
+          <Eyebrow className="mb-6 block">
             LOYALTY {'×'} FINTECH {'×'} INNOVATION
-          </Label>
+          </Eyebrow>
           <h1 className="max-w-4xl font-heading text-display-xl">
             Onde estratégia{' '}
-            <span className="text-lime">vira</span> sistema.
+            <span className="lime-highlight">vira</span> sistema.
           </h1>
           <p className="mt-6 max-w-prose text-body-l text-graphite">
             Aurimar Nogueira. Coordenador Sênior de Negócios Financeiros na LATAM Pass.
@@ -133,15 +134,14 @@ export default function HomePage() {
           </div>
           <Link
             href="/trajetoria"
-            className="group mt-8 inline-flex items-center gap-2 text-body-s text-ink"
+            className="link-editorial group mt-8 inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.12em]"
           >
-            Ler trajetória completa
+            LER TRAJETÓRIA COMPLETA
             <ArrowRight
               size={16}
               strokeWidth={1.5}
               className="transition-transform duration-200 group-hover:translate-x-1"
             />
-            <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-lime transition-all duration-200 group-hover:w-full" />
           </Link>
         </div>
       </section>

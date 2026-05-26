@@ -1,4 +1,4 @@
-import { Label } from '@/components/brand/Label';
+import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Hairline } from '@/components/brand/Hairline';
 import { cn } from '@/lib/utils';
 
@@ -12,9 +12,9 @@ type SectionHeadProps = {
 export function SectionHead({ eyebrow, title, subtitle, className }: SectionHeadProps) {
   return (
     <div className={cn('mb-12 md:mb-16', className)}>
-      <Label withTab className="mb-4 block">
+      <Eyebrow className="mb-4 block">
         {eyebrow}
-      </Label>
+      </Eyebrow>
       <h2 className="font-heading text-display-m">{title}</h2>
       {subtitle && (
         <p className="mt-4 max-w-prose text-body-l text-graphite">{subtitle}</p>

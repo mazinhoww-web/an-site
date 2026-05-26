@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Download, ArrowLeft } from 'lucide-react';
+import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
 import { SkillCard } from '@/components/skills/SkillCard';
@@ -170,7 +171,7 @@ export default function SkillDetailPage({ params }: { params: { slug: string } }
             <span className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
               {skill.downloads.toLocaleString('pt-BR')} downloads
             </span>
-            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-lime">
+            <span className="border border-lime px-2 py-0.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-ink">
               FREE
             </span>
           </div>
@@ -208,7 +209,7 @@ export default function SkillDetailPage({ params }: { params: { slug: string } }
       {related.length > 0 && (
         <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
           <div className="mx-auto max-w-container">
-            <Label withTab className="mb-6 block">SKILLS RELACIONADAS</Label>
+            <Eyebrow className="mb-6 block">SKILLS RELACIONADAS</Eyebrow>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((r) => (
                 <SkillCard

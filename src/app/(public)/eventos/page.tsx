@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { MapPin, Building2, ArrowUpRight } from 'lucide-react';
+import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
 import { cn } from '@/lib/utils';
@@ -66,7 +67,7 @@ export default function EventosPage() {
       {/* Hero */}
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
-          <Label withTab className="mb-4 block">EVENTOS</Label>
+          <Eyebrow className="mb-4 block">EVENTOS</Eyebrow>
           <h1 className="font-heading text-display-m">Palestras, painéis e mesas</h1>
           <p className="mt-4 max-w-prose text-body-l text-graphite">
             Painéis, palestras, mentorias e mesas em que estive como representante de uma
@@ -86,10 +87,10 @@ export default function EventosPage() {
                 type="button"
                 onClick={() => setActiveFilter(role)}
                 className={cn(
-                  'px-4 py-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] transition-colors duration-150',
+                  'px-4 py-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] transition-all duration-150',
                   activeFilter === role
-                    ? 'border border-lime bg-lime/10 text-lime'
-                    : 'border border-hairline text-smoke hover:border-ink hover:text-ink',
+                    ? 'border border-ink text-ink shadow-[inset_0_-2px_0_var(--color-lime)]'
+                    : 'border border-hairline text-graphite hover:border-ink hover:text-ink',
                 )}
               >
                 {role}
@@ -118,11 +119,8 @@ export default function EventosPage() {
                   {/* Zone 1: Date + Role */}
                   <div className="md:col-span-2">
                     <p className="font-mono text-h3 font-bold">{event.date}</p>
-                    <p
-                      className={`mt-1 font-mono text-[10px] font-medium uppercase tracking-[0.08em] ${
-                        event.roleHighlight ? 'text-lime' : 'text-ink'
-                      }`}
-                    >
+                    <p className="mt-1 inline-flex items-center gap-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-ink">
+                      {event.roleHighlight && <span className="text-lime leading-none">{'•'}</span>}
                       {event.role}
                     </p>
                   </div>
@@ -133,7 +131,7 @@ export default function EventosPage() {
                     <h3 className="font-heading text-h2 transition-colors duration-150 group-hover:text-ink">
                       {event.title}
                     </h3>
-                    <p className="mt-1 text-body-s text-lime">{event.topic}</p>
+                    <p className="mt-1 text-body-s font-medium text-ink">{event.topic}</p>
                     <p className="mt-3 text-body-s text-graphite">{event.description}</p>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {event.tags.map((tag) => (

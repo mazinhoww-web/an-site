@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Label } from '@/components/brand/Label';
+import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Hairline } from '@/components/brand/Hairline';
 import { ContactForm } from './ContactForm';
 
@@ -33,7 +33,7 @@ export default function ContatoPage() {
       {/* Hero */}
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
-          <Label withTab className="mb-4 block">CONTATO</Label>
+          <Eyebrow className="mb-4 block">CONTATO</Eyebrow>
           <h1 className="font-heading text-display-m">Vamos conversar</h1>
           <p className="mt-4 max-w-prose text-body-l text-graphite">
             Envie sua mensagem, proposta ou dúvida.
@@ -52,7 +52,7 @@ export default function ContatoPage() {
           {/* Info sidebar */}
           <div className="md:col-span-5">
             <div className="border border-hairline bg-paper p-6">
-              <Label withTab className="mb-4 block">OUTRAS FORMAS DE CONTATO</Label>
+              <Eyebrow className="mb-4 block">OUTRAS FORMAS DE CONTATO</Eyebrow>
               <div className="space-y-4">
                 <a
                   href="https://linkedin.com/in/aurimarnogueira"

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { Label } from '@/components/brand/Label';
+import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Hairline } from '@/components/brand/Hairline';
 import { SectionHead } from '@/components/ui/SectionHead';
 
@@ -118,7 +118,7 @@ export default function TrajetoriaPage() {
       {/* Hero */}
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
-          <Label withTab className="mb-4 block">TRAJETÓRIA</Label>
+          <Eyebrow className="mb-4 block">TRAJETÓRIA</Eyebrow>
           <h1 className="max-w-3xl font-heading text-display-m">
             Uma década de execução em fintech e loyalty
           </h1>
@@ -221,7 +221,7 @@ export default function TrajetoriaPage() {
                 className="border border-hairline p-8 transition-colors duration-200 hover:border-lime"
               >
                 <h3 className="font-heading text-h3">{fw.name}</h3>
-                <p className="mt-1 text-body-s text-lime">{fw.subtitle}</p>
+                <p className="mt-1 text-body-s text-graphite">{fw.subtitle}</p>
                 <p className="mt-4 text-body-s text-graphite">{fw.description}</p>
               </div>
             ))}

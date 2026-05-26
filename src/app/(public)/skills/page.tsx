@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Label } from '@/components/brand/Label';
+import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Hairline } from '@/components/brand/Hairline';
 import { SkillCard } from '@/components/skills/SkillCard';
 import { cn } from '@/lib/utils';
@@ -112,7 +112,7 @@ export default function SkillsPage() {
       {/* Hero */}
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
-          <Label withTab className="mb-4 block">SKILLS</Label>
+          <Eyebrow className="mb-4 block">SKILLS</Eyebrow>
           <h1 className="font-heading text-display-m">Metodologias empacotadas para Claude</h1>
           <p className="mt-4 max-w-prose text-body-l text-graphite">
             Frameworks de trabalho transformados em código executável.
@@ -132,10 +132,10 @@ export default function SkillsPage() {
                 type="button"
                 onClick={() => setActiveCategory(cat)}
                 className={cn(
-                  'px-4 py-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] transition-colors duration-150',
+                  'px-4 py-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] transition-all duration-150',
                   activeCategory === cat
-                    ? 'border border-lime bg-lime/10 text-lime'
-                    : 'border border-hairline text-smoke hover:border-ink hover:text-ink',
+                    ? 'border border-ink text-ink shadow-[inset_0_-2px_0_var(--color-lime)]'
+                    : 'border border-hairline text-graphite hover:border-ink hover:text-ink',
                 )}
               >
                 {cat}

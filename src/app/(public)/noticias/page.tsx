@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
-import { Label } from '@/components/brand/Label';
+import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Hairline } from '@/components/brand/Hairline';
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function NoticiasPage() {
       {/* Hero */}
       <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
         <div className="mx-auto max-w-container">
-          <Label withTab className="mb-4 block">NOTÍCIAS</Label>
+          <Eyebrow className="mb-4 block">NOTÍCIAS</Eyebrow>
           <h1 className="font-heading text-display-m">Leituras recomendadas e updates</h1>
           <p className="mt-4 max-w-prose text-body-l text-graphite">
             Artigos, participações em eventos e reflexões sobre loyalty, fintech e inovação.
