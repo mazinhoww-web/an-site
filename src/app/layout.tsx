@@ -26,12 +26,12 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: 'AN. | Aurimar Nogueira',
-    template: '%s | AN.',
-  },
-  description: 'Onde estratégia vira sistema. LOYALTY × FINTECH × INNOVATION.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://aurimarnogueira.com.br'),
+  title: {
+    default: 'AN. Aurimar Nogueira',
+    template: '%s · AN.',
+  },
+  description: 'Loyalty, fintech e inovação aplicada em ecossistemas regulados. Site pessoal de Aurimar Nogueira.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
