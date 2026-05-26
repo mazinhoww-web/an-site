@@ -60,9 +60,9 @@ type ConnectLink = {
 const CONNECT_LINKS: ConnectLink[] = [
   {
     label: 'LinkedIn',
-    href: 'https://linkedin.com/in/aurimarnogueira',
+    href: 'https://www.linkedin.com/in/mazinho/',
     icon: LinkedinIcon,
-    ariaLabel: 'Abrir LinkedIn em nova aba',
+    ariaLabel: 'LinkedIn de Aurimar Nogueira',
   },
   {
     label: 'GitHub',

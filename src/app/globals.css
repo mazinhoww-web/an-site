@@ -22,6 +22,104 @@
   .link-editorial:hover {
     background-size: 100% 2px;
   }
+
+  /* Photo treatment: grayscale + contrast */
+  .photo-editorial img {
+    filter: grayscale(1) contrast(1.05);
+  }
+
+  /* Home hero overlay */
+  .home-hero-overlay {
+    background: linear-gradient(
+      to right,
+      var(--color-bone) 0%,
+      var(--color-bone) 35%,
+      transparent 100%
+    );
+  }
+  @media (max-width: 768px) {
+    .home-hero-overlay {
+      background: linear-gradient(
+        to bottom,
+        var(--color-bone) 0%,
+        var(--color-bone) 50%,
+        rgba(245, 244, 239, 0.7) 100%
+      );
+    }
+  }
+
+  /* Logo marquee */
+  .logo-marquee {
+    border-top: 1px solid var(--color-hairline);
+    border-bottom: 1px solid var(--color-hairline);
+    padding: 32px 0;
+    background: var(--color-bone);
+    overflow: hidden;
+  }
+
+  .logo-marquee__caption {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+    opacity: 0.6;
+    margin-bottom: 24px;
+  }
+
+  .logo-marquee__viewport {
+    overflow: hidden;
+    width: 100%;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 80px,
+      black calc(100% - 80px),
+      transparent
+    );
+  }
+
+  .logo-marquee__track {
+    display: flex;
+    gap: 80px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: max-content;
+    animation: logo-marquee-scroll 30s linear infinite;
+  }
+
+  .logo-marquee__track:hover {
+    animation-play-state: paused;
+  }
+
+  .logo-marquee__item {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .logo-marquee__item img {
+    height: 32px;
+    width: auto;
+    opacity: 0.6;
+    filter: grayscale(1) brightness(0);
+    transition: opacity 200ms ease;
+  }
+
+  .logo-marquee__item:hover img {
+    opacity: 1;
+  }
+
+  /* Event card cover */
+  .event-cover img {
+    filter: grayscale(1) contrast(1.05);
+  }
 }
 
 @layer base {
@@ -65,5 +163,40 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+}
+
+@keyframes logo-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee__track {
+    animation: none !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100% !important;
+  }
+  .logo-marquee__viewport {
+    mask-image: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo-marquee__track {
+    gap: 40px;
+    animation-duration: 20s;
+  }
+  .logo-marquee__item img {
+    height: 24px;
+  }
+  .logo-marquee__caption {
+    font-size: 10px;
+    gap: 8px;
   }
 }

@@ -27,7 +27,7 @@ export function PhotoFrame({ src, alt, className }: PhotoFrameProps) {
 
       {src ? (
         <motion.div
-          className="relative aspect-[3/4] w-full overflow-hidden"
+          className="photo-editorial relative aspect-[3/4] w-full overflow-hidden"
           whileHover={reducedMotion ? undefined : { scale: 1.03 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >

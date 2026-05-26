@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Calendar, MapPin, Building2, Users, ArrowLeft, ArrowRight, Send } from 'lucide-react';
@@ -20,6 +21,9 @@ type Event = {
   audienceSize?: string;
   content: string;
   tags: readonly string[];
+  cover?: string;
+  bodyImage?: string;
+  bodyImageAlt?: string;
 };
 
 const EVENTS: Event[] = [
@@ -39,6 +43,29 @@ const EVENTS: Event[] = [
     content:
       'O convite surgiu da relação construída entre LATAM Pass e o sistema Sicredi, que busca ampliar sua oferta de valor para associados através de programas de fidelidade. O painel discutiu como cooperativas de crédito podem usar loyalty como alavanca financeira, saindo do modelo tradicional de benefício de marketing para operar como ativo financeiro de fato.',
     tags: ['Loyalty', 'Cooperativas', 'Inovação'],
+    cover: '/photos/evento-sicredi-summit.jpg',
+    bodyImage: '/photos/evento-sicredi-stage.jpg',
+    bodyImageAlt: 'Aurimar Nogueira palestrando no Summit Sicredi',
+  },
+  {
+    slug: 'crmbonus-meet-2026',
+    date: '14 Mai 2026',
+    type: 'PAINEL',
+    role: 'PAINELISTA',
+    roleHighlight: false,
+    title: 'CRMBonus Meet: Cenários Econômicos',
+    topic: 'Cenários econômicos e os novos vetores de consumo',
+    description:
+      'Painel sobre cenários macroeconômicos e mudanças nos padrões de consumo, com participantes de LATAM Airlines, J.P. Morgan, CRMBonus e JUSPAY.',
+    city: 'São Paulo, SP',
+    organizer: 'CRMBonus',
+    audienceSize: '~200',
+    content:
+      'O CRMBonus Meet reuniu executivos de diferentes setores para discutir cenários econômicos e os novos vetores de consumo no Brasil. O painel abordou como mudanças macroeconômicas impactam o comportamento do consumidor no checkout e como programas de fidelidade podem se adaptar a esse novo cenário, criando valor tanto para marcas quanto para consumidores.',
+    tags: ['Fintech', 'Consumo', 'Loyalty'],
+    cover: '/photos/evento-crmbonus-meet.jpg',
+    bodyImage: '/photos/evento-crmbonus-grupo.jpg',
+    bodyImageAlt: 'Painelistas do CRMBonus Meet',
   },
   {
     slug: 'embedded-credit-cubo-itau',
@@ -56,6 +83,9 @@ const EVENTS: Event[] = [
     content:
       'O painel explorou como crédito embarcado (embedded credit) está mudando a cadeia de valor financeira, permitindo que plataformas não financeiras ofereçam produtos de crédito integrados. A discussão focou no papel de programas de fidelidade como LATAM Pass na originação de valor, combinando dados de comportamento do consumidor com infraestrutura financeira regulada.',
     tags: ['Fintech', 'Crédito', 'Embedded Finance'],
+    cover: '/photos/evento-gyra-cubo.jpg',
+    bodyImage: '/photos/evento-gyra-detail.jpg',
+    bodyImageAlt: 'Aurimar Nogueira no painel Embedded Credit no Cubo Itaú',
   },
   {
     slug: 'inclusao-produtiva-segundo-voo',
@@ -145,6 +175,19 @@ export default function EventoDetailPage({ params }: Props) {
           </div>
 
           <Hairline className="mt-8" />
+
+          {event.cover && (
+            <div className="event-cover relative mt-8 aspect-[16/9] w-full overflow-hidden border border-hairline">
+              <Image
+                src={event.cover}
+                alt={event.title}
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 1200px"
+              />
+            </div>
+          )}
         </div>
       </section>
 
@@ -154,6 +197,20 @@ export default function EventoDetailPage({ params }: Props) {
           <div className="md:col-span-8">
             <h2 className="font-heading text-h2">Sobre esta participação</h2>
             <p className="mt-4 max-w-prose text-body text-graphite">{event.content}</p>
+
+            {event.bodyImage && (
+              <figure className="event-cover mt-8 overflow-hidden border border-hairline">
+                <div className="relative aspect-[3/2]">
+                  <Image
+                    src={event.bodyImage}
+                    alt={event.bodyImageAlt || ''}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 800px"
+                  />
+                </div>
+              </figure>
+            )}
 
             <div className="mt-8 flex flex-wrap gap-2">
               {event.tags.map((tag) => (

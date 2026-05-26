@@ -1,11 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, Building2, ArrowUpRight } from 'lucide-react';
 import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
+import { LogoMarquee } from '@/components/LogoMarquee';
 import { cn } from '@/lib/utils';
 
 const EVENTS = [
@@ -22,6 +24,22 @@ const EVENTS = [
     city: 'Cuiabá, MT',
     organizer: 'Sicredi',
     tags: ['Loyalty', 'Cooperativas', 'Inovação'],
+    cover: '/photos/evento-sicredi-summit.jpg',
+  },
+  {
+    slug: 'crmbonus-meet-2026',
+    date: '14 MAI 2026',
+    type: 'PAINEL',
+    role: 'PAINELISTA',
+    roleHighlight: false,
+    title: 'CRMBonus Meet: Cenários Econômicos',
+    topic: 'Cenários econômicos e os novos vetores de consumo',
+    description:
+      'Painel sobre cenários macroeconômicos e mudanças nos padrões de consumo, com participantes de LATAM Airlines, J.P. Morgan, CRMBonus e JUSPAY.',
+    city: 'São Paulo, SP',
+    organizer: 'CRMBonus',
+    tags: ['Fintech', 'Consumo', 'Loyalty'],
+    cover: '/photos/evento-crmbonus-meet.jpg',
   },
   {
     slug: 'embedded-credit-cubo-itau',
@@ -36,6 +54,7 @@ const EVENTS = [
     city: 'São Paulo, SP',
     organizer: 'GYRA+',
     tags: ['Fintech', 'Crédito', 'Embedded Finance'],
+    cover: '/photos/evento-gyra-cubo.jpg',
   },
   {
     slug: 'inclusao-produtiva-segundo-voo',
@@ -50,6 +69,7 @@ const EVENTS = [
     city: 'Brasília, DF',
     organizer: 'LATAM Airlines',
     tags: ['Inclusão', 'Loyalty', 'Social'],
+    cover: null,
   },
 ] as const;
 
@@ -77,8 +97,10 @@ export default function EventosPage() {
         </div>
       </section>
 
+      <LogoMarquee />
+
       {/* Filters */}
-      <section className="px-6 md:px-12 lg:px-16">
+      <section className="px-6 pt-12 md:px-12 lg:px-16">
         <div className="mx-auto max-w-container">
           <div className="flex flex-wrap gap-2">
             {ROLES.map((role) => (
@@ -115,6 +137,17 @@ export default function EventosPage() {
                 href={`/eventos/${event.slug}`}
                 className="group block py-8 md:py-10"
               >
+                {event.cover && (
+                  <div className="event-cover relative mb-6 aspect-[16/9] w-full overflow-hidden border border-hairline">
+                    <Image
+                      src={event.cover}
+                      alt={event.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                      sizes="(max-width: 768px) 100vw, 1200px"
+                    />
+                  </div>
+                )}
                 <div className="grid gap-4 md:grid-cols-12 md:gap-8">
                   {/* Zone 1: Date + Role */}
                   <div className="md:col-span-2">

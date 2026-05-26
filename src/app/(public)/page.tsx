@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Eyebrow } from '@/components/brand/Eyebrow';
@@ -62,7 +63,7 @@ const PERSON_JSONLD = {
   worksFor: { '@type': 'Organization', name: 'LATAM Pass' },
   url: 'https://aurimarnogueira.com.br',
   sameAs: [
-    'https://linkedin.com/in/aurimarnogueira',
+    'https://www.linkedin.com/in/mazinho/',
     'https://github.com/mazinhoww-web',
   ],
   address: { '@type': 'PostalAddress', addressLocality: 'Cuiabá', addressRegion: 'MT', addressCountry: 'BR' },
@@ -76,8 +77,19 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_JSONLD) }}
       />
       {/* Hero */}
-      <section className="flex min-h-[80vh] flex-col justify-center px-6 py-24 md:px-12 lg:px-16">
-        <div className="mx-auto w-full max-w-container">
+      <section className="relative flex min-h-[80vh] flex-col justify-center overflow-hidden bg-bone px-6 py-24 md:px-12 lg:px-16">
+        <div className="photo-editorial absolute inset-0">
+          <Image
+            src="/photos/aurimar-hero.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[75%_center]"
+          />
+          <div className="home-hero-overlay absolute inset-0" aria-hidden="true" />
+        </div>
+        <div className="relative z-10 mx-auto w-full max-w-container">
           <Eyebrow className="mb-6 block">
             LOYALTY {'×'} FINTECH {'×'} INNOVATION
           </Eyebrow>

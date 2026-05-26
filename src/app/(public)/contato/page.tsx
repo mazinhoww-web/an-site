@@ -55,14 +55,14 @@ export default function ContatoPage() {
               <Eyebrow className="mb-4 block">OUTRAS FORMAS DE CONTATO</Eyebrow>
               <div className="space-y-4">
                 <a
-                  href="https://linkedin.com/in/aurimarnogueira"
+                  href="https://www.linkedin.com/in/mazinho/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Abrir LinkedIn em nova aba"
+                  aria-label="LinkedIn de Aurimar Nogueira"
                   className="flex items-center gap-3 text-body-s text-graphite transition-colors duration-150 hover:text-ink"
                 >
                   <LinkedinIcon />
-                  linkedin.com/in/aurimarnogueira
+                  linkedin.com/in/mazinho
                 </a>
                 <a
                   href="https://github.com/mazinhoww-web"

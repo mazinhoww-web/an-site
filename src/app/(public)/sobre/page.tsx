@@ -41,7 +41,7 @@ export default function SobrePage() {
         <div className="mx-auto grid max-w-container gap-12 md:grid-cols-12">
           {/* Left: Photo */}
           <div className="md:col-span-4">
-            <PhotoFrame alt="Aurimar Nogueira" />
+            <PhotoFrame src="/photos/aurimar-editorial.jpg" alt="Aurimar Nogueira" />
             <div className="mt-6 space-y-2">
               <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
                 Cuiabá, MT, Brasil
@@ -159,10 +159,10 @@ export default function SobrePage() {
           <SectionHead eyebrow="CONECTAR" title="Onde me encontrar" />
           <div className="flex flex-wrap gap-6">
             <a
-              href="https://linkedin.com/in/aurimarnogueira"
+              href="https://www.linkedin.com/in/mazinho/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Abrir LinkedIn em nova aba"
+              aria-label="LinkedIn de Aurimar Nogueira"
               className="group flex items-center gap-2 border border-hairline px-6 py-3 text-body-s text-graphite transition-colors duration-150 hover:border-ink hover:text-ink"
             >
               LinkedIn
