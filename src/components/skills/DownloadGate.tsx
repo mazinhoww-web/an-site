@@ -139,7 +139,7 @@ export function DownloadGate({ skillSlug, skillName, hasAsset, isOpen, onClose }
               href={downloadUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-ink px-8 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-lime transition-colors duration-200 hover:text-bone"
+              className="inline-flex items-center gap-2 bg-lime px-8 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-ink transition-colors duration-200 hover:bg-lime-deep"
             >
               <Download size={16} strokeWidth={1.5} />
               BAIXAR AGORA

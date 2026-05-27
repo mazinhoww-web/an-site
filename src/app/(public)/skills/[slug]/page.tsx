@@ -6,6 +6,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import matter from 'gray-matter';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
@@ -25,23 +27,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 function extractSummary(content: string): string {
   const lines = content.split('\n');
-  const paragraphs: string[] = [];
-  let foundFirstHeading = false;
+  const result: string[] = [];
+  let sectionCount = 0;
 
   for (const line of lines) {
     if (line.startsWith('#')) {
-      if (foundFirstHeading) break;
-      foundFirstHeading = true;
-      continue;
+      sectionCount++;
+      if (sectionCount > 2) break;
     }
     const trimmed = line.trim();
-    if (trimmed && !trimmed.startsWith('//') && !trimmed.startsWith('---')) {
-      paragraphs.push(trimmed);
-    }
-    if (paragraphs.length >= 4) break;
+    if (trimmed.startsWith('---')) continue;
+    result.push(line);
   }
 
-  return paragraphs.join('\n\n');
+  return result.join('\n').trim();
 }
 
 const INSTALL_INSTRUCTIONS: Record<string, string> = {
@@ -116,10 +115,8 @@ export default async function SkillDetailPage({ params }: Props) {
 
             {/* Sobre essa skill */}
             <Eyebrow className="mb-4 block">SOBRE ESSA SKILL</Eyebrow>
-            <div className="max-w-prose space-y-4 text-body text-graphite">
-              {summary.split('\n\n').map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
+            <div className="prose prose-sm max-w-none text-graphite prose-headings:font-heading prose-headings:text-ink prose-h1:text-h2 prose-h2:text-h3 prose-h3:text-body-l prose-p:text-graphite prose-strong:text-ink prose-code:font-mono prose-code:text-[13px] prose-code:text-lime prose-code:before:content-none prose-code:after:content-none prose-pre:bg-ink prose-pre:text-bone prose-a:text-ink prose-a:decoration-lime prose-li:text-graphite prose-li:my-1 prose-table:text-body-s">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{summary}</ReactMarkdown>
             </div>
 
             {/* Accordion: SKILL.md completo */}
