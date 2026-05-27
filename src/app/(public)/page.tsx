@@ -85,7 +85,7 @@ export default function HomePage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[85%_center]"
+            className="object-cover object-[70%_center]"
           />
           <div className="home-hero-overlay absolute inset-0" aria-hidden="true" />
         </div>
