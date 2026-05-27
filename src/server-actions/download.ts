@@ -5,6 +5,7 @@ import { db } from '@/db';
 import { downloads, subscribers, skills } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { headers } from 'next/headers';
+import { getSignedDownloadUrl } from '@/lib/blob';
 
 const schema = z.object({
   email: z.string().email('Email invalido').max(200),
@@ -76,5 +77,7 @@ export async function requestDownload(input: unknown) {
     .set({ downloads: (skill.downloads ?? 0) + 1 })
     .where(eq(skills.id, skill.id));
 
-  return { success: true, downloadUrl: skill.blobUrl };
+  const downloadUrl = await getSignedDownloadUrl(skill.blobUrl);
+
+  return { success: true, downloadUrl };
 }

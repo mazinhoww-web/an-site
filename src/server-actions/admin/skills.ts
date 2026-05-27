@@ -37,7 +37,7 @@ export async function createSkill(formData: FormData): Promise<ActionResult> {
 
     if (file && file.size > 0) {
       if (file.size > 5 * 1024 * 1024) return { success: false, error: 'Arquivo máximo: 5MB' };
-      const blob = await put(`skills/${parsed.data.slug}.skill`, file, { access: 'public' });
+      const blob = await put(`skills/${parsed.data.slug}.skill`, file, { access: 'private' });
       blobUrl = blob.url;
     }
 
@@ -80,7 +80,7 @@ export async function updateSkill(id: string, formData: FormData): Promise<Actio
 
     if (file && file.size > 0) {
       if (file.size > 5 * 1024 * 1024) return { success: false, error: 'Arquivo máximo: 5MB' };
-      const blob = await put(`skills/${parsed.data.slug}.skill`, file, { access: 'public' });
+      const blob = await put(`skills/${parsed.data.slug}.skill`, file, { access: 'private' });
       updateData.blobUrl = blob.url;
     }
 
