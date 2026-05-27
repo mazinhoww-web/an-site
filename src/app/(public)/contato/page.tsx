@@ -87,7 +87,7 @@ export default function ContatoPage() {
                 </a>
               </div>
               <Hairline className="my-6" />
-              <h4 className="font-heading text-body-s font-medium">Horário de resposta</h4>
+              <h2 className="font-heading text-body-s font-medium">Horário de resposta</h2>
               <p className="mt-1 text-body-s text-graphite">
                 Seg a Sex, 9h às 18h (horário de Brasília).
               </p>

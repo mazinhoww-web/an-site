@@ -142,9 +142,9 @@ export default async function PalestraDetailPage({ params }: Props) {
           {/* Sidebar: ficha tecnica */}
           <div className="md:col-span-4">
             <div className="sticky top-20 space-y-6 border border-hairline p-6">
-              <h4 className="font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-ink">
+              <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-ink">
                 Ficha tecnica
-              </h4>
+              </h2>
 
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
