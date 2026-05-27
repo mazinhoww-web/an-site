@@ -15,6 +15,8 @@ export default async function SkillsPage() {
       description: skills.description,
       category: skills.category,
       downloads: skills.downloads,
+      stars: skills.stars,
+      usageRank: skills.usageRank,
       author: skills.author,
       isCurated: skills.isCurated,
       assetFormat: skills.assetFormat,

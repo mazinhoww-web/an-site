@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { Label } from '@/components/brand/Label';
+import { StarButton } from '@/components/skills/StarButton';
 import { cn } from '@/lib/utils';
 
 type SkillCardProps = {
@@ -9,6 +10,8 @@ type SkillCardProps = {
   description: string;
   category: string;
   downloads: number;
+  stars: number;
+  usageRank?: number | null;
   badge?: string;
   featured?: boolean;
   className?: string;
@@ -20,6 +23,8 @@ export function SkillCard({
   description,
   category,
   downloads,
+  stars,
+  usageRank,
   badge = 'FREE',
   featured = false,
   className,
@@ -33,6 +38,11 @@ export function SkillCard({
         className,
       )}
     >
+      {usageRank != null && (
+        <span className="absolute left-4 top-4 bg-ink px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.08em] text-lime">
+          TOP {usageRank}
+        </span>
+      )}
       {badge && (
         <span className="absolute right-4 top-4 border border-lime px-2 py-0.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-ink">
           {badge}
@@ -42,9 +52,12 @@ export function SkillCard({
       <h3 className="font-heading text-h3">{name}</h3>
       <p className="mt-2 flex-1 text-body-s text-graphite line-clamp-2">{description}</p>
       <div className="mt-4 flex items-center justify-between">
-        <span className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
-          {downloads.toLocaleString('pt-BR')} downloads
-        </span>
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
+            {downloads.toLocaleString('pt-BR')} downloads
+          </span>
+          <StarButton slug={slug} initialStars={stars} compact />
+        </div>
         <ArrowUpRight
           size={16}
           strokeWidth={1.5}

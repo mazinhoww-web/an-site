@@ -115,6 +115,8 @@ export const skills = pgTable('skills', {
   sourceUrl: text('source_url'),
   isCurated: boolean('is_curated').default(false),
   downloads: integer('downloads').default(0),
+  stars: integer('stars').default(0).notNull(),
+  usageRank: integer('usage_rank'),
   published: boolean('published').default(true),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),

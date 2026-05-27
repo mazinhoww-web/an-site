@@ -5,11 +5,13 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import matter from 'gray-matter';
 import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
 import { SkillDetailClient } from './SkillDetailClient';
 import { SkillContentAccordion } from './SkillContentAccordion';
+import { StarButton } from '@/components/skills/StarButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -65,10 +67,11 @@ export default async function SkillDetailPage({ params }: Props) {
     md: 'Baixar SKILL.md',
   };
 
-  const summary = extractSummary(skill.content);
+  const { content: bodyContent } = matter(skill.content);
+  const summary = extractSummary(bodyContent);
 
   return (
-    <>
+    <div className="overflow-x-hidden">
       {/* Breadcrumb */}
       <section className="px-6 pt-20 md:px-12 md:pt-32 lg:px-16">
         <div className="mx-auto max-w-container">
@@ -85,11 +88,11 @@ export default async function SkillDetailPage({ params }: Props) {
         <div className="mx-auto grid max-w-container gap-8 lg:grid-cols-[1fr_400px]">
 
           {/* LEFT: content */}
-          <div>
+          <div className="min-w-0">
             {/* Header */}
             <Label className="mb-3 block">{skill.category}</Label>
-            <h1 className="max-w-3xl font-heading text-display-l">{skill.name}</h1>
-            <p className="mt-4 text-body-l text-graphite">{skill.description}</p>
+            <h1 className="max-w-3xl break-words font-heading text-display-l">{skill.name}</h1>
+            <p className="mt-4 text-body-l text-graphite" style={{ overflowWrap: 'anywhere' }}>{skill.description}</p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
               {skill.author && (
@@ -121,19 +124,22 @@ export default async function SkillDetailPage({ params }: Props) {
 
             {/* Accordion: SKILL.md completo */}
             <div className="mt-8">
-              <SkillContentAccordion content={skill.content} />
+              <SkillContentAccordion content={bodyContent} />
             </div>
           </div>
 
           {/* RIGHT: sidebar sticky */}
           <div className="lg:sticky lg:top-24 lg:self-start">
             <div className="border border-hairline bg-paper p-6">
-              {/* Download button */}
+              {/* Download + Star buttons */}
               <SkillDetailClient
                 skillSlug={skill.slug}
                 skillName={skill.name}
                 downloadLabel={formatLabel[skill.assetFormat ?? 'skill'] ?? 'Baixar'}
               />
+              <div className="mt-3">
+                <StarButton slug={skill.slug} initialStars={skill.stars ?? 0} />
+              </div>
 
               <Hairline className="my-6" />
 
@@ -216,6 +222,6 @@ export default async function SkillDetailPage({ params }: Props) {
           </Link>
         </div>
       </section>
-    </>
+    </div>
   );
 }
