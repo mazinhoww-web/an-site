@@ -1,60 +1,58 @@
 import type { MetadataRoute } from 'next';
+import { db } from '@/db';
+import { skills, events } from '@/db/schema';
+import { eq } from 'drizzle-orm';
+import { getAllPalestras } from '@/lib/palestras';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://aurimarnogueira.com.br';
 
-const STATIC_PAGES = [
-  '',
-  '/sobre',
-  '/eventos',
-  '/skills',
-  '/skills/como-usar',
-  '/contato',
-] as const;
-
-const EVENT_SLUGS = [
-  'summit-sicredi-2026',
-  'embedded-credit-cubo-itau',
-  'inclusao-produtiva-segundo-voo',
-] as const;
-
-const SKILL_SLUGS = [
-  'gtm-engineering',
-  'gtm-automation-ai-agents',
-  'metodo-jet-ski',
-  'gsd2-methodology',
-  'automation-data-platforms',
-  'revops-gtm-strategy',
-  'customer-success-operations',
-  'product-management-digital',
-  'agile-project-management',
-  'data-engineering-senior',
-  'innovation2business',
-  'latam-deck-template',
-] as const;
-
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
-  const staticEntries = STATIC_PAGES.map((path) => ({
-    url: `${BASE_URL}${path}`,
-    lastModified: now,
-    changeFrequency: 'weekly' as const,
-    priority: path === '' ? 1 : 0.8,
-  }));
+  const staticPages: MetadataRoute.Sitemap = [
+    { url: BASE_URL, lastModified: now, changeFrequency: 'daily', priority: 1 },
+    { url: `${BASE_URL}/sobre`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE_URL}/palestras`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE_URL}/eventos`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${BASE_URL}/skills`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${BASE_URL}/skills/como-usar`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/contato`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${BASE_URL}/privacidade`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/agora`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+  ];
 
-  const eventEntries = EVENT_SLUGS.map((slug) => ({
-    url: `${BASE_URL}/eventos/${slug}`,
-    lastModified: now,
-    changeFrequency: 'monthly' as const,
+  const publishedSkills = await db
+    .select({ slug: skills.slug, updatedAt: skills.updatedAt })
+    .from(skills)
+    .where(eq(skills.published, true));
+
+  const skillEntries: MetadataRoute.Sitemap = publishedSkills.map((s) => ({
+    url: `${BASE_URL}/skills/${s.slug}`,
+    lastModified: s.updatedAt ?? now,
+    changeFrequency: 'monthly',
     priority: 0.7,
   }));
 
-  const skillEntries = SKILL_SLUGS.map((slug) => ({
-    url: `${BASE_URL}/skills/${slug}`,
-    lastModified: now,
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
+  const publishedEvents = await db
+    .select({ slug: events.slug, updatedAt: events.updatedAt })
+    .from(events)
+    .where(eq(events.published, true));
+
+  const eventEntries: MetadataRoute.Sitemap = publishedEvents.map((e) => ({
+    url: `${BASE_URL}/eventos/${e.slug}`,
+    lastModified: e.updatedAt ?? now,
+    changeFrequency: 'monthly',
+    priority: 0.7,
   }));
 
-  return [...staticEntries, ...eventEntries, ...skillEntries];
+  const palestras = await getAllPalestras();
+
+  const palestraEntries: MetadataRoute.Sitemap = palestras.map((p) => ({
+    url: `${BASE_URL}/palestras/${p.slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...skillEntries, ...eventEntries, ...palestraEntries];
 }
