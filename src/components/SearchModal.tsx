@@ -2,22 +2,18 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { Search, X, FileText, Box, FolderKanban, Calendar } from 'lucide-react';
+import { Search, X, Box, Calendar } from 'lucide-react';
 import { globalSearch } from '@/server-actions/search';
 
-type Result = { type: 'skill' | 'noticia' | 'projeto' | 'evento'; title: string; slug: string; excerpt: string };
+type Result = { type: 'skill' | 'evento'; title: string; slug: string; excerpt: string };
 
 const TYPE_ICONS = {
   skill: Box,
-  noticia: FileText,
-  projeto: FolderKanban,
   evento: Calendar,
 } as const;
 
 const TYPE_LABELS = {
   skill: 'SKILL',
-  noticia: 'NOTÍCIA',
-  projeto: 'PROJETO',
   evento: 'EVENTO',
 } as const;
 
@@ -75,7 +71,7 @@ export function SearchModal() {
             type="text"
             value={query}
             onChange={e => setQuery(e.target.value)}
-            placeholder="Buscar skills, notícias, projetos, eventos..."
+            placeholder="Buscar skills, eventos..."
             className="flex-1 bg-transparent text-body text-ink outline-none placeholder:text-smoke/60"
           />
           <button type="button" onClick={close} className="text-smoke hover:text-ink">

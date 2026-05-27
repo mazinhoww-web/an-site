@@ -9,7 +9,6 @@ const STATIC_PAGES = [
   '/eventos',
   '/skills',
   '/skills/como-usar',
-  '/noticias',
   '/contato',
 ] as const;
 
@@ -17,11 +16,6 @@ const EVENT_SLUGS = [
   'summit-sicredi-2026',
   'embedded-credit-cubo-itau',
   'inclusao-produtiva-segundo-voo',
-] as const;
-
-const NEWS_SLUGS = [
-  'summit-sicredi-2026',
-  'embedded-credit-cubo-itau',
 ] as const;
 
 const SKILL_SLUGS = [
@@ -56,13 +50,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const newsEntries = NEWS_SLUGS.map((slug) => ({
-    url: `${BASE_URL}/noticias/${slug}`,
-    lastModified: now,
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }));
-
   const skillEntries = SKILL_SLUGS.map((slug) => ({
     url: `${BASE_URL}/skills/${slug}`,
     lastModified: now,
@@ -70,5 +57,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticEntries, ...eventEntries, ...newsEntries, ...skillEntries];
+  return [...staticEntries, ...eventEntries, ...skillEntries];
 }

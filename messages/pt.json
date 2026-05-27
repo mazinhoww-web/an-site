@@ -2,10 +2,8 @@
   "nav": {
     "sobre": "Sobre",
     "trajetoria": "Trajetória",
-    "projetos": "Projetos",
     "eventos": "Eventos",
     "skills": "Skills",
-    "noticias": "Notícias",
     "contato": "Contato",
     "agora": "Agora"
   },
@@ -31,7 +29,7 @@
     "privacy": "Seus dados ficam comigo. Não compartilho com ninguém."
   },
   "search": {
-    "placeholder": "Buscar skills, notícias, projetos, eventos...",
+    "placeholder": "Buscar skills, eventos...",
     "no_results": "Nenhum resultado para",
     "searching": "Buscando..."
   }

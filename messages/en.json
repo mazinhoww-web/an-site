@@ -2,10 +2,8 @@
   "nav": {
     "sobre": "About",
     "trajetoria": "Career",
-    "projetos": "Projects",
     "eventos": "Events",
     "skills": "Skills",
-    "noticias": "News",
     "contato": "Contact",
     "agora": "Now"
   },
@@ -31,7 +29,7 @@
     "privacy": "Your data stays with me. I don't share with anyone."
   },
   "search": {
-    "placeholder": "Search skills, news, projects, events...",
+    "placeholder": "Search skills, events...",
     "no_results": "No results for",
     "searching": "Searching..."
   }

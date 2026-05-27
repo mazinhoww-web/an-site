@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
@@ -40,19 +40,6 @@ const FEATURED_SKILLS = [
   { slug: 'gsd2-methodology', name: 'GSD2', category: 'Framework' },
   { slug: 'gtm-engineering', name: 'GTM Engineering', category: 'Go-to-Market' },
   { slug: 'automation-data-platforms', name: 'Automation & Data', category: 'Data' },
-] as const;
-
-const LATEST_NEWS = [
-  {
-    slug: 'summit-sicredi-2026',
-    date: '22 MAI 2026',
-    title: 'Painel no Summit de Inovação Sicredi',
-  },
-  {
-    slug: 'embedded-credit-cubo-itau',
-    date: '11 MAI 2026',
-    title: 'Painel Embedded Credit no Cubo Itaú',
-  },
 ] as const;
 
 const PERSON_JSONLD = {
@@ -269,50 +256,6 @@ export default function HomePage() {
             className="group mt-8 inline-flex items-center gap-2 text-body-s text-ink"
           >
             Ver todas as skills
-            <ArrowRight
-              size={16}
-              strokeWidth={1.5}
-              className="transition-transform duration-200 group-hover:translate-x-1"
-            />
-          </Link>
-        </div>
-      </section>
-
-      {/* Bloco 5: Ultimas noticias */}
-      <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
-        <div className="mx-auto max-w-container">
-          <SectionHead
-            eyebrow="NOTÍCIAS"
-            title="Updates recentes."
-          />
-          <div className="space-y-0">
-            {LATEST_NEWS.map((item, i) => (
-              <div key={item.slug}>
-                {i > 0 && <Hairline />}
-                <Link
-                  href={`/noticias/${item.slug}`}
-                  className="group flex items-center justify-between py-6"
-                >
-                  <div>
-                    <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
-                      {item.date}
-                    </p>
-                    <h3 className="mt-1 font-heading text-h3">{item.title}</h3>
-                  </div>
-                  <ArrowUpRight
-                    size={20}
-                    strokeWidth={1.5}
-                    className="flex-shrink-0 text-graphite transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-lime"
-                  />
-                </Link>
-              </div>
-            ))}
-          </div>
-          <Link
-            href="/noticias"
-            className="group mt-4 inline-flex items-center gap-2 text-body-s text-ink"
-          >
-            Ver todas as notícias
             <ArrowRight
               size={16}
               strokeWidth={1.5}
