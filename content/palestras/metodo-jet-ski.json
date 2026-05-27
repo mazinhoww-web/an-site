@@ -1,0 +1,44 @@
+{
+  "slug": "metodo-jet-ski",
+  "titulo": "Metodo Jet Ski: como inovar dentro da empresa tradicional",
+  "pilar": "Inovacao",
+  "lead": "Framework em 3 fases para equipes que precisam entregar inovacao dentro de estruturas corporativas, sem ficar refem de comite, backlog infinito ou ownership difuso.",
+  "quote": "Inovacao corporativa morre de cinco causas. Todas evitaveis se o framework estiver certo.",
+  "duracao": "50-70 min",
+  "formato": "Palestra ou workshop",
+  "publico": [
+    "Liderancas de inovacao corporativa",
+    "Heads de transformacao digital",
+    "Diretores de produto e tecnologia",
+    "Gestores de programas de aceleracao interna"
+  ],
+  "modulos": [
+    {
+      "numero": 1,
+      "titulo": "Os 5 inimigos da inovacao corporativa",
+      "descricao": "Paralisia analitica, escopo infinito, ownership difuso, backlog que cresce mais que o time, reuniao de status sem decisao. Diagnostico e antidoto para cada um."
+    },
+    {
+      "numero": 2,
+      "titulo": "Fase 1: Diagnostico da Oportunidade",
+      "descricao": "Como separar ruido de sinal. Ferramenta de triagem que filtra ideias por viabilidade tecnica, regulatoria e comercial em menos de uma semana."
+    },
+    {
+      "numero": 3,
+      "titulo": "Fase 2: Prototipacao Agil",
+      "descricao": "Construir o MVP com recurso interno, sem RFP e sem esperar aprovacao de budget extra. Sprint de 2 semanas com gate review no final."
+    },
+    {
+      "numero": 4,
+      "titulo": "Fase 3: Visao Transformadora",
+      "descricao": "Conectar o piloto a estrategia da empresa. Como fazer o projeto sair da gaveta de inovacao e entrar no roadmap de produto oficial."
+    }
+  ],
+  "fotos": [
+    {
+      "src": "/photos/evento-sicredi-stage.jpg",
+      "alt": "Aurimar Nogueira apresentando o Metodo Jet Ski",
+      "caption": "Apresentacao dos 5 inimigos da inovacao, Summit Sicredi"
+    }
+  ]
+}

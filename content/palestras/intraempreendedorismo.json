@@ -1,0 +1,49 @@
+{
+  "slug": "intraempreendedorismo",
+  "titulo": "O manual do intraempreendedor em empresa grande",
+  "pilar": "Intraempreendedorismo",
+  "lead": "Como profissionais que pensam como dono constroem projetos reais dentro de organizações grandes, sem esperar autorização para inovar.",
+  "quote": "Dono de projeto dentro de empresa grande nao pede permissao. Apresenta o business case.",
+  "duracao": "45-60 min",
+  "formato": "Palestra ou workshop",
+  "publico": [
+    "Gerentes e coordenadores de inovacao",
+    "Heads de transformacao digital",
+    "Product managers em corporacoes",
+    "Liderancas de squads internas"
+  ],
+  "modulos": [
+    {
+      "numero": 1,
+      "titulo": "Como identificar uma oportunidade real",
+      "descricao": "Separar tendencia de oportunidade concreta. Criterios: mercado enderecavel, dor verificavel, capacidade interna de execucao."
+    },
+    {
+      "numero": 2,
+      "titulo": "Estrutura de proposta que sobrevive a diretoria",
+      "descricao": "P&L minimo, leitura de risco, alinhamento com prioridade da casa. Formato que o CFO lê em 3 minutos."
+    },
+    {
+      "numero": 3,
+      "titulo": "Prototipacao com recurso que voce ja tem",
+      "descricao": "MVP usando time, ferramenta e budget existentes. Sem pedir headcount, sem RFP, sem comite adicional."
+    },
+    {
+      "numero": 4,
+      "titulo": "De piloto a operacao: governanca minima viavel",
+      "descricao": "Como escalar um piloto sem criar burocracia. KPIs de progressao, gate reviews com stakeholders certos, handoff para time de produto."
+    }
+  ],
+  "fotos": [
+    {
+      "src": "/photos/evento-sicredi-summit.jpg",
+      "alt": "Aurimar Nogueira no Summit de Inovacao Sicredi",
+      "caption": "Summit Sicredi 2026, Cuiaba"
+    },
+    {
+      "src": "/photos/evento-sicredi-stage.jpg",
+      "alt": "Aurimar Nogueira palestrando no palco do Sicredi",
+      "caption": "Palestra sobre intraempreendedorismo corporativo"
+    }
+  ]
+}

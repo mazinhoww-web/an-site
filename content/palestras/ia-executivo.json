@@ -1,0 +1,45 @@
+{
+  "slug": "ia-executivo",
+  "titulo": "Inteligencia artificial no dia a dia do executivo",
+  "pilar": "IA Executivos",
+  "lead": "Nao e sobre fascinacao com IA. E sobre integracao pratica: como usar modelos de linguagem para decisao, automacao de processos e construcao de produto sem depender de time tecnico dedicado.",
+  "quote": "IA que nao entra no fluxo de trabalho do executivo e demo, nao e ferramenta.",
+  "duracao": "45-60 min",
+  "formato": "Palestra ou workshop",
+  "publico": [
+    "C-level e diretores",
+    "Heads de area nao tecnica",
+    "Gestores de operacoes e estrategia",
+    "Liderancas de produto"
+  ],
+  "modulos": [
+    {
+      "numero": 1,
+      "titulo": "IA como ferramenta de decisao, nao de fascinacao",
+      "descricao": "Separar hype de utilidade. Onde modelos de linguagem resolvem problema real do executivo: analise de dados, sintese de documentos, simulacao de cenarios."
+    },
+    {
+      "numero": 2,
+      "titulo": "Skill builder: como construir ferramentas com IA",
+      "descricao": "Referencia ao proprio an-site como caso pratico. Como um executivo nao tecnico constroi produto digital usando Claude Code, cursor e frameworks de prompt."
+    },
+    {
+      "numero": 3,
+      "titulo": "AI council: governanca de IA na empresa",
+      "descricao": "Como montar um comite de IA que funciona. Criterios de adocao, gestao de risco, politica de dados, metricas de impacto."
+    },
+    {
+      "numero": 4,
+      "titulo": "Prompts para decisao executiva",
+      "descricao": "Templates de prompt para analise competitiva, business case, due diligence e revisao de proposta. Uso pratico em reuniao de diretoria."
+    }
+  ],
+  "fotos": [
+    {
+      "src": "/photos/aurimar-editorial.jpg",
+      "alt": "Aurimar Nogueira",
+      "caption": "Foto editorial"
+    }
+  ],
+  "placeholder_ai": true
+}

@@ -1,0 +1,49 @@
+{
+  "slug": "fidelizacao",
+  "titulo": "Como construir uma marca que o cliente escolhe sempre",
+  "pilar": "Fidelizacao",
+  "lead": "Marca amada nao acontece por acaso. E engenharia de retencao, incentivo e experiencia medida em LTV, nao em likes.",
+  "quote": "Fidelidade nao se compra com desconto. Se constroi com produto que resolve e parceria que multiplica.",
+  "duracao": "40-50 min",
+  "formato": "Palestra ou painel",
+  "publico": [
+    "Heads de marketing e CRM",
+    "Gestores de programas de fidelidade",
+    "Fundadores DTC e e-commerce",
+    "Diretores de customer experience"
+  ],
+  "modulos": [
+    {
+      "numero": 1,
+      "titulo": "Anatomia de um programa que retém",
+      "descricao": "O que separa programas de pontos que viram custo de programas que geram receita. Metricas: LTV, churn rate, NPS transacional."
+    },
+    {
+      "numero": 2,
+      "titulo": "Economia de coalizao: parceiros como alavanca",
+      "descricao": "Como montar rede de parceiros que alimenta o ecossistema sem diluir a proposta de valor. Modelo LATAM Pass como referencia."
+    },
+    {
+      "numero": 3,
+      "titulo": "Segmentacao que converte, nao que irrita",
+      "descricao": "Tiering baseado em comportamento real, nao em gasto bruto. Como evitar o efeito 'cliente gold que nao volta'."
+    },
+    {
+      "numero": 4,
+      "titulo": "De custo de marketing a ativo financeiro",
+      "descricao": "Programas de fidelidade como originadores de valor financeiro. Embedded finance, monetizacao de base, parceria com fintech."
+    }
+  ],
+  "fotos": [
+    {
+      "src": "/photos/evento-crmbonus-meet.jpg",
+      "alt": "Aurimar Nogueira no painel CRMBonus Meet",
+      "caption": "CRMBonus Meet 2026, Sao Paulo"
+    },
+    {
+      "src": "/photos/evento-crmbonus-grupo.jpg",
+      "alt": "Painelistas no evento CRMBonus",
+      "caption": "Painel sobre cenarios de consumo e fidelizacao"
+    }
+  ]
+}

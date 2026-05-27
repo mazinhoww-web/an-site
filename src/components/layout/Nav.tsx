@@ -18,6 +18,7 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 
 const NAV_ITEMS = [
   { label: 'Sobre', href: '/sobre' },
+  { label: 'Palestras', href: '/palestras' },
   { label: 'Eventos', href: '/eventos' },
   { label: 'Skills', href: '/skills' },
   { label: 'Contato', href: '/contato' },

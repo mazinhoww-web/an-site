@@ -1,0 +1,45 @@
+{
+  "slug": "agro-startups",
+  "titulo": "Mercado financeiro, agro e a cultura de startups",
+  "pilar": "Agro e Startups",
+  "lead": "Agro brasileiro e tech, e dado, e financeiro. Quem trata como commodity analogica perde a proxima onda de valor que ja esta sendo construida por AgFintechs e registradoras.",
+  "quote": "A primeira CPR Verde do Brasil nao nasceu de banco. Nasceu de produto que leu a regulacao antes do mercado.",
+  "duracao": "40-50 min",
+  "formato": "Palestra ou painel",
+  "publico": [
+    "Investidores e gestores de fundos agro",
+    "Founders de AgFintechs",
+    "Executivos do setor financeiro",
+    "Traders e originadores de commodities"
+  ],
+  "modulos": [
+    {
+      "numero": 1,
+      "titulo": "Agro como plataforma financeira",
+      "descricao": "CPR, CDCA, CRA: instrumentos de credito agro que viram ativos registraveis. Como o agro brasileiro opera infraestrutura financeira de classe mundial."
+    },
+    {
+      "numero": 2,
+      "titulo": "Case CPR Verde: produto que cria categoria",
+      "descricao": "Como o primeiro registro de CPR Verde do Brasil foi estruturado na CERC. Regulacao existente, participantes alinhados desde o desenho, zero precedente."
+    },
+    {
+      "numero": 3,
+      "titulo": "AgFintechs e o futuro do credito rural",
+      "descricao": "Plataformas de credito agro, tokenizacao de recebiveis, marketplace de garantias. O que ja opera e o que esta em fase de regulacao."
+    },
+    {
+      "numero": 4,
+      "titulo": "Cultura de startup em cadeia conservadora",
+      "descricao": "Como aplicar ciclo rapido de produto em ecossistema que opera em safra. Adaptacoes do framework agil para o ritmo do agronegocio."
+    }
+  ],
+  "fotos": [
+    {
+      "src": "/photos/aurimar-editorial.jpg",
+      "alt": "Aurimar Nogueira",
+      "caption": "Foto editorial"
+    }
+  ],
+  "placeholder_ai": true
+}

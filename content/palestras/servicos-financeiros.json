@@ -1,0 +1,49 @@
+{
+  "slug": "servicos-financeiros",
+  "titulo": "Como aplicar servicos financeiros no seu negocio",
+  "pilar": "Servicos Financeiros",
+  "lead": "Seu produto pode virar uma fintech sem virar um banco. Embedded finance, BaaS e white label para quem quer capturar receita financeira sem construir infraestrutura do zero.",
+  "quote": "Fintech nao e app de banco. E qualquer produto que embarca servico financeiro onde o cliente ja esta.",
+  "duracao": "45-60 min",
+  "formato": "Palestra ou painel",
+  "publico": [
+    "Founders e heads de produto",
+    "Diretores de operacoes",
+    "Executivos de varejo e marketplace",
+    "Gestores de parcerias estrategicas"
+  ],
+  "modulos": [
+    {
+      "numero": 1,
+      "titulo": "Mapa de oportunidade em embedded finance",
+      "descricao": "Credito, seguros, investimentos, cambio: onde cada vertical encaixa no seu produto. Criterios: regulacao, margem, complexidade de integracao."
+    },
+    {
+      "numero": 2,
+      "titulo": "BaaS, white label e FIDC: qual modelo serve",
+      "descricao": "Diferenca pratica entre BaaS, white label bancario e FIDC como veiculos. Quando usar cada um, com exemplos reais."
+    },
+    {
+      "numero": 3,
+      "titulo": "Regulacao como vantagem, nao como barreira",
+      "descricao": "Como ler a regulacao do BCB como mapa de oportunidade. Quem entra antes na modelagem regulatoria trava vantagem estrutural."
+    },
+    {
+      "numero": 4,
+      "titulo": "Unit economics de produto financeiro embarcado",
+      "descricao": "Modelagem de P&L para produtos financeiros dentro de plataformas nao financeiras. Take rate, custo de funding, risco operacional."
+    }
+  ],
+  "fotos": [
+    {
+      "src": "/photos/evento-gyra-cubo.jpg",
+      "alt": "Aurimar Nogueira no painel Embedded Credit no Cubo Itau",
+      "caption": "Painel GYRA+ no Cubo Itau, Sao Paulo"
+    },
+    {
+      "src": "/photos/evento-gyra-detail.jpg",
+      "alt": "Detalhe do painel sobre credito embarcado",
+      "caption": "Discussao sobre credito embarcado e programas de fidelidade"
+    }
+  ]
+}
