@@ -17,11 +17,11 @@ const nextConfig = {
       beforeFiles: [
         {
           source: '/mentormatch',
-          destination: `${process.env.MENTORMATCH_URL || 'https://mentormatch-delta.vercel.app'}/mentormatch`,
+          destination: `${process.env.MENTORMATCH_URL || 'https://mentormatch-five.vercel.app'}/mentormatch`,
         },
         {
           source: '/mentormatch/:path*',
-          destination: `${process.env.MENTORMATCH_URL || 'https://mentormatch-delta.vercel.app'}/mentormatch/:path*`,
+          destination: `${process.env.MENTORMATCH_URL || 'https://mentormatch-five.vercel.app'}/mentormatch/:path*`,
         },
       ],
     };
