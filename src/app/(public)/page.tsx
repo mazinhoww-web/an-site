@@ -140,7 +140,7 @@ export default function HomePage() {
                 </p>
               </div>
               <Link
-                href="/trajetoria"
+                href="/sobre"
                 className="link-editorial group mt-8 inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.12em]"
               >
                 LER TRAJETÓRIA COMPLETA
@@ -217,7 +217,7 @@ export default function HomePage() {
             ))}
           </div>
           <Link
-            href="/trajetoria"
+            href="/sobre"
             className="group mt-8 inline-flex items-center gap-2 text-body-s text-ink"
           >
             Ver trajetória completa

@@ -5,7 +5,6 @@ const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://aurimarnogueira.co
 const STATIC_PAGES = [
   '',
   '/sobre',
-  '/trajetoria',
   '/eventos',
   '/skills',
   '/skills/como-usar',
