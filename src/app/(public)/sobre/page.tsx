@@ -27,7 +27,7 @@ const CHAPTERS = [
     role: 'Coordenador Sênior de Negócios Financeiros',
     location: 'São Paulo, SP (remoto Cuiabá)',
     description:
-      'Squad eLoyalty / New Business. Estruturação de produtos financeiros próprios em parceria com infraestrutura nacional e internacional. Modelagem completa de unit economics. Discovery de vendors com critérios técnicos e regulatórios. Frameworks autorais aplicados no dia a dia (Método Jet Ski, GSD2, Innovation2Business).',
+      'Squad eLoyalty / New Business. Estruturação de produtos financeiros próprios em parceria com infraestrutura nacional e internacional. Modelagem completa de unit economics. Discovery de vendors com critérios técnicos e regulatórios. Frameworks autorais aplicados no dia a dia (Método Jet, GSD2, Innovation2Business).',
     result:
       'Frentes de negócio ativas em estágio avançado de validação. Pipeline de parcerias estratégicas em curso. Inteligência competitiva contínua sobre o mercado de loyalty no Brasil.',
     learning:
@@ -94,7 +94,7 @@ const CHAPTERS = [
 
 const FRAMEWORKS = [
   {
-    name: 'Método Jet Ski',
+    name: 'Método Jet',
     subtitle: 'Execução ágil de produtos em mercados regulados',
     description:
       'Framework de inovação em 3 fases: Diagnóstico da Oportunidade, Prototipação Ágil, Visão Transformadora. Aplicado em squads de inovação corporativa.',
@@ -160,7 +160,7 @@ export default function SobrePage() {
               <p>
                 O fio condutor é sempre o mesmo: produto que entende o usuário, parceria
                 que destrava capital, regulação que cabe no desenho. Frameworks autorais
-                como Método Jet Ski, GSD2 e Innovation2Business traduzem essa visão em
+                como Método Jet, GSD2 e Innovation2Business traduzem essa visão em
                 execução de squad.
               </p>
             </div>

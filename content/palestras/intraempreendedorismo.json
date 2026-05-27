@@ -37,17 +37,18 @@
   "fotos": [
     {
       "src": "/palestras/intraempreendedorismo/01-sicredi-keynote.jpg",
-      "alt": "Aurimar Nogueira no Summit de Inovacao Sicredi",
-      "caption": "Summit Sicredi 2026, Cuiaba",
-      "tipo": "foto",
-      "focal_point": { "x": 55, "y": 38 }
+      "alt": "Aurimar Nogueira apresentando bio e frameworks no Summit Sicredi",
+      "caption": "Summit Sicredi 2026, Cuiaba"
     },
     {
-      "src": "/palestras/intraempreendedorismo/02-sicredi-momentos.jpg",
-      "alt": "Aurimar Nogueira palestrando no palco do Sicredi",
-      "caption": "Palestra sobre intraempreendedorismo corporativo",
-      "tipo": "foto",
-      "focal_point": { "x": 50, "y": 35 }
+      "src": "/palestras/intraempreendedorismo/02-sicredi-perfil.jpg",
+      "alt": "Aurimar Nogueira interagindo com slide de conteudo",
+      "caption": "Perfil editorial durante a palestra no Sicredi"
+    },
+    {
+      "src": "/palestras/intraempreendedorismo/03-sicredi-palco.jpg",
+      "alt": "Grupo de participantes no palco do Summit de Inovacao Sicredi",
+      "caption": "Participantes do 2o Summit de Inovacao Sicredi Centro-Norte"
     }
   ]
 }

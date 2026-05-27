@@ -238,7 +238,7 @@ Não é ícone, mas é tratado aqui pela natureza visual: linhas hairline cresce
 
 ### 5.3 SVG customizados (frameworks autorais)
 
-Método Jet Ski, GSD2, Innovation2Business têm SVGs próprios. Cada um anima 1 vez ao entrar no viewport (path draw em 800ms). Hover: scale 1.05.
+Método Jet, GSD2, Innovation2Business têm SVGs próprios. Cada um anima 1 vez ao entrar no viewport (path draw em 800ms). Hover: scale 1.05.
 
 ---
 

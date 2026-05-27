@@ -113,7 +113,7 @@ console.log(`Key: ${key}`)
 
 Execução para cada skill com PDF:
 ```bash
-pnpm tsx scripts/upload-asset.ts ./assets/metodo-jet-ski.pdf skills/metodo-jet-ski.pdf
+pnpm tsx scripts/upload-asset.ts ./assets/metodo-jet.pdf skills/metodo-jet.pdf
 ```
 
 Atualizar `assetBlobKey` da skill no Neon (via /admin após 8.2, ou via SQL direto agora).

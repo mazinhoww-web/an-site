@@ -119,14 +119,14 @@ Commite.
 ```
 Execute Slice 2.2 (Sobre) do ROADMAP.md.
 
-Conteudo da bio: pegue do userMemories do Aurimar (LATAM Pass como Coordenador Senior eLoyalty/New Business, frameworks Jet Ski/Innovation2Business/GSD2, CERC, Stone, CRDC).
+Conteudo da bio: pegue do userMemories do Aurimar (LATAM Pass como Coordenador Senior eLoyalty/New Business, frameworks Jet/Innovation2Business/GSD2, CERC, Stone, CRDC).
 
 Implemente:
 - /sobre page com hero compacto + grid 2 col (PhotoFrame esquerda | bio markdown direita)
 - Componente PhotoFrame conforme DESIGN.md secao 3.10 (frame 1:1, border 2px ink, mark canto sup dir, tag inf esq, lime bar 4px na base)
 - Use placeholder de foto em /public/photo-placeholder.jpg por enquanto
 - Secao "Trajetoria" com timeline (LATAM Pass, CERC, Stone, CRDC) usando Hairline divider
-- Secao "Frameworks" com 3 cards (Jet Ski, Innovation2Business, GSD2)
+- Secao "Frameworks" com 3 cards (Jet, Innovation2Business, GSD2)
 - Secao "Conecte-se" com links externos (LinkedIn /in/mazinho, GitHub /mazinhoww-web, email)
 
 Tudo server component. Texto bio em src/data/about.md (depois migra para DB se quiser editar via admin).

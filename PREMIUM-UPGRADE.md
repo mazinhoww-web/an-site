@@ -339,7 +339,7 @@ parceria que destrava capital, regulação que cabe
 no desenho.
 
 A pegada autoral começou cedo. Frameworks como 
-Método Jet Ski, GSD2 e Innovation2Business foram 
+Método Jet, GSD2 e Innovation2Business foram 
 construídos para sair da teoria e operar em squad 
 real, com OKR mensurável e profit share por 
 iniciativa.
@@ -404,7 +404,7 @@ empacotado para ser carregado dentro do Claude
 Cowork ou Claude Code. Quando ativada, ela ensina 
 o Claude a executar tarefas com o método específico.
 
-[Grid 4 SkillCards: Método Jet Ski, GSD2, 
+[Grid 4 SkillCards: Método Jet, GSD2, 
 Innovation2Business, LATAM Deck]
 [Link com lime underline] Ver todas as skills → /skills
 ```

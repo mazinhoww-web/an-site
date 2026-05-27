@@ -173,7 +173,7 @@ STRUCTURE (top to bottom):
   - Description 1 line in Inter body-s
   - Tag in mono uppercase at bottom (e.g. "INOVAÇÃO")
   - Download lucide icon on top-right corner that animates pull-down on hover
-- Featured skills: Método Jet Ski, GSD2, Innovation2Business, LATAM Deck
+- Featured skills: Método Jet, GSD2, Innovation2Business, LATAM Deck
 - Link at the bottom: "Ver todas as skills" with lime underline
 
 7. Hairline divider
@@ -287,7 +287,7 @@ Seed projects to show:
 - CERC CPR Registry (Fintech, 2021)
 - Cia do Visto (Empreendedorismo, 2025)
 - Pátio Estúdios (Empreendedorismo, 2024)
-- Método Jet Ski (Inovação, 2025)
+- Método Jet (Inovação, 2025)
 
 Pagination at bottom: simple "Anterior" / "1 2 3" / "Próxima" in mono uppercase
 ```
@@ -318,14 +318,14 @@ STRUCTURE:
 Each SkillCard:
 - Paper background, 1px hairline border, 32px padding, no border radius
 - Top: lucide Box icon 32px in ink color (this is THE skill icon)
-- Below icon: H3 Space Grotesk weight 600: skill name (e.g. "Método Jet Ski")
+- Below icon: H3 Space Grotesk weight 600: skill name (e.g. "Método Jet")
 - Body-s Inter: 2-3 lines description
 - Tag chip mono uppercase: category (e.g. "INOVAÇÃO")
 - Bottom row: lucide Download icon left + "Baixar" text in mono + download count in mono (e.g. "127 BAIXADAS")
 - Hover: border becomes ink, Box icon rotates 8 degrees and scales 1.05
 
 Skills to show:
-- Método Jet Ski (Inovação)
+- Método Jet (Inovação)
 - GSD2 — Get Shit Done (Produto)
 - Innovation2Business (Inovação)
 - LATAM Deck (Comunicação)
@@ -346,14 +346,14 @@ Generate the skill detail page following AN. design system. Show TWO states:
 
 STATE A: page without modal
 
-1. Breadcrumb: mono uppercase "SKILLS / MÉTODO JET SKI" with hairline separator and chevron icons
+1. Breadcrumb: mono uppercase "SKILLS / MÉTODO JET" with hairline separator and chevron icons
 
 2. Hero of the skill:
 - Two-column layout
 - Left 4/12: large lucide Box icon, 80px, ink color, with a subtle hairline border square around it as a frame
 - Right 8/12:
   - Eyebrow mono uppercase: "INOVAÇÃO"
-  - H1 Space Grotesk weight 700: "Método Jet Ski"
+  - H1 Space Grotesk weight 700: "Método Jet"
   - Subtitle Inter body-l: "Framework de 3 fases para acelerar oportunidades de inovação de oportunidade vaga até protótipo testável."
   - Metadata row in mono uppercase 11px (icons + label + value):
     - lucide Tag + AUTOR / AURIMAR NOGUEIRA
@@ -637,7 +637,7 @@ The 6 highlights:
 3. "R$ 88M" / NPV CASE TAG / Valor presente líquido do business case TAG LATAM Pass
 4. "1ª" / CPR VERDE DO BRASIL / Primeira CPR Verde registrada no país, conduzida na CERC
 5. "30%" / CONVERSÃO DE LEADS / Crescimento mensurado em iniciativas na LATAM Pass
-6. "3" / FRAMEWORKS AUTORAIS / Método Jet Ski, GSD2 e Innovation2Business
+6. "3" / FRAMEWORKS AUTORAIS / Método Jet, GSD2 e Innovation2Business
 
 5. Hairline divider
 
@@ -684,7 +684,7 @@ Card structure:
 - Last line in graphite Inter: "Aplicado em: [contextos]"
 
 The 3 frameworks:
-- Método Jet Ski (phases: Diagnóstico da Oportunidade, Prototipação Ágil, Visão Transformadora)
+- Método Jet (phases: Diagnóstico da Oportunidade, Prototipação Ágil, Visão Transformadora)
 - GSD2 — Get Shit Done (phases: Milestone, Slice, Task)
 - Innovation2Business (phases: OKR por iniciativa, Profit share, Cadência semanal)
 

@@ -48,6 +48,11 @@
       "caption": "Painel sobre cenarios de consumo e fidelizacao",
       "tipo": "foto",
       "focal_point": { "x": 80, "y": 38 }
+    },
+    {
+      "src": "/palestras/fidelizacao/03-sicredi-speaking.jpg",
+      "alt": "Aurimar Nogueira palestrando sobre loyalty no Summit Sicredi",
+      "caption": "Loyalty em cooperativas de credito, Summit Sicredi 2026"
     }
   ]
 }

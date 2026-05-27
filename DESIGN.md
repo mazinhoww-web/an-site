@@ -308,7 +308,7 @@ Ver `TRAJETORIA.md` para spec completa de conteúdo. Layout:
   - Cada capítulo: ano (mono) | empresa (h2) | função (caption) | narrativa (body) | tags
   - Linha vertical lime cresce no scroll
 [Hairline]
-[Frameworks autorais: Método Jet Ski, GSD2, Innovation2Business]
+[Frameworks autorais: Método Jet, GSD2, Innovation2Business]
   - 3 cards com explicação curta
 [Hairline]
 [Citações ou prêmios: se houver]

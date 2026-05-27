@@ -16,7 +16,7 @@ Must-haves verificáveis:
 - [ ] Timeline narrativa com no mínimo 4 capítulos (LATAM Pass, CERC, Stone, CRDC)
 - [ ] Cada capítulo tem as 5 seções: Contexto, Mandato, Movimento, Resultado, Aprendizado
 - [ ] Hairline vertical anima com scroll, pontos lime crescem um a um (ver `ICONS-MOTION.md` 4.10)
-- [ ] Seção Frameworks Autorais com 3 cards (Método Jet Ski, GSD2, Innovation2Business)
+- [ ] Seção Frameworks Autorais com 3 cards (Método Jet, GSD2, Innovation2Business)
 - [ ] CTA final para `/contato` e LinkedIn
 - [ ] Conteúdo vem das tabelas `career_chapters`, `career_highlights`, `frameworks` (admin editável)
 - [ ] Página tem JSON-LD `ProfilePage` conforme `SEO.md` seção 5.3
@@ -229,7 +229,7 @@ insert into public.career_highlights (metric, label, description, order_index, i
   ('R$ 88M', 'NPV CASE TAG', 'Valor presente líquido do business case TAG LATAM Pass com pricing Taggy revisado', 3, 'Trophy'),
   ('1ª', 'CPR VERDE DO BRASIL', 'Primeira CPR Verde registrada no país, conduzida na CERC', 4, 'Award'),
   ('30%', 'CONVERSÃO DE LEADS', 'Crescimento mensurado em ações de produto e parcerias na LATAM Pass', 5, 'TrendingUp'),
-  ('3', 'FRAMEWORKS AUTORAIS', 'Método Jet Ski, GSD2 e Innovation2Business, aplicados em squads reais', 6, 'Sparkle');
+  ('3', 'FRAMEWORKS AUTORAIS', 'Método Jet, GSD2 e Innovation2Business, aplicados em squads reais', 6, 'Sparkle');
 
 -- Capítulos (ordem desc = mais recente primeiro). Conteúdo completo em TRAJETORIA.md seção 3
 insert into public.career_chapters (slug, title, role, company, period_start, period_end, is_current, order_index, context_md, mandate_md, movement_md, result_md, learning_md, tags) values
@@ -325,8 +325,8 @@ insert into public.career_chapters (slug, title, role, company, period_start, pe
 
 -- Frameworks
 insert into public.frameworks (slug, name, purpose, phases, applied_in, order_index) values
-  ('metodo-jet-ski',
-    'Método Jet Ski',
+  ('metodo-jet',
+    'Método Jet',
     'Acelerar oportunidades de inovação de oportunidade vaga até protótipo testável em ciclos curtos.',
     '{"Diagnóstico da Oportunidade","Prototipação Ágil","Visão Transformadora"}',
     'Innovation2Business squad da LATAM Pass',
@@ -450,7 +450,7 @@ Estrutura (em ordem vertical):
 Os 6 highlights:
 1) "R$ 70B+" / "ATIVOS REGISTRADOS" / Volume sob gestão no CERC CPR Registry
 2) "60%" / "MARKET SHARE CPR" / Participação contra B3, partindo do zero
-3) "3" / "FRAMEWORKS AUTORAIS" / Jet Ski, GSD2, Innovation2Business
+3) "3" / "FRAMEWORKS AUTORAIS" / Jet, GSD2, Innovation2Business
 4) "R$ 88M" / "NPV CASE TAG" / Business case TAG LATAM Pass
 5) "150-200" / "USUÁRIOS MVP" / Tamanho-alvo MVP LATAM Wallet
 6) "1ª" / "CPR VERDE DO BRASIL" / Primeira registrada no país
@@ -473,7 +473,7 @@ Capítulos: LATAM Pass (atual), CERC, Stone, CRDC.
 
 7. Seção Frameworks Autorais:
 3 cards lado a lado em desktop:
-- Método Jet Ski (3 fases)
+- Método Jet (3 fases)
 - GSD2 (Milestone > Slice > Task)
 - Innovation2Business
 

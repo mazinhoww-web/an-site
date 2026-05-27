@@ -1,6 +1,6 @@
 {
-  "slug": "metodo-jet-ski",
-  "titulo": "Metodo Jet Ski: como inovar dentro da empresa tradicional",
+  "slug": "metodo-jet",
+  "titulo": "Metodo Jet: como inovar dentro da empresa tradicional",
   "pilar": "Inovacao",
   "lead": "Framework em 3 fases para equipes que precisam entregar inovacao dentro de estruturas corporativas, sem ficar refem de comite, backlog infinito ou ownership difuso.",
   "quote": "Inovacao corporativa morre de cinco causas. Todas evitaveis se o framework estiver certo.",
@@ -36,10 +36,19 @@
   ],
   "fotos": [
     {
-      "src": "/palestras/metodo-jet-ski/01-hero.svg",
-      "alt": "Framework Metodo Jet Ski: Diagnostico, Prototipacao, Visao",
-      "caption": "Framework em 3 fases para inovacao corporativa",
-      "tipo": "ilustracao"
+      "src": "/palestras/metodo-jet/01-sicredi-keynote.jpg",
+      "alt": "Aurimar Nogueira palestrando no Summit de Inovacao Sicredi",
+      "caption": "Summit Sicredi 2026, Cuiaba"
+    },
+    {
+      "src": "/palestras/metodo-jet/02-sicredi-5-inimigos.jpg",
+      "alt": "Aurimar Nogueira apresentando os 5 inimigos da inovacao corporativa",
+      "caption": "Os 5 inimigos da inovacao corporativa no palco do Sicredi"
+    },
+    {
+      "src": "/palestras/metodo-jet/03-sicredi-workshop.jpg",
+      "alt": "Workshop do Metodo Jet com participantes do Sicredi",
+      "caption": "Dinamica de grupo aplicando o framework em mesa redonda"
     }
   ]
 }

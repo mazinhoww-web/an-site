@@ -43,7 +43,7 @@ Grid 3x2 (desktop) ou 1x6 (mobile). Cada card: número grande mono + label mono 
 3. **R$ 88M** — `NPV CASE TAG` — Valor presente líquido do business case da TAG LATAM Pass com pricing Taggy revisado
 4. **1ª** — `CPR VERDE DO BRASIL` — Primeira CPR Verde registrada no país, conduzida na CERC
 5. **30%** — `CONVERSÃO DE LEADS` — Crescimento mensurado em ações de produto e parcerias na LATAM Pass
-6. **3** — `FRAMEWORKS AUTORAIS` — Método Jet Ski, GSD2 e Innovation2Business, aplicados em squads reais
+6. **3** — `FRAMEWORKS AUTORAIS` — Método Jet, GSD2 e Innovation2Business, aplicados em squads reais
 
 ### 2.3 Timeline narrativa (6 capítulos)
 
@@ -229,7 +229,7 @@ Linha vertical hairline com pontos lime que crescem no scroll. Ordem: mais recen
 
 Após a timeline, antes do CTA final. 3 cards lado a lado em desktop:
 
-### Card 1 — Método Jet Ski
+### Card 1 — Método Jet
 
 **Para que serve:** acelerar oportunidades de inovação de oportunidade vaga até protótipo testável em ciclos curtos.
 
@@ -297,13 +297,13 @@ RLS: public read onde `published = true`, admin all.
 Ver `SEO.md` para a estratégia completa. Resumo desta página:
 
 - **Title:** `Trajetória | Aurimar Nogueira — Loyalty × Fintech × Innovation`
-- **Description:** `Histórico de Aurimar Nogueira: LATAM Pass, CRDC, 1WIN, CERC (R$ 70B+ em ativos, 60% de market share em CPR), Stone. Frameworks autorais Método Jet Ski, GSD2 e Innovation2Business.`
+- **Description:** `Histórico de Aurimar Nogueira: LATAM Pass, CRDC, 1WIN, CERC (R$ 70B+ em ativos, 60% de market share em CPR), Stone. Frameworks autorais Método Jet, GSD2 e Innovation2Business.`
 - **OG image:** `/api/og?type=trajetoria&title=Trajetoria` (1200x630)
 - **JSON-LD:** `ProfilePage` com `Person`, `hasOccupation`, `alumniOf` (UniC, Tera, FGV)
 - **URL canônica:** `https://aurimar.com.br/trajetoria`
 - **Headings:** H1 único "Trajetória", H2 por capítulo, H3 por subseção (Contexto/Mandato/Movimento/Resultado/Aprendizado)
 - **Internal linking:** cada capítulo linka para projetos relacionados em `/projetos` quando houver (LATAM Wallet, Cartão PF, etc)
-- **Keywords-alvo:** "aurimar nogueira", "aurimar latam pass", "mazinho latam", "cerc cpr registry", "método jet ski"
+- **Keywords-alvo:** "aurimar nogueira", "aurimar latam pass", "mazinho latam", "cerc cpr registry", "método jet"
 
 ---
 

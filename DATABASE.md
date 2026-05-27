@@ -593,8 +593,8 @@ insert into skills (slug, name, short_description, category_id, tags, badge, is_
    'FREE', false, true, now()),
 
   -- skills proprias do Aurimar
-  ('metodo-jet-ski',
-   'Metodo Jet Ski',
+  ('metodo-jet',
+   'Metodo Jet',
    'Framework de inovacao em 3 fases: Diagnostico da Oportunidade, Prototipacao Agil, Visao Transformadora. Aplicado em squads de inovacao corporativa.',
    'framework',
    array['Inovacao', 'Discovery', 'Squad', 'Prototipo'],

@@ -36,10 +36,14 @@
   ],
   "fotos": [
     {
-      "src": "/palestras/ia-executivo/01-hero.jpg",
-      "alt": "Ilustracao geometrica abstrata sobre inteligencia artificial executiva",
-      "caption": "IA aplicada: do dado a decisao",
-      "tipo": "ilustracao"
+      "src": "/palestras/ia-executivo/01-sicredi-keynote.jpg",
+      "alt": "Aurimar Nogueira palestrando no Summit de Inovacao Sicredi",
+      "caption": "Summit Sicredi 2026, Cuiaba"
+    },
+    {
+      "src": "/palestras/ia-executivo/02-sicredi-workshop.jpg",
+      "alt": "Workshop com participantes discutindo aplicacao pratica",
+      "caption": "Dinamica de grupo no Summit Sicredi"
     }
   ]
 }

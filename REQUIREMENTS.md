@@ -63,7 +63,7 @@ Must-haves verificáveis. Cada requisito é binário (atende / não atende). Org
 - **R6.1** Bio longa (markdown editável via admin) com timeline.
 - **R6.2** Foto principal usando o frame especificado no brand book seção 07.
 - **R6.3** Lista de empresas/papéis (LATAM Pass, CERC, Stone, CRDC) com ano e descritor.
-- **R6.4** Lista de frameworks criados (Método Jet Ski, Innovation2Business, GSD2).
+- **R6.4** Lista de frameworks criados (Método Jet, Innovation2Business, GSD2).
 - **R6.5** Lista de links externos: LinkedIn, GitHub `mazinhoww-web`, email.
 
 ## R7. Projetos

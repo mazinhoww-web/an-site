@@ -38,7 +38,7 @@ Não é um blog tradicional, nem um portfólio passivo. É uma **plataforma de d
 |---|---|---|
 | **Recrutador exec / VC** | Pesquisa Aurimar antes de reunião | Sobre, projetos, contato |
 | **Operador GTM / Fintech** | Viu LinkedIn ou painel, quer aprofundar | Skills, frameworks, artigos |
-| **Mentee / Estudante** | Buscou Método Jet Ski ou GSD2 | Skills baixáveis + Como Usar |
+| **Mentee / Estudante** | Buscou Método Jet ou GSD2 | Skills baixáveis + Como Usar |
 | **Imprensa / Evento** | Material para divulgar palestra | Bio, foto frame, descritor |
 
 ---

@@ -157,7 +157,7 @@ Criado ICONS-MOTION.md como fonte única de verdade de todos os ícones do site.
 
 ## 2026-05-24 (sessão v2) — Página Trajetória adicionada
 
-Criado TRAJETORIA.md. Página `/trajetoria` não é currículo cronológico chapado: é narrativa com 5 seções por capítulo (Contexto / Mandato / Movimento / Resultado / Aprendizado). Highlights de impacto em grid 3x2 (R$ 70B+, 60%, 3, R$ 88M, 150-200, 1ª). Frameworks autorais em 3 cards (Método Jet Ski, GSD2, Innovation2Business).
+Criado TRAJETORIA.md. Página `/trajetoria` não é currículo cronológico chapado: é narrativa com 5 seções por capítulo (Contexto / Mandato / Movimento / Resultado / Aprendizado). Highlights de impacto em grid 3x2 (R$ 70B+, 60%, 3, R$ 88M, 150-200, 1ª). Frameworks autorais em 3 cards (Método Jet, GSD2, Innovation2Business).
 
 Conteúdo vem de 3 tabelas novas no Supabase: `career_chapters`, `career_highlights`, `frameworks`. Migration 003_career.sql + seed completo no SPEC-ADDENDUM.md.
 

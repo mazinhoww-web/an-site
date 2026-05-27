@@ -50,7 +50,7 @@ Movimento:
 Estruturação de produtos financeiros próprios em parceria com infraestrutura
 nacional e internacional. Modelagem completa de unit economics. Discovery de
 vendors com critérios técnicos e regulatórios. Frameworks autorais aplicados
-no dia a dia (Método Jet Ski, GSD2, Innovation2Business).
+no dia a dia (Método Jet, GSD2, Innovation2Business).
 
 Resultado:
 Frentes de negócio ativas em estágio avançado de validação. Pipeline de
@@ -212,7 +212,7 @@ regulação existente, com participantes alinhados desde o desenho.
 
 O fio condutor é sempre o mesmo: produto que entende o usuário, parceria
 que destrava capital, regulação que cabe no desenho. Frameworks autorais
-como Método Jet Ski, GSD2 e Innovation2Business traduzem essa visão em
+como Método Jet, GSD2 e Innovation2Business traduzem essa visão em
 execução de squad.
 ```
 
@@ -745,7 +745,7 @@ A seção "QUEM / Construo produto em mercados que não perdoam improviso" na ho
     [margin-top 24px]
     
     "A pegada autoral começou cedo. Frameworks como Método
-    Jet Ski, GSD2 e Innovation2Business foram construídos
+    Jet, GSD2 e Innovation2Business foram construídos
     para sair da teoria e operar em squad real, com OKR
     mensurável e profit share por iniciativa."
     

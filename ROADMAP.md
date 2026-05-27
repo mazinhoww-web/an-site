@@ -74,7 +74,7 @@ Ordem de execução é estrita: nenhum slice avança com tasks pendentes do ante
 - [ ] T2.2.1 Página `/sobre` com bio em markdown.
 - [ ] T2.2.2 Componente `<PhotoFrame>` (frame 1:1 com mark, tag, lime bar conforme brand book).
 - [ ] T2.2.3 Timeline de empresas como lista com hairline divider.
-- [ ] T2.2.4 Lista de frameworks criados (Jet Ski, Innovation2Business, GSD2).
+- [ ] T2.2.4 Lista de frameworks criados (Jet, Innovation2Business, GSD2).
 - [ ] T2.2.5 Bloco de links externos.
 
 **Pronto quando:** `/sobre` renderiza com foto em frame especificado, todos elementos do brand book.

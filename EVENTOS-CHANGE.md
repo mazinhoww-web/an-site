@@ -204,7 +204,7 @@ insert into public.events (
   'Inovação aplicada em cooperativismo financeiro',
   'Speaker no summit anual da Sicredi Central Centro-Norte. Tema: como aplicar frameworks de inovação testados em empresas de capital aberto dentro de cooperativas regionais.',
   'O Sistema Sicredi tem na cooperatividade um diferencial estratégico, mas enfrenta o desafio comum de toda instituição financeira: balancear inovação com regulação e cultura. A Central Centro-Norte convidou o Summit como espaço de debate entre líderes do sistema e provocadores externos.',
-  'Apresentação cobriu três frentes: 1) por que loyalty e fintech são pernas inseparáveis na próxima onda de bancarização cooperativa, 2) como o Método Jet Ski pode ser adaptado para ciclos de inovação dentro de cooperativas regionais, 3) cases recentes da LATAM Pass que se aplicam ao contexto Sicredi.',
+  'Apresentação cobriu três frentes: 1) por que loyalty e fintech são pernas inseparáveis na próxima onda de bancarização cooperativa, 2) como o Método Jet pode ser adaptado para ciclos de inovação dentro de cooperativas regionais, 3) cases recentes da LATAM Pass que se aplicam ao contexto Sicredi.',
   'A inovação em cooperativas só escala quando respeita a governança regional. Framework precisa ser adaptável, não importável puro.',
   '2026-05-21', '2026-05-22',
   'Cuiabá', 'MT', 'Sicredi Central Centro-Norte',

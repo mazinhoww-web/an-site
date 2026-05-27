@@ -27,7 +27,7 @@ const NOW_SECTIONS = [
     items: [
       'Skills Hub com metodologias empacotadas para Claude Code',
       'Newsletter sobre loyalty, fintech e inovação aplicada',
-      'Frameworks autorais: Método Jet Ski, GSD2, Innovation2Business',
+      'Frameworks autorais: Método Jet, GSD2, Innovation2Business',
     ],
   },
   {

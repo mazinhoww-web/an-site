@@ -36,7 +36,7 @@ const SCENARIO_CARDS = [
 ] as const;
 
 const FEATURED_SKILLS = [
-  { slug: 'metodo-jet-ski', name: 'Método Jet Ski', category: 'Framework' },
+  { slug: 'metodo-jet', name: 'Método Jet', category: 'Framework' },
   { slug: 'gsd2-methodology', name: 'GSD2', category: 'Framework' },
   { slug: 'gtm-engineering', name: 'GTM Engineering', category: 'Go-to-Market' },
   { slug: 'automation-data-platforms', name: 'Automation & Data', category: 'Data' },
@@ -134,7 +134,7 @@ export default function HomePage() {
                 </p>
                 <p>
                   A pegada autoral começou cedo. Frameworks como Método
-                  Jet Ski, GSD2 e Innovation2Business foram construídos
+                  Jet, GSD2 e Innovation2Business foram construídos
                   para sair da teoria e operar em squad real, com OKR
                   mensurável e profit share por iniciativa.
                 </p>

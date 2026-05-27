@@ -50,7 +50,7 @@ Lime now appears in MORE places, still functional, never decorative. Target: up 
 - Lime focus ring 2px on all inputs and buttons (already exists, reinforce)
 - Lime underline that grows from 0 to 100% width on hover of ALL editorial links
 - Lime pulse dot next to "ATUAL", "ATIVO", "AO VIVO" labels
-- Lime accent on framework icons (Sparkle in lime when over Method Jet Ski, GSD2, Innovation2Business)
+- Lime accent on framework icons (Sparkle in lime when over Method Jet, GSD2, Innovation2Business)
 - Lime vertical line 2px on left of blockquotes
 - Lime trail bar 2px at top of page showing scroll progress (0% to 100% as user scrolls)
 - Lime mini square 4x4 BEFORE each list item in editorial content
@@ -111,7 +111,7 @@ Section 2 — Quem sou eu:
 - H2 Space Grotesk: "Construo produto em mercados que não perdoam improviso."
 - 2 paragraphs of editorial body (max 65ch):
   Paragraph A: "Comecei em operação no agro, passei por adquirência, mercados de capitais e hoje trabalho na maior companhia aérea da América Latina. O que muda entre uma fase e outra é a indústria. O que segue igual é o triângulo: produto que entende o usuário, parceria que destrava capital, regulação que cabe no desenho."
-  Paragraph B: "A pegada autoral começou cedo. Frameworks como Método Jet Ski, GSD2 e Innovation2Business foram construídos para sair da teoria e operar em squad real, com OKR mensurável e profit share por iniciativa."
+  Paragraph B: "A pegada autoral começou cedo. Frameworks como Método Jet, GSD2 e Innovation2Business foram construídos para sair da teoria e operar em squad real, com OKR mensurável e profit share por iniciativa."
 - Link with lime underline: "Ler trajetória completa →" going to /trajetoria
 - Right side: small PhotoFrame placeholder with User icon
 
@@ -129,7 +129,7 @@ Section 4 — Skills:
 - Eyebrow "FERRAMENTAS"
 - H2 Space Grotesk: "Métodos transformados em código que o Claude executa."
 - Body: "Cada skill abaixo é um framework de trabalho, empacotado para ser carregado dentro do Claude Cowork ou Claude Code. Quando ativada, ensina o Claude a executar tarefas com o método específico."
-- Grid of 4 SkillCards (Método Jet Ski, GSD2, Innovation2Business, LATAM Deck)
+- Grid of 4 SkillCards (Método Jet, GSD2, Innovation2Business, LATAM Deck)
 - Each card: Box icon 32px (with slight 3D tilt drawn), name in Space Grotesk weight 600, description 2 lines in Inter, category in mono uppercase at bottom-left, download count in mono at bottom-right ("↓ 127 BAIXADAS"). Border becomes lime on hover.
 - DO NOT WRITE "criadas por mim" or "para download". Just present them.
 - Link: "Ver todas as skills →"
@@ -171,7 +171,7 @@ S3 SOBRE — REPLACE all English paragraphs with these Portuguese paragraphs in 
 P1: "Loyalty, fintech e inovação não são para mim disciplinas separadas. São um triângulo: produto que entende milhas, parceria que destrava capital, regulação que cabe no desenho. Quando uma das três pernas falha, o produto inteiro emperra."
 P2: "A trajetória começou em operação no agro e em marketplace, passou por adquirência na Stone, pelo CPR Registry da CERC contra a B3, e hoje está na LATAM Pass coordenando novos negócios financeiros da squad eLoyalty."
 P3: "O foco atual está em produtos financeiros próprios, parcerias estratégicas com infraestrutura financeira e inteligência competitiva. Os nomes dos produtos em andamento ficam reservados até o lançamento."
-P4: "Este site existe para registrar essas frentes e compartilhar os frameworks que uso. Método Jet Ski, GSD2 e Innovation2Business estão na seção Ferramentas."
+P4: "Este site existe para registrar essas frentes e compartilhar os frameworks que uso. Método Jet, GSD2 e Innovation2Business estão na seção Ferramentas."
 - REPLACE the AI-generated CG portrait with a PhotoFrame placeholder: hairline square frame, bone background, lucide User icon 64px centered in ink color, lime 16x16 square accent at top-right outside the frame. Caption mono uppercase below: "FOTO EM BREVE".
 
 
@@ -190,7 +190,7 @@ S4 TRAJETÓRIA — Already mostly correct but apply these fixes:
   RESULTADO: "LOI assinado em parceria estratégica. Stack Phase 1 travado. 30% de crescimento em conversão de leads. Squad Innovation2Business reconhecida como motor de novos negócios."
   APRENDIZADO: "Em loyalty, spread, interchange, float e IOF se comportam diferente em wallet versus cartão versus white label. Modelagem só funciona quando produto e regulação caminham juntos."
 - CHAPTERS MUST BE 6 SEPARATE BLOCKS, NOT 4 + collapsed. List: LATAM Pass / CRDC / 1WIN (com pill "PARALELO") / CERC / Stone / Início. Each fully visible.
-- Frameworks section: phases MUST be correct. Method Jet Ski phases: "01 Diagnóstico da Oportunidade / 02 Prototipação Ágil / 03 Visão Transformadora" (NOT manobrabilidade, NOT velocidade de validação, NOT redução de arrasto). GSD2 phases: "01 Milestone / 02 Slice / 03 Task" (NOT goal setting, NOT shit done). Innovation2Business phases: "01 OKR por iniciativa / 02 Profit share / 03 Cadência semanal".
+- Frameworks section: phases MUST be correct. Method Jet phases: "01 Diagnóstico da Oportunidade / 02 Prototipação Ágil / 03 Visão Transformadora" (NOT manobrabilidade, NOT velocidade de validação, NOT redução de arrasto). GSD2 phases: "01 Milestone / 02 Slice / 03 Task" (NOT goal setting, NOT shit done). Innovation2Business phases: "01 OKR por iniciativa / 02 Profit share / 03 Cadência semanal".
 
 
 S5 EVENTOS (replaces old S5 Projetos) — Generate a NEW screen for /eventos following this spec:
@@ -210,7 +210,7 @@ S5 EVENTOS (replaces old S5 Projetos) — Generate a NEW screen for /eventos fol
 S6 SKILLS HUB — Apply these fixes:
 - DO NOT WRITE "criadas por mim" or "disponíveis para download". Just present the skills cleanly.
 - Replace skill card descriptions with these (concise, accurate):
-  Método Jet Ski: "Framework de 3 fases para acelerar inovação. Diagnóstico, Prototipação, Visão."
+  Método Jet: "Framework de 3 fases para acelerar inovação. Diagnóstico, Prototipação, Visão."
   GSD2 — Get Shit Done: "Spec-before-code com hierarquia Milestone > Slice > Task."
   Innovation2Business: "Squad de inovação como motor de receita. OKR e profit share por iniciativa."
   LATAM Deck: "Decks executivos no padrão LATAM Pass ELEVATE 2025."
@@ -222,7 +222,7 @@ S6 SKILLS HUB — Apply these fixes:
 
 
 S7 SKILL DETALHE — Replace skill content:
-- "O que faz": "O Método Jet Ski é um framework autoral de três fases para acelerar oportunidades de inovação. Sai do diagnóstico de uma oportunidade vaga e chega num protótipo testável em ciclos curtos. Aplicado dentro da squad Innovation2Business da LATAM Pass."
+- "O que faz": "O Método Jet é um framework autoral de três fases para acelerar oportunidades de inovação. Sai do diagnóstico de uma oportunidade vaga e chega num protótipo testável em ciclos curtos. Aplicado dentro da squad Innovation2Business da LATAM Pass."
 - "Quando usar": "Use quando a oportunidade ainda está mal definida, quando o backlog tradicional não cabe, ou quando o ciclo de validação precisa ser muito mais curto que o de desenvolvimento de produto comum."
 - "Três fases": exactly "01 Diagnóstico da Oportunidade / 02 Prototipação Ágil / 03 Visão Transformadora" (NOT manobrabilidade/velocidade/arrasto)
 - REMOVE any mention of "sprints de 5 dias", "Ugly But Functional", "UBF", "Next.js Supabase Vercel" (these belong to other contexts)
@@ -289,7 +289,7 @@ Block right (4/12) — Atividade recente:
 - H3 "Atividade recente"
 - List of 8 items, each with lucide icon + text + tempo relativo mono (HÁ 2 HORAS):
   - MessageSquare "Nova mensagem de contato@empresa.com"
-  - Download "Skill 'Método Jet Ski' baixada"
+  - Download "Skill 'Método Jet' baixada"
   - UserPlus "Novo subscriber na newsletter"
   - Eye "Página /trajetoria recebeu 12 views"
   - Calendar "Evento 'Sicredi Summit' publicado"

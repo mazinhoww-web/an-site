@@ -9,7 +9,7 @@
 ### 1.1 Objetivos de negócio
 
 1. **Aurimar é encontrado quando buscado por nome.** Resultado #1 no Google para "Aurimar Nogueira", "Aurimar LATAM Pass", "Mazinho LATAM".
-2. **Aparecer em buscas de tópico.** Top 20 em buscas como "método jet ski inovação", "GSD2 produto", "Innovation2Business squad", "CPR Verde Brasil pioneiro".
+2. **Aparecer em buscas de tópico.** Top 20 em buscas como "método jet inovação", "GSD2 produto", "Innovation2Business squad", "CPR Verde Brasil pioneiro".
 3. **Skills do Aurimar (Cowork) encontradas.** Cada skill com URL canônica indexada e ranqueada para a função que executa.
 4. **Trafego direto qualificado para LinkedIn e contato.** Visitantes que chegam ao site têm probabilidade alta de virar conexão ou conversa.
 
@@ -40,7 +40,7 @@
 | Projetos lista | `/projetos` | aurimar.com.br/projetos |
 | Projeto detalhe | `/projetos/[slug]` | aurimar.com.br/projetos/cia-do-visto |
 | Skills lista | `/skills` | aurimar.com.br/skills |
-| Skill detalhe | `/skills/[slug]` | aurimar.com.br/skills/metodo-jet-ski |
+| Skill detalhe | `/skills/[slug]` | aurimar.com.br/skills/metodo-jet |
 | Como usar skill | `/skills/como-usar` | aurimar.com.br/skills/como-usar |
 | Notícias lista | `/noticias` | aurimar.com.br/noticias |
 | Notícia detalhe | `/noticias/[slug]` | aurimar.com.br/noticias/sumimt-sicredi-2026 |
@@ -72,7 +72,7 @@ Inclui:
 Estrutura mínima por item:
 ```xml
 <url>
-  <loc>https://aurimar.com.br/skills/metodo-jet-ski</loc>
+  <loc>https://aurimar.com.br/skills/metodo-jet</loc>
   <lastmod>2026-05-24</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
@@ -160,7 +160,7 @@ Máximo 60 caracteres. Brand sempre ao final.
 
 Exemplos:
 - **Home:** `Coordenador Sênior de Negócios Financeiros na LATAM Pass. Loyalty, fintech e inovação aplicada. Frameworks autorais e skills do Claude para download.`
-- **Trajetória:** `Histórico contextual: LATAM Pass, CERC (60% market share em CPR Registry, R$ 70B+), Stone, CRDC. Frameworks Método Jet Ski, GSD2, Innovation2Business.`
+- **Trajetória:** `Histórico contextual: LATAM Pass, CERC (60% market share em CPR Registry, R$ 70B+), Stone, CRDC. Frameworks Método Jet, GSD2, Innovation2Business.`
 
 ### 3.3 Headings
 
@@ -176,7 +176,7 @@ Exemplos:
 - **Tamanho mínimo de página:** 300 palavras para indexar bem. Páginas curtas (skills lista, projetos lista) compensam com cards ricos em texto
 - **Páginas longas (Trajetória, Skill detalhe):** estruturadas com H2/H3 e listas para escaneabilidade
 - **Linking interno:** cada página principal linka para 2-4 outras páginas relevantes. Trajetória linka para projetos que menciona. Projetos linkam para skills usadas
-- **Texto âncora:** descritivo ("ver método Jet Ski") não genérico ("clique aqui")
+- **Texto âncora:** descritivo ("ver método Jet") não genérico ("clique aqui")
 
 ### 3.5 Imagens
 
@@ -549,7 +549,7 @@ Padrão: `?utm_source=an-site&utm_medium=...&utm_campaign=...`
 - `mazinho latam pass`
 
 **De autoridade (intent informacional, prioridade média):**
-- `método jet ski inovação`
+- `método jet inovação`
 - `gsd2 metodologia`
 - `innovation2business`
 - `cpr verde brasil pioneiro`
@@ -557,7 +557,7 @@ Padrão: `?utm_source=an-site&utm_medium=...&utm_campaign=...`
 
 **Long-tail (intent específico):**
 - `como funciona latam pass conta global`
-- `skill claude método jet ski download`
+- `skill claude método jet download`
 - `frameworks inovação loyalty fintech`
 
 ### 8.2 Tópicos pillar (priorizar como conteúdo profundo)
