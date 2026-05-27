@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
-import { Eyebrow } from '@/components/brand/Eyebrow';
-import { Hairline } from '@/components/brand/Hairline';
+import { PageHero } from '@/components/PageHero';
 import { db } from '@/db';
 import { projects } from '@/db/schema';
 import { eq, desc } from 'drizzle-orm';
@@ -24,18 +23,13 @@ export default async function ProjetosPage() {
 
   return (
     <>
-      <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
-        <div className="mx-auto max-w-container">
-          <Eyebrow className="mb-4 block">PROJETOS</Eyebrow>
-          <h1 className="font-heading text-display-m">O que construí</h1>
-          <p className="mt-4 max-w-prose text-body-l text-graphite">
-            Projetos em loyalty, fintech, produto e inovação aplicada.
-          </p>
-          <Hairline className="mt-8" />
-        </div>
-      </section>
+      <PageHero
+        eyebrow="PROJETOS"
+        title="O que construí"
+        lead="Projetos em loyalty, fintech, produto e inovação aplicada."
+      />
 
-      <section className="px-6 pb-20 md:px-12 md:pb-32 lg:px-16">
+      <section className="px-6 pb-16 md:px-12 md:pb-24 lg:px-16">
         <div className="mx-auto max-w-container">
           {allProjects.length === 0 ? (
             <p className="py-12 text-center text-body text-smoke">

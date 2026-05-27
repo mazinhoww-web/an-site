@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
+import { PageHero } from '@/components/PageHero';
 import { cn } from '@/lib/utils';
 import type { Palestra } from '@/types/palestra';
 
@@ -36,21 +36,11 @@ export default function PalestrasPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
-        <div className="mx-auto max-w-container">
-          <Eyebrow className="mb-4 block">PALESTRAS</Eyebrow>
-          <h1 className="font-heading text-display-m">
-            Conteudos que levo para o{' '}
-            <span className="bg-lime px-1.5">palco</span>
-          </h1>
-          <p className="mt-4 max-w-prose text-body-l text-graphite">
-            Palestras, workshops e paineis sobre loyalty, fintech, inovacao corporativa e IA aplicada.
-            Formatos adaptaveis para eventos de 30 a 3.000 pessoas.
-          </p>
-          <Hairline className="mt-8" />
-        </div>
-      </section>
+      <PageHero
+        eyebrow="PALESTRAS"
+        title={<>Conteudos que levo para o{' '}<span className="bg-lime px-1.5">palco</span></>}
+        lead="Palestras, workshops e paineis sobre loyalty, fintech, inovacao corporativa e IA aplicada. Formatos adaptaveis para eventos de 30 a 3.000 pessoas."
+      />
 
       {/* Filters */}
       <section className="px-6 pt-4 md:px-12 lg:px-16">
@@ -76,7 +66,7 @@ export default function PalestrasPage() {
       </section>
 
       {/* Grid */}
-      <section className="px-6 pb-20 pt-8 md:px-12 md:pb-32 lg:px-16">
+      <section className="px-6 pb-16 pt-8 md:px-12 md:pb-24 lg:px-16">
         <div className="mx-auto max-w-container">
           {filtered.length === 0 && palestras.length > 0 && (
             <p className="py-12 text-center text-body text-smoke">
@@ -120,7 +110,7 @@ export default function PalestrasPage() {
       </section>
 
       {/* CTA */}
-      <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
+      <section className="px-6 py-16 md:px-12 md:py-24 lg:px-16">
         <div className="mx-auto max-w-container">
           <Hairline className="mb-12" />
           <h2 className="font-heading text-display-m">Quer uma palestra sob medida?</h2>

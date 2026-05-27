@@ -1,9 +1,8 @@
 import { db } from '@/db';
 import { skills } from '@/db/schema';
 import { eq } from 'drizzle-orm';
-import { Eyebrow } from '@/components/brand/Eyebrow';
-import { Hairline } from '@/components/brand/Hairline';
 import { SkillsGrid } from './SkillsGrid';
+import { PageHero } from '@/components/PageHero';
 
 export const dynamic = 'force-dynamic';
 
@@ -28,17 +27,11 @@ export default async function SkillsPage() {
 
   return (
     <>
-      <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
-        <div className="mx-auto max-w-container">
-          <Eyebrow className="mb-4 block">SKILLS</Eyebrow>
-          <h1 className="font-heading text-display-m">Metodologias empacotadas para Claude</h1>
-          <p className="mt-4 max-w-prose text-body-l text-graphite">
-            Frameworks de trabalho transformados em codigo executavel.
-            Cada skill ensina o Claude a executar tarefas com o metodo especifico.
-          </p>
-          <Hairline className="mt-8" />
-        </div>
-      </section>
+      <PageHero
+        eyebrow="SKILLS"
+        title="Metodologias empacotadas para Claude"
+        lead="Frameworks de trabalho transformados em codigo executavel. Cada skill ensina o Claude a executar tarefas com o metodo especifico."
+      />
 
       <SkillsGrid skills={allSkills} categories={categories} />
     </>

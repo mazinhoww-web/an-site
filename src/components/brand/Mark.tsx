@@ -25,7 +25,7 @@ export function Mark({ size = 'md', color = 'default', asLink = false, className
   const content = (
     <motion.span
       className={cn(
-        'inline-flex font-heading font-bold leading-none select-none',
+        'group/mark inline-flex cursor-pointer font-heading font-bold leading-none select-none',
         sizeMap[size],
         textColor,
         className,
@@ -33,7 +33,11 @@ export function Mark({ size = 'md', color = 'default', asLink = false, className
       whileHover={reducedMotion ? undefined : { scale: 1.02 }}
       transition={{ duration: 0.15 }}
     >
-      AN
+      A
+      <span className="relative">
+        N
+        <span className="absolute bottom-0 left-0 h-px w-0 bg-lime transition-all duration-200 group-hover/mark:w-full" />
+      </span>
       <motion.span
         className="inline-block origin-center text-lime"
         initial={reducedMotion ? undefined : { scale: 0.7, opacity: 0 }}

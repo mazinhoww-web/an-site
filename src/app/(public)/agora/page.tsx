@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Hairline } from '@/components/brand/Hairline';
 import { SectionHead } from '@/components/ui/SectionHead';
+import { PageHero } from '@/components/PageHero';
 
 export const metadata: Metadata = {
   title: 'Agora',
@@ -52,18 +53,13 @@ const NOW_SECTIONS = [
 export default function AgoraPage() {
   return (
     <>
-      <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
-        <div className="mx-auto max-w-container">
-          <Eyebrow className="mb-4 block">AGORA</Eyebrow>
-          <h1 className="font-heading text-display-m">O que estou fazendo agora</h1>
-          <p className="mt-4 max-w-prose text-body-l text-graphite">
-            Inspirado no movimento nownownow.com. Atualizado periodicamente.
-          </p>
-          <Hairline className="mt-8" />
-        </div>
-      </section>
+      <PageHero
+        eyebrow="AGORA"
+        title="O que estou fazendo agora"
+        lead="Inspirado no movimento nownownow.com. Atualizado periodicamente."
+      />
 
-      <section className="px-6 pb-20 md:px-12 md:pb-32 lg:px-16">
+      <section className="px-6 pb-16 md:px-12 md:pb-24 lg:px-16">
         <div className="mx-auto max-w-container space-y-16">
           {NOW_SECTIONS.map((section) => (
             <div key={section.eyebrow}>
@@ -82,7 +78,7 @@ export default function AgoraPage() {
         </div>
       </section>
 
-      <section className="px-6 pb-20 md:px-12 md:pb-32 lg:px-16">
+      <section className="px-6 pb-16 md:px-12 md:pb-24 lg:px-16">
         <div className="mx-auto max-w-container">
           <Hairline className="mb-12" />
           <h2 className="font-heading text-display-m">Quer conversar sobre algo?</h2>

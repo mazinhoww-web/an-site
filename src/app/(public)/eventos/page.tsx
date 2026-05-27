@@ -8,6 +8,7 @@ import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
 import { LogoMarquee } from '@/components/LogoMarquee';
+import { PageHero } from '@/components/PageHero';
 import { cn } from '@/lib/utils';
 
 const EVENTS = [
@@ -84,18 +85,11 @@ export default function EventosPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
-        <div className="mx-auto max-w-container">
-          <Eyebrow className="mb-4 block">EVENTOS</Eyebrow>
-          <h1 className="font-heading text-display-m">Palestras, painéis e mesas</h1>
-          <p className="mt-4 max-w-prose text-body-l text-graphite">
-            Painéis, palestras, mentorias e mesas em que estive como representante de uma
-            frente que defendo. Em ordem cronológica reversa.
-          </p>
-          <Hairline className="mt-8" />
-        </div>
-      </section>
+      <PageHero
+        eyebrow="EVENTOS"
+        title="Palestras, painéis e mesas"
+        lead="Painéis, palestras, mentorias e mesas em que estive como representante de uma frente que defendo. Em ordem cronológica reversa."
+      />
 
       <LogoMarquee />
 
@@ -123,7 +117,7 @@ export default function EventosPage() {
       </section>
 
       {/* Event list */}
-      <section className="px-6 pb-20 pt-8 md:px-12 md:pb-32 lg:px-16">
+      <section className="px-6 pb-16 pt-8 md:px-12 md:pb-24 lg:px-16">
         <div className="mx-auto max-w-container space-y-0">
           {filtered.length === 0 && (
             <p className="py-12 text-center text-body text-smoke">

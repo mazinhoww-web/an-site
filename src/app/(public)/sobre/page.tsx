@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Hairline } from '@/components/brand/Hairline';
 import { PhotoFrame } from '@/components/brand/PhotoFrame';
 import { SectionHead } from '@/components/ui/SectionHead';
+import { PageHero } from '@/components/PageHero';
 
 export const metadata: Metadata = {
   title: 'Sobre',
@@ -116,22 +116,14 @@ const FRAMEWORKS = [
 export default function SobrePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
-        <div className="mx-auto max-w-container">
-          <Eyebrow className="mb-4 block">SOBRE</Eyebrow>
-          <h1 className="max-w-3xl font-heading text-display-m">
-            Quem é Aurimar Nogueira
-          </h1>
-          <p className="mt-4 max-w-prose text-body text-graphite">
-            Uma década de execução em fintech e loyalty.
-          </p>
-          <Hairline className="mt-8" />
-        </div>
-      </section>
+      <PageHero
+        eyebrow="SOBRE"
+        title="Quem é Aurimar Nogueira"
+        lead="Uma década de execução em fintech e loyalty."
+      />
 
       {/* Bio: foto + texto */}
-      <section className="px-6 pb-20 md:px-12 md:pb-32 lg:px-16">
+      <section className="px-6 pb-16 md:px-12 md:pb-24 lg:px-16">
         <div className="mx-auto grid max-w-container gap-12 md:grid-cols-12">
           {/* Left: Photo */}
           <div className="md:col-span-4">
@@ -177,7 +169,7 @@ export default function SobrePage() {
       </section>
 
       {/* Em números */}
-      <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
+      <section className="px-6 py-16 md:px-12 md:py-24 lg:px-16">
         <div className="mx-auto max-w-container">
           <SectionHead eyebrow="EM NÚMEROS" title="Resultados que importam." />
           <div className="grid grid-cols-2 gap-6 md:grid-cols-3">
@@ -197,7 +189,7 @@ export default function SobrePage() {
       </section>
 
       {/* Timeline completa */}
-      <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
+      <section className="px-6 py-16 md:px-12 md:py-24 lg:px-16">
         <div className="mx-auto max-w-container">
           <SectionHead eyebrow="TRAJETÓRIA" title="Linha do tempo profissional." />
           <div className="relative space-y-12 border-l-2 border-lime pl-8 md:pl-12">
@@ -258,7 +250,7 @@ export default function SobrePage() {
       </section>
 
       {/* Frameworks */}
-      <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
+      <section className="px-6 py-16 md:px-12 md:py-24 lg:px-16">
         <div className="mx-auto max-w-container">
           <SectionHead
             eyebrow="MÉTODOS CRIADOS"
@@ -291,7 +283,7 @@ export default function SobrePage() {
       </section>
 
       {/* Links externos */}
-      <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
+      <section className="px-6 py-16 md:px-12 md:py-24 lg:px-16">
         <div className="mx-auto max-w-container">
           <SectionHead eyebrow="CONECTAR" title="Onde me encontrar" />
           <div className="flex flex-wrap gap-6">
@@ -328,7 +320,7 @@ export default function SobrePage() {
       </section>
 
       {/* CTA */}
-      <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
+      <section className="px-6 py-16 md:px-12 md:py-24 lg:px-16">
         <div className="mx-auto max-w-container">
           <Hairline className="mb-12" />
           <h2 className="font-heading text-display-m">Vamos conversar?</h2>

@@ -16,7 +16,7 @@ import { cn } from '@/lib/utils';
 import { Mark } from '@/components/brand/Mark';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
-const NAV_ITEMS = [
+const BASE_NAV_ITEMS = [
   { label: 'Sobre', href: '/sobre' },
   { label: 'Palestras', href: '/palestras' },
   { label: 'Eventos', href: '/eventos' },
@@ -26,6 +26,9 @@ const NAV_ITEMS = [
 
 export function Nav() {
   const pathname = usePathname();
+  const navItems = pathname === '/'
+    ? BASE_NAV_ITEMS
+    : [{ label: 'Inicio' as const, href: '/' }, ...BASE_NAV_ITEMS];
   const [isOpen, setIsOpen] = useState(false);
   const reducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
@@ -78,7 +81,7 @@ export function Nav() {
 
           {/* Desktop links */}
           <div className="hidden items-center gap-8 md:flex">
-            {NAV_ITEMS.map((item) => {
+            {navItems.map((item) => {
               const active = isActive(item.href);
               return (
                 <Link
@@ -147,7 +150,7 @@ export function Nav() {
             {/* Mobile links */}
             <div className="flex flex-1 flex-col items-center justify-center gap-8">
               <ThemeToggle />
-              {NAV_ITEMS.map((item) => {
+              {navItems.map((item) => {
                 const active = isActive(item.href);
                 return (
                   <Link

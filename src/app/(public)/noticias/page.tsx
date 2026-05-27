@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
-import { Eyebrow } from '@/components/brand/Eyebrow';
-import { Hairline } from '@/components/brand/Hairline';
+import { PageHero } from '@/components/PageHero';
 
 export const metadata: Metadata = {
   title: 'Notícias',
@@ -29,20 +28,14 @@ const NEWS = [
 export default function NoticiasPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
-        <div className="mx-auto max-w-container">
-          <Eyebrow className="mb-4 block">NOTÍCIAS</Eyebrow>
-          <h1 className="font-heading text-display-m">Leituras recomendadas e updates</h1>
-          <p className="mt-4 max-w-prose text-body-l text-graphite">
-            Artigos, participações em eventos e reflexões sobre loyalty, fintech e inovação.
-          </p>
-          <Hairline className="mt-8" />
-        </div>
-      </section>
+      <PageHero
+        eyebrow="NOTÍCIAS"
+        title="Leituras recomendadas e updates"
+        lead="Artigos, participações em eventos e reflexões sobre loyalty, fintech e inovação."
+      />
 
       {/* News list */}
-      <section className="px-6 pb-20 md:px-12 md:pb-32 lg:px-16">
+      <section className="px-6 pb-16 md:px-12 md:pb-24 lg:px-16">
         <div className="mx-auto max-w-container">
           <div className="grid gap-6 md:grid-cols-2">
             {NEWS.map((item) => (

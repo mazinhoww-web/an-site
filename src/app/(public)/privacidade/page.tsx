@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import { Eyebrow } from '@/components/brand/Eyebrow';
-import { Hairline } from '@/components/brand/Hairline';
+import { PageHero } from '@/components/PageHero';
 
 export const metadata: Metadata = {
   title: 'Política de Privacidade',
@@ -10,18 +9,13 @@ export const metadata: Metadata = {
 export default function PrivacidadePage() {
   return (
     <>
-      <section className="px-6 py-20 md:px-12 md:py-32 lg:px-16">
-        <div className="mx-auto max-w-container">
-          <Eyebrow className="mb-4 block">LGPD</Eyebrow>
-          <h1 className="font-heading text-display-m">Política de Privacidade</h1>
-          <p className="mt-4 text-body-s text-smoke">
-            Última atualização: {new Date().getFullYear()}
-          </p>
-          <Hairline className="mt-8" />
-        </div>
-      </section>
+      <PageHero eyebrow="LGPD" title="Política de Privacidade">
+        <p className="text-body-s text-smoke">
+          Última atualização: {new Date().getFullYear()}
+        </p>
+      </PageHero>
 
-      <section className="px-6 pb-20 md:px-12 md:pb-32 lg:px-16">
+      <section className="px-6 pb-16 md:px-12 md:pb-24 lg:px-16">
         <div className="mx-auto max-w-container">
           <div className="mx-auto max-w-prose space-y-8 text-body text-graphite">
             <div>
