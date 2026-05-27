@@ -19,14 +19,11 @@ export function SkillDetailClient({ skillSlug, skillName, downloadLabel }: Props
       <button
         type="button"
         onClick={() => setGateOpen(true)}
-        className="inline-flex items-center gap-2 bg-ink px-8 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-lime transition-colors duration-150 hover:bg-lime hover:text-ink"
+        className="inline-flex w-full items-center justify-center gap-2 bg-ink px-8 py-4 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-bone transition-colors duration-200 hover:text-lime"
       >
         <Download size={16} strokeWidth={1.5} />
         {downloadLabel}
       </button>
-      <p className="mt-3 text-body-s text-smoke">
-        Compativel com Claude Code e Claude Cowork.
-      </p>
 
       <DownloadGate
         skillSlug={skillSlug}

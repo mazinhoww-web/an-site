@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { X, Loader2, CheckCircle, Download, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Eyebrow } from '@/components/brand/Eyebrow';
@@ -30,6 +30,7 @@ export function DownloadGate({ skillSlug, skillName, hasAsset, isOpen, onClose }
   const [errorMsg, setErrorMsg] = useState('');
   const [email, setEmail] = useState('');
   const [consentLgpd, setConsentLgpd] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setSavedEmail(getCookie(COOKIE_NAME));
@@ -42,9 +43,20 @@ export function DownloadGate({ skillSlug, skillName, hasAsset, isOpen, onClose }
   }, [isOpen]);
 
   useEffect(() => {
-    function handleEscape(e: KeyboardEvent) { if (e.key === 'Escape') onClose(); }
-    if (isOpen) document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') { onClose(); return; }
+      if (e.key !== 'Tab' || !modalRef.current) return;
+      const focusable = modalRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+    }
+    if (isOpen) document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -96,8 +108,8 @@ export function DownloadGate({ skillSlug, skillName, hasAsset, isOpen, onClose }
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/60 p-6">
-      <div className={cn(
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/60 p-6" role="dialog" aria-modal="true" aria-label={`Download ${skillName}`}>
+      <div ref={modalRef} className={cn(
         'relative w-full max-w-md border bg-paper p-8',
         state === 'success' ? 'border-lime' : 'border-hairline',
       )}>
