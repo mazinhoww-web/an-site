@@ -1,75 +1,80 @@
 'use server';
 
 import { z } from 'zod';
-import { nanoid } from 'nanoid';
 import { db } from '@/db';
 import { downloads, subscribers, skills } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { headers } from 'next/headers';
-import { rateLimit } from '@/lib/rate-limit';
-import { Resend } from 'resend';
 
 const schema = z.object({
-  email: z.string().email().max(200),
+  email: z.string().email('Email invalido').max(200),
+  name: z.string().min(2, 'Nome obrigatorio').max(200),
+  phone: z.string().max(30).optional().default(''),
   skillSlug: z.string().min(1).max(120),
-  consentLgpd: z.literal(true),
+  consentLgpd: z.literal(true, 'Aceite os termos'),
+  consentNewsletter: z.boolean().optional().default(false),
+  consentWhatsapp: z.boolean().optional().default(false),
 });
 
 export async function requestDownload(input: unknown) {
   const data = schema.parse(input);
 
-  const ip = (await headers()).get('x-forwarded-for') ?? 'unknown';
-  await rateLimit(`download:${ip}`, 10, 600);
+  const [skill] = await db
+    .select()
+    .from(skills)
+    .where(eq(skills.slug, data.skillSlug))
+    .limit(1);
 
-  const [skill] = await db.select().from(skills).where(eq(skills.slug, data.skillSlug)).limit(1);
-  if (!skill) throw new Error('Skill não encontrada');
-  if (!skill.assetBlobKey) throw new Error('Asset não disponível');
+  if (!skill) throw new Error('Skill nao encontrada');
+  if (!skill.blobUrl) throw new Error('Asset nao disponivel para download');
 
-  const existing = await db.select().from(subscribers).where(eq(subscribers.email, data.email)).limit(1);
-  let subscriberId: string;
+  const hdrs = await headers();
+  const ip = hdrs.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+  const ua = hdrs.get('user-agent') ?? '';
+
+  const existing = await db
+    .select()
+    .from(subscribers)
+    .where(eq(subscribers.email, data.email))
+    .limit(1);
 
   if (existing[0]) {
-    subscriberId = existing[0].id;
+    await db
+      .update(subscribers)
+      .set({
+        name: data.name || existing[0].name,
+        phone: data.phone || existing[0].phone,
+        consentNewsletter: data.consentNewsletter || existing[0].consentNewsletter,
+        consentWhatsapp: data.consentWhatsapp || existing[0].consentWhatsapp,
+      })
+      .where(eq(subscribers.email, data.email));
   } else {
-    const result = await db.insert(subscribers).values({
+    await db.insert(subscribers).values({
       email: data.email,
-      consentNewsletter: false,
+      name: data.name,
+      phone: data.phone || null,
+      consentNewsletter: data.consentNewsletter,
+      consentWhatsapp: data.consentWhatsapp,
       source: 'download',
       confirmed: false,
-    }).returning({ id: subscribers.id });
-    subscriberId = result[0]!.id;
+    });
   }
-
-  const token = nanoid(32);
-  const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
   await db.insert(downloads).values({
     skillId: skill.id,
-    subscriberId,
     email: data.email,
-    token,
-    expiresAt,
+    name: data.name,
+    phone: data.phone || null,
+    consentNewsletter: data.consentNewsletter,
+    consentWhatsapp: data.consentWhatsapp,
+    ipAnonymized: ip.replace(/\.\d+$/, '.0'),
+    userAgent: ua.substring(0, 500),
   });
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://aurimarnogueira.com.br';
-  const downloadUrl = `${baseUrl}/baixar/${token}`;
+  await db
+    .update(skills)
+    .set({ downloads: (skill.downloads ?? 0) + 1 })
+    .where(eq(skills.id, skill.id));
 
-  const resend = new Resend(process.env.RESEND_API_KEY);
-  await resend.emails.send({
-    from: process.env.RESEND_FROM ?? 'AN. <download@aurimarnogueira.com.br>',
-    to: data.email,
-    subject: `Seu download: ${skill.name}`,
-    text: [
-      'Aqui esta o link para baixar ' + skill.name + ':',
-      '',
-      downloadUrl,
-      '',
-      'Link expira em 24 horas e e de uso unico.',
-      '',
-      'Aurimar Nogueira',
-      'aurimarnogueira.com.br',
-    ].join('\n'),
-  });
-
-  return { ok: true };
+  return { success: true, downloadUrl: skill.blobUrl };
 }

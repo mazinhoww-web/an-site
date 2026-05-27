@@ -139,13 +139,13 @@ export const downloads = pgTable('downloads', {
   skillId: uuid('skill_id')
     .notNull()
     .references(() => skills.id),
-  subscriberId: uuid('subscriber_id')
-    .references(() => subscribers.id),
   email: text('email').notNull(),
-  token: text('token').unique(),
-  expiresAt: timestamp('expires_at'),
-  usedAt: timestamp('used_at'),
+  name: text('name'),
+  phone: text('phone'),
+  consentNewsletter: boolean('consent_newsletter').default(false),
+  consentWhatsapp: boolean('consent_whatsapp').default(false),
   ipAnonymized: text('ip_anonymized'),
+  userAgent: text('user_agent'),
   createdAt: timestamp('created_at').defaultNow(),
 });
 
