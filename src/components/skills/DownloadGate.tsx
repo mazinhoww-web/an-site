@@ -34,6 +34,7 @@ export function DownloadGate({ skillSlug, skillName, hasAsset, isOpen, onClose }
   const [state, setState] = useState<GateState>('idle');
   const [errorMsg, setErrorMsg] = useState('');
   const [downloadUrl, setDownloadUrl] = useState('');
+  const [emailSent, setEmailSent] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -83,6 +84,7 @@ export function DownloadGate({ skillSlug, skillName, hasAsset, isOpen, onClose }
       });
       if (result.success && result.downloadUrl) {
         setDownloadUrl(result.downloadUrl);
+        setEmailSent(result.emailSent ?? false);
         setCookie(COOKIE_NAME, email, COOKIE_DAYS);
         setState('success');
       } else {
@@ -144,6 +146,11 @@ export function DownloadGate({ skillSlug, skillName, hasAsset, isOpen, onClose }
               <Download size={16} strokeWidth={1.5} />
               BAIXAR AGORA
             </a>
+            {emailSent && (
+              <p className="mt-3 text-body-s text-smoke">
+                Tambem enviamos o link para {email.replace(/^(.{2}).*@/, '$1***@')}
+              </p>
+            )}
           </div>
         ) : (
           <>

@@ -6,6 +6,7 @@ import { downloads, subscribers, skills } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { headers } from 'next/headers';
 import { getSignedDownloadUrl } from '@/lib/blob';
+import { sendDownloadEmail } from '@/lib/resend';
 
 const schema = z.object({
   email: z.string().email('Email invalido').max(200),
@@ -79,5 +80,21 @@ export async function requestDownload(input: unknown) {
 
   const downloadUrl = await getSignedDownloadUrl(skill.blobUrl);
 
-  return { success: true, downloadUrl };
+  let emailSent = false;
+  try {
+    await sendDownloadEmail({
+      to: data.email,
+      name: data.name,
+      skillName: skill.name,
+      skillSlug: skill.slug,
+      downloadUrl,
+      assetFormat: skill.assetFormat,
+      assetFilename: skill.assetFilename,
+    });
+    emailSent = true;
+  } catch (err) {
+    console.error('Failed to send download email:', err);
+  }
+
+  return { success: true, downloadUrl, emailSent };
 }
