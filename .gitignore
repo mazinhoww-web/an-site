@@ -39,3 +39,9 @@ tsconfig.tsbuildinfo
 # Drizzle
 drizzle/meta
 .env*
+
+# Backups e temp
+.planning/backups/
+.tmp/
+Skill/
+assets/
