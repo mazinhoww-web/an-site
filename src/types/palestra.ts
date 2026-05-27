@@ -2,6 +2,8 @@ export type PalestraFoto = {
   src: string;
   alt: string;
   caption?: string;
+  tipo?: 'foto' | 'ilustracao';
+  focal_point?: { x: number; y: number };
 };
 
 export type PalestraModulo = {

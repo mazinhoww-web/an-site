@@ -1,12 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
 import { PageHero } from '@/components/PageHero';
+import { PalestraCard } from '@/components/PalestraCard';
 import { cn } from '@/lib/utils';
 import type { Palestra } from '@/types/palestra';
 
@@ -75,35 +74,11 @@ export default function PalestrasPage() {
           )}
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((palestra, i) => (
-              <Link
+              <PalestraCard
                 key={palestra.slug}
-                href={`/palestras/${palestra.slug}`}
-                className="group border border-hairline transition-colors duration-200 hover:border-ink"
-              >
-                {palestra.fotos[0] && (
-                  <div className="relative aspect-[16/10] w-full overflow-hidden">
-                    <Image
-                      src={palestra.fotos[0].src}
-                      alt={palestra.fotos[0].alt}
-                      fill
-                      loading={i < 3 ? 'eager' : 'lazy'}
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                  </div>
-                )}
-                <div className="p-6">
-                  <Label className="mb-2 block">{palestra.pilar.toUpperCase()}</Label>
-                  <h3 className="font-heading text-h3 transition-colors duration-150 group-hover:text-ink">
-                    {palestra.titulo}
-                  </h3>
-                  <p className="mt-2 line-clamp-2 text-body-s text-graphite">{palestra.lead}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-ink">
-                    Ver detalhes
-                    <ArrowRight size={12} strokeWidth={1.5} className="transition-transform duration-200 group-hover:translate-x-1" />
-                  </span>
-                </div>
-              </Link>
+                palestra={palestra}
+                priority={i < 3}
+              />
             ))}
           </div>
         </div>

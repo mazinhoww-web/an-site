@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" fill="none">
+  <rect width="1200" height="750" fill="#F5F4EF"/>
+
+  <!-- Hairline grid -->
+  <line x1="0" y1="187" x2="1200" y2="187" stroke="#E5E3DC" stroke-width="1"/>
+  <line x1="0" y1="563" x2="1200" y2="563" stroke="#E5E3DC" stroke-width="1"/>
+  <line x1="400" y1="0" x2="400" y2="750" stroke="#E5E3DC" stroke-width="1"/>
+  <line x1="800" y1="0" x2="800" y2="750" stroke="#E5E3DC" stroke-width="1"/>
+
+  <!-- Phase 1: Diagnostico -->
+  <rect x="80" y="240" width="260" height="270" stroke="#0A0A0A" stroke-width="1.5" fill="none"/>
+  <text x="100" y="280" font-family="monospace" font-size="11" font-weight="600" letter-spacing="0.08em" fill="#0A0A0A">01</text>
+  <line x1="100" y1="295" x2="320" y2="295" stroke="#E5E3DC" stroke-width="1"/>
+  <text x="100" y="340" font-family="system-ui, sans-serif" font-size="22" font-weight="600" fill="#0A0A0A">Diagnostico</text>
+  <text x="100" y="370" font-family="system-ui, sans-serif" font-size="14" fill="#6B6B6B">Separar ruido de sinal.</text>
+  <text x="100" y="390" font-family="system-ui, sans-serif" font-size="14" fill="#6B6B6B">Triagem por viabilidade</text>
+  <text x="100" y="410" font-family="system-ui, sans-serif" font-size="14" fill="#6B6B6B">tecnica e comercial.</text>
+  <!-- Checkmarks -->
+  <rect x="100" y="440" width="8" height="8" fill="#0A0A0A"/>
+  <text x="116" y="448" font-family="monospace" font-size="11" fill="#6B6B6B">Mercado enderecavel</text>
+  <rect x="100" y="460" width="8" height="8" fill="#0A0A0A"/>
+  <text x="116" y="468" font-family="monospace" font-size="11" fill="#6B6B6B">Dor verificavel</text>
+  <rect x="100" y="480" width="8" height="8" fill="#CCFF00"/>
+  <text x="116" y="488" font-family="monospace" font-size="11" fill="#6B6B6B">Capacidade interna</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="360" y1="375" x2="440" y2="375" stroke="#0A0A0A" stroke-width="1.5"/>
+  <polygon points="440,370 452,375 440,380" fill="#0A0A0A"/>
+
+  <!-- Phase 2: Prototipacao -->
+  <rect x="470" y="240" width="260" height="270" stroke="#0A0A0A" stroke-width="1.5" fill="none"/>
+  <text x="490" y="280" font-family="monospace" font-size="11" font-weight="600" letter-spacing="0.08em" fill="#0A0A0A">02</text>
+  <line x1="490" y1="295" x2="710" y2="295" stroke="#E5E3DC" stroke-width="1"/>
+  <text x="490" y="340" font-family="system-ui, sans-serif" font-size="22" font-weight="600" fill="#0A0A0A">Prototipacao</text>
+  <text x="490" y="370" font-family="system-ui, sans-serif" font-size="14" fill="#6B6B6B">MVP com recurso interno.</text>
+  <text x="490" y="390" font-family="system-ui, sans-serif" font-size="14" fill="#6B6B6B">Sprint de 2 semanas,</text>
+  <text x="490" y="410" font-family="system-ui, sans-serif" font-size="14" fill="#6B6B6B">gate review no final.</text>
+  <!-- Sprint bars -->
+  <rect x="490" y="440" width="180" height="6" fill="#E5E3DC"/>
+  <rect x="490" y="440" width="120" height="6" fill="#0A0A0A"/>
+  <rect x="490" y="456" width="180" height="6" fill="#E5E3DC"/>
+  <rect x="490" y="456" width="80" height="6" fill="#0A0A0A"/>
+  <rect x="490" y="472" width="180" height="6" fill="#E5E3DC"/>
+  <rect x="490" y="472" width="160" height="6" fill="#CCFF00"/>
+
+  <!-- Arrow 2→3 -->
+  <line x1="750" y1="375" x2="830" y2="375" stroke="#0A0A0A" stroke-width="1.5"/>
+  <polygon points="830,370 842,375 830,380" fill="#0A0A0A"/>
+
+  <!-- Phase 3: Visao -->
+  <rect x="860" y="240" width="260" height="270" stroke="#0A0A0A" stroke-width="1.5" fill="none"/>
+  <text x="880" y="280" font-family="monospace" font-size="11" font-weight="600" letter-spacing="0.08em" fill="#0A0A0A">03</text>
+  <line x1="880" y1="295" x2="1100" y2="295" stroke="#E5E3DC" stroke-width="1"/>
+  <text x="880" y="340" font-family="system-ui, sans-serif" font-size="22" font-weight="600" fill="#0A0A0A">Visao</text>
+  <text x="880" y="370" font-family="system-ui, sans-serif" font-size="14" fill="#6B6B6B">Conectar piloto a</text>
+  <text x="880" y="390" font-family="system-ui, sans-serif" font-size="14" fill="#6B6B6B">estrategia da empresa.</text>
+  <text x="880" y="410" font-family="system-ui, sans-serif" font-size="14" fill="#6B6B6B">Roadmap oficial.</text>
+  <!-- Target/bullseye simplified -->
+  <circle cx="960" cy="468" r="28" stroke="#E5E3DC" stroke-width="1" fill="none"/>
+  <circle cx="960" cy="468" r="18" stroke="#E5E3DC" stroke-width="1" fill="none"/>
+  <circle cx="960" cy="468" r="6" fill="#CCFF00"/>
+
+  <!-- Title -->
+  <text x="80" y="170" font-family="monospace" font-size="11" font-weight="600" letter-spacing="0.08em" fill="#6B6B6B">METODO JET SKI</text>
+  <line x1="80" y1="180" x2="280" y2="180" stroke="#E5E3DC" stroke-width="1"/>
+
+  <!-- Bottom label -->
+  <text x="80" y="600" font-family="system-ui, sans-serif" font-size="14" fill="#6B6B6B">Diagnostico &gt; Prototipacao &gt; Visao</text>
+</svg>

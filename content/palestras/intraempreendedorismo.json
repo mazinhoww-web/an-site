@@ -2,7 +2,7 @@
   "slug": "intraempreendedorismo",
   "titulo": "O manual do intraempreendedor em empresa grande",
   "pilar": "Intraempreendedorismo",
-  "lead": "Como profissionais que pensam como dono constroem projetos reais dentro de organizações grandes, sem esperar autorização para inovar.",
+  "lead": "Como profissionais que pensam como dono constroem projetos reais dentro de organizacoes grandes, sem esperar autorizacao para inovar.",
   "quote": "Dono de projeto dentro de empresa grande nao pede permissao. Apresenta o business case.",
   "duracao": "45-60 min",
   "formato": "Palestra ou workshop",
@@ -21,7 +21,7 @@
     {
       "numero": 2,
       "titulo": "Estrutura de proposta que sobrevive a diretoria",
-      "descricao": "P&L minimo, leitura de risco, alinhamento com prioridade da casa. Formato que o CFO lê em 3 minutos."
+      "descricao": "P&L minimo, leitura de risco, alinhamento com prioridade da casa. Formato que o CFO le em 3 minutos."
     },
     {
       "numero": 3,
@@ -36,14 +36,18 @@
   ],
   "fotos": [
     {
-      "src": "/photos/evento-sicredi-summit.jpg",
+      "src": "/palestras/intraempreendedorismo/01-sicredi-keynote.jpg",
       "alt": "Aurimar Nogueira no Summit de Inovacao Sicredi",
-      "caption": "Summit Sicredi 2026, Cuiaba"
+      "caption": "Summit Sicredi 2026, Cuiaba",
+      "tipo": "foto",
+      "focal_point": { "x": 55, "y": 38 }
     },
     {
-      "src": "/photos/evento-sicredi-stage.jpg",
+      "src": "/palestras/intraempreendedorismo/02-sicredi-momentos.jpg",
       "alt": "Aurimar Nogueira palestrando no palco do Sicredi",
-      "caption": "Palestra sobre intraempreendedorismo corporativo"
+      "caption": "Palestra sobre intraempreendedorismo corporativo",
+      "tipo": "foto",
+      "focal_point": { "x": 50, "y": 35 }
     }
   ]
 }

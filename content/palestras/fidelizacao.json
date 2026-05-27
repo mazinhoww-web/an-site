@@ -15,7 +15,7 @@
   "modulos": [
     {
       "numero": 1,
-      "titulo": "Anatomia de um programa que retém",
+      "titulo": "Anatomia de um programa que retem",
       "descricao": "O que separa programas de pontos que viram custo de programas que geram receita. Metricas: LTV, churn rate, NPS transacional."
     },
     {
@@ -36,14 +36,18 @@
   ],
   "fotos": [
     {
-      "src": "/photos/evento-crmbonus-meet.jpg",
+      "src": "/palestras/fidelizacao/01-crmbonus-painel.jpg",
       "alt": "Aurimar Nogueira no painel CRMBonus Meet",
-      "caption": "CRMBonus Meet 2026, Sao Paulo"
+      "caption": "CRMBonus Meet 2026, Sao Paulo",
+      "tipo": "foto",
+      "focal_point": { "x": 75, "y": 35 }
     },
     {
-      "src": "/photos/evento-crmbonus-grupo.jpg",
+      "src": "/palestras/fidelizacao/02-crmbonus-palco.jpg",
       "alt": "Painelistas no evento CRMBonus",
-      "caption": "Painel sobre cenarios de consumo e fidelizacao"
+      "caption": "Painel sobre cenarios de consumo e fidelizacao",
+      "tipo": "foto",
+      "focal_point": { "x": 80, "y": 38 }
     }
   ]
 }

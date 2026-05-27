@@ -36,14 +36,18 @@
   ],
   "fotos": [
     {
-      "src": "/photos/evento-gyra-cubo.jpg",
+      "src": "/palestras/servicos-financeiros/01-cubo-itau-painel.jpg",
       "alt": "Aurimar Nogueira no painel Embedded Credit no Cubo Itau",
-      "caption": "Painel GYRA+ no Cubo Itau, Sao Paulo"
+      "caption": "Painel GYRA+ no Cubo Itau, Sao Paulo",
+      "tipo": "foto",
+      "focal_point": { "x": 22, "y": 42 }
     },
     {
-      "src": "/photos/evento-gyra-detail.jpg",
+      "src": "/palestras/servicos-financeiros/02-cubo-itau-detalhe.jpg",
       "alt": "Detalhe do painel sobre credito embarcado",
-      "caption": "Discussao sobre credito embarcado e programas de fidelidade"
+      "caption": "Discussao sobre credito embarcado e programas de fidelidade",
+      "tipo": "foto",
+      "focal_point": { "x": 32, "y": 22 }
     }
   ]
 }

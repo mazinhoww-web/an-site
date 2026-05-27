@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowRight, Clock, Users, Mic } from 'lucide-react';
@@ -7,6 +6,7 @@ import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Label } from '@/components/brand/Label';
 import { Hairline } from '@/components/brand/Hairline';
 import { SectionHead } from '@/components/ui/SectionHead';
+import { PalestraFoto } from '@/components/PalestraFoto';
 import { getAllPalestras, getPalestraBySlug, getRelatedPalestras } from '@/lib/palestras';
 
 type Props = {
@@ -66,13 +66,11 @@ export default async function PalestraDetailPage({ params }: Props) {
       {heroFoto && (
         <section className="px-6 md:px-12 lg:px-16">
           <div className="mx-auto max-w-container">
-            <div className="relative aspect-[16/10] w-full overflow-hidden border border-hairline">
-              <Image
-                src={heroFoto.src}
-                alt={heroFoto.alt}
-                fill
+            <div className="border border-hairline">
+              <PalestraFoto
+                foto={heroFoto}
+                className="aspect-[16/10]"
                 priority
-                className="object-cover"
                 sizes="(max-width: 768px) 100vw, 1200px"
               />
             </div>
@@ -118,13 +116,10 @@ export default async function PalestraDetailPage({ params }: Props) {
               <div className="mt-16 space-y-6">
                 {extraFotos.map((foto) => (
                   <div key={foto.src}>
-                    <div className="relative aspect-[16/10] w-full overflow-hidden border border-hairline">
-                      <Image
-                        src={foto.src}
-                        alt={foto.alt}
-                        fill
-                        loading="lazy"
-                        className="object-cover"
+                    <div className="border border-hairline">
+                      <PalestraFoto
+                        foto={foto}
+                        className="aspect-[16/10]"
                         sizes="(max-width: 768px) 100vw, 800px"
                       />
                     </div>

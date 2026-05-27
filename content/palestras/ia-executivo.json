@@ -36,10 +36,10 @@
   ],
   "fotos": [
     {
-      "src": "/photos/aurimar-editorial.jpg",
-      "alt": "Aurimar Nogueira",
-      "caption": "Foto editorial"
+      "src": "/palestras/ia-executivo/01-hero.jpg",
+      "alt": "Ilustracao geometrica abstrata sobre inteligencia artificial executiva",
+      "caption": "IA aplicada: do dado a decisao",
+      "tipo": "ilustracao"
     }
-  ],
-  "placeholder_ai": true
+  ]
 }

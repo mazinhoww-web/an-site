@@ -36,9 +36,10 @@
   ],
   "fotos": [
     {
-      "src": "/photos/evento-sicredi-stage.jpg",
-      "alt": "Aurimar Nogueira apresentando o Metodo Jet Ski",
-      "caption": "Apresentacao dos 5 inimigos da inovacao, Summit Sicredi"
+      "src": "/palestras/metodo-jet-ski/01-hero.svg",
+      "alt": "Framework Metodo Jet Ski: Diagnostico, Prototipacao, Visao",
+      "caption": "Framework em 3 fases para inovacao corporativa",
+      "tipo": "ilustracao"
     }
   ]
 }
