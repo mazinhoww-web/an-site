@@ -12,6 +12,20 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/mentormatch',
+          destination: `${process.env.MENTORMATCH_URL || 'https://mentormatch-delta.vercel.app'}/mentormatch`,
+        },
+        {
+          source: '/mentormatch/:path*',
+          destination: `${process.env.MENTORMATCH_URL || 'https://mentormatch-delta.vercel.app'}/mentormatch/:path*`,
+        },
+      ],
+    };
+  },
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
