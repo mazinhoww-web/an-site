@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Eyebrow } from '@/components/brand/Eyebrow';
 import { Hairline } from '@/components/brand/Hairline';
 import { ContactForm } from './ContactForm';
@@ -41,7 +42,9 @@ export default function ContatoPage() {
       <section className="px-6 pb-16 md:px-12 md:pb-24 lg:px-16">
         <div className="mx-auto grid max-w-container gap-12 md:grid-cols-12">
           <div className="md:col-span-7">
-            <ContactForm />
+            <Suspense>
+              <ContactForm />
+            </Suspense>
           </div>
 
           {/* Info sidebar */}

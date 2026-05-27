@@ -3,13 +3,21 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Send, Loader2, CheckCircle } from 'lucide-react';
 import { contactSchema, type ContactFormData } from '@/lib/validators/contact';
 import { submitContact } from '@/server-actions/contacts';
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error';
 
+const VALID_SUBJECTS = ['contato', 'evento', 'consultoria', 'imersao-lovable', 'imersao-claude', 'outro'] as const;
+
 export function ContactForm() {
+  const searchParams = useSearchParams();
+  const assuntoParam = searchParams.get('assunto');
+  const defaultSubject = VALID_SUBJECTS.includes(assuntoParam as typeof VALID_SUBJECTS[number])
+    ? (assuntoParam as typeof VALID_SUBJECTS[number])
+    : '';
   const [formState, setFormState] = useState<FormState>('idle');
   const [serverError, setServerError] = useState('');
 
@@ -19,6 +27,9 @@ export function ContactForm() {
     formState: { errors },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
+    defaultValues: {
+      subject: defaultSubject as ContactFormData['subject'],
+    },
   });
 
   async function onSubmit(data: ContactFormData) {
@@ -102,6 +113,8 @@ export function ContactForm() {
           <option value="contato">Contato pessoal</option>
           <option value="evento">Proposta de evento</option>
           <option value="consultoria">Consultoria</option>
+          <option value="imersao-lovable">Imersão Corporativa Lovable</option>
+          <option value="imersao-claude">Imersão Corporativa Claude</option>
           <option value="outro">Outro</option>
         </select>
         {errors.subject && <p className={errorClass}>{errors.subject.message}</p>}

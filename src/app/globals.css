@@ -28,6 +28,21 @@
     background-size: 100% 2px;
   }
 
+  /* Inline product logo in titles */
+  .immersion-logo {
+    display: inline-block;
+    height: 0.75em;
+    width: auto;
+    vertical-align: baseline;
+    position: relative;
+    top: -0.04em;
+    filter: grayscale(1) brightness(0);
+  }
+
+  html.theme-ink .immersion-logo {
+    filter: grayscale(1) brightness(0) invert(1);
+  }
+
   /* Photo treatment: grayscale + contrast */
   .photo-editorial img {
     filter: grayscale(1) contrast(1.05);
