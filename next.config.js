@@ -16,25 +16,22 @@ const nextConfig = {
     const mmUrl = process.env.MENTORMATCH_URL || 'https://mentormatch-five.vercel.app';
     return {
       beforeFiles: [
+        // Generic platform: proxy everything under /mentormatch 1:1 to the
+        // standalone MentorMatch app (which runs with basePath: /mentormatch).
+        // This also serves _next chunks and public assets referenced as
+        // /mentormatch/* by every page, including the Sicredi landing.
         { source: '/mentormatch', destination: `${mmUrl}/mentormatch` },
         { source: '/mentormatch/:path*', destination: `${mmUrl}/mentormatch/:path*` },
-        // Sicredi tenant landing
+
+        // Sicredi tenant.
+        // Only the landing maps to the branded route (/mentormatch/sicredi).
+        // Every other path goes to the GENERIC app: the active tenant is
+        // carried by the `mm-tenant` cookie (set on the landing), not by the
+        // URL. Keeping internal routes on the generic app means new/unlisted
+        // routes (e.g. /t/:slug/* dashboards, auth, onboarding, api) all
+        // resolve correctly instead of 404-ing against the branded path.
         { source: '/sicredi/mentormatch', destination: `${mmUrl}/mentormatch/sicredi` },
-        // Internal flow routes (tenant context preserved via cookie set by Sicredi landing)
-        { source: '/sicredi/mentormatch/login', destination: `${mmUrl}/mentormatch/login` },
-        { source: '/sicredi/mentormatch/register', destination: `${mmUrl}/mentormatch/register` },
-        { source: '/sicredi/mentormatch/select-profile', destination: `${mmUrl}/mentormatch/select-profile` },
-        { source: '/sicredi/mentormatch/welcome', destination: `${mmUrl}/mentormatch/welcome` },
-        { source: '/sicredi/mentormatch/dashboard', destination: `${mmUrl}/mentormatch/dashboard` },
-        { source: '/sicredi/mentormatch/forgot-password', destination: `${mmUrl}/mentormatch/forgot-password` },
-        { source: '/sicredi/mentormatch/reset-password', destination: `${mmUrl}/mentormatch/reset-password` },
-        { source: '/sicredi/mentormatch/admin', destination: `${mmUrl}/mentormatch/admin` },
-        { source: '/sicredi/mentormatch/admin/:path*', destination: `${mmUrl}/mentormatch/admin/:path*` },
-        { source: '/sicredi/mentormatch/onboarding/:path*', destination: `${mmUrl}/mentormatch/onboarding/:path*` },
-        { source: '/sicredi/mentormatch/t/:path*', destination: `${mmUrl}/mentormatch/t/:path*` },
-        { source: '/sicredi/mentormatch/api/:path*', destination: `${mmUrl}/mentormatch/api/:path*` },
-        // Fallback for static assets / icons / etc
-        { source: '/sicredi/mentormatch/:path*', destination: `${mmUrl}/mentormatch/sicredi/:path*` },
+        { source: '/sicredi/mentormatch/:path*', destination: `${mmUrl}/mentormatch/:path*` },
       ],
     };
   },
