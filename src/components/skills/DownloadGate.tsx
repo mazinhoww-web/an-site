@@ -110,7 +110,7 @@ export function DownloadGate({ skillSlug, skillName, hasAsset, isOpen, onClose }
           <div className="flex flex-col items-center gap-4 py-8 text-center">
             <Download size={32} strokeWidth={1.5} className="text-smoke" />
             <h3 className="font-heading text-h2">Em breve</h3>
-            <p className="text-body-s text-graphite">O arquivo para {skillName} ainda esta sendo preparado.</p>
+            <p className="text-body-s text-graphite">O arquivo para {skillName} ainda está sendo preparado.</p>
           </div>
         </div>
       </div>
@@ -135,7 +135,7 @@ export function DownloadGate({ skillSlug, skillName, hasAsset, isOpen, onClose }
             <CheckCircle size={32} strokeWidth={1.5} className="text-lime" />
             <h3 className="font-heading text-h2">Pronto para baixar</h3>
             <p className="text-body-s text-graphite">
-              Clique no botao abaixo para baixar {skillName}.
+              Clique no botão abaixo para baixar {skillName}.
             </p>
             <a
               href={downloadUrl}
@@ -148,7 +148,7 @@ export function DownloadGate({ skillSlug, skillName, hasAsset, isOpen, onClose }
             </a>
             {emailSent && (
               <p className="mt-3 text-body-s text-smoke">
-                Tambem enviamos o link para {email.replace(/^(.{2}).*@/, '$1***@')}
+                Também enviamos o link para {email.replace(/^(.{2}).*@/, '$1***@')}
               </p>
             )}
           </div>
@@ -182,13 +182,13 @@ export function DownloadGate({ skillSlug, skillName, hasAsset, isOpen, onClose }
                 <label className="flex items-start gap-2">
                   <input type="checkbox" checked={consentLgpd} onChange={e => setConsentLgpd(e.target.checked)} className="mt-1 accent-lime" />
                   <span className="text-body-s text-graphite">
-                    Concordo com a <a href="/privacidade" className="underline decoration-lime">politica de privacidade</a> (obrigatorio) *
+                    Concordo com a <a href="/privacidade" className="underline decoration-lime">política de privacidade</a> (obrigatório) *
                   </span>
                 </label>
 
                 <label className="flex items-start gap-2">
                   <input type="checkbox" checked={consentNewsletter} onChange={e => setConsentNewsletter(e.target.checked)} className="mt-1 accent-lime" />
-                  <span className="text-body-s text-graphite">Quero receber newsletter quando novas skills sairem</span>
+                  <span className="text-body-s text-graphite">Quero receber newsletter quando novas skills saírem</span>
                 </label>
 
                 <label className="flex items-start gap-2">
@@ -208,7 +208,7 @@ export function DownloadGate({ skillSlug, skillName, hasAsset, isOpen, onClose }
             </form>
 
             <p className="mt-4 text-center text-body-s text-smoke">
-              Seus dados ficam comigo. Nao compartilho com ninguem.{' '}
+              Seus dados ficam comigo. Não compartilho com ninguém.{' '}
               <a href="/privacidade" className="underline decoration-lime transition-colors hover:text-ink">LGPD aplicada</a>.
             </p>
           </>

@@ -22,11 +22,22 @@ const PILARES = [
 export default function PalestrasPage() {
   const [palestras, setPalestras] = useState<Palestra[]>([]);
   const [activeFilter, setActiveFilter] = useState('Todos');
+  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
 
   useEffect(() => {
     fetch('/api/palestras')
-      .then((res) => res.json())
-      .then((data: Palestra[]) => setPalestras(data));
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data: Palestra[]) => {
+        setPalestras(data);
+        setStatus('ready');
+      })
+      .catch((err) => {
+        console.error('Erro ao carregar palestras:', err);
+        setStatus('error');
+      });
   }, []);
 
   const filtered = activeFilter === 'Todos'
@@ -67,7 +78,17 @@ export default function PalestrasPage() {
       {/* Grid */}
       <section className="px-6 pb-16 pt-8 md:px-12 md:pb-24 lg:px-16">
         <div className="mx-auto max-w-container">
-          {filtered.length === 0 && palestras.length > 0 && (
+          {status === 'loading' && (
+            <p className="py-12 text-center text-body text-smoke">
+              Carregando palestras...
+            </p>
+          )}
+          {status === 'error' && (
+            <p className="py-12 text-center text-body text-graphite">
+              Nao foi possivel carregar as palestras. Tente recarregar a pagina.
+            </p>
+          )}
+          {status === 'ready' && filtered.length === 0 && palestras.length > 0 && (
             <p className="py-12 text-center text-body text-smoke">
               Nenhuma palestra nesse pilar.
             </p>

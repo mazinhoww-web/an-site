@@ -32,14 +32,9 @@ export async function dispatchNewsletter(formData: FormData): Promise<ActionResu
       ),
     );
 
-    const unsubscribed = recipients.filter(r => {
-      const unsub = (r as Record<string, unknown>)['unsubscribed'];
-      return unsub !== true;
-    });
-
     const batchSize = 100;
-    for (let i = 0; i < unsubscribed.length; i += batchSize) {
-      const batch = unsubscribed.slice(i, i + batchSize);
+    for (let i = 0; i < recipients.length; i += batchSize) {
+      const batch = recipients.slice(i, i + batchSize);
       await Promise.allSettled(
         batch.map(r => sendNewsletterEmail(r.email, subject, html, r.unsubscribeToken!)),
       );
@@ -49,12 +44,12 @@ export async function dispatchNewsletter(formData: FormData): Promise<ActionResu
       subject,
       contentMd,
       contentHtml: html,
-      recipientCount: unsubscribed.length,
+      recipientCount: recipients.length,
       status: 'sent',
       sentAt: new Date(),
     });
 
-    return { success: true, recipientCount: unsubscribed.length };
+    return { success: true, recipientCount: recipients.length };
   } catch (err) {
     console.error('Newsletter dispatch error:', err);
     return { success: false, error: 'Erro ao disparar newsletter' };

@@ -81,6 +81,7 @@ const CONNECT_LINKS: ConnectLink[] = [
 const SITE_LINKS = [
   { label: 'Sobre', href: '/sobre' },
   { label: 'Palestras', href: '/palestras' },
+  { label: 'Imersões', href: '/imersoes' },
   { label: 'Eventos', href: '/eventos' },
   { label: 'Skills', href: '/skills' },
   { label: 'Contato', href: '/contato' },

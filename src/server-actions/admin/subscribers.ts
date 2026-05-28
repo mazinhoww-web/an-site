@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '@/db';
-import { subscribers, contacts } from '@/db/schema';
+import { subscribers, contacts, skills } from '@/db/schema';
 import { eq, sql, desc, like, and } from 'drizzle-orm';
 import { auth } from '@/lib/auth';
 
@@ -71,7 +71,7 @@ export async function markContactRead(id: string): Promise<ActionResult> {
 export async function getDashboardStats() {
   await requireAdmin();
   const [subsCount] = await db.select({ count: sql<number>`count(*)::int` }).from(subscribers).where(eq(subscribers.confirmed, true));
-  const [downloadsCount] = await db.select({ count: sql<number>`coalesce(sum(downloads),0)::int` }).from(sql`skills`);
+  const [downloadsCount] = await db.select({ count: sql<number>`coalesce(sum(downloads),0)::int` }).from(skills);
   const [unreadCount] = await db.select({ count: sql<number>`count(*)::int` }).from(contacts).where(eq(contacts.status, 'new'));
 
   return {
