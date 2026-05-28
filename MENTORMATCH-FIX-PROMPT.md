@@ -87,6 +87,16 @@ A proxy ja existe em `an-site/next.config.js` (rewrites de `/mentormatch/*` e `/
 3. Cookies `mm.*` e `mm-tenant` devem ter `path:/` e `sameSite:lax` (ja estao). Validar E2E que, via proxy, o Set-Cookie do app persiste no dominio `aurimarnogueira.com.br` e e lido no register/complete-profile (ver P2.2 da auditoria).
 4. As rotas internas do sicredi sao reescritas para a rota generica do app (`/sicredi/mentormatch/login -> {mmUrl}/mentormatch/login`). O contexto de tenant vem do cookie `mm-tenant=sicredi` setado na landing. Confirmar que o cookie sobrevive a navegacao entre `/sicredi/mentormatch/*` e o app generico.
 
-Prompt para Claude Code no an-site (proxy):
+### Correcao da proxy APLICADA (an-site, `next.config.js`)
 
-> No repo an-site, confirme em `next.config.js` que todos os rewrites de `/mentormatch/*` e `/sicredi/mentormatch/*` cobrem as rotas reais do app (incluir `/select-profile`, `/onboarding/:path*`, `/welcome`, `/dashboard`, `/api/:path*`, `/t/:path*`, `/admin/:path*`). Garanta que `MENTORMATCH_URL` no Vercel aponta para o deploy correto. Faca um teste E2E de set/leitura do cookie `mm-tenant` atravessando a proxy no fluxo `/sicredi/mentormatch -> register -> dashboard`.
+Status: feito nesta sessao.
+
+- Bloco generico mantido: `/mentormatch` e `/mentormatch/:path*` -> `${mmUrl}/mentormatch(/:path*)`. Serve tambem `_next` e assets `/mentormatch/*` de todas as paginas (inclusive a landing Sicredi).
+- Bloco Sicredi simplificado e corrigido:
+  - `/sicredi/mentormatch` -> `${mmUrl}/mentormatch/sicredi` (so a landing branded).
+  - `/sicredi/mentormatch/:path*` -> `${mmUrl}/mentormatch/:path*` (todo o resto vai para o app generico; o tenant vem do cookie `mm-tenant`, nao da URL).
+- Motivo: o fallback antigo mandava rotas nao-enumeradas para `/mentormatch/sicredi/:path*` (caminho branded sem essas rotas no app) -> 404. Agora qualquer rota interna (auth, onboarding, `/t/:slug/*`, `/admin`, `/api`) resolve no app generico. Cobertura 100%, sem enumeracao fragil.
+
+Pendente (fora do codigo desta sessao):
+- Garantir que `MENTORMATCH_URL` no projeto Vercel do an-site aponta para o deploy atual do MentorMatch.
+- Teste E2E do cookie `mm-tenant` atravessando a proxy no fluxo `/sicredi/mentormatch -> register -> dashboard` (ver P2.2 da auditoria).
