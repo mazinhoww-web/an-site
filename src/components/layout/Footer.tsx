@@ -144,7 +144,7 @@ export function Footer() {
           <div className="space-y-4">
             <Label withTab>LOCALIDADE</Label>
             <p className="text-body-s text-graphite">
-              Cuiabá, MT, Brasil
+              Cuiabá - MT | São Paulo - SP
             </p>
             <Label tone="default">
               LOYALTY {'×'} FINTECH {'×'} INNOVATION
@@ -157,7 +157,7 @@ export function Footer() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <Mark size="sm" />
           <p className="text-body-s text-smoke">
-            {'©'} {year} Aurimar Nogueira. Cuiabá, MT. Onde estratégia vira sistema.
+            {'©'} {year} Aurimar Nogueira. Cuiabá - MT | São Paulo - SP. Onde estratégia vira sistema.
           </p>
         </div>
       </div>

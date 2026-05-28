@@ -165,7 +165,7 @@ export default function HomePage() {
               </div>
               <div className="py-6">
                 <p className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-graphite">BASE</p>
-                <p className="mt-2 font-heading text-[20px]">Cuiabá, MT</p>
+                <p className="mt-2 font-heading text-[20px]">Cuiabá - MT | São Paulo - SP</p>
                 <p className="mt-1 font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-smoke">remoto para SP</p>
               </div>
             </div>

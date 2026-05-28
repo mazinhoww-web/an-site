@@ -130,7 +130,7 @@ export default function SobrePage() {
             <PhotoFrame src="/photos/aurimar-editorial.jpg" alt="Aurimar Nogueira" />
             <div className="mt-6 space-y-2">
               <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
-                Cuiabá, MT, Brasil
+                Cuiabá - MT | São Paulo - SP
               </p>
               <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-smoke">
                 Coord. Sr. Negócios Financeiros
