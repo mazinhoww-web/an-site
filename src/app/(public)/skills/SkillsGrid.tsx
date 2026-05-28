@@ -49,7 +49,7 @@ export function SkillsGrid({ skills, categories }: Props) {
                 'px-4 py-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.08em] transition-all duration-150',
                 topFilter
                   ? 'border border-lime bg-ink text-lime'
-                  : 'border border-lime/40 text-lime hover:border-lime hover:text-lime',
+                  : 'border border-lime/60 text-ink hover:border-lime',
               )}
             >
               Top do Aurimar

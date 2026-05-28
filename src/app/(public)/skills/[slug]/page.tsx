@@ -115,7 +115,7 @@ export default async function SkillDetailPage({ params }: Props) {
 
             {/* Sobre essa skill */}
             <Eyebrow className="mb-4 block">SOBRE ESSA SKILL</Eyebrow>
-            <div className="prose prose-sm max-w-none text-graphite prose-headings:font-heading prose-headings:text-ink prose-h1:text-h2 prose-h2:text-h3 prose-h3:text-body-l prose-p:text-graphite prose-strong:text-ink prose-code:font-mono prose-code:text-[13px] prose-code:text-lime prose-code:before:content-none prose-code:after:content-none prose-pre:bg-ink prose-pre:text-bone prose-a:text-ink prose-a:decoration-lime prose-li:text-graphite prose-li:my-1 prose-table:text-body-s">
+            <div className="prose prose-sm max-w-none text-graphite prose-headings:font-heading prose-headings:text-ink prose-h1:text-h2 prose-h2:text-h3 prose-h3:text-body-l prose-p:text-graphite prose-strong:text-ink prose-code:font-mono prose-code:text-[13px] prose-code:text-ink prose-code:bg-bone prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-ink prose-pre:text-bone prose-a:text-ink prose-a:decoration-lime prose-li:text-graphite prose-li:my-1 prose-table:text-body-s">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>{summary}</ReactMarkdown>
             </div>
 

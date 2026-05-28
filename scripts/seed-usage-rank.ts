@@ -1,4 +1,6 @@
-import 'dotenv/config';
+import { config } from 'dotenv';
+config({ path: '.env.local' });
+
 import postgres from 'postgres';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { sql } from 'drizzle-orm';
@@ -8,15 +10,15 @@ const client = postgres(url);
 const db = drizzle(client);
 
 const ranks: [string, number][] = [
-  ['gtm-engineering', 1],
-  ['revops-gtm-strategy', 2],
-  ['gtm-automation-ai-agents', 3],
-  ['market-sizing', 4],
-  ['wshobson-agents-competitive-landscape', 5],
-  ['product-management-digital', 6],
-  ['affaan-m-everything-claude-code-research-ops', 7],
-  ['gsd-2-main', 8],
-  ['market-research-reports', 9],
+  ['market-research-reports', 1],
+  ['gtm-engineering', 2],
+  ['revops-gtm-strategy', 3],
+  ['gtm-automation-agents', 4],
+  ['market-sizing', 5],
+  ['competitive-landscape', 6],
+  ['product-management-digital', 7],
+  ['research-ops', 8],
+  ['get-shit-done', 9],
 ];
 
 async function main() {

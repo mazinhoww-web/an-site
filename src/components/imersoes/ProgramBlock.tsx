@@ -35,7 +35,7 @@ export function ProgramBlock({ block }: ProgramBlockProps) {
             </p>
           </div>
           <div className="border-2 border-ink p-4">
-            <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.12em] text-lime">
+            <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.12em] text-ink">
               {block.comparison.now.head}
             </p>
             <p className="text-body-s text-graphite">
@@ -69,7 +69,7 @@ export function ProgramBlock({ block }: ProgramBlockProps) {
       {/* Exercise */}
       {block.exercise && (
         <div className="mt-6">
-          <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.12em] text-lime">
+          <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.12em] text-ink">
             EXERCÍCIO PRÁTICO
           </p>
           <p className="text-body-s text-graphite">{block.exercise}</p>
