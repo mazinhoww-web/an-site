@@ -13,16 +13,13 @@ const nextConfig = {
     ],
   },
   async rewrites() {
+    const mmUrl = process.env.MENTORMATCH_URL || 'https://mentormatch-five.vercel.app';
     return {
       beforeFiles: [
-        {
-          source: '/mentormatch',
-          destination: `${process.env.MENTORMATCH_URL || 'https://mentormatch-five.vercel.app'}/mentormatch`,
-        },
-        {
-          source: '/mentormatch/:path*',
-          destination: `${process.env.MENTORMATCH_URL || 'https://mentormatch-five.vercel.app'}/mentormatch/:path*`,
-        },
+        { source: '/mentormatch', destination: `${mmUrl}/mentormatch` },
+        { source: '/mentormatch/:path*', destination: `${mmUrl}/mentormatch/:path*` },
+        { source: '/sicredi/mentormatch', destination: `${mmUrl}/mentormatch/sicredi` },
+        { source: '/sicredi/mentormatch/:path*', destination: `${mmUrl}/mentormatch/sicredi/:path*` },
       ],
     };
   },
