@@ -13,19 +13,24 @@ type ImmersionCTAProps = {
 };
 
 function renderTitle(title: string, highlight: string, logo: string) {
+  const highlightNode = logo ? (
+    <Image
+      src={logo}
+      alt={highlight}
+      width={160}
+      height={40}
+      className="immersion-logo"
+      unoptimized
+    />
+  ) : (
+    <span className="lime-highlight">{highlight}</span>
+  );
+
   const index = title.indexOf(highlight);
   if (index === -1) {
     return (
       <>
-        {title}{' '}
-        <Image
-          src={logo}
-          alt={highlight}
-          width={160}
-          height={40}
-          className="immersion-logo"
-          unoptimized
-        />
+        {title} {highlightNode}
       </>
     );
   }
@@ -34,14 +39,7 @@ function renderTitle(title: string, highlight: string, logo: string) {
   return (
     <>
       {before}
-      <Image
-        src={logo}
-        alt={highlight}
-        width={160}
-        height={40}
-        className="immersion-logo"
-        unoptimized
-      />
+      {highlightNode}
       {after}
     </>
   );

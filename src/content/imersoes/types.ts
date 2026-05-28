@@ -1,7 +1,16 @@
 // src/content/imersoes/types.ts
 // Tipos compartilhados entre as imersões. Não alterar sem PR.
 
-export type ImmersionSlug = "lovable" | "claude";
+export type ImmersionSlug =
+  | "lovable"
+  | "claude"
+  | "ia-na-pratica"
+  | "ai-business-builder"
+  | "ia-advogados"
+  | "ia-produtos"
+  | "ai-automation-lab"
+  | "ia-executivos"
+  | "founder-ia";
 
 export type Comparison = {
   before: { head: string; body: string };

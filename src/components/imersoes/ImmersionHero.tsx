@@ -22,14 +22,18 @@ function renderTitle(title: string, highlightWord: string, logo: string) {
   return (
     <>
       {before}
-      <Image
-        src={logo}
-        alt={highlightWord}
-        width={200}
-        height={48}
-        className="immersion-logo"
-        unoptimized
-      />
+      {logo ? (
+        <Image
+          src={logo}
+          alt={highlightWord}
+          width={200}
+          height={48}
+          className="immersion-logo"
+          unoptimized
+        />
+      ) : (
+        <span className="lime-highlight">{highlightWord}</span>
+      )}
       {after}
     </>
   );
