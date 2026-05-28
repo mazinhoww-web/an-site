@@ -36,9 +36,10 @@
   ],
   "fotos": [
     {
-      "src": "/palestras/agro-startups/01-hero.jpg",
-      "alt": "Ilustracao editorial: Agro e Startups",
-      "caption": "Agro e startups: convergencia entre infraestrutura financeira e ciclo curto de produto"
+      "src": "/palestras/agro-startups/01-hero.svg",
+      "alt": "Diagrama: Producao agro vira ativo financeiro registravel via CPR, CDCA e CPR Verde, ate chegar ao mercado de capitais",
+      "caption": "Agro x Financeiro: a convergencia em 3 fases",
+      "tipo": "ilustracao"
     }
   ]
 }

@@ -36,9 +36,10 @@
   ],
   "fotos": [
     {
-      "src": "/palestras/ia-executivo/01-hero.jpg",
-      "alt": "Ilustracao editorial: IA no dia a dia do executivo",
-      "caption": "IA integrada ao fluxo de decisao executiva"
+      "src": "/palestras/ia-executivo/01-hero.svg",
+      "alt": "Diagrama: fluxo de dado para modelo para decisao no dia a dia do executivo",
+      "caption": "IA aplicada: do dado a decisao",
+      "tipo": "ilustracao"
     }
   ]
 }
