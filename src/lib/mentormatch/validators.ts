@@ -113,3 +113,26 @@ export const mmInvitationCreateSchema = z.object({
   tenantId: z.string().uuid().optional(),
 });
 export type MmInvitationCreateInput = z.infer<typeof mmInvitationCreateSchema>;
+
+// --- Super admin / tenants (Fase 9) --------------------------------------
+
+export const mmTenantCreateSchema = z.object({
+  name: z.string().min(2).max(120),
+  slug: z.string().regex(/^[a-z0-9-]+$/, 'Slug invalido (use a-z, 0-9, -)'),
+  brandColor: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Cor invalida').default('#6366f1'),
+  secondaryColor: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Cor invalida').optional(),
+  themeKey: z.string().min(1).max(40).optional(),
+  planId: z.string().uuid(),
+});
+export type MmTenantCreateInput = z.infer<typeof mmTenantCreateSchema>;
+
+export const mmTenantUpdateSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string().min(2).max(120).optional(),
+  brandColor: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Cor invalida').optional(),
+  secondaryColor: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Cor invalida').optional(),
+  themeKey: z.string().min(1).max(40).optional(),
+  planId: z.string().uuid().optional(),
+  active: z.boolean().optional(),
+});
+export type MmTenantUpdateInput = z.infer<typeof mmTenantUpdateSchema>;

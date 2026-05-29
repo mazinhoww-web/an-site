@@ -2,6 +2,7 @@ import { and, eq } from 'drizzle-orm';
 import bcrypt from 'bcryptjs';
 import { db } from '@/db';
 import { mmPlan, mmSkill, mmSubscription, mmTenant, mmUser } from '@/lib/mentormatch/db/schema';
+import { MM_DEFAULT_SKILLS } from '@/lib/mentormatch/constants';
 
 // ---------------------------------------------------------------------------
 // Idempotent MentorMatch seed. Run with: pnpm db:seed-mm (needs a live DB).
@@ -10,7 +11,7 @@ import { mmPlan, mmSkill, mmSubscription, mmTenant, mmUser } from '@/lib/mentorm
 // ---------------------------------------------------------------------------
 
 const BCRYPT_COST = 10;
-const DEFAULT_SKILLS = ['Technology', 'Design', 'Management', 'Marketing', 'Career'];
+const DEFAULT_SKILLS = MM_DEFAULT_SKILLS;
 
 type PlanSeed = {
   name: string;
