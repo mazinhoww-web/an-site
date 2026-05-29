@@ -15,6 +15,13 @@
       "when": 1748217600000,
       "tag": "0001_download_gate_columns",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1780052157508,
+      "tag": "0002_giant_falcon",
+      "breakpoints": true
     }
   ]
 }
