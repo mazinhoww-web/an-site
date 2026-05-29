@@ -14,6 +14,11 @@ function readCookie(name: string): string | undefined {
   return match ? decodeURIComponent(match[1]!) : undefined;
 }
 
+function readQueryParam(name: string): string | undefined {
+  if (typeof window === 'undefined') return undefined;
+  return new URLSearchParams(window.location.search).get(name) ?? undefined;
+}
+
 export default function MmRegisterPage() {
   const router = useRouter();
   const [error, setError] = useState('');
@@ -28,7 +33,7 @@ export default function MmRegisterPage() {
     const res = await fetch('/api/mentormatch/auth/register', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(values),
+      body: JSON.stringify({ ...values, invitationToken: readQueryParam('invitation') }),
     });
     if (res.status === 409) {
       setError('Este email ja esta cadastrado.');

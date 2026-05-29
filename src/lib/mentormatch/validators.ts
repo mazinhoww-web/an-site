@@ -7,6 +7,7 @@ export const mmRegisterSchema = z.object({
   name: z.string().min(2, 'Informe seu nome'),
   email: z.string().email('Email invalido'),
   password: z.string().min(8, 'Minimo de 8 caracteres'),
+  invitationToken: z.string().optional(),
 });
 export type MmRegisterInput = z.infer<typeof mmRegisterSchema>;
 
@@ -64,3 +65,51 @@ export const mmNotificationPatchSchema = z
     message: 'Informe id ou all:true',
   });
 export type MmNotificationPatchInput = z.infer<typeof mmNotificationPatchSchema>;
+
+// --- Admin (Fase 8) -------------------------------------------------------
+
+export const mmSkillCreateSchema = z.object({
+  name: z.string().min(2, 'Nome muito curto').max(80),
+  category: z.string().max(60).optional(),
+});
+export type MmSkillCreateInput = z.infer<typeof mmSkillCreateSchema>;
+
+export const mmSkillUpdateSchema = z.object({
+  name: z.string().min(2).max(80).optional(),
+  category: z.string().max(60).optional(),
+  isActive: z.boolean().optional(),
+});
+export type MmSkillUpdateInput = z.infer<typeof mmSkillUpdateSchema>;
+
+export const mmLibraryCreateSchema = z.object({
+  title: z.string().min(2).max(160),
+  description: z.string().max(1000).optional(),
+  fileUrl: z.string().url(),
+  fileType: z.enum(['PDF', 'VIDEO', 'ARTICLE', 'OTHER']).optional(),
+  fileSize: z.number().int().nonnegative().optional(),
+});
+export type MmLibraryCreateInput = z.infer<typeof mmLibraryCreateSchema>;
+
+export const mmUserStatusPatchSchema = z.object({
+  userId: z.string().uuid(),
+  status: z.enum(['PENDING', 'APPROVED', 'REJECTED', 'SUSPENDED']),
+});
+export type MmUserStatusPatchInput = z.infer<typeof mmUserStatusPatchSchema>;
+
+export const mmSettingsPatchSchema = z.object({
+  slug: z.string().min(1),
+  name: z.string().min(2).max(120).optional(),
+  brandColor: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Cor invalida').optional(),
+  secondaryColor: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Cor invalida').optional(),
+  logoUrl: z.string().url().optional().or(z.literal('')),
+  themeKey: z.string().min(1).max(40).optional(),
+  maxMenteesPerMentor: z.number().int().min(1).max(50).optional(),
+});
+export type MmSettingsPatchInput = z.infer<typeof mmSettingsPatchSchema>;
+
+export const mmInvitationCreateSchema = z.object({
+  email: z.string().email(),
+  role: z.enum(['ADMIN', 'MENTOR', 'MENTEE']),
+  tenantId: z.string().uuid().optional(),
+});
+export type MmInvitationCreateInput = z.infer<typeof mmInvitationCreateSchema>;

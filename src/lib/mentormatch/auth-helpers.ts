@@ -24,6 +24,15 @@ export async function getMmUserFromDb(): Promise<MmDbUser | null> {
   return rows[0] ?? null;
 }
 
+/**
+ * Whether a user may administer a given tenant. SUPER_ADMIN can administer any
+ * tenant (superset of ADMIN — D-07); an ADMIN only its own tenant (D-06/D-07).
+ */
+export function canAdminTenant(user: MmDbUser, tenantId: string): boolean {
+  if (user.role === 'SUPER_ADMIN') return true;
+  return user.role === 'ADMIN' && user.tenantId === tenantId;
+}
+
 /** Resolve an active tenant by slug (used by guards and tenant resolution). */
 export async function getActiveTenantBySlug(slug: string) {
   const rows = await db
