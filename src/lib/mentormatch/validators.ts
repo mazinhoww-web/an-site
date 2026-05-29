@@ -33,3 +33,34 @@ export type MmCompleteProfileInput = z.infer<typeof mmCompleteProfileSchema>;
 // Form half of the wizard (role comes from the route, not the form).
 export const mmOnboardingFormSchema = mmCompleteProfileSchema.omit({ role: true, skills: true });
 export type MmOnboardingFormInput = z.infer<typeof mmOnboardingFormSchema>;
+
+// --- Matching / waitlist / notifications (Fase 6) -------------------------
+
+export const mmConnectionRequestSchema = z.object({
+  mentorId: z.string().uuid(),
+  message: z.string().min(10, 'Mensagem muito curta').max(500, 'Mensagem muito longa').optional(),
+});
+export type MmConnectionRequestInput = z.infer<typeof mmConnectionRequestSchema>;
+
+export const mmConnectionRespondSchema = z.object({
+  connectionId: z.string().uuid(),
+  status: z.enum(['ACCEPTED', 'REJECTED', 'COMPLETED', 'CANCELLED']),
+});
+export type MmConnectionRespondInput = z.infer<typeof mmConnectionRespondSchema>;
+
+export const mmWaitlistReorderSchema = z.object({
+  entries: z
+    .array(z.object({ id: z.string().uuid(), position: z.number().int().min(1) }))
+    .min(1),
+});
+export type MmWaitlistReorderInput = z.infer<typeof mmWaitlistReorderSchema>;
+
+export const mmWaitlistDeleteSchema = z.object({ id: z.string().uuid() });
+export type MmWaitlistDeleteInput = z.infer<typeof mmWaitlistDeleteSchema>;
+
+export const mmNotificationPatchSchema = z
+  .object({ id: z.string().uuid().optional(), all: z.boolean().optional() })
+  .refine((v) => v.all === true || typeof v.id === 'string', {
+    message: 'Informe id ou all:true',
+  });
+export type MmNotificationPatchInput = z.infer<typeof mmNotificationPatchSchema>;
