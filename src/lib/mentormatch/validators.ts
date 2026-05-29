@@ -136,3 +136,26 @@ export const mmTenantUpdateSchema = z.object({
   active: z.boolean().optional(),
 });
 export type MmTenantUpdateInput = z.infer<typeof mmTenantUpdateSchema>;
+
+// --- Auth complementares + perfil (Fase 12) ------------------------------
+
+export const mmForgotPasswordSchema = z.object({ email: z.string().email() });
+export type MmForgotPasswordInput = z.infer<typeof mmForgotPasswordSchema>;
+
+export const mmResetPasswordSchema = z.object({
+  token: z.string().min(1),
+  password: z.string().min(8, 'Minimo de 8 caracteres'),
+});
+export type MmResetPasswordInput = z.infer<typeof mmResetPasswordSchema>;
+
+export const mmProfilePatchSchema = z.object({
+  name: z.string().min(2).max(120).optional(),
+  headline: z.string().max(160).optional(),
+  bio: z.string().max(2000).optional(),
+  education: z.string().max(500).optional(),
+  experience: z.string().max(2000).optional(),
+  linkedin: z.string().url('URL invalida').or(z.literal('')).optional(),
+  whatsapp: z.string().max(40).optional(),
+  image: z.string().url().optional().or(z.literal('')),
+});
+export type MmProfilePatchInput = z.infer<typeof mmProfilePatchSchema>;
