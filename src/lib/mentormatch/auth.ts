@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import { and, eq } from 'drizzle-orm';
+import { and, eq, isNull } from 'drizzle-orm';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
 import { db } from '@/db';
@@ -33,13 +33,27 @@ async function findMmUserForLogin(email: string, tenantSlug?: string) {
       .from(mmTenant)
       .where(and(eq(mmTenant.slug, tenantSlug), eq(mmTenant.active, true)))
       .limit(1);
-    if (!tenant[0]) return null;
-    const rows = await db
-      .select()
-      .from(mmUser)
-      .where(and(eq(mmUser.email, email), eq(mmUser.tenantId, tenant[0].id)))
-      .limit(1);
-    return rows[0] ?? null;
+    // Unknown/inactive tenant in the cookie must not block login: fall back to
+    // resolving by email alone instead of failing the sign-in.
+    if (tenant[0]) {
+      // Prefer the account already assigned to this tenant.
+      const inTenant = await db
+        .select()
+        .from(mmUser)
+        .where(and(eq(mmUser.email, email), eq(mmUser.tenantId, tenant[0].id)))
+        .limit(1);
+      if (inTenant[0]) return inTenant[0];
+      // Fall back to a not-yet-assigned account (public registration mid-
+      // onboarding). complete-profile claims it for this same tenant via the
+      // mm-tenant cookie, so a tenantId IS NULL account belongs to this flow.
+      const unassigned = await db
+        .select()
+        .from(mmUser)
+        .where(and(eq(mmUser.email, email), isNull(mmUser.tenantId)))
+        .limit(1);
+      if (unassigned[0]) return unassigned[0];
+      return null;
+    }
   }
   // No tenant context (e.g. super admin): resolve by email alone.
   const rows = await db.select().from(mmUser).where(eq(mmUser.email, email)).limit(1);
