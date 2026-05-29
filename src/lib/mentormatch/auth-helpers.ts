@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 import { db } from '@/db';
 import { mmTenant, mmUser } from '@/lib/mentormatch/db/schema';
 import { mmAuth } from '@/lib/mentormatch/auth';
@@ -29,9 +29,7 @@ export async function getActiveTenantBySlug(slug: string) {
   const rows = await db
     .select()
     .from(mmTenant)
-    .where(eq(mmTenant.slug, slug))
+    .where(and(eq(mmTenant.slug, slug), eq(mmTenant.active, true)))
     .limit(1);
-  const tenant = rows[0];
-  if (!tenant || !tenant.active) return null;
-  return tenant;
+  return rows[0] ?? null;
 }
