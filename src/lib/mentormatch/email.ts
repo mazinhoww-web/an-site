@@ -41,6 +41,28 @@ export async function sendAccountApprovedEmail(to: string, name: string | null, 
   }
 }
 
+export async function sendPasswordResetEmail(to: string, token: string) {
+  const resend = getResend();
+  if (!resend) return;
+  try {
+    const url = `${appUrl}/mentormatch/reset-password?token=${encodeURIComponent(token)}`;
+    await resend.emails.send({
+      from,
+      replyTo,
+      to,
+      subject: 'Redefinir senha — MentorMatch',
+      html: shell(
+        'Redefinir senha',
+        `<p>Recebemos um pedido para redefinir sua senha.</p>
+         <p><a href="${url}">Definir nova senha</a></p>
+         <p style="color:#8a8a8a;font-size:12px">O link expira em 60 minutos. Se nao foi voce, ignore este e-mail.</p>`,
+      ),
+    });
+  } catch (error) {
+    console.error('[MM_EMAIL_ERROR]', { kind: 'password_reset', to, error });
+  }
+}
+
 export async function sendInvitationEmail(
   to: string,
   token: string,
