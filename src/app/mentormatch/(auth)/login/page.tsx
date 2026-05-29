@@ -62,6 +62,11 @@ export default function MmLoginPage() {
           Criar conta
         </Link>
       </p>
+      <p className="mt-2 text-body-s text-graphite">
+        <Link href="/mentormatch/forgot-password" className="text-ink underline">
+          Esqueci a senha
+        </Link>
+      </p>
     </main>
   );
 }
