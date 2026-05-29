@@ -19,3 +19,16 @@ export async function resolveOnboardingTenant() {
   if (slug !== MM_DEFAULT_TENANT_SLUG) return getActiveTenantBySlug(MM_DEFAULT_TENANT_SLUG);
   return null;
 }
+
+/**
+ * Theme key for the current request, from the `mm-tenant` cookie's tenant.
+ * Falls back to 'dark' when there is no cookie/tenant. Used by the module root
+ * layout to apply the `theme-{key}` class.
+ */
+export async function resolveThemeKey(): Promise<string> {
+  const jar = await cookies();
+  const slug = jar.get(MM_TENANT_COOKIE)?.value;
+  if (!slug) return 'dark';
+  const tenant = await getActiveTenantBySlug(slug);
+  return tenant?.themeKey ?? 'dark';
+}

@@ -15,6 +15,15 @@ const config: Config = {
         'lime-deep': 'rgb(var(--color-lime-deep) / <alpha-value>)',
         success: 'rgb(var(--color-success) / <alpha-value>)',
         error: 'rgb(var(--color-error) / <alpha-value>)',
+        // MentorMatch white-label tokens (defined in src/styles/mentormatch/*.css).
+        mm: {
+          primary: 'var(--mm-primary)',
+          secondary: 'var(--mm-secondary)',
+          background: 'var(--mm-background)',
+          surface: 'var(--mm-surface)',
+          text: 'var(--mm-text)',
+          border: 'var(--mm-border)',
+        },
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
