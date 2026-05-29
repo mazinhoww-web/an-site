@@ -1,5 +1,16 @@
-// Placeholder — real tenant admin (users) arrives in Fase 8. Exists so the
-// post-login destination resolves and the admin guard chain is build-verified.
-export default function TenantAdminUsersPage() {
-  return <div>Admin do tenant — usuarios (placeholder — Fase 8)</div>;
+import { notFound } from 'next/navigation';
+import { getActiveTenantBySlug } from '@/lib/mentormatch/auth-helpers';
+import { UsersTable } from '@/components/mentormatch/admin/UsersTable';
+
+export const dynamic = 'force-dynamic';
+
+export default async function AdminUsersPage({ params }: { params: { slug: string } }) {
+  const tenant = await getActiveTenantBySlug(params.slug);
+  if (!tenant) notFound();
+  return (
+    <main className="space-y-6">
+      <h1 className="font-heading text-display-m">Usuarios</h1>
+      <UsersTable tenantId={tenant.id} />
+    </main>
+  );
 }
