@@ -352,7 +352,7 @@ mmUserStatusPatchSchema, mmSettingsPatchSchema, mmInvitationCreateSchema` (+ tip
 | `BLOB_READ_WRITE_TOKEN` | Sim p/ upload | `@vercel/blob put` | token Vercel |
 | `POSTGRES_URL`/`DATABASE_URL` | Sim | `src/lib/db-url.ts` | postgres URL |
 | `NODE_ENV` | auto | `auth.ts` (secure cookies) | production |
-| `MENTORMATCH_URL` | (proxy, até Fase 14) | `next.config.js` | `https://mentormatch-five.vercel.app` |
+| `MENTORMATCH_URL` | removido na Fase 14 (proxy eliminado) | — | — |
 
 ---
 
