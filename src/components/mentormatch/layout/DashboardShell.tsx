@@ -12,7 +12,15 @@ export function DashboardShell({ slug, children }: { slug: string; children: Rea
           <Link href={`/mentormatch/t/${slug}`} className="font-heading text-h3">
             MentorMatch
           </Link>
-          <NotificationsBell />
+          <div className="flex items-center gap-4">
+            <Link
+              href={`/mentormatch/t/${slug}/library`}
+              className="text-body-s text-ink hover:underline"
+            >
+              Biblioteca
+            </Link>
+            <NotificationsBell />
+          </div>
         </div>
       </header>
       <div className="mx-auto max-w-container px-6 py-10">{children}</div>

@@ -22,8 +22,26 @@ export function OnboardingWizard({
   const router = useRouter();
   const { update } = useSession();
   const [selected, setSelected] = useState<string[]>([]);
+  const [image, setImage] = useState<string | undefined>(undefined);
+  const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
+
+  async function uploadAvatar(file: File) {
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const res = await fetch('/api/mentormatch/upload', { method: 'POST', body: fd });
+      if (res.ok) {
+        const { url } = (await res.json()) as { url: string };
+        setImage(url);
+      }
+      // best-effort: avatar is optional, a failed upload does not block onboarding
+    } finally {
+      setUploading(false);
+    }
+  }
 
   const {
     register,
@@ -49,7 +67,7 @@ export function OnboardingWizard({
       const res = await fetch('/api/mentormatch/auth/complete-profile', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ ...values, role, skills: selected }),
+        body: JSON.stringify({ ...values, role, skills: selected, image }),
       });
       if (!res.ok) {
         const data = (await res.json().catch(() => null)) as { error?: string } | null;
@@ -92,6 +110,21 @@ export function OnboardingWizard({
         </Field>
         <Field label="WhatsApp" error={errors.whatsapp?.message}>
           <input className={inputCls} placeholder="+55 11 90000-0000" {...register('whatsapp')} />
+        </Field>
+        <Field label="Foto (opcional)">
+          <div className="flex items-center gap-3">
+            <input
+              type="file"
+              accept="image/*"
+              className="text-body-s"
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (f) void uploadAvatar(f);
+              }}
+            />
+            {uploading && <span className="text-body-s text-graphite">enviando...</span>}
+            {image && !uploading && <span className="text-body-s text-success">enviada</span>}
+          </div>
         </Field>
 
         <fieldset className="space-y-3">
