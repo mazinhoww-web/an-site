@@ -1,0 +1,136 @@
+# Prompt refinado — Engenharia reversa do MentorMatch
+
+Cole o bloco abaixo numa sessao do Claude Code conectada ao **repositorio-fonte do MentorMatch**.
+Refina o prompt original do Aurimar: adiciona a separacao defeito-vs-intencao, seed, maquinas de
+estado, tabela de roteamento, mapeamento para a stack alvo e criterios de aceite; e permite
+escrever os arquivos de documentacao (mantendo o codigo intocado).
+
+---
+
+```
+MODO ENGENHARIA REVERSA TOTAL — COM BASE DE RECONSTRUÇÃO CORRIGIDA
+
+Você está conectado diretamente ao repositório-fonte deste projeto.
+
+Sua missão: realizar engenharia reversa completa e produzir uma documentação definitiva
+capaz de reconstruir o sistema integralmente em qualquer stack/infra, separando o
+comportamento INTENCIONAL do comportamento ATUAL (defeitos), para que a reconstrução
+corrija os bugs em vez de reproduzi-los.
+
+REGRAS
+- NÃO modifique, refatore ou corrija nenhum arquivo de código-fonte.
+- NÃO faça commits nem deploy.
+- VOCÊ PODE (e deve) escrever SOMENTE os arquivos de DOCUMENTAÇÃO de saída listados na Fase 0.
+- Baseie 100% das conclusões em evidências do código. Marque toda suposição com "(HIPÓTESE)".
+- Não simplifique excessivamente. Não omita detalhes que afetem a reconstrução.
+
+FASE 0 — ENTREGÁVEIS (escreva estes arquivos)
+- BLUEPRINT.md (documento mestre, fases 2 a 17)
+- BLUEPRINT-DEFEITOS.md (fase 1 — atual vs intencional)
+- BLUEPRINT-STACK-ALVO.md (fase 16 — mapeamento para a stack de destino)
+- BLUEPRINT-ACEITE.md (fase 15 — critérios E2E)
+- PROMPT-RECONSTRUCAO.md (fase 17 — prompt mestre)
+
+FASE 1 — DEFEITO vs INTENÇÃO (FAÇA PRIMEIRO, É O MAIS IMPORTANTE)
+Para cada divergência entre o que o código faz e o que claramente deveria fazer:
+- O que o código faz hoje (com arquivo:linha)
+- Qual o comportamento correto/intencional
+- A regra de negócio correta
+- Severidade (bloqueia jornada / quebra função / fragilidade)
+Inclua: loops de redirect, estados que nunca são atingidos, rotas/endpoints referenciados
+que não existem, fluxos duplicados/divergentes, código morto, guardas que confiam em fonte
+defasada (ex.: token vs banco), validações ausentes. A reconstrução seguirá o INTENCIONAL.
+
+FASE 2 — DESCOBERTA
+Estrutura de diretórios; package.json e lock; framework e libs; monorepo?; estrutura de
+frontend/backend/shared/APIs/componentes/serviços/hooks/stores/contextos/middlewares/utils/
+banco/auth/observabilidade/deploy. Mapeie relacionamentos entre camadas.
+
+FASE 3 — VISÃO EXECUTIVA
+O que o sistema faz; problema que resolve; usuários e papéis; fluxo principal; proposta de
+valor; módulos centrais. Explique para um arquiteto que nunca viu o projeto.
+
+FASE 4 — ARQUITETURA
+Frontend: framework, roteamento, grupos de rota, layouts, componentes, estado, hooks,
+providers, renderização, cache, theming. Backend: API routes, server actions/controllers,
+casos de uso, repositórios, middlewares, filas/jobs/workers (se houver). Responsabilidade e
+dependência de cada camada.
+
+FASE 5 — DOMÍNIO
+Todas as entidades. Para cada: nome, finalidade, campos+tipos, relacionamentos, dependências,
+estados possíveis, ciclo de vida.
+
+FASE 6 — BANCO DE DADOS
+SGBD, ORM, schema completo (tabelas, colunas, tipos, PKs, FKs, índices, constraints,
+unicidade), relacionamentos, triggers/views/procedures/functions (se houver), policies/RLS,
+ESTRATÉGIA DE MULTI-TENANCY (coluna discriminadora? RLS? como o isolamento é garantido?).
+Para cada tabela: finalidade, dependências, regras associadas. Gere o ER completo.
+
+FASE 7 — SEED / FIXTURES OBRIGATÓRIOS
+Liste todos os dados-semente sem os quais o sistema não funciona (tenants base, usuário
+admin/super-admin, catálogos, planos). Marque o que está AUSENTE no seed atual mas é
+necessário. A reconstrução deve incluir o seed.
+
+FASE 8 — MÁQUINAS DE ESTADO
+Para cada entidade com estado (ex.: status de conexão, status de usuário, convite,
+onboarding): transições válidas, gatilhos, efeitos colaterais. Use tabelas de transição.
+
+FASE 9 — AUTENTICAÇÃO E AUTORIZAÇÃO
+Login, logout, registro, sessão, tokens, refresh, reset de senha, MFA/OAuth/SSO (presentes?),
+cookies (nomes/flags), claims, roles, policies. Onde a autorização é aplicada (middleware?
+layout? rota?) e QUAL É A FONTE DE VERDADE de papel/tenant (token vs banco) — sinalize riscos
+de defasagem.
+
+FASE 10 — TABELA DE DECISÃO DE ROTEAMENTO PÓS-LOGIN
+Monte uma tabela única (papel × onboarding × tenant → destino) consolidando todos os helpers
+de redirecionamento e o middleware. Aponte divergências entre helpers que possam causar loop.
+
+FASE 11 — FLUXOS FUNCIONAIS
+Principal, secundários, alternativos, de erro, administrativos, internos. Para cada:
+entrada, processamento, validações, saída, erros possíveis.
+
+FASE 12 — APIS E CONTRATOS
+REST/GraphQL/RPC/webhooks/server actions/endpoints internos. Para cada: URL, método, entrada,
+saída, payload, headers, auth, validações, tratamento de erro. Marque endpoints referenciados
+no frontend que NÃO existem no backend.
+
+FASE 13 — INTEGRAÇÕES EXTERNAS
+Para cada serviço (banco, storage, e-mail, pagamentos, auth, IA, cloud): objetivo,
+dependência (crítica/alta/média), fluxo, dados trafegados, falhas possíveis, e se está ATIVO
+ou apenas presente (atrás de flag).
+
+FASE 14 — INFRA, DEPLOY E HOSPEDAGEM
+Ambientes (dev/homolog/prod); containers/CI/CD/pipelines/secrets; build/deploy/cache/storage/
+CDN/DNS. Config de plataforma (vercel.json/settings, edge/serverless, middleware, regions,
+redirects, rewrites, headers, cron). Se houver basePath/proxy/subpath, documente o CONTRATO
+de hospedagem e como reproduzi-lo. Variáveis de ambiente: nome, função, obrigatória?, impacto,
+dependências (sem valores sensíveis). Feature flags e o que cada uma altera. Observabilidade
+(logs/tracing/métricas/alertas/erro) — descreva o que existe e o que falta.
+
+FASE 15 — CRITÉRIOS DE ACEITAÇÃO E2E
+Liste cenários verificáveis por fluxo (registro→onboarding→dashboard, login, admin, super
+admin, isolamento entre tenants e papéis, reset de senha, branding por tenant). Reaproveite
+qualquer roteiro de QA existente no repo. Cada cenário: passos + resultado esperado.
+
+FASE 16 — MAPEAMENTO PARA A STACK ALVO
+Se a reconstrução for em outra stack, gere uma tabela origem→alvo para: framework, ORM,
+modelo de tabelas (cada modelo/tabela), auth, hashing, estilo/tema, basePath/roteamento,
+storage, e-mail, hospedagem. Aponte conflitos (ex.: tabelas/rotas que colidem com um sistema
+existente no destino) e como isolar.
+
+FASE 17 — BLUEPRINT UNIVERSAL (tech-agnostic)
+Arquitetura, domínio, banco, APIs, fluxos, infra e deploy reproduzíveis em conceitos
+universais, sem amarrar a tecnologia.
+
+FASE 18 — PROMPT MESTRE DE RECONSTRUÇÃO
+Gere um PROMPT único e autossuficiente para outra IA reconstruir o sistema do zero,
+contendo: papéis, entidades+campos, banco+isolamento multi-tenant, seed obrigatório, auth
+(com a regra "decisões de acesso leem o banco, não o token"), tabela de roteamento pós-login,
+fluxos, regras, APIs, integrações, infra/deploy e critérios de aceite. Inclua explicitamente
+uma seção "NÃO reproduza" com os defeitos e o código morto identificados na Fase 1 e 18.
+
+CRITÉRIO FINAL
+A documentação deve responder: "Se este repositório fosse apagado agora, como reconstruí-lo
+integralmente — com o MESMO comportamento intencional, banco, integrações, deploy e regras —
+sem reproduzir os defeitos conhecidos?"
+```

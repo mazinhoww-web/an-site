@@ -1,0 +1,50 @@
+/* MentorMatch theme bundle. Importado no topo do globals.css.
+   Define os temas + animacoes globais compartilhadas pelo subsistema. */
+@import './base.css';
+@import './sicredi.css';
+
+/* Animacoes globais compartilhadas entre todos os temas MentorMatch */
+@keyframes mm-fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes mm-auroraA {
+  0%, 100% { transform: translate(0, 0) scale(1);     opacity: 0.45; }
+  50%      { transform: translate(20px, -15px) scale(1.06); opacity: 0.7; }
+}
+@keyframes mm-auroraB {
+  0%, 100% { transform: translate(0, 0) scale(1);     opacity: 0.35; }
+  50%      { transform: translate(-15px, 20px) scale(1.05); opacity: 0.6; }
+}
+@keyframes mm-auroraC {
+  0%, 100% { transform: translate(0, 0) scale(1);     opacity: 0.3; }
+  50%      { transform: translate(10px, 10px) scale(1.08); opacity: 0.55; }
+}
+@keyframes mm-skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+@keyframes mm-toast-in {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes mm-modal-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes mm-toast-drain {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-dark *,
+  .theme-dark *::before,
+  .theme-dark *::after,
+  .theme-sicredi *,
+  .theme-sicredi *::before,
+  .theme-sicredi *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
