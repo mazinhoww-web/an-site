@@ -41,11 +41,11 @@ export default function ResetPasswordPage() {
 
   return (
     <main className="mx-auto max-w-md px-6 py-20">
-      <h1 className="mb-6 font-heading text-display-m">Redefinir senha</h1>
+      <h1 className="mb-6 font-mmdisplay text-display-m">Redefinir senha</h1>
       {state === 'done' ? (
-        <p className="text-body text-success">
+        <p className="text-body text-mm-success">
           Senha redefinida.{' '}
-          <Link href="/mentormatch/login" className="text-ink underline">
+          <Link href="/mentormatch/login" className="text-mm-text underline">
             Entrar
           </Link>
         </p>
@@ -61,7 +61,7 @@ export default function ResetPasswordPage() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
-          {error && <p className="text-body-s text-error">{error}</p>}
+          {error && <p className="text-body-s text-mm-danger">{error}</p>}
           <button type="button" disabled={state === 'submitting'} onClick={() => void submit()} className={btnCls}>
             {state === 'submitting' ? 'Salvando...' : 'Redefinir'}
           </button>
@@ -71,7 +71,7 @@ export default function ResetPasswordPage() {
   );
 }
 
-const labelCls = 'font-mono text-mono-meta uppercase tracking-wide text-graphite';
+const labelCls = 'font-mono text-mono-meta uppercase tracking-wide text-mm-muted';
 const inputCls =
-  'w-full rounded border border-hairline bg-paper px-3 py-2 text-body text-ink outline-none focus:border-ink';
-const btnCls = 'rounded bg-ink px-6 py-3 font-heading text-body text-paper hover:bg-graphite disabled:opacity-60';
+  'w-full rounded border border-mm-border bg-mm-card px-3 py-2 text-body text-mm-text outline-none focus:border-mm-primary';
+const btnCls = 'rounded bg-mm-primary px-6 py-3 font-mmdisplay text-body text-mm-primaryfg hover:bg-mm-primary2 disabled:opacity-60';

@@ -72,19 +72,19 @@ export function SkillsManager({ tenantId }: { tenantId: string }) {
           Adicionar
         </button>
       </div>
-      {error && <p className="text-body-s text-error">{error}</p>}
+      {error && <p className="text-body-s text-mm-danger">{error}</p>}
       {loading ? (
-        <p className="text-body-s text-graphite">Carregando...</p>
+        <p className="text-body-s text-mm-muted">Carregando...</p>
       ) : (
         <ul className="space-y-2">
           {skills.map((s) => (
             <li
               key={s.id}
-              className={`flex items-center justify-between rounded border border-hairline bg-paper px-4 py-2 ${s.isActive ? '' : 'opacity-60'}`}
+              className={`flex items-center justify-between rounded border border-mm-border bg-mm-card px-4 py-2 ${s.isActive ? '' : 'opacity-60'}`}
             >
               <span className="text-body-s">
-                {s.name} <span className="text-graphite">{s.category ?? ''}</span>{' '}
-                <span className="font-mono text-mono-meta text-graphite">uso {s.usageCount}</span>
+                {s.name} <span className="text-mm-muted">{s.category ?? ''}</span>{' '}
+                <span className="font-mono text-mono-meta text-mm-muted">uso {s.usageCount}</span>
               </span>
               <span className="flex gap-2">
                 <button type="button" onClick={() => void toggle(s)} className={btn}>
@@ -102,6 +102,6 @@ export function SkillsManager({ tenantId }: { tenantId: string }) {
   );
 }
 
-const input = 'rounded border border-hairline bg-paper px-3 py-2 text-body text-ink outline-none focus:border-ink';
-const btn = 'rounded border border-hairline px-3 py-1.5 text-body-s text-ink hover:border-ink';
-const btnPrimary = 'rounded bg-ink px-4 py-2 text-body-s text-paper hover:bg-graphite';
+const input = 'rounded border border-mm-border bg-mm-card px-3 py-2 text-body text-mm-text outline-none focus:border-mm-primary';
+const btn = 'rounded border border-mm-border px-3 py-1.5 text-body-s text-mm-text hover:border-mm-primary';
+const btnPrimary = 'rounded bg-mm-primary px-4 py-2 text-body-s text-mm-primaryfg hover:bg-mm-primary2';

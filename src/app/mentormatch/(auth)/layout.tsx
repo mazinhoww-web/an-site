@@ -6,7 +6,7 @@ import { MmSessionProvider } from '@/components/mentormatch/providers/MmSessionP
 export default function MmAuthLayout({ children }: { children: ReactNode }) {
   return (
     <MmSessionProvider>
-      <div className="min-h-screen bg-bone text-ink">{children}</div>
+      <div className="min-h-screen bg-mm-bg text-mm-text">{children}</div>
     </MmSessionProvider>
   );
 }

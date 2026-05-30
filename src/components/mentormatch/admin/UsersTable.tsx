@@ -69,26 +69,26 @@ export function UsersTable({ tenantId }: { tenantId: string }) {
         </select>
       </div>
 
-      {loading && <p className="text-body-s text-graphite">Carregando...</p>}
-      {error && <p className="text-body-s text-error">{error}</p>}
-      {!loading && rows.length === 0 && <p className="text-body-s text-graphite">Nenhum usuario.</p>}
+      {loading && <p className="text-body-s text-mm-muted">Carregando...</p>}
+      {error && <p className="text-body-s text-mm-danger">{error}</p>}
+      {!loading && rows.length === 0 && <p className="text-body-s text-mm-muted">Nenhum usuario.</p>}
 
       <ul className="space-y-2">
         {rows.map((u) => (
           <li
             key={u.id}
-            className="flex flex-wrap items-center justify-between gap-2 rounded border border-hairline bg-paper px-4 py-3"
+            className="flex flex-wrap items-center justify-between gap-2 rounded border border-mm-border bg-mm-card px-4 py-3"
           >
             <span className="text-body-s">
-              {u.name ?? '—'} <span className="text-graphite">{u.email}</span>{' '}
-              <span className="font-mono text-mono-meta text-graphite">{u.role ?? 'sem papel'}</span>
+              {u.name ?? '—'} <span className="text-mm-muted">{u.email}</span>{' '}
+              <span className="font-mono text-mono-meta text-mm-muted">{u.role ?? 'sem papel'}</span>
             </span>
             <span className="flex items-center gap-2">
-              <span className="font-mono text-mono-meta uppercase text-graphite">{u.status}</span>
+              <span className="font-mono text-mono-meta uppercase text-mm-muted">{u.status}</span>
               <select
                 value={u.status}
                 onChange={(e) => void setUserStatus(u.id, e.target.value)}
-                className="rounded border border-hairline px-2 py-1 text-body-s"
+                className="rounded border border-mm-border px-2 py-1 text-body-s"
               >
                 {STATUSES.map((s) => (
                   <option key={s} value={s}>
@@ -105,4 +105,4 @@ export function UsersTable({ tenantId }: { tenantId: string }) {
 }
 
 const input =
-  'rounded border border-hairline bg-paper px-3 py-2 text-body text-ink outline-none focus:border-ink';
+  'rounded border border-mm-border bg-mm-card px-3 py-2 text-body text-mm-text outline-none focus:border-mm-primary';

@@ -89,11 +89,11 @@ export function SettingsForm({ initial }: { initial: Settings }) {
       <Field label="Logo">
         <div className="flex items-center gap-3">
           <input ref={fileRef} type="file" accept="image/*" className="text-body-s" onChange={() => void uploadLogo()} />
-          {form.logoUrl && <span className="text-body-s text-graphite">enviado</span>}
+          {form.logoUrl && <span className="text-body-s text-mm-muted">enviado</span>}
         </div>
       </Field>
-      {error && <p className="text-body-s text-error">{error}</p>}
-      {state === 'saved' && <p className="text-body-s text-success">Salvo.</p>}
+      {error && <p className="text-body-s text-mm-danger">{error}</p>}
+      {state === 'saved' && <p className="text-body-s text-mm-success">Salvo.</p>}
       <button type="button" disabled={state === 'saving'} onClick={() => void save()} className={btnPrimary}>
         {state === 'saving' ? 'Salvando...' : 'Salvar'}
       </button>
@@ -104,11 +104,11 @@ export function SettingsForm({ initial }: { initial: Settings }) {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block space-y-1.5">
-      <span className="font-mono text-mono-meta uppercase tracking-wide text-graphite">{label}</span>
+      <span className="font-mono text-mono-meta uppercase tracking-wide text-mm-muted">{label}</span>
       {children}
     </label>
   );
 }
 
-const input = 'w-full rounded border border-hairline bg-paper px-3 py-2 text-body text-ink outline-none focus:border-ink';
-const btnPrimary = 'rounded bg-ink px-6 py-2 text-body text-paper hover:bg-graphite disabled:opacity-60';
+const input = 'w-full rounded border border-mm-border bg-mm-card px-3 py-2 text-body text-mm-text outline-none focus:border-mm-primary';
+const btnPrimary = 'rounded bg-mm-primary px-6 py-2 text-body text-mm-primaryfg hover:bg-mm-primary2 disabled:opacity-60';

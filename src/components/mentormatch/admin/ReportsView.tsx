@@ -26,8 +26,8 @@ export function ReportsView({ tenantId }: { tenantId: string }) {
       .catch(() => setState('error'));
   }, [tenantId]);
 
-  if (state === 'loading') return <p className="text-body-s text-graphite">Carregando...</p>;
-  if (state === 'error' || !data) return <p className="text-body-s text-error">Falha ao carregar relatorios.</p>;
+  if (state === 'loading') return <p className="text-body-s text-mm-muted">Carregando...</p>;
+  if (state === 'error' || !data) return <p className="text-body-s text-mm-danger">Falha ao carregar relatorios.</p>;
 
   return (
     <div className="space-y-8">
@@ -39,41 +39,41 @@ export function ReportsView({ tenantId }: { tenantId: string }) {
       </div>
 
       <section className="space-y-2">
-        <h2 className="font-heading text-h3">Conexoes por mes</h2>
+        <h2 className="font-mmdisplay text-h3">Conexoes por mes</h2>
         <ul className="flex flex-wrap gap-3">
           {data.connectionsByMonth.map((m) => (
-            <li key={m.month} className="rounded border border-hairline bg-paper px-3 py-2 text-body-s">
-              <span className="font-mono text-mono-meta text-graphite">{m.month}</span> · {m.count}
+            <li key={m.month} className="rounded border border-mm-border bg-mm-card px-3 py-2 text-body-s">
+              <span className="font-mono text-mono-meta text-mm-muted">{m.month}</span> · {m.count}
             </li>
           ))}
         </ul>
       </section>
 
       <section className="space-y-2">
-        <h2 className="font-heading text-h3">Top habilidades</h2>
+        <h2 className="font-mmdisplay text-h3">Top habilidades</h2>
         {data.topSkills.length === 0 ? (
-          <p className="text-body-s text-graphite">Sem dados.</p>
+          <p className="text-body-s text-mm-muted">Sem dados.</p>
         ) : (
           <ul className="space-y-1">
             {data.topSkills.map((s) => (
               <li key={s.name} className="text-body-s">
-                {s.name} <span className="text-graphite">· {s.count}</span>
+                {s.name} <span className="text-mm-muted">· {s.count}</span>
               </li>
             ))}
           </ul>
         )}
       </section>
 
-      <p className="text-body-s text-graphite">Taxa de aceite: {data.acceptanceRate}%</p>
+      <p className="text-body-s text-mm-muted">Taxa de aceite: {data.acceptanceRate}%</p>
     </div>
   );
 }
 
 function Stat({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded border border-hairline bg-paper p-5">
-      <p className="font-heading text-display-m">{value}</p>
-      <p className="font-mono text-mono-meta uppercase tracking-wide text-graphite">{label}</p>
+    <div className="rounded border border-mm-border bg-mm-card p-5">
+      <p className="font-mmdisplay text-display-m">{value}</p>
+      <p className="font-mono text-mono-meta uppercase tracking-wide text-mm-muted">{label}</p>
     </div>
   );
 }

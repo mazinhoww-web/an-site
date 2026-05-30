@@ -6,16 +6,16 @@ import { NotificationsBell } from '@/components/mentormatch/layout/Notifications
 // quick nav and the notifications bell. Guards live in the layout that renders this.
 export function DashboardShell({ slug, children }: { slug: string; children: ReactNode }) {
   return (
-    <div className="min-h-screen bg-bone text-ink">
-      <header className="border-b border-hairline bg-paper">
+    <div className="min-h-screen bg-mm-bg text-mm-text">
+      <header className="border-b border-mm-border bg-mm-card">
         <div className="mx-auto flex max-w-container items-center justify-between px-6 py-4">
-          <Link href={`/mentormatch/t/${slug}`} className="font-heading text-h3">
+          <Link href={`/mentormatch/t/${slug}`} className="font-mmdisplay text-h3">
             MentorMatch
           </Link>
           <div className="flex items-center gap-4">
             <Link
               href={`/mentormatch/t/${slug}/library`}
-              className="text-body-s text-ink hover:underline"
+              className="text-body-s text-mm-text hover:underline"
             >
               Biblioteca
             </Link>

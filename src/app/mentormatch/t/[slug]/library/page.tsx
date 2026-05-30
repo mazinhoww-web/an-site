@@ -20,18 +20,18 @@ export default async function TenantLibraryPage({ params }: { params: { slug: st
 
   return (
     <main className="space-y-6">
-      <h1 className="font-heading text-display-m">Biblioteca</h1>
+      <h1 className="font-mmdisplay text-display-m">Biblioteca</h1>
       {items.length === 0 ? (
-        <p className="text-body-s text-graphite">Nenhum material disponivel ainda.</p>
+        <p className="text-body-s text-mm-muted">Nenhum material disponivel ainda.</p>
       ) : (
         <ul className="space-y-2">
           {items.map((it) => (
-            <li key={it.id} className="rounded border border-hairline bg-paper px-4 py-3">
-              <a href={it.fileUrl} target="_blank" rel="noreferrer" className="text-body text-ink underline">
+            <li key={it.id} className="rounded border border-mm-border bg-mm-card px-4 py-3">
+              <a href={it.fileUrl} target="_blank" rel="noreferrer" className="text-body text-mm-text underline">
                 {it.title}
               </a>{' '}
-              <span className="font-mono text-mono-meta text-graphite">{it.fileType}</span>
-              {it.description && <p className="mt-1 text-body-s text-graphite">{it.description}</p>}
+              <span className="font-mono text-mono-meta text-mm-muted">{it.fileType}</span>
+              {it.description && <p className="mt-1 text-body-s text-mm-muted">{it.description}</p>}
             </li>
           ))}
         </ul>

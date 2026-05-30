@@ -38,40 +38,40 @@ export default async function MenteeDashboardPage({ params }: { params: { slug: 
   return (
     <main className="space-y-10">
       <header className="flex items-center justify-between">
-        <h1 className="font-heading text-display-m">Painel do mentorado</h1>
+        <h1 className="font-mmdisplay text-display-m">Painel do mentorado</h1>
         <Link
           href={`/mentormatch/t/${params.slug}/mentors`}
-          className="rounded bg-ink px-4 py-2 text-body-s text-paper hover:bg-graphite"
+          className="rounded bg-mm-primary px-4 py-2 text-body-s text-mm-primaryfg hover:bg-mm-primary2"
         >
           Buscar mentores
         </Link>
       </header>
 
       <section className="space-y-3">
-        <h2 className="font-heading text-h2">Seu mentor</h2>
+        <h2 className="font-mmdisplay text-h2">Seu mentor</h2>
         {currentMentor ? (
-          <div className="flex items-center justify-between rounded border border-hairline bg-paper px-4 py-3">
+          <div className="flex items-center justify-between rounded border border-mm-border bg-mm-card px-4 py-3">
             <span className="text-body">
               {currentMentor.name ?? 'Mentor'}{' '}
-              <span className="text-body-s text-graphite">{currentMentor.headline ?? ''}</span>
+              <span className="text-body-s text-mm-muted">{currentMentor.headline ?? ''}</span>
             </span>
             {currentWa && (
-              <a href={currentWa} target="_blank" rel="noreferrer" className="text-body-s text-ink underline">
+              <a href={currentWa} target="_blank" rel="noreferrer" className="text-body-s text-mm-text underline">
                 WhatsApp
               </a>
             )}
           </div>
         ) : (
-          <p className="text-body-s text-graphite">
+          <p className="text-body-s text-mm-muted">
             Voce ainda nao tem um mentor ativo. Use &quot;Buscar mentores&quot; para solicitar.
           </p>
         )}
       </section>
 
       <section className="space-y-3">
-        <h2 className="font-heading text-h2">Suas solicitacoes</h2>
+        <h2 className="font-mmdisplay text-h2">Suas solicitacoes</h2>
         {connections.length === 0 ? (
-          <p className="text-body-s text-graphite">Nenhuma solicitacao ainda.</p>
+          <p className="text-body-s text-mm-muted">Nenhuma solicitacao ainda.</p>
         ) : (
           <ul className="space-y-2">
             {connections.map((c) => {
@@ -79,10 +79,10 @@ export default async function MenteeDashboardPage({ params }: { params: { slug: 
               return (
                 <li
                   key={c.id}
-                  className="flex items-center justify-between rounded border border-hairline bg-paper px-4 py-3"
+                  className="flex items-center justify-between rounded border border-mm-border bg-mm-card px-4 py-3"
                 >
                   <span className="text-body">{m?.name ?? 'Mentor'}</span>
-                  <span className="font-mono text-mono-meta uppercase tracking-wide text-graphite">
+                  <span className="font-mono text-mono-meta uppercase tracking-wide text-mm-muted">
                     {STATUS_LABEL[c.status] ?? c.status}
                   </span>
                 </li>

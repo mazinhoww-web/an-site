@@ -38,7 +38,7 @@ export function RequestActions({ connectionId }: { connectionId: string }) {
         type="button"
         disabled={pending}
         onClick={() => respond('ACCEPTED')}
-        className="rounded bg-ink px-4 py-1.5 text-body-s text-paper hover:bg-graphite disabled:opacity-60"
+        className="rounded bg-mm-primary px-4 py-1.5 text-body-s text-mm-primaryfg hover:bg-mm-primary2 disabled:opacity-60"
       >
         Aceitar
       </button>
@@ -46,11 +46,11 @@ export function RequestActions({ connectionId }: { connectionId: string }) {
         type="button"
         disabled={pending}
         onClick={() => respond('REJECTED')}
-        className="rounded border border-hairline px-4 py-1.5 text-body-s text-ink hover:border-ink disabled:opacity-60"
+        className="rounded border border-mm-border px-4 py-1.5 text-body-s text-mm-text hover:border-mm-primary disabled:opacity-60"
       >
         Recusar
       </button>
-      {error && <span className="text-body-s text-error">{error}</span>}
+      {error && <span className="text-body-s text-mm-danger">{error}</span>}
     </div>
   );
 }

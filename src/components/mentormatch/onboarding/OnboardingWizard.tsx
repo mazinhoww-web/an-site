@@ -91,8 +91,8 @@ export function OnboardingWizard({
   return (
     <main className="mx-auto max-w-2xl px-6 py-16">
       <header className="mb-8 space-y-2">
-        <h1 className="font-heading text-display-m">Perfil de {label}</h1>
-        <p className="text-body text-graphite">Complete seu perfil para continuar.</p>
+        <h1 className="font-mmdisplay text-display-m">Perfil de {label}</h1>
+        <p className="text-body text-mm-muted">Complete seu perfil para continuar.</p>
       </header>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -122,17 +122,17 @@ export function OnboardingWizard({
                 if (f) void uploadAvatar(f);
               }}
             />
-            {uploading && <span className="text-body-s text-graphite">enviando...</span>}
-            {image && !uploading && <span className="text-body-s text-success">enviada</span>}
+            {uploading && <span className="text-body-s text-mm-muted">enviando...</span>}
+            {image && !uploading && <span className="text-body-s text-mm-success">enviada</span>}
           </div>
         </Field>
 
         <fieldset className="space-y-3">
-          <legend className="font-mono text-mono-meta uppercase tracking-wide text-graphite">
+          <legend className="font-mono text-mono-meta uppercase tracking-wide text-mm-muted">
             Habilidades {role === 'MENTOR' ? '(que voce ensina)' : '(que quer desenvolver)'}
           </legend>
           {skills.length === 0 ? (
-            <p className="text-body-s text-graphite">Nenhuma habilidade disponivel neste tenant.</p>
+            <p className="text-body-s text-mm-muted">Nenhuma habilidade disponivel neste tenant.</p>
           ) : (
             <div className="flex flex-wrap gap-2">
               {skills.map((s) => {
@@ -145,8 +145,8 @@ export function OnboardingWizard({
                     aria-pressed={active}
                     className={
                       active
-                        ? 'rounded border border-ink bg-ink px-3 py-1.5 text-body-s text-paper'
-                        : 'rounded border border-hairline bg-paper px-3 py-1.5 text-body-s text-ink hover:border-ink'
+                        ? 'rounded border border-mm-primary bg-mm-primary px-3 py-1.5 text-body-s text-mm-primaryfg'
+                        : 'rounded border border-mm-border bg-mm-card px-3 py-1.5 text-body-s text-mm-text hover:border-mm-primary'
                     }
                   >
                     {s.name}
@@ -157,12 +157,12 @@ export function OnboardingWizard({
           )}
         </fieldset>
 
-        {error && <p className="text-body-s text-error">{error}</p>}
+        {error && <p className="text-body-s text-mm-danger">{error}</p>}
 
         <button
           type="submit"
           disabled={submitting}
-          className="rounded bg-ink px-6 py-3 font-heading text-body text-paper transition hover:bg-graphite disabled:opacity-60"
+          className="rounded bg-mm-primary px-6 py-3 font-mmdisplay text-body text-mm-primaryfg transition hover:bg-mm-primary2 disabled:opacity-60"
         >
           {submitting ? 'Salvando...' : 'Concluir'}
         </button>
@@ -172,7 +172,7 @@ export function OnboardingWizard({
 }
 
 const inputCls =
-  'w-full rounded border border-hairline bg-paper px-3 py-2 text-body text-ink outline-none focus:border-ink';
+  'w-full rounded border border-mm-border bg-mm-card px-3 py-2 text-body text-mm-text outline-none focus:border-mm-primary';
 
 function Field({
   label,
@@ -185,9 +185,9 @@ function Field({
 }) {
   return (
     <label className="block space-y-1.5">
-      <span className="font-mono text-mono-meta uppercase tracking-wide text-graphite">{label}</span>
+      <span className="font-mono text-mono-meta uppercase tracking-wide text-mm-muted">{label}</span>
       {children}
-      {error && <span className="block text-body-s text-error">{error}</span>}
+      {error && <span className="block text-body-s text-mm-danger">{error}</span>}
     </label>
   );
 }

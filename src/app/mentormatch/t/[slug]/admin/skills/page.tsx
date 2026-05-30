@@ -9,7 +9,7 @@ export default async function AdminSkillsPage({ params }: { params: { slug: stri
   if (!tenant) notFound();
   return (
     <main className="space-y-6">
-      <h1 className="font-heading text-display-m">Habilidades</h1>
+      <h1 className="font-mmdisplay text-display-m">Habilidades</h1>
       <SkillsManager tenantId={tenant.id} />
     </main>
   );

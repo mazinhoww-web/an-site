@@ -83,7 +83,7 @@ export function TenantsAdmin({ initial, plans }: { initial: Overview; plans: Pla
       </section>
 
       <section className="space-y-4">
-        <h2 className="font-heading text-h2">Criar tenant</h2>
+        <h2 className="font-mmdisplay text-h2">Criar tenant</h2>
         <div className="flex flex-wrap items-end gap-3">
           <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nome" className={input} />
           <input value={slug} onChange={(e) => setSlug(e.target.value)} placeholder="slug" className={input} />
@@ -99,24 +99,24 @@ export function TenantsAdmin({ initial, plans }: { initial: Overview; plans: Pla
             {busy ? 'Criando...' : 'Criar'}
           </button>
         </div>
-        {error && <p className="text-body-s text-error">{error}</p>}
+        {error && <p className="text-body-s text-mm-danger">{error}</p>}
       </section>
 
       <section className="space-y-3">
-        <h2 className="font-heading text-h2">Tenants</h2>
+        <h2 className="font-mmdisplay text-h2">Tenants</h2>
         <ul className="space-y-2">
           {data.tenants.map((t) => (
             <li
               key={t.id}
-              className={`flex flex-wrap items-center justify-between gap-2 rounded border border-hairline bg-paper px-4 py-3 ${t.active ? '' : 'opacity-60'}`}
+              className={`flex flex-wrap items-center justify-between gap-2 rounded border border-mm-border bg-mm-card px-4 py-3 ${t.active ? '' : 'opacity-60'}`}
             >
               <span className="text-body-s">
-                <strong>{t.name}</strong> <span className="font-mono text-mono-meta text-graphite">/{t.slug}</span>{' '}
-                <span className="text-graphite">{t.planName ?? 'sem plano'}</span> · {t.users} users · {t.mentors} mentores ·{' '}
+                <strong>{t.name}</strong> <span className="font-mono text-mono-meta text-mm-muted">/{t.slug}</span>{' '}
+                <span className="text-mm-muted">{t.planName ?? 'sem plano'}</span> · {t.users} users · {t.mentors} mentores ·{' '}
                 {t.activeConnections} ativas
               </span>
               <span className="flex items-center gap-2">
-                <span className="font-mono text-mono-meta uppercase text-graphite">{t.active ? 'ativo' : 'inativo'}</span>
+                <span className="font-mono text-mono-meta uppercase text-mm-muted">{t.active ? 'ativo' : 'inativo'}</span>
                 <button type="button" onClick={() => void toggleActive(t)} className={btn}>
                   {t.active ? 'Desativar' : 'Ativar'}
                 </button>
@@ -134,13 +134,13 @@ export function TenantsAdmin({ initial, plans }: { initial: Overview; plans: Pla
 
 function Stat({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded border border-hairline bg-paper p-5">
-      <p className="font-heading text-display-m">{value}</p>
-      <p className="font-mono text-mono-meta uppercase tracking-wide text-graphite">{label}</p>
+    <div className="rounded border border-mm-border bg-mm-card p-5">
+      <p className="font-mmdisplay text-display-m">{value}</p>
+      <p className="font-mono text-mono-meta uppercase tracking-wide text-mm-muted">{label}</p>
     </div>
   );
 }
 
-const input = 'rounded border border-hairline bg-paper px-3 py-2 text-body text-ink outline-none focus:border-ink';
-const btn = 'rounded border border-hairline px-3 py-1.5 text-body-s text-ink hover:border-ink';
-const btnPrimary = 'rounded bg-ink px-4 py-2 text-body-s text-paper hover:bg-graphite disabled:opacity-60';
+const input = 'rounded border border-mm-border bg-mm-card px-3 py-2 text-body text-mm-text outline-none focus:border-mm-primary';
+const btn = 'rounded border border-mm-border px-3 py-1.5 text-body-s text-mm-text hover:border-mm-primary';
+const btnPrimary = 'rounded bg-mm-primary px-4 py-2 text-body-s text-mm-primaryfg hover:bg-mm-primary2 disabled:opacity-60';

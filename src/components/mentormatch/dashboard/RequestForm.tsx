@@ -44,11 +44,11 @@ export function RequestForm({ mentorId }: { mentorId: string }) {
   }
 
   if (state === 'created') {
-    return <p className="text-body text-success">Solicitacao enviada. Aguarde a resposta do mentor.</p>;
+    return <p className="text-body text-mm-success">Solicitacao enviada. Aguarde a resposta do mentor.</p>;
   }
   if (state === 'waitlisted') {
     return (
-      <p className="text-body text-ink">
+      <p className="text-body text-mm-text">
         Mentor lotado. Voce entrou na fila de espera{position ? ` na posicao ${position}` : ''}.
       </p>
     );
@@ -61,20 +61,20 @@ export function RequestForm({ mentorId }: { mentorId: string }) {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Apresente-se e diga o que busca na mentoria (10 a 500 caracteres)."
-        className="w-full rounded border border-hairline bg-paper px-3 py-2 text-body text-ink outline-none focus:border-ink"
+        className="w-full rounded border border-mm-border bg-mm-card px-3 py-2 text-body text-mm-text outline-none focus:border-mm-primary"
       />
       <div className="flex items-center justify-between">
-        <span className="font-mono text-mono-meta text-graphite">{message.length}/500</span>
+        <span className="font-mono text-mono-meta text-mm-muted">{message.length}/500</span>
         <button
           type="button"
           disabled={state === 'submitting'}
           onClick={() => void submit()}
-          className="rounded bg-ink px-6 py-2 text-body text-paper hover:bg-graphite disabled:opacity-60"
+          className="rounded bg-mm-primary px-6 py-2 text-body text-mm-primaryfg hover:bg-mm-primary2 disabled:opacity-60"
         >
           {state === 'submitting' ? 'Enviando...' : 'Enviar solicitacao'}
         </button>
       </div>
-      {error && <p className="text-body-s text-error">{error}</p>}
+      {error && <p className="text-body-s text-mm-danger">{error}</p>}
     </div>
   );
 }

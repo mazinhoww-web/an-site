@@ -14,13 +14,13 @@ export default async function AdminExportPage({ params }: { params: { slug: stri
   if (!tenant) notFound();
   return (
     <main className="space-y-6">
-      <h1 className="font-heading text-display-m">Exportar CSV</h1>
+      <h1 className="font-mmdisplay text-display-m">Exportar CSV</h1>
       <div className="flex flex-wrap gap-3">
         {TYPES.map(([type, label]) => (
           <a
             key={type}
             href={`/api/mentormatch/admin/export?type=${type}&tenantId=${tenant.id}`}
-            className="rounded border border-hairline px-4 py-2 text-body-s text-ink hover:border-ink"
+            className="rounded border border-mm-border px-4 py-2 text-body-s text-mm-text hover:border-mm-primary"
           >
             Exportar {label}
           </a>

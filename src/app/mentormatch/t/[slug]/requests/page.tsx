@@ -27,23 +27,23 @@ export default async function RequestsPage() {
 
   return (
     <main className="space-y-8">
-      <h1 className="font-heading text-display-m">Solicitacoes</h1>
+      <h1 className="font-mmdisplay text-display-m">Solicitacoes</h1>
       {pending.length === 0 ? (
-        <p className="text-body-s text-graphite">Nenhuma solicitacao pendente.</p>
+        <p className="text-body-s text-mm-muted">Nenhuma solicitacao pendente.</p>
       ) : (
         <ul className="space-y-3">
           {pending.map((c) => {
             const m = menteeById.get(c.menteeId);
             return (
-              <li key={c.id} className="rounded border border-hairline bg-paper p-4">
+              <li key={c.id} className="rounded border border-mm-border bg-mm-card p-4">
                 <div className="mb-2 flex items-center justify-between">
                   <span className="text-body">
                     {m?.name ?? 'Mentee'}{' '}
-                    <span className="text-body-s text-graphite">{m?.headline ?? ''}</span>
+                    <span className="text-body-s text-mm-muted">{m?.headline ?? ''}</span>
                   </span>
                   <RequestActions connectionId={c.id} />
                 </div>
-                {c.message && <p className="text-body-s text-ink">{c.message}</p>}
+                {c.message && <p className="text-body-s text-mm-text">{c.message}</p>}
               </li>
             );
           })}

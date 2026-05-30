@@ -35,10 +35,10 @@ export default async function ConfirmPage({
   return (
     <main className="mx-auto max-w-2xl space-y-6">
       <header className="space-y-1">
-        <h1 className="font-heading text-display-m">{mentor.name ?? 'Mentor'}</h1>
-        {mentor.headline && <p className="text-body text-graphite">{mentor.headline}</p>}
+        <h1 className="font-mmdisplay text-display-m">{mentor.name ?? 'Mentor'}</h1>
+        {mentor.headline && <p className="text-body text-mm-muted">{mentor.headline}</p>}
       </header>
-      {mentor.bio && <p className="text-body text-ink">{mentor.bio}</p>}
+      {mentor.bio && <p className="text-body text-mm-text">{mentor.bio}</p>}
       <RequestForm mentorId={mentor.id} />
     </main>
   );
