@@ -1,3 +1,7 @@
+/* MentorMatch theme tokens (escopados em .theme-dark / .theme-sicredi).
+   Precede o Tailwind por exigencia do @import CSS. */
+@import '../styles/themes/index.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
