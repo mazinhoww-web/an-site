@@ -12,7 +12,7 @@ export default async function SuperAdminPage() {
 
   return (
     <main className="mx-auto max-w-container space-y-10 px-6 py-10">
-      <h1 className="font-heading text-display-m">Super Admin</h1>
+      <h1 className="font-mmdisplay text-display-m">Super Admin</h1>
       <TenantsAdmin initial={overview} plans={plans} />
     </main>
   );

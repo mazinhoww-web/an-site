@@ -9,7 +9,7 @@ export default async function AdminUsersPage({ params }: { params: { slug: strin
   if (!tenant) notFound();
   return (
     <main className="space-y-6">
-      <h1 className="font-heading text-display-m">Usuarios</h1>
+      <h1 className="font-mmdisplay text-display-m">Usuarios</h1>
       <UsersTable tenantId={tenant.id} />
     </main>
   );

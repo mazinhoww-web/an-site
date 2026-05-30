@@ -70,21 +70,21 @@ export function WaitlistManager({ initial }: { initial: Entry[] }) {
   }
 
   if (entries.length === 0) {
-    return <p className="text-body-s text-graphite">Fila de espera vazia.</p>;
+    return <p className="text-body-s text-mm-muted">Fila de espera vazia.</p>;
   }
 
   return (
     <div className="space-y-2">
-      {error && <p className="text-body-s text-error">{error}</p>}
+      {error && <p className="text-body-s text-mm-danger">{error}</p>}
       <ol className="space-y-2">
         {entries.map((e, i) => (
           <li
             key={e.id}
-            className="flex items-center justify-between rounded border border-hairline bg-paper px-3 py-2"
+            className="flex items-center justify-between rounded border border-mm-border bg-mm-card px-3 py-2"
           >
             <span className="text-body-s">
-              <span className="font-mono text-mono-meta text-graphite">#{e.position}</span>{' '}
-              {e.mentee?.name ?? 'Mentee'} <span className="text-graphite">{e.mentee?.headline ?? ''}</span>
+              <span className="font-mono text-mono-meta text-mm-muted">#{e.position}</span>{' '}
+              {e.mentee?.name ?? 'Mentee'} <span className="text-mm-muted">{e.mentee?.headline ?? ''}</span>
             </span>
             <span className="flex items-center gap-1">
               <button type="button" disabled={busy || i === 0} onClick={() => move(i, -1)} className={btn}>
@@ -110,4 +110,4 @@ export function WaitlistManager({ initial }: { initial: Entry[] }) {
 }
 
 const btn =
-  'rounded border border-hairline px-2 py-1 text-body-s text-ink hover:border-ink disabled:opacity-40';
+  'rounded border border-mm-border px-2 py-1 text-body-s text-mm-text hover:border-mm-primary disabled:opacity-40';

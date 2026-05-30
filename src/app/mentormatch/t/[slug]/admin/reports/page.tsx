@@ -9,7 +9,7 @@ export default async function AdminReportsPage({ params }: { params: { slug: str
   if (!tenant) notFound();
   return (
     <main className="space-y-6">
-      <h1 className="font-heading text-display-m">Relatorios</h1>
+      <h1 className="font-mmdisplay text-display-m">Relatorios</h1>
       <ReportsView tenantId={tenant.id} />
     </main>
   );

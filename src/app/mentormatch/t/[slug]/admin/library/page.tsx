@@ -9,7 +9,7 @@ export default async function AdminLibraryPage({ params }: { params: { slug: str
   if (!tenant) notFound();
   return (
     <main className="space-y-6">
-      <h1 className="font-heading text-display-m">Biblioteca</h1>
+      <h1 className="font-mmdisplay text-display-m">Biblioteca</h1>
       <LibraryManager tenantId={tenant.id} />
     </main>
   );

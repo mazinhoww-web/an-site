@@ -62,14 +62,14 @@ export function InvitationsManager({ tenantId }: { tenantId: string }) {
           Convidar
         </button>
       </div>
-      {error && <p className="text-body-s text-error">{error}</p>}
+      {error && <p className="text-body-s text-mm-danger">{error}</p>}
       <ul className="space-y-2">
-        {invites.length === 0 && <li className="text-body-s text-graphite">Nenhum convite.</li>}
+        {invites.length === 0 && <li className="text-body-s text-mm-muted">Nenhum convite.</li>}
         {invites.map((i) => (
-          <li key={i.id} className="flex items-center justify-between rounded border border-hairline bg-paper px-4 py-2">
+          <li key={i.id} className="flex items-center justify-between rounded border border-mm-border bg-mm-card px-4 py-2">
             <span className="text-body-s">
-              {i.email} <span className="font-mono text-mono-meta text-graphite">{i.role}</span>{' '}
-              <span className="text-graphite">{i.used ? 'usado' : i.expired ? 'expirado' : 'pendente'}</span>
+              {i.email} <span className="font-mono text-mono-meta text-mm-muted">{i.role}</span>{' '}
+              <span className="text-mm-muted">{i.used ? 'usado' : i.expired ? 'expirado' : 'pendente'}</span>
             </span>
             <button type="button" onClick={() => void revoke(i.id)} className={btn}>
               Revogar
@@ -81,6 +81,6 @@ export function InvitationsManager({ tenantId }: { tenantId: string }) {
   );
 }
 
-const input = 'rounded border border-hairline bg-paper px-3 py-2 text-body text-ink outline-none focus:border-ink';
-const btn = 'rounded border border-hairline px-3 py-1.5 text-body-s text-ink hover:border-ink';
-const btnPrimary = 'rounded bg-ink px-4 py-2 text-body-s text-paper hover:bg-graphite';
+const input = 'rounded border border-mm-border bg-mm-card px-3 py-2 text-body text-mm-text outline-none focus:border-mm-primary';
+const btn = 'rounded border border-mm-border px-3 py-1.5 text-body-s text-mm-text hover:border-mm-primary';
+const btnPrimary = 'rounded bg-mm-primary px-4 py-2 text-body-s text-mm-primaryfg hover:bg-mm-primary2';

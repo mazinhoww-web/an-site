@@ -55,23 +55,23 @@ export default async function MentorMatchLandingPage() {
     : FALLBACK_PLANS;
 
   return (
-    <div className="theme-dark min-h-screen bg-bone text-ink">
+    <div className="theme-dark min-h-screen bg-mm-bg text-mm-text">
       <ClearTenantCookie />
 
       {/* HERO */}
       <section className="mx-auto max-w-container px-6 py-24">
-        <h1 className="max-w-3xl font-heading text-display-xl">
+        <h1 className="max-w-3xl font-mmdisplay text-display-xl">
           MentorMatch — Programas de Mentoria que Escalam
         </h1>
-        <p className="mt-6 max-w-2xl text-body-l text-graphite">
+        <p className="mt-6 max-w-2xl text-body-l text-mm-muted">
           Plataforma white-label para empresas criarem programas internos de mentoria com matching
           inteligente, fila de espera e relatorios.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/mentormatch/default" className="rounded bg-ink px-6 py-3 font-heading text-body text-paper hover:bg-graphite">
+          <Link href="/mentormatch/default" className="rounded bg-mm-primary px-6 py-3 font-mmdisplay text-body text-mm-primaryfg hover:bg-mm-primary2">
             Ver demonstracao
           </Link>
-          <Link href="/contato" className="rounded border border-hairline px-6 py-3 font-heading text-body text-ink hover:border-ink">
+          <Link href="/contato" className="rounded border border-mm-border px-6 py-3 font-mmdisplay text-body text-mm-text hover:border-mm-primary">
             Solicitar demonstracao
           </Link>
         </div>
@@ -79,12 +79,12 @@ export default async function MentorMatchLandingPage() {
 
       {/* RECURSOS */}
       <section className="mx-auto max-w-container px-6 py-16">
-        <h2 className="mb-8 font-heading text-h1">Recursos</h2>
+        <h2 className="mb-8 font-mmdisplay text-h1">Recursos</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map(([title, desc]) => (
-            <article key={title} className="rounded border border-hairline bg-paper p-6">
-              <h3 className="font-heading text-h3">{title}</h3>
-              <p className="mt-2 text-body-s text-graphite">{desc}</p>
+            <article key={title} className="rounded border border-mm-border bg-mm-card p-6">
+              <h3 className="font-mmdisplay text-h3">{title}</h3>
+              <p className="mt-2 text-body-s text-mm-muted">{desc}</p>
             </article>
           ))}
         </div>
@@ -92,12 +92,12 @@ export default async function MentorMatchLandingPage() {
 
       {/* COMO FUNCIONA */}
       <section className="mx-auto max-w-container px-6 py-16">
-        <h2 className="mb-8 font-heading text-h1">Como funciona</h2>
+        <h2 className="mb-8 font-mmdisplay text-h1">Como funciona</h2>
         <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map(([n, desc]) => (
-            <li key={n} className="rounded border border-hairline bg-paper p-6">
-              <span className="font-heading text-display-m">{n}</span>
-              <p className="mt-2 text-body-s text-graphite">{desc}</p>
+            <li key={n} className="rounded border border-mm-border bg-mm-card p-6">
+              <span className="font-mmdisplay text-display-m">{n}</span>
+              <p className="mt-2 text-body-s text-mm-muted">{desc}</p>
             </li>
           ))}
         </ol>
@@ -105,22 +105,22 @@ export default async function MentorMatchLandingPage() {
 
       {/* PLANOS */}
       <section className="mx-auto max-w-container px-6 py-16">
-        <h2 className="mb-8 font-heading text-h1">Planos</h2>
+        <h2 className="mb-8 font-mmdisplay text-h1">Planos</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {plans.map((p) => {
             const popular = p.slug === 'starter';
             return (
               <article
                 key={p.slug}
-                className={`rounded border bg-paper p-6 ${popular ? 'border-ink' : 'border-hairline'}`}
+                className={`rounded border bg-mm-card p-6 ${popular ? 'border-mm-primary' : 'border-mm-border'}`}
               >
                 {popular && (
-                  <span className="mb-2 inline-block rounded bg-lime px-2 py-0.5 font-mono text-mono-meta text-ink">
+                  <span className="mb-2 inline-block rounded bg-mm-secondary px-2 py-0.5 font-mono text-mono-meta text-mm-text">
                     Mais popular
                   </span>
                 )}
-                <h3 className="font-heading text-h3">{p.name}</h3>
-                <p className="mt-2 font-heading text-h2">{priceLabel(p.slug, p.priceMonthly)}</p>
+                <h3 className="font-mmdisplay text-h3">{p.name}</h3>
+                <p className="mt-2 font-mmdisplay text-h2">{priceLabel(p.slug, p.priceMonthly)}</p>
               </article>
             );
           })}
@@ -129,15 +129,15 @@ export default async function MentorMatchLandingPage() {
 
       {/* CONTATO */}
       <section className="mx-auto max-w-container px-6 py-16">
-        <h2 className="mb-4 font-heading text-h1">Quer levar o MentorMatch para sua empresa?</h2>
-        <p className="mb-6 text-body text-graphite">Fale com a gente e configuramos seu programa.</p>
-        <Link href="/contato" className="rounded bg-ink px-6 py-3 font-heading text-body text-paper hover:bg-graphite">
+        <h2 className="mb-4 font-mmdisplay text-h1">Quer levar o MentorMatch para sua empresa?</h2>
+        <p className="mb-6 text-body text-mm-muted">Fale com a gente e configuramos seu programa.</p>
+        <Link href="/contato" className="rounded bg-mm-primary px-6 py-3 font-mmdisplay text-body text-mm-primaryfg hover:bg-mm-primary2">
           Solicitar demonstracao
         </Link>
       </section>
 
-      <footer className="border-t border-hairline">
-        <div className="mx-auto max-w-container px-6 py-8 text-body-s text-graphite">
+      <footer className="border-t border-mm-border">
+        <div className="mx-auto max-w-container px-6 py-8 text-body-s text-mm-muted">
           <Link href="/" className="hover:underline">
             Aurimar Nogueira
           </Link>

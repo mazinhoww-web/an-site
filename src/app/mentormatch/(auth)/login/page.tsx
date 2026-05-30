@@ -39,31 +39,31 @@ export default function MmLoginPage() {
 
   return (
     <main className="mx-auto max-w-md px-6 py-20">
-      <h1 className="mb-6 font-heading text-display-m">Entrar</h1>
+      <h1 className="mb-6 font-mmdisplay text-display-m">Entrar</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <label className="block space-y-1.5">
           <span className={labelCls}>Email</span>
           <input type="email" autoComplete="email" className={inputCls} {...register('email')} />
-          {errors.email && <span className="block text-body-s text-error">{errors.email.message}</span>}
+          {errors.email && <span className="block text-body-s text-mm-danger">{errors.email.message}</span>}
         </label>
         <label className="block space-y-1.5">
           <span className={labelCls}>Senha</span>
           <input type="password" autoComplete="current-password" className={inputCls} {...register('password')} />
-          {errors.password && <span className="block text-body-s text-error">{errors.password.message}</span>}
+          {errors.password && <span className="block text-body-s text-mm-danger">{errors.password.message}</span>}
         </label>
-        {error && <p className="text-body-s text-error">{error}</p>}
+        {error && <p className="text-body-s text-mm-danger">{error}</p>}
         <button type="submit" disabled={isSubmitting} className={btnCls}>
           {isSubmitting ? 'Entrando...' : 'Entrar'}
         </button>
       </form>
-      <p className="mt-6 text-body-s text-graphite">
+      <p className="mt-6 text-body-s text-mm-muted">
         Nao tem conta?{' '}
-        <Link href="/mentormatch/register" className="text-ink underline">
+        <Link href="/mentormatch/register" className="text-mm-text underline">
           Criar conta
         </Link>
       </p>
-      <p className="mt-2 text-body-s text-graphite">
-        <Link href="/mentormatch/forgot-password" className="text-ink underline">
+      <p className="mt-2 text-body-s text-mm-muted">
+        <Link href="/mentormatch/forgot-password" className="text-mm-text underline">
           Esqueci a senha
         </Link>
       </p>
@@ -71,8 +71,8 @@ export default function MmLoginPage() {
   );
 }
 
-const labelCls = 'font-mono text-mono-meta uppercase tracking-wide text-graphite';
+const labelCls = 'font-mono text-mono-meta uppercase tracking-wide text-mm-muted';
 const inputCls =
-  'w-full rounded border border-hairline bg-paper px-3 py-2 text-body text-ink outline-none focus:border-ink';
+  'w-full rounded border border-mm-border bg-mm-card px-3 py-2 text-body text-mm-text outline-none focus:border-mm-primary';
 const btnCls =
-  'rounded bg-ink px-6 py-3 font-heading text-body text-paper transition hover:bg-graphite disabled:opacity-60';
+  'rounded bg-mm-primary px-6 py-3 font-mmdisplay text-body text-mm-primaryfg transition hover:bg-mm-primary2 disabled:opacity-60';

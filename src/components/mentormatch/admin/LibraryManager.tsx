@@ -68,13 +68,13 @@ export function LibraryManager({ tenantId }: { tenantId: string }) {
           {busy ? 'Enviando...' : 'Adicionar material'}
         </button>
       </div>
-      {error && <p className="text-body-s text-error">{error}</p>}
+      {error && <p className="text-body-s text-mm-danger">{error}</p>}
       <ul className="space-y-2">
-        {items.length === 0 && <li className="text-body-s text-graphite">Nenhum material.</li>}
+        {items.length === 0 && <li className="text-body-s text-mm-muted">Nenhum material.</li>}
         {items.map((it) => (
-          <li key={it.id} className="flex items-center justify-between rounded border border-hairline bg-paper px-4 py-2">
-            <a href={it.fileUrl} target="_blank" rel="noreferrer" className="text-body-s text-ink underline">
-              {it.title} <span className="font-mono text-mono-meta text-graphite">{it.fileType}</span>
+          <li key={it.id} className="flex items-center justify-between rounded border border-mm-border bg-mm-card px-4 py-2">
+            <a href={it.fileUrl} target="_blank" rel="noreferrer" className="text-body-s text-mm-text underline">
+              {it.title} <span className="font-mono text-mono-meta text-mm-muted">{it.fileType}</span>
             </a>
             <button type="button" onClick={() => void remove(it.id)} className={btn}>
               Excluir
@@ -86,6 +86,6 @@ export function LibraryManager({ tenantId }: { tenantId: string }) {
   );
 }
 
-const input = 'rounded border border-hairline bg-paper px-3 py-2 text-body text-ink outline-none focus:border-ink';
-const btn = 'rounded border border-hairline px-3 py-1.5 text-body-s text-ink hover:border-ink';
-const btnPrimary = 'rounded bg-ink px-4 py-2 text-body-s text-paper hover:bg-graphite disabled:opacity-60';
+const input = 'rounded border border-mm-border bg-mm-card px-3 py-2 text-body text-mm-text outline-none focus:border-mm-primary';
+const btn = 'rounded border border-mm-border px-3 py-1.5 text-body-s text-mm-text hover:border-mm-primary';
+const btnPrimary = 'rounded bg-mm-primary px-4 py-2 text-body-s text-mm-primaryfg hover:bg-mm-primary2 disabled:opacity-60';

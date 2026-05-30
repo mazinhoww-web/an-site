@@ -26,9 +26,9 @@ export default function ForgotPasswordPage() {
 
   return (
     <main className="mx-auto max-w-md px-6 py-20">
-      <h1 className="mb-6 font-heading text-display-m">Esqueci a senha</h1>
+      <h1 className="mb-6 font-mmdisplay text-display-m">Esqueci a senha</h1>
       {done ? (
-        <p className="text-body text-ink">
+        <p className="text-body text-mm-text">
           Se houver uma conta com esse email, enviamos um link para redefinir a senha.
         </p>
       ) : (
@@ -36,15 +36,15 @@ export default function ForgotPasswordPage() {
           <label className="block space-y-1.5">
             <span className={labelCls}>Email</span>
             <input type="email" autoComplete="email" className={inputCls} {...register('email')} />
-            {errors.email && <span className="block text-body-s text-error">{errors.email.message}</span>}
+            {errors.email && <span className="block text-body-s text-mm-danger">{errors.email.message}</span>}
           </label>
           <button type="submit" disabled={isSubmitting} className={btnCls}>
             {isSubmitting ? 'Enviando...' : 'Enviar link'}
           </button>
         </form>
       )}
-      <p className="mt-6 text-body-s text-graphite">
-        <Link href="/mentormatch/login" className="text-ink underline">
+      <p className="mt-6 text-body-s text-mm-muted">
+        <Link href="/mentormatch/login" className="text-mm-text underline">
           Voltar ao login
         </Link>
       </p>
@@ -52,7 +52,7 @@ export default function ForgotPasswordPage() {
   );
 }
 
-const labelCls = 'font-mono text-mono-meta uppercase tracking-wide text-graphite';
+const labelCls = 'font-mono text-mono-meta uppercase tracking-wide text-mm-muted';
 const inputCls =
-  'w-full rounded border border-hairline bg-paper px-3 py-2 text-body text-ink outline-none focus:border-ink';
-const btnCls = 'rounded bg-ink px-6 py-3 font-heading text-body text-paper hover:bg-graphite disabled:opacity-60';
+  'w-full rounded border border-mm-border bg-mm-card px-3 py-2 text-body text-mm-text outline-none focus:border-mm-primary';
+const btnCls = 'rounded bg-mm-primary px-6 py-3 font-mmdisplay text-body text-mm-primaryfg hover:bg-mm-primary2 disabled:opacity-60';

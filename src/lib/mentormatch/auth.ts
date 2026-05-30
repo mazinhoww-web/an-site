@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import { and, eq, isNull } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
 import { db } from '@/db';
@@ -26,38 +26,26 @@ const credentialsSchema = z.object({
 
 const isProd = process.env.NODE_ENV === 'production';
 
-async function findMmUserForLogin(email: string, tenantSlug?: string) {
-  if (tenantSlug) {
-    const tenant = await db
-      .select({ id: mmTenant.id })
-      .from(mmTenant)
-      .where(and(eq(mmTenant.slug, tenantSlug), eq(mmTenant.active, true)))
-      .limit(1);
-    // Unknown/inactive tenant in the cookie must not block login: fall back to
-    // resolving by email alone instead of failing the sign-in.
-    if (tenant[0]) {
-      // Prefer the account already assigned to this tenant.
-      const inTenant = await db
-        .select()
-        .from(mmUser)
-        .where(and(eq(mmUser.email, email), eq(mmUser.tenantId, tenant[0].id)))
-        .limit(1);
-      if (inTenant[0]) return inTenant[0];
-      // Fall back to a not-yet-assigned account (public registration mid-
-      // onboarding). complete-profile claims it for this same tenant via the
-      // mm-tenant cookie, so a tenantId IS NULL account belongs to this flow.
-      const unassigned = await db
-        .select()
-        .from(mmUser)
-        .where(and(eq(mmUser.email, email), isNull(mmUser.tenantId)))
-        .limit(1);
-      if (unassigned[0]) return unassigned[0];
-      return null;
-    }
-  }
-  // No tenant context (e.g. super admin): resolve by email alone.
-  const rows = await db.select().from(mmUser).where(eq(mmUser.email, email)).limit(1);
-  return rows[0] ?? null;
+// Returns all accounts for an email, ordered so that the cookie tenant's account
+// (if any) comes first. The mm-tenant cookie is only a tie-breaker for the
+// multi-tenant-same-email case (D-05); it must NOT block login for accounts in
+// other tenants, for the super admin, or for freshly registered users whose
+// tenantId is still null.
+async function candidatesForLogin(email: string, tenantSlug?: string) {
+  const candidates = await db.select().from(mmUser).where(eq(mmUser.email, email));
+  if (candidates.length <= 1 || !tenantSlug) return candidates;
+
+  const tenant = await db
+    .select({ id: mmTenant.id })
+    .from(mmTenant)
+    .where(eq(mmTenant.slug, tenantSlug))
+    .limit(1);
+  const tid = tenant[0]?.id;
+  if (!tid) return candidates;
+
+  const inTenant = candidates.filter((c) => c.tenantId === tid);
+  const others = candidates.filter((c) => c.tenantId !== tid);
+  return [...inTenant, ...others];
 }
 
 export const {
@@ -98,16 +86,18 @@ export const {
       async authorize(raw) {
         const parsed = credentialsSchema.safeParse(raw);
         if (!parsed.success) return null;
-        const { email, password, tenantSlug } = parsed.data;
+        const { password, tenantSlug } = parsed.data;
+        const email = parsed.data.email.toLowerCase();
 
-        const user = await findMmUserForLogin(email.toLowerCase(), tenantSlug);
-        if (!user?.password) return null;
-
-        const ok = await bcrypt.compare(password, user.password);
-        if (!ok) return null;
-
-        // Minimal identity; claims are hydrated from the DB in the jwt callback.
-        return { id: user.id, email: user.email, name: user.name, image: user.image };
+        const candidates = await candidatesForLogin(email, tenantSlug);
+        // Pick the first account (cookie tenant preferred) whose password matches.
+        for (const user of candidates) {
+          if (user.password && (await bcrypt.compare(password, user.password))) {
+            // Minimal identity; claims are hydrated from the DB in the jwt callback.
+            return { id: user.id, email: user.email, name: user.name, image: user.image };
+          }
+        }
+        return null;
       },
     }),
   ],
