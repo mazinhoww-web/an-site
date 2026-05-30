@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MentorMatch — Wireframes (Default / Sicredi)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Exo+2:wght@300;400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ---- Theme tokens (from original design.md) ---- */
+  body.theme-default{
+    --bg:#0d0d14; --bg-deep:#08080d; --card:#13131e; --surface:rgba(255,255,255,.05);
+    --text:#ededef; --muted:#9ca3af; --sub:#6b7280; --accent:#6366f1; --accent-2:#4f46e5;
+    --accent-fg:#fff; --border:rgba(255,255,255,.10); --radius-card:14px; --radius-btn:10px;
+    --font-display:'Inter',system-ui,sans-serif; --font-body:'Inter',system-ui,sans-serif;
+    --shadow:0 8px 24px rgba(0,0,0,.4); --green:#10b981; --red:#ef4444; --amber:#f59e0b;
+    --chip:rgba(255,255,255,.06); --chip-fg:#cbd0dc; --display-weight:700;
+  }
+  body.theme-sicredi{
+    --bg:#fafafa; --bg-deep:#f0f2ef; --card:#ffffff; --surface:#fafafa;
+    --text:#323c32; --muted:#5a645a; --sub:#828a82; --accent:#33820d; --accent-2:#26610a;
+    --accent-fg:#fff; --border:#cdd3cd; --radius-card:4px; --radius-btn:8px;
+    --font-display:'Exo 2',sans-serif; --font-body:'Nunito',sans-serif;
+    --shadow:0 2px 4px #cdd3cd; --green:#33820d; --red:#aa003c; --amber:#e6a500;
+    --chip:#d7e6c8; --chip-fg:#26610a; --display-weight:300;
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg-deep);color:var(--text);font-family:var(--font-body);
+       transition:background .2s,color .2s;}
+  h1,h2,h3,h4{font-family:var(--font-display);font-weight:var(--display-weight);margin:0}
+  .muted{color:var(--muted)} .sub{color:var(--sub);font-size:12px}
+
+  /* top control bar */
+  .bar{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--border);
+       padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .bar b{font-family:var(--font-display)}
+  .toggle{display:flex;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:4px}
+  .toggle button{border:0;background:transparent;color:var(--muted);padding:6px 14px;border-radius:999px;cursor:pointer;font-family:var(--font-body);font-size:13px}
+  .toggle button.on{background:var(--accent);color:var(--accent-fg)}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+  .sectitle{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);margin:28px 0 10px}
+  .gallery{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start}
+
+  /* device frames */
+  .phone{width:300px;background:var(--bg);border:1px solid var(--border);border-radius:26px;
+         box-shadow:var(--shadow);overflow:hidden}
+  .phone .scr{height:560px;overflow:hidden;display:flex;flex-direction:column}
+  .desktop{width:560px;background:var(--bg);border:1px solid var(--border);border-radius:12px;
+           box-shadow:var(--shadow);overflow:hidden}
+  .cap{font-size:12px;color:var(--sub);margin-top:8px;text-align:center}
+
+  /* building blocks */
+  .pad{padding:14px}
+  .hd{padding:12px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:var(--font-display);font-weight:var(--display-weight);font-size:15px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-card);box-shadow:var(--shadow)}
+  .btn{display:inline-block;background:var(--accent);color:var(--accent-fg);border-radius:var(--radius-btn);
+       padding:9px 14px;font-size:13px;font-weight:600;text-align:center}
+  .btn.full{display:block}
+  .btn.out{background:transparent;color:var(--text);border:1px solid var(--border)}
+  .input{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-btn);height:34px;display:flex;align-items:center;padding:0 10px;color:var(--sub);font-size:12px}
+  .chip{display:inline-block;background:var(--chip);color:var(--chip-fg);border-radius:999px;padding:4px 10px;font-size:11px;margin:0 4px 6px 0}
+  .chip.sel{background:var(--accent);color:var(--accent-fg)}
+  .avatar{width:44px;height:44px;border-radius:999px;background:var(--chip);display:inline-flex;align-items:center;justify-content:center;color:var(--accent-2);font-weight:700;font-family:var(--font-display)}
+  .avatar.lg{width:72px;height:72px;font-size:22px}
+  .line{height:9px;border-radius:5px;background:var(--surface);margin:6px 0}
+  .line.s{width:55%} .line.m{width:75%} .line.t{height:7px}
+  .row{display:flex;align-items:center;gap:10px}
+  .between{display:flex;align-items:center;justify-content:space-between}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .stat{flex:1;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-card);padding:10px}
+  .stat .n{font-family:var(--font-display);font-weight:var(--display-weight);font-size:22px}
+  .nav{margin-top:auto;border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0;font-size:10px;color:var(--muted)}
+  .nav .on{color:var(--accent)}
+  .dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
+  .badge{background:var(--red);color:#fff;border-radius:999px;font-size:10px;padding:1px 6px}
+  .pill{font-size:10px;color:var(--green);border:1px solid var(--green);border-radius:999px;padding:1px 7px}
+  .pill.red{color:var(--red);border-color:var(--red)}
+  .tabs{display:flex;gap:14px;padding:10px 14px;border-bottom:1px solid var(--border);font-size:12px;color:var(--muted)}
+  .tabs .on{color:var(--text);border-bottom:2px solid var(--accent);padding-bottom:6px}
+  .side{width:120px;background:var(--bg-deep);border-right:1px solid var(--border);padding:12px 10px;font-size:11px;color:var(--muted)}
+  .side .on{color:var(--accent)}
+  .th{display:grid;grid-template-columns:1.4fr 1fr .8fr .6fr;gap:8px;font-size:10px;color:var(--sub);padding:6px 0;border-bottom:1px solid var(--border)}
+  .tr{display:grid;grid-template-columns:1.4fr 1fr .8fr .6fr;gap:8px;font-size:11px;padding:8px 0;border-bottom:1px solid var(--border);align-items:center}
+  .swatch{display:inline-block;width:16px;height:16px;border-radius:4px;border:1px solid var(--border);vertical-align:middle}
+  .hero{padding:22px 14px;background:linear-gradient(160deg,var(--accent),var(--accent-2));color:var(--accent-fg)}
+</style>
+</head>
+<body class="theme-default">
+  <div class="bar">
+    <b>MentorMatch — Wireframes</b>
+    <span class="muted" style="font-size:13px">replicando o design.md (toque para alternar o tema)</span>
+    <span style="flex:1"></span>
+    <div class="toggle">
+      <button id="b-default" class="on" onclick="setT('default')">Default (escuro / índigo)</button>
+      <button id="b-sicredi" onclick="setT('sicredi')">Sicredi (claro / verde)</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- PUBLIC / AUTH -->
+    <div class="sectitle">Público + Autenticação</div>
+    <div class="gallery">
+
+      <!-- Landing pública (desktop) -->
+      <div>
+        <div class="desktop">
+          <div class="hd"><span class="logo">MentorMatch</span><span class="row"><span class="sub">Demonstração</span><span class="btn">Entrar</span></span></div>
+          <div class="hero">
+            <h1 style="font-size:22px;max-width:80%">Programas de Mentoria que Escalam</h1>
+            <div class="line t" style="background:rgba(255,255,255,.4);width:70%"></div>
+            <div style="margin-top:12px"><span class="btn out" style="border-color:rgba(255,255,255,.6);color:#fff">Ver demonstração</span> <span class="btn" style="background:#fff;color:var(--accent-2)">Solicitar demo</span></div>
+          </div>
+          <div class="pad">
+            <div class="sub" style="margin-bottom:6px">RECURSOS</div>
+            <div class="grid2">
+              <div class="card pad"><b>Matching Inteligente</b><div class="line t"></div></div>
+              <div class="card pad"><b>Fila de Espera</b><div class="line t"></div></div>
+              <div class="card pad"><b>White-Label</b><div class="line t"></div></div>
+              <div class="card pad"><b>Relatórios</b><div class="line t"></div></div>
+            </div>
+            <div class="sub" style="margin:12px 0 6px">PLANOS</div>
+            <div class="grid2" style="grid-template-columns:repeat(4,1fr)">
+              <div class="card pad"><b>Free</b><div class="sub">R$0</div></div>
+              <div class="card pad" style="border-color:var(--accent)"><span class="chip sel">Popular</span><br><b>Starter</b><div class="sub">R$299</div></div>
+              <div class="card pad"><b>Pro</b><div class="sub">R$799</div></div>
+              <div class="card pad"><b>Enterprise</b><div class="sub">consulta</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="cap">/mentormatch — Landing pública (desktop)</div>
+      </div>
+
+      <!-- Landing branded -->
+      <div>
+        <div class="phone"><div class="scr">
+          <div class="hero" style="flex:1;display:flex;flex-direction:column;justify-content:center">
+            <div class="logo" style="background:rgba(255,255,255,.2);align-self:flex-start;padding:4px 10px;border-radius:6px">LOGO</div>
+            <h1 style="font-size:24px;margin-top:18px">Programa de Mentoria</h1>
+            <div class="line t" style="background:rgba(255,255,255,.4);width:80%"></div>
+            <div class="line t" style="background:rgba(255,255,255,.4);width:60%"></div>
+            <div style="margin-top:20px">
+              <span class="btn full" style="background:#fff;color:var(--accent-2)">Quero participar</span>
+              <div style="height:8px"></div>
+              <span class="btn full out" style="border-color:rgba(255,255,255,.6);color:#fff">Já tenho conta</span>
+            </div>
+          </div>
+        </div></div>
+        <div class="cap">/mentormatch/{slug} — Landing branded</div>
+      </div>
+
+      <!-- Login -->
+      <div>
+        <div class="phone"><div class="scr pad">
+          <h1 style="font-size:22px;margin-bottom:14px">Entrar</h1>
+          <div class="sub">Email</div><div class="input">voce@empresa.com</div>
+          <div style="height:10px"></div>
+          <div class="sub">Senha</div><div class="input">••••••••</div>
+          <div style="height:14px"></div>
+          <span class="btn full">Entrar</span>
+          <div style="height:14px"></div>
+          <div class="sub">Não tem conta? <span style="color:var(--accent)">Criar conta</span></div>
+          <div class="sub" style="margin-top:6px;color:var(--accent)">Esqueci a senha</div>
+        </div></div>
+        <div class="cap">/mentormatch/login</div>
+      </div>
+
+      <!-- Select profile -->
+      <div>
+        <div class="phone"><div class="scr pad">
+          <h1 style="font-size:20px">Como você quer participar?</h1>
+          <div class="sub" style="margin-bottom:14px">Escolha seu papel</div>
+          <div class="card pad" style="margin-bottom:12px"><b>Quero ser Mentor</b><div class="line t"></div><div class="line t s"></div></div>
+          <div class="card pad"><b>Quero ser Mentorado</b><div class="line t"></div><div class="line t s"></div></div>
+        </div></div>
+        <div class="cap">/select-profile</div>
+      </div>
+
+      <!-- Onboarding wizard -->
+      <div>
+        <div class="phone"><div class="scr pad">
+          <h1 style="font-size:20px">Perfil de Mentor</h1>
+          <div class="sub" style="margin-bottom:10px">Complete seu perfil</div>
+          <div class="row" style="margin-bottom:10px"><div class="avatar lg">＋</div><div><div class="sub">Foto (opcional)</div></div></div>
+          <div class="sub">Nome</div><div class="input">Aurimar N.</div>
+          <div style="height:8px"></div>
+          <div class="sub">Headline</div><div class="input">Head de Produto</div>
+          <div style="height:10px"></div>
+          <div class="sub" style="margin-bottom:6px">Habilidades</div>
+          <div><span class="chip sel">Technology</span><span class="chip">Design</span><span class="chip">Career</span><span class="chip">Marketing</span></div>
+          <div style="height:10px"></div>
+          <span class="btn full">Concluir</span>
+        </div></div>
+        <div class="cap">/onboarding/mentor · mentee</div>
+      </div>
+
+    </div>
+
+    <!-- DASHBOARDS -->
+    <div class="sectitle">Dashboards (mentor / mentee) + Matching</div>
+    <div class="gallery">
+
+      <!-- Mentee dashboard -->
+      <div>
+        <div class="phone"><div class="scr">
+          <div class="hd"><span class="logo">MentorMatch</span><span class="row"><span class="dot"></span><span class="badge">3</span></span></div>
+          <div class="pad" style="flex:1">
+            <div class="between"><h2 style="font-size:18px">Painel</h2><span class="btn">Buscar mentores</span></div>
+            <div class="sub" style="margin:12px 0 6px">SEU MENTOR</div>
+            <div class="card pad row"><div class="avatar">JS</div><div style="flex:1"><b>João Silva</b><div class="sub">Head de Dados</div></div><span class="pill">WhatsApp</span></div>
+            <div class="sub" style="margin:12px 0 6px">SOLICITAÇÕES</div>
+            <div class="card pad between"><span>Maria L.</span><span class="pill">Ativa</span></div>
+            <div style="height:8px"></div>
+            <div class="card pad between"><span>Pedro R.</span><span class="sub">Pendente</span></div>
+          </div>
+          <div class="nav"><span class="on">Match</span><span>Processo</span><span>Biblioteca</span><span>Perfil</span></div>
+        </div></div>
+        <div class="cap">/t/{slug}/mentee</div>
+      </div>
+
+      <!-- Mentor dashboard -->
+      <div>
+        <div class="phone"><div class="scr">
+          <div class="hd"><span class="logo">MentorMatch</span><span class="row"><span class="sub">Biblioteca</span><span class="badge">2</span></span></div>
+          <div class="pad" style="flex:1">
+            <div class="between"><h2 style="font-size:18px">Painel do mentor</h2><span class="btn out">Solicitações (2)</span></div>
+            <div class="row" style="gap:8px;margin:12px 0">
+              <div class="stat"><div class="n">3</div><div class="sub">Mentorados</div></div>
+              <div class="stat"><div class="n">2</div><div class="sub">Pendentes</div></div>
+              <div class="stat"><div class="n">1</div><div class="sub">Na fila</div></div>
+            </div>
+            <div class="sub" style="margin:6px 0">MENTORADOS</div>
+            <div class="card pad between"><span class="row"><span class="avatar">ML</span> Maria L.</span><span class="pill">WhatsApp</span></div>
+            <div class="sub" style="margin:10px 0 6px">FILA DE ESPERA</div>
+            <div class="card pad between"><span class="sub">#1 Carla M.</span><span class="row"><span class="chip">↑</span><span class="chip">↓</span><span class="chip">x</span></span></div>
+          </div>
+          <div class="nav"><span>Match</span><span class="on">Processo</span><span>Biblioteca</span><span>Perfil</span></div>
+        </div></div>
+        <div class="cap">/t/{slug}/mentor (+ fila)</div>
+      </div>
+
+      <!-- Mentor search -->
+      <div>
+        <div class="phone"><div class="scr">
+          <div class="hd"><span class="logo">Buscar</span><span class="sub">Filtro ⚙</span></div>
+          <div class="pad" style="flex:1">
+            <div class="input" style="margin-bottom:10px">🔍  nome, headline, bio</div>
+            <div class="grid2">
+              <div class="card pad" style="text-align:center"><div class="avatar lg" style="margin:auto">JS</div><b style="display:block;margin-top:6px">João S.</b><div class="sub">Dados</div><span class="pill" style="margin-top:6px;display:inline-block">2 ativas</span><br><span class="btn" style="margin-top:8px">Solicitar</span></div>
+              <div class="card pad" style="text-align:center"><div class="avatar lg" style="margin:auto">AL</div><b style="display:block;margin-top:6px">Ana L.</b><div class="sub">Produto</div><span class="pill red" style="margin-top:6px;display:inline-block">Lotado</span><br><span class="btn out" style="margin-top:8px">Fila</span></div>
+            </div>
+          </div>
+          <div class="nav"><span class="on">Match</span><span>Processo</span><span>Biblioteca</span><span>Perfil</span></div>
+        </div></div>
+        <div class="cap">/t/{slug}/mentors</div>
+      </div>
+
+      <!-- Requests -->
+      <div>
+        <div class="phone"><div class="scr">
+          <div class="hd"><span class="logo">Solicitações</span></div>
+          <div class="pad" style="flex:1">
+            <div class="card pad" style="margin-bottom:10px">
+              <div class="row"><div class="avatar">PR</div><div style="flex:1"><b>Pedro R.</b><div class="sub">Quer aprender Produto</div></div></div>
+              <div class="line t" style="margin-top:8px"></div>
+              <div class="row" style="margin-top:10px;gap:8px"><span class="btn" style="flex:1">Aceitar</span><span class="btn out" style="flex:1">Recusar</span></div>
+            </div>
+            <div class="card pad"><div class="row"><div class="avatar">CM</div><div style="flex:1"><b>Carla M.</b></div></div><div class="row" style="margin-top:10px;gap:8px"><span class="btn" style="flex:1">Aceitar</span><span class="btn out" style="flex:1">Recusar</span></div></div>
+          </div>
+          <div class="nav"><span>Match</span><span class="on">Processo</span><span>Biblioteca</span><span>Perfil</span></div>
+        </div></div>
+        <div class="cap">/t/{slug}/requests</div>
+      </div>
+
+      <!-- Notifications -->
+      <div>
+        <div class="phone"><div class="scr">
+          <div class="hd"><span class="logo">Notificações</span><span class="sub" style="color:var(--accent)">Marcar todas</span></div>
+          <div class="pad" style="flex:1">
+            <div class="card pad" style="margin-bottom:8px"><b style="font-size:13px">Nova solicitação</b><div class="sub">Pedro solicitou mentoria</div></div>
+            <div class="card pad" style="margin-bottom:8px;opacity:.6"><b style="font-size:13px">Mentoria aceita</b><div class="sub">Sua solicitação foi aceita</div></div>
+            <div class="card pad" style="opacity:.6"><b style="font-size:13px">Promovido da fila</b><div class="sub">Abriu vaga para você</div></div>
+          </div>
+          <div class="nav"><span>Match</span><span>Processo</span><span>Biblioteca</span><span class="on">Perfil</span></div>
+        </div></div>
+        <div class="cap">Sino + dropdown (polling 30s)</div>
+      </div>
+
+      <!-- Library -->
+      <div>
+        <div class="phone"><div class="scr">
+          <div class="hd"><span class="logo">Biblioteca</span></div>
+          <div class="pad" style="flex:1">
+            <div class="card pad between" style="margin-bottom:8px"><span class="row"><span class="chip">PDF</span> Guia de Mentoria</span><span class="sub">↓</span></div>
+            <div class="card pad between" style="margin-bottom:8px"><span class="row"><span class="chip">VIDEO</span> Onboarding</span><span class="sub">↓</span></div>
+            <div class="card pad between"><span class="row"><span class="chip">ARTICLE</span> Boas práticas</span><span class="sub">↓</span></div>
+          </div>
+          <div class="nav"><span>Match</span><span>Processo</span><span class="on">Biblioteca</span><span>Perfil</span></div>
+        </div></div>
+        <div class="cap">/t/{slug}/library</div>
+      </div>
+
+    </div>
+
+    <!-- ADMIN -->
+    <div class="sectitle">Admin do tenant + Super Admin</div>
+    <div class="gallery">
+
+      <!-- Admin users -->
+      <div>
+        <div class="desktop"><div style="display:flex;height:340px">
+          <div class="side"><div class="logo" style="font-size:13px;margin-bottom:12px">Admin</div><div class="on">Usuários</div><div>Skills</div><div>Biblioteca</div><div>Relatórios</div><div>Settings</div><div>Convites</div></div>
+          <div class="pad" style="flex:1">
+            <div class="between"><h2 style="font-size:16px">Usuários</h2><span class="btn">Convidar</span></div>
+            <div class="row" style="gap:8px;margin:10px 0"><div class="input" style="flex:1">🔍 buscar</div><div class="input" style="width:90px">Status ▾</div></div>
+            <div class="th"><span>Nome</span><span>Email</span><span>Papel</span><span>Ação</span></div>
+            <div class="tr"><span class="row"><span class="avatar" style="width:24px;height:24px;font-size:10px">M</span>Maria L.</span><span class="sub">maria@…</span><span class="pill">MENTOR</span><span class="sub">▾</span></div>
+            <div class="tr"><span class="row"><span class="avatar" style="width:24px;height:24px;font-size:10px">P</span>Pedro R.</span><span class="sub">pedro@…</span><span class="sub">PENDING</span><span class="btn" style="padding:3px 8px;font-size:10px">Aprovar</span></div>
+          </div>
+        </div></div>
+        <div class="cap">/t/{slug}/admin/users</div>
+      </div>
+
+      <!-- Admin settings -->
+      <div>
+        <div class="desktop"><div style="display:flex;height:340px">
+          <div class="side"><div class="logo" style="font-size:13px;margin-bottom:12px">Admin</div><div>Usuários</div><div>Skills</div><div>Biblioteca</div><div>Relatórios</div><div class="on">Settings</div></div>
+          <div class="pad" style="flex:1">
+            <h2 style="font-size:16px;margin-bottom:10px">Configurações</h2>
+            <div class="sub">Nome do programa</div><div class="input">MentorMatch Sicredi</div>
+            <div style="height:8px"></div>
+            <div class="row" style="gap:14px">
+              <div><div class="sub">Cor principal</div><span class="swatch" style="background:var(--accent)"></span> <span class="sub">accent</span></div>
+              <div><div class="sub">Max. mentees/mentor</div><div class="input" style="width:70px">4</div></div>
+            </div>
+            <div style="height:8px"></div>
+            <div class="sub">Logo</div><div class="card pad" style="text-align:center;color:var(--sub)">⬆ enviar logo</div>
+            <div style="height:10px"></div><span class="btn">Salvar</span>
+          </div>
+        </div></div>
+        <div class="cap">/t/{slug}/admin/settings (persiste maxMentees)</div>
+      </div>
+
+      <!-- Super admin -->
+      <div>
+        <div class="desktop"><div class="pad" style="height:340px">
+          <h2 style="font-size:16px">Super Admin</h2>
+          <div class="row" style="gap:8px;margin:10px 0"><div class="stat"><div class="n">2</div><div class="sub">Tenants</div></div><div class="stat"><div class="n">14</div><div class="sub">Usuários</div></div><div class="stat"><div class="n">6</div><div class="sub">Conexões ativas</div></div></div>
+          <div class="between"><b>Tenants</b><span class="btn">Criar tenant</span></div>
+          <div class="th" style="grid-template-columns:1.2fr .8fr .8fr .8fr"><span>Nome</span><span>Slug</span><span>Plano</span><span>Ação</span></div>
+          <div class="tr" style="grid-template-columns:1.2fr .8fr .8fr .8fr"><span>MentorMatch Demo</span><span class="sub">/default</span><span class="sub">Free</span><span class="sub" style="color:var(--accent)">Entrar</span></div>
+          <div class="tr" style="grid-template-columns:1.2fr .8fr .8fr .8fr"><span>MentorMatch Sicredi</span><span class="sub">/sicredi</span><span class="sub">Free</span><span class="sub" style="color:var(--accent)">Entrar</span></div>
+        </div></div>
+        <div class="cap">/mentormatch/admin</div>
+      </div>
+
+    </div>
+
+  </div>
+
+<script>
+  function setT(t){
+    document.body.className='theme-'+t;
+    document.getElementById('b-default').classList.toggle('on',t==='default');
+    document.getElementById('b-sicredi').classList.toggle('on',t==='sicredi');
+  }
+</script>
+</body>
+</html>

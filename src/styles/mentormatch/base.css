@@ -1,17 +1,38 @@
-/* MentorMatch theme tokens. Default (dark) palette. Tenants override these via
- * a `.theme-{key}` class on the module wrapper, or per-tenant brandColor set
- * inline on the branded landing. NOTE: dashboards currently use the an-site
- * design tokens; adopting --mm-* there is incremental (see PR). */
-:root {
+/* MentorMatch design tokens (from docs/design.md).
+ * Default look: LIGHT, indigo accent, Inter (aligned with an-site, per decision).
+ * Tenants override via .theme-{key} on the .mm-root wrapper (see sicredi.css).
+ * The default token set lives on .mm-root so any non-sicredi themeKey inherits it. */
+.mm-root {
+  --mm-bg: #f7f7fb;
+  --mm-card: #ffffff;
+  --mm-surface: #f1f2f7;
+  --mm-text: #0f1222;
+  --mm-muted: #5b6072;
+  --mm-sub: #8a8fa3;
+  --mm-border: #e6e7ef;
   --mm-primary: #6366f1;
-  --mm-secondary: #818cf8;
-  --mm-background: #0f172a;
-  --mm-surface: #1e293b;
-  --mm-surface-hover: #334155;
-  --mm-text: #f8fafc;
-  --mm-text-muted: #94a3b8;
-  --mm-border: #334155;
-  --mm-success: #22c55e;
+  --mm-primary-2: #4f46e5;
+  --mm-primary-fg: #ffffff;
+  --mm-secondary: #eef0ff;
+  --mm-success: #10b981;
   --mm-warning: #f59e0b;
-  --mm-error: #ef4444;
+  --mm-danger: #ef4444;
+  --mm-radius-card: 14px;
+  --mm-radius-btn: 10px;
+  --mm-font-display: var(--font-mm-inter), 'Inter', system-ui, sans-serif;
+  --mm-font-body: var(--font-mm-inter), 'Inter', system-ui, sans-serif;
+  --mm-display-weight: 700;
+
+  background: var(--mm-bg);
+  color: var(--mm-text);
+  font-family: var(--mm-font-body);
+  min-height: 100vh;
+}
+
+.mm-root h1,
+.mm-root h2,
+.mm-root h3,
+.mm-root h4 {
+  font-family: var(--mm-font-display);
+  font-weight: var(--mm-display-weight);
 }

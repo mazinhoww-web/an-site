@@ -1,14 +1,22 @@
-/* Sicredi tenant theme (themeKey "sicredi"). */
+/* Sicredi tenant theme (themeKey "sicredi") — light, green, Exo 2 + Nunito. */
 .theme-sicredi {
+  --mm-bg: #fafafa;
+  --mm-card: #ffffff;
+  --mm-surface: #f3f5f1;
+  --mm-text: #323c32;
+  --mm-muted: #5a645a;
+  --mm-sub: #828a82;
+  --mm-border: #cdd3cd;
   --mm-primary: #33820d;
-  --mm-secondary: #0a4b1e;
-  --mm-background: #0a0a0a;
-  --mm-surface: #141414;
-  --mm-surface-hover: #1a1a1a;
-  --mm-text: #fafafa;
-  --mm-text-muted: #a3a3a3;
-  --mm-border: #262626;
-  --mm-success: #4ade80;
-  --mm-warning: #f59e0b;
-  --mm-error: #ef4444;
+  --mm-primary-2: #26610a;
+  --mm-primary-fg: #ffffff;
+  --mm-secondary: #d7e6c8;
+  --mm-success: #33820d;
+  --mm-warning: #e6a500;
+  --mm-danger: #aa003c;
+  --mm-radius-card: 4px;
+  --mm-radius-btn: 8px;
+  --mm-font-display: var(--font-mm-exo2), 'Exo 2', sans-serif;
+  --mm-font-body: var(--font-mm-nunito), 'Nunito', sans-serif;
+  --mm-display-weight: 300;
 }

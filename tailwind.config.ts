@@ -17,18 +17,28 @@ const config: Config = {
         error: 'rgb(var(--color-error) / <alpha-value>)',
         // MentorMatch white-label tokens (defined in src/styles/mentormatch/*.css).
         mm: {
-          primary: 'var(--mm-primary)',
-          secondary: 'var(--mm-secondary)',
-          background: 'var(--mm-background)',
+          bg: 'var(--mm-bg)',
+          card: 'var(--mm-card)',
           surface: 'var(--mm-surface)',
           text: 'var(--mm-text)',
+          muted: 'var(--mm-muted)',
+          sub: 'var(--mm-sub)',
           border: 'var(--mm-border)',
+          primary: 'var(--mm-primary)',
+          primary2: 'var(--mm-primary-2)',
+          primaryfg: 'var(--mm-primary-fg)',
+          secondary: 'var(--mm-secondary)',
+          success: 'var(--mm-success)',
+          warning: 'var(--mm-warning)',
+          danger: 'var(--mm-danger)',
         },
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
         heading: ['var(--font-heading)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-mono)', 'monospace'],
+        mmdisplay: ['var(--mm-font-display)'],
+        mmbody: ['var(--mm-font-body)'],
       },
       fontSize: {
         'display-xl': [
