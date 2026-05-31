@@ -1,19 +1,38 @@
 import { db } from '@/db';
-import { mmPlan } from '@/lib/mentormatch/db/schema';
+import { mmConnection, mmPlan } from '@/lib/mentormatch/db/schema';
 import { getTenantsOverview } from '@/lib/mentormatch/admin-stats';
-import { TenantsAdmin } from '@/components/mentormatch/admin/TenantsAdmin';
+import { SuperAdminView } from '@/components/mentormatch/admin/SuperAdminView';
 
 export const dynamic = 'force-dynamic';
 
-// Super admin panel. Access is gated to SUPER_ADMIN by admin/layout.tsx.
+// Super admin panel (dark nativo + Indigo). Acesso gated a SUPER_ADMIN no layout.
 export default async function SuperAdminPage() {
-  const [overview, planRows] = await Promise.all([getTenantsOverview(), db.select().from(mmPlan)]);
-  const plans = planRows.map((p) => ({ id: p.id, name: p.name }));
+  const [overview, planRows, connectionsTotal] = await Promise.all([
+    getTenantsOverview(),
+    db.select().from(mmPlan),
+    db.$count(mmConnection),
+  ]);
+
+  const tenantsActive = overview.tenants.filter((t) => t.active).length;
+  const plans = planRows.map((p) => ({
+    id: p.id,
+    name: p.name,
+    active: p.active,
+    features: (p.features as string[] | null) ?? [],
+    priceMonthly: p.priceMonthly,
+    maxUsers: p.maxUsers,
+  }));
 
   return (
-    <main className="mx-auto max-w-container space-y-10 px-6 py-10">
-      <h1 className="font-heading text-display-m">Super Admin</h1>
-      <TenantsAdmin initial={overview} plans={plans} />
-    </main>
+    <SuperAdminView
+      metrics={{
+        tenantsActive,
+        usersTotal: overview.totals.users,
+        matchesTotal: overview.totals.activeConnections,
+        connectionsTotal,
+      }}
+      tenants={overview.tenants}
+      plans={plans}
+    />
   );
 }

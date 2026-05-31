@@ -121,6 +121,14 @@ export const mmInvitationCreateSchema = z.object({
 });
 export type MmInvitationCreateInput = z.infer<typeof mmInvitationCreateSchema>;
 
+// Plano: toggle de ativo + feature flags (super admin). Billing FREE por ora (D005).
+export const mmPlanUpdateSchema = z.object({
+  id: z.string().uuid(),
+  active: z.boolean().optional(),
+  features: z.array(z.string().max(60)).max(50).optional(),
+});
+export type MmPlanUpdateInput = z.infer<typeof mmPlanUpdateSchema>;
+
 // --- Super admin / tenants (Fase 9) --------------------------------------
 
 export const mmTenantCreateSchema = z.object({
