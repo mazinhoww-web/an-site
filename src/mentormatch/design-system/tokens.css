@@ -1,0 +1,66 @@
+/* MentorMatch — Design System tokens (DESIGN.md v1.0, decisao D022).
+   ESCOPADO sob .mm para NAO alterar o an-site: nada vai para :root global.
+   O an-site usa --color-* / html.theme-ink; este DS usa --brand/--bg/--surface
+   sob .mm e dark via .mm[data-theme="dark"]. Os dois nao colidem. */
+
+.mm {
+  /* === BRAND (substituivel por tenant em runtime via inline style no wrapper) === */
+  --brand: #4f46e5; /* default Indigo 600 — protagonista */
+  --brand-contrast: #ffffff; /* texto sobre o brand (revalidado por tenant) */
+  /* derivados do --brand por opacidade/mix — tenant so injeta --brand */
+  --brand-hover: color-mix(in srgb, var(--brand), #000 14%);
+  --brand-soft: color-mix(in srgb, var(--brand) 10%, var(--surface));
+  --brand-ring: color-mix(in srgb, var(--brand) 32%, transparent);
+
+  /* === NEUTRAL (fixo, nao muda por tenant) === */
+  --bg: #fbfbfd;
+  --surface: #ffffff;
+  --surface-2: #f4f4f7;
+  --border: #e6e6ec;
+  --border-strong: #d3d3dc;
+  --text: #121217;
+  --text-secondary: #5b5b66;
+  --text-muted: #9a9aa6;
+
+  /* === SEMANTIC (fixo) === */
+  --success: #16a34a;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --info: #2563eb;
+
+  /* === RAIO === */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+
+  /* === SOMBRA (com blur, sutil) === */
+  --shadow-xs: 0 1px 2px rgba(17, 17, 23, 0.06);
+  --shadow-sm: 0 2px 8px rgba(17, 17, 23, 0.08);
+  --shadow-md: 0 8px 24px rgba(17, 17, 23, 0.1);
+  --shadow-lg: 0 16px 48px rgba(17, 17, 23, 0.14);
+  --shadow-brand: 0 8px 24px var(--brand-ring);
+
+  /* fonts: variaveis vindas do next/font aplicadas no wrapper */
+  --mm-font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --mm-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  font-family: var(--mm-font-sans);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === DARK MODE (escopado ao wrapper) === */
+.mm[data-theme='dark'] {
+  --bg: #0b0b0f;
+  --surface: #15151b;
+  --surface-2: #1e1e26;
+  --border: #26262f;
+  --border-strong: #34343f;
+  --text: #f5f5f8;
+  --text-secondary: #b0b0bc;
+  --text-muted: #71717f;
+  --brand-soft: color-mix(in srgb, var(--brand) 14%, transparent);
+}
