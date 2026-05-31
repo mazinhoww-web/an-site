@@ -6,6 +6,7 @@ import { getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { runSerializable } from '@/lib/mentormatch/tx';
 import { createNotification, type MmTx } from '@/lib/mentormatch/notifications';
 import { mmConnectionRequestSchema, mmConnectionRespondSchema } from '@/lib/mentormatch/validators';
+import { emailMenteeAccepted, emailMentorNewRequest } from '@/lib/mentormatch/notify-email';
 
 export const dynamic = 'force-dynamic';
 
@@ -78,6 +79,7 @@ export async function POST(req: Request) {
   const parsed = mmConnectionRequestSchema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: 'Dados invalidos' }, { status: 400 });
   const { mentorId, message } = parsed.data;
+  const post: { fn: (() => Promise<void>) | null } = { fn: null };
 
   try {
     const result = await runSerializable<ApiResult>(async (tx) => {
@@ -134,6 +136,9 @@ export async function POST(req: Request) {
           },
           tx,
         );
+        const reqTenantId = mentor.tenantId;
+        const menteeName = user.name;
+        post.fn = () => emailMentorNewRequest(mentorId, reqTenantId, menteeName);
         return { status: 201, body: { connection: inserted[0] } };
       }
 
@@ -149,6 +154,7 @@ export async function POST(req: Request) {
       return { status: 201, body: { waitlisted: true, position } };
     });
 
+    if (result.status < 300 && post.fn) await post.fn().catch(() => {});
     return NextResponse.json(result.body, { status: result.status });
   } catch (error) {
     console.error('[MM_API_ERROR]', { endpoint: 'connections#POST', userId: user.id, error });
@@ -166,6 +172,7 @@ export async function PATCH(req: Request) {
   const parsed = mmConnectionRespondSchema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: 'Dados invalidos' }, { status: 400 });
   const { connectionId, status } = parsed.data;
+  const post: { fn: (() => Promise<void>) | null } = { fn: null };
 
   try {
     const result = await runSerializable<ApiResult>(async (tx) => {
@@ -201,6 +208,7 @@ export async function PATCH(req: Request) {
             },
             tx,
           );
+          post.fn = () => emailMenteeAccepted(conn.menteeId, conn.tenantId);
           return { status: 200, body: { ok: true } };
         }
         // REJECTED
@@ -235,6 +243,7 @@ export async function PATCH(req: Request) {
       return { status: 200, body: { ok: true } };
     });
 
+    if (result.status < 300 && post.fn) await post.fn().catch(() => {});
     return NextResponse.json(result.body, { status: result.status });
   } catch (error) {
     console.error('[MM_API_ERROR]', { endpoint: 'connections#PATCH', userId: user.id, error });

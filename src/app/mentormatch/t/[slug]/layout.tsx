@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { getActiveTenantBySlug, getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { resolvePostLoginHref } from '@/lib/mentormatch/dashboard-href';
 import { tenantBrandStyle } from '@/lib/mentormatch/tenant-theme';
+import { resolveColorScheme } from '@/lib/mentormatch/color-scheme';
 import { DashboardShell } from '@/components/mentormatch/layout/DashboardShell';
 
 // Guard: session + tenant ownership. Source of truth is the database (D-06).
@@ -25,9 +26,12 @@ export default async function TenantDashboardLayout({
   }
 
   // Injeta a marca do tenant em runtime no subtree do app (--brand + --mm-primary).
+  const theme = await resolveColorScheme();
   return (
     <div style={tenantBrandStyle(tenant)}>
-      <DashboardShell slug={params.slug}>{children}</DashboardShell>
+      <DashboardShell slug={params.slug} brandColor={tenant.brandColor} theme={theme}>
+        {children}
+      </DashboardShell>
     </div>
   );
 }

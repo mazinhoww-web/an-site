@@ -4,7 +4,17 @@ import { NotificationsBell } from '@/components/mentormatch/layout/Notifications
 
 // Dashboard chrome shared by all /t/[slug] pages: a header with the brand,
 // quick nav and the notifications bell. Guards live in the layout that renders this.
-export function DashboardShell({ slug, children }: { slug: string; children: ReactNode }) {
+export function DashboardShell({
+  slug,
+  children,
+  brandColor,
+  theme,
+}: {
+  slug: string;
+  children: ReactNode;
+  brandColor?: string | null;
+  theme?: 'light' | 'dark';
+}) {
   return (
     <div className="min-h-screen bg-bone text-ink">
       <header className="border-b border-hairline bg-paper">
@@ -19,7 +29,7 @@ export function DashboardShell({ slug, children }: { slug: string; children: Rea
             >
               Biblioteca
             </Link>
-            <NotificationsBell />
+            <NotificationsBell brandColor={brandColor} theme={theme} />
           </div>
         </div>
       </header>
