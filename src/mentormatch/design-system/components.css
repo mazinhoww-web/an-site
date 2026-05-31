@@ -396,6 +396,14 @@
   }
 }
 
+/* ============ TABLE ROW ============ */
+.mm .mm-row {
+  transition: background 0.15s;
+}
+.mm .mm-row:hover {
+  background: var(--surface-2);
+}
+
 /* ============ EMPTY STATE ============ */
 .mm .mm-empty {
   display: flex;
