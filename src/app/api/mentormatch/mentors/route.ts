@@ -83,10 +83,12 @@ export async function GET(req: Request) {
       id: m.id,
       name: m.name,
       headline: m.headline,
+      department: m.department,
       bio: m.bio,
       image: m.image,
       skills: skillsByMentor.get(m.id) ?? [],
       activeConnections: activeByMentor.get(m.id) ?? 0,
+      maxMentees: m.maxMentees,
     }));
     return NextResponse.json(result);
   } catch (error) {
