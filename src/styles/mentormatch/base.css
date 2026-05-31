@@ -1,0 +1,17 @@
+/* MentorMatch theme tokens. Default (dark) palette. Tenants override these via
+ * a `.theme-{key}` class on the module wrapper, or per-tenant brandColor set
+ * inline on the branded landing. NOTE: dashboards currently use the an-site
+ * design tokens; adopting --mm-* there is incremental (see PR). */
+:root {
+  --mm-primary: #6366f1;
+  --mm-secondary: #818cf8;
+  --mm-background: #0f172a;
+  --mm-surface: #1e293b;
+  --mm-surface-hover: #334155;
+  --mm-text: #f8fafc;
+  --mm-text-muted: #94a3b8;
+  --mm-border: #334155;
+  --mm-success: #22c55e;
+  --mm-warning: #f59e0b;
+  --mm-error: #ef4444;
+}

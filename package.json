@@ -13,6 +13,7 @@
     "db:migrate": "dotenv -e .env.local -- drizzle-kit migrate",
     "db:studio": "dotenv -e .env.local -- drizzle-kit studio",
     "db:push": "dotenv -e .env.local -- drizzle-kit push",
+    "db:seed-mm": "dotenv -e .env.local -- tsx src/lib/mentormatch/db/seed.ts",
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
@@ -29,6 +30,7 @@
     "@vercel/kv": "^3.0.0",
     "@vercel/og": "^0.11.1",
     "@vercel/speed-insights": "^2.0.0",
+    "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.45.2",
@@ -74,6 +76,7 @@
     "prettier": "^3",
     "shadcn": "^4.8.0",
     "tailwindcss": "^3.4.19",
+    "tsx": "^4.22.3",
     "typescript": "~5.7.3"
   }
 }

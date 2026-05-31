@@ -1,0 +1,14 @@
+/* Sicredi tenant theme (themeKey "sicredi"). */
+.theme-sicredi {
+  --mm-primary: #33820d;
+  --mm-secondary: #0a4b1e;
+  --mm-background: #0a0a0a;
+  --mm-surface: #141414;
+  --mm-surface-hover: #1a1a1a;
+  --mm-text: #fafafa;
+  --mm-text-muted: #a3a3a3;
+  --mm-border: #262626;
+  --mm-success: #4ade80;
+  --mm-warning: #f59e0b;
+  --mm-error: #ef4444;
+}
