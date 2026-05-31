@@ -4,7 +4,8 @@ import { db } from '@/db';
 import { mmSkill } from '@/lib/mentormatch/db/schema';
 import { getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { resolveOnboardingTenant } from '@/lib/mentormatch/tenant';
-import { OnboardingWizard } from '@/components/mentormatch/onboarding/OnboardingWizard';
+import { resolveColorScheme } from '@/lib/mentormatch/color-scheme';
+import { MmOnboardingWizard } from '@/components/mentormatch/onboarding/MmOnboardingWizard';
 
 export const dynamic = 'force-dynamic';
 
@@ -14,6 +15,7 @@ export default async function MenteeOnboardingPage() {
   if (user.onboardingDone && user.role && user.tenantId) redirect('/mentormatch/continue');
 
   const tenant = await resolveOnboardingTenant();
+  const theme = await resolveColorScheme();
   const rows = tenant
     ? await db
         .select()
@@ -23,5 +25,13 @@ export default async function MenteeOnboardingPage() {
     : [];
   const skills = rows.map((s) => ({ id: s.id, name: s.name }));
 
-  return <OnboardingWizard role="MENTEE" skills={skills} defaultName={user.name ?? ''} />;
+  return (
+    <MmOnboardingWizard
+      brandColor={tenant?.brandColor}
+      theme={theme}
+      skills={skills}
+      defaultName={user.name ?? ''}
+      defaultRole="MENTEE"
+    />
+  );
 }

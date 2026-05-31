@@ -22,6 +22,8 @@ export const mmCompleteProfileSchema = z.object({
   role: z.enum(['MENTOR', 'MENTEE']),
   name: z.string().min(2, 'Informe seu nome'),
   headline: z.string().max(160).optional(),
+  position: z.string().max(120).optional(),
+  department: z.string().max(120).optional(),
   bio: z.string().max(2000).optional(),
   education: z.string().max(500).optional(),
   experience: z.string().max(2000).optional(),
@@ -29,6 +31,10 @@ export const mmCompleteProfileSchema = z.object({
   whatsapp: z.string().max(40).optional(),
   image: z.string().url().optional(),
   skills: z.array(z.string().uuid()).min(1, 'Selecione ao menos uma habilidade'),
+  // D-22: dual-role. Ausentes -> derivados de `role` (retrocompat com a wizard legada).
+  canMentor: z.boolean().optional(),
+  canMentee: z.boolean().optional(),
+  maxMentees: z.number().int().min(1).max(8).optional(),
 });
 export type MmCompleteProfileInput = z.infer<typeof mmCompleteProfileSchema>;
 
