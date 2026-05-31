@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { isReservedTenantSlug } from '@/lib/mentormatch/constants';
 
 // Zod schemas for MentorMatch auth/onboarding. Shared by client forms and the
 // route handlers so validation never diverges.
@@ -118,7 +119,12 @@ export type MmInvitationCreateInput = z.infer<typeof mmInvitationCreateSchema>;
 
 export const mmTenantCreateSchema = z.object({
   name: z.string().min(2).max(120),
-  slug: z.string().regex(/^[a-z0-9-]+$/, 'Slug invalido (use a-z, 0-9, -)'),
+  slug: z
+    .string()
+    .min(2, 'Slug muito curto')
+    .max(40, 'Slug muito longo')
+    .regex(/^[a-z0-9-]+$/, 'Slug invalido (use a-z, 0-9, -)')
+    .refine((s) => !isReservedTenantSlug(s), 'Slug reservado pelo sistema'),
   brandColor: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Cor invalida').default('#6366f1'),
   secondaryColor: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Cor invalida').optional(),
   themeKey: z.string().min(1).max(40).optional(),

@@ -2,6 +2,7 @@ import { notFound, redirect } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { getActiveTenantBySlug, getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { resolvePostLoginHref } from '@/lib/mentormatch/dashboard-href';
+import { tenantBrandStyle } from '@/lib/mentormatch/tenant-theme';
 import { DashboardShell } from '@/components/mentormatch/layout/DashboardShell';
 
 // Guard: session + tenant ownership. Source of truth is the database (D-06).
@@ -23,5 +24,10 @@ export default async function TenantDashboardLayout({
     redirect(await resolvePostLoginHref(user));
   }
 
-  return <DashboardShell slug={params.slug}>{children}</DashboardShell>;
+  // Injeta a marca do tenant em runtime no subtree do app (--brand + --mm-primary).
+  return (
+    <div style={tenantBrandStyle(tenant)}>
+      <DashboardShell slug={params.slug}>{children}</DashboardShell>
+    </div>
+  );
 }
