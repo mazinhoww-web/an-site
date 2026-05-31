@@ -21,6 +21,61 @@ function shell(title: string, body: string): string {
     <h1 style="font-size:20px">${title}</h1>${body}</div>`;
 }
 
+function escapeHtml(s: string): string {
+  return s.replace(/[&<>"']/g, (c) =>
+    c === '&' ? '&amp;' : c === '<' ? '&lt;' : c === '>' ? '&gt;' : c === '"' ? '&quot;' : '&#39;',
+  );
+}
+
+// Branded transactional shell: header bar + CTA na cor de marca do tenant.
+function brandedShell(opts: {
+  tenantName: string;
+  brandColor: string;
+  title: string;
+  bodyHtml: string;
+  ctaUrl?: string;
+  ctaLabel?: string;
+}): string {
+  const cta = opts.ctaUrl
+    ? `<p style="margin:20px 0 0"><a href="${opts.ctaUrl}" style="display:inline-block;background:${opts.brandColor};color:#fff;text-decoration:none;padding:10px 18px;border-radius:12px;font-weight:600">${escapeHtml(opts.ctaLabel ?? 'Abrir')}</a></p>`
+    : '';
+  return `<div style="font-family:Inter,Arial,sans-serif;max-width:560px;margin:0 auto;color:#121217;border:1px solid #e6e6ec;border-radius:16px;overflow:hidden">
+    <div style="background:${opts.brandColor};padding:16px 24px;color:#fff;font-weight:700;font-size:15px">${escapeHtml(opts.tenantName)}</div>
+    <div style="padding:24px">
+      <h1 style="font-size:20px;margin:0 0 8px">${escapeHtml(opts.title)}</h1>
+      ${opts.bodyHtml}
+      ${cta}
+    </div>
+  </div>`;
+}
+
+// Email transacional branded por tenant (eventos de notificacao). Best-effort:
+// sem RESEND_API_KEY vira no-op; falhas nunca quebram o fluxo principal.
+export async function sendNotificationEmail(opts: {
+  to: string;
+  tenantName: string;
+  brandColor: string;
+  subject: string;
+  title: string;
+  bodyHtml: string;
+  ctaUrl?: string;
+  ctaLabel?: string;
+}): Promise<void> {
+  const resend = getResend();
+  if (!resend) return;
+  try {
+    await resend.emails.send({
+      from,
+      replyTo,
+      to: opts.to,
+      subject: opts.subject,
+      html: brandedShell(opts),
+    });
+  } catch (error) {
+    console.error('[MM_EMAIL_ERROR]', { kind: 'notification', to: opts.to, error });
+  }
+}
+
 export async function sendAccountApprovedEmail(to: string, name: string | null, tenantName: string) {
   const resend = getResend();
   if (!resend) return;
