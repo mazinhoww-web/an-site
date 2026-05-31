@@ -40,14 +40,14 @@ export default async function BrandedLandingPage({ params }: { params: { slug: s
 
         <div className="flex flex-wrap gap-3">
           <Link
-            href="/mentormatch/register"
+            href={`/mentormatch/${tenant.slug}/cadastrar`}
             className="rounded px-6 py-3 font-heading text-body text-paper"
             style={{ background: 'var(--mm-primary)' }}
           >
             Quero participar
           </Link>
           <Link
-            href="/mentormatch/login"
+            href={`/mentormatch/${tenant.slug}/login`}
             className="rounded border border-hairline px-6 py-3 font-heading text-body text-ink hover:border-ink"
           >
             Ja tenho conta
