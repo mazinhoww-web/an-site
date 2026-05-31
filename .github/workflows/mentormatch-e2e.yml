@@ -1,0 +1,52 @@
+name: MentorMatch E2E
+
+# Sobe Postgres efemero, aplica o schema, roda o seed real e executa o E2E
+# (Playwright `request`). Bloqueia o merge se falhar (D023: DONE = E2E verde).
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: mentormatch
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      POSTGRES_URL: postgresql://postgres:postgres@localhost:5432/mentormatch
+      AUTH_SECRET: ci-auth-secret-0123456789abcdef
+      MM_AUTH_SECRET: ci-mm-secret-0123456789abcdef
+      AUTH_URL: http://localhost:3000
+      NEXTAUTH_URL: http://localhost:3000
+      AUTH_TRUST_HOST: 'true'
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+      SUPER_ADMIN_EMAIL: super@mm.test
+      SUPER_ADMIN_PASSWORD: super1234
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Apply schema
+        run: pnpm exec drizzle-kit push --force
+      - name: Seed (real data)
+        run: pnpm seed
+      - name: E2E
+        run: pnpm test:e2e
