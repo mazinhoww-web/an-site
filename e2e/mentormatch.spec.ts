@@ -1,0 +1,100 @@
+import { expect, request as playwrightRequest, test } from '@playwright/test';
+import { mmLogin, mmSession } from './helpers';
+
+// E2E real contra o banco seedado (ver SEED.md). Cada teste cria seu proprio
+// `request` context (cookie jar isolado). Tolerante a re-execucao (seed
+// idempotente; pedidos duplicados -> 409 esperado).
+
+const SLUG = 'default';
+const BASE_URL = process.env.E2E_BASE_URL ?? `http://localhost:${process.env.PORT ?? 3000}`;
+
+async function tenantIdOf(slug: string): Promise<{ tenantId: string }> {
+  const ctx = await playwrightRequest.newContext({ baseURL: BASE_URL });
+  await mmLogin(ctx, `mentee1@${slug}.test`, 'test1234', slug);
+  const s = await mmSession(ctx);
+  const tenantId = s.user!.tenantId;
+  await ctx.dispose();
+  return { tenantId };
+}
+
+test('login resolve por (email, tenantSlug) e carrega a sessao do tenant', async ({ request }) => {
+  await mmLogin(request, `mentee1@${SLUG}.test`, 'test1234', SLUG);
+  const s = await mmSession(request);
+  expect(s.user?.role).toBe('MENTEE');
+  expect(s.user?.tenantSlug).toBe(SLUG);
+  expect(s.user?.onboardingDone).toBe(true);
+});
+
+test('vitrine de match lista os mentores do tenant', async ({ request }) => {
+  await mmLogin(request, `mentee1@${SLUG}.test`, 'test1234', SLUG);
+  const { user } = await mmSession(request);
+  const res = await request.get(`/api/mentormatch/mentors?tenantId=${user!.tenantId}`);
+  expect(res.ok()).toBeTruthy();
+  const mentors = (await res.json()) as { name: string; maxMentees: number; activeConnections: number }[];
+  expect(mentors.length).toBeGreaterThanOrEqual(6);
+  expect(mentors[0]).toHaveProperty('maxMentees');
+});
+
+test('mentorado envia solicitacao; duplicada e bloqueada (R3)', async ({ request }) => {
+  await mmLogin(request, `mentee5@${SLUG}.test`, 'test1234', SLUG);
+  const { user } = await mmSession(request);
+  const list = (await (await request.get(`/api/mentormatch/mentors?tenantId=${user!.tenantId}`)).json()) as {
+    id: string;
+    activeConnections: number;
+    maxMentees: number;
+  }[];
+  const available = list.find((m) => m.activeConnections < m.maxMentees);
+  expect(available, 'ha mentor disponivel no seed').toBeTruthy();
+
+  const first = await request.post('/api/mentormatch/connections', { data: { mentorId: available!.id } });
+  // 201 (primeira vez) ou 409 (re-execucao): em ambos a solicitacao existe.
+  expect([201, 409]).toContain(first.status());
+
+  const dup = await request.post('/api/mentormatch/connections', { data: { mentorId: available!.id } });
+  expect(dup.status()).toBe(409);
+});
+
+test('mentor aceita solicitacao -> ACCEPTED + notificacao ao mentorado (D006/R4)', async ({ request }) => {
+  // Mentorado dedicado envia para um mentor com vaga.
+  await mmLogin(request, `mentee7@${SLUG}.test`, 'test1234', SLUG);
+  const menteeSession = await mmSession(request);
+  const mentors = (await (
+    await request.get(`/api/mentormatch/mentors?tenantId=${menteeSession.user!.tenantId}`)
+  ).json()) as { id: string; activeConnections: number; maxMentees: number }[];
+  const mentor = mentors.find((m) => m.activeConnections < m.maxMentees)!;
+  await request.post('/api/mentormatch/connections', { data: { mentorId: mentor.id } });
+
+  // Descobre a conexao (como mentorado).
+  const myConns = (await (await request.get('/api/mentormatch/connections')).json()) as {
+    id: string;
+    mentorId: string;
+    status: string;
+  }[];
+  const conn = myConns.find((c) => c.mentorId === mentor.id && ['PENDING', 'ACCEPTED'].includes(c.status))!;
+  expect(conn, 'conexao registrada').toBeTruthy();
+
+  // Mentor faz login em outro contexto e aceita.
+  const mentorCtx = await playwrightRequest.newContext({ baseURL: BASE_URL });
+  // Acha o email do mentor pelo indice nao e trivial; loga cada mentorN ate ser o dono.
+  let accepted = false;
+  for (let i = 1; i <= 6 && !accepted; i++) {
+    await mmLogin(mentorCtx, `mentor${i}@${SLUG}.test`, 'test1234', SLUG);
+    const res = await mentorCtx.patch('/api/mentormatch/connections', {
+      data: { connectionId: conn.id, status: 'ACCEPTED' },
+    });
+    if (res.ok()) accepted = true; // 403 quando nao e o mentor dono (R5)
+  }
+  await mentorCtx.dispose();
+  expect(accepted, 'o mentor dono aceitou').toBeTruthy();
+
+  // Notificacao de aceite chegou ao mentorado.
+  const notifs = (await (await request.get('/api/mentormatch/notifications')).json()) as { type: string }[];
+  expect(notifs.some((n) => n.type === 'CONNECTION_ACCEPTED')).toBeTruthy();
+});
+
+test('isolamento de tenant: mentorado de A nao acessa mentores de B (G1/D023.6)', async ({ request }) => {
+  await mmLogin(request, `mentee1@${SLUG}.test`, 'test1234', SLUG);
+  const { tenantId: otherTenantId } = await tenantIdOf('sicredi');
+  const res = await request.get(`/api/mentormatch/mentors?tenantId=${otherTenantId}`);
+  expect(res.status()).toBe(403);
+});

@@ -14,7 +14,9 @@
     "db:studio": "dotenv -e .env.local -- drizzle-kit studio",
     "db:push": "dotenv -e .env.local -- drizzle-kit push",
     "db:seed-mm": "dotenv -e .env.local -- tsx src/lib/mentormatch/db/seed.ts",
-    "analyze": "ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build",
+    "seed": "tsx scripts/seed-mentormatch.ts",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@auth/core": "^0.34.3",
@@ -63,6 +65,7 @@
     ]
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^20.19.41",
     "@types/react": "^18.3.29",

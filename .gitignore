@@ -45,3 +45,9 @@ drizzle/meta
 .tmp/
 Skill/
 assets/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
