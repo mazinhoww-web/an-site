@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import type { CSSProperties } from 'react';
 import { getActiveTenantBySlug } from '@/lib/mentormatch/auth-helpers';
+import { tenantBrandStyle } from '@/lib/mentormatch/tenant-theme';
 import { SetTenantCookie } from '@/components/mentormatch/landing/SetTenantCookie';
 
 export const dynamic = 'force-dynamic';
@@ -14,8 +14,9 @@ export default async function BrandedLandingPage({ params }: { params: { slug: s
   const tenant = await getActiveTenantBySlug(params.slug);
   if (!tenant) notFound();
 
-  // Per-tenant brand color overrides the named theme's primary.
-  const style = { '--mm-primary': tenant.brandColor } as CSSProperties;
+  // Per-tenant brand color injected at runtime: --mm-primary (legacy) + --brand
+  // (design system), com --brand-contrast calculado por contraste WCAG.
+  const style = tenantBrandStyle(tenant);
 
   return (
     <div className={`theme-${tenant.themeKey} min-h-screen bg-bone text-ink`} style={style}>
@@ -39,14 +40,14 @@ export default async function BrandedLandingPage({ params }: { params: { slug: s
 
         <div className="flex flex-wrap gap-3">
           <Link
-            href="/mentormatch/register"
+            href={`/mentormatch/${tenant.slug}/cadastrar`}
             className="rounded px-6 py-3 font-heading text-body text-paper"
             style={{ background: 'var(--mm-primary)' }}
           >
             Quero participar
           </Link>
           <Link
-            href="/mentormatch/login"
+            href={`/mentormatch/${tenant.slug}/login`}
             className="rounded border border-hairline px-6 py-3 font-heading text-body text-ink hover:border-ink"
           >
             Ja tenho conta
