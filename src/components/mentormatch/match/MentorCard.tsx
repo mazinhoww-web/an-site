@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/mentormatch/design-system';
+import Link from 'next/link';
 import { Badge } from '@/mentormatch/design-system';
 import { capacityOf, type MatchMentor } from './types';
 
@@ -39,7 +39,7 @@ function Avatar({ name, image }: { name: string | null; image: string | null }) 
   );
 }
 
-export function MentorCard({ mentor, onView }: { mentor: MatchMentor; onView: () => void }) {
+export function MentorCard({ mentor, href }: { mentor: MatchMentor; href: string }) {
   const cap = capacityOf(mentor);
   const visibleSkills = mentor.skills.slice(0, 3);
   const extra = mentor.skills.length - visibleSkills.length;
@@ -97,9 +97,9 @@ export function MentorCard({ mentor, onView }: { mentor: MatchMentor; onView: ()
         </div>
       </div>
 
-      <Button onClick={onView} style={{ width: '100%' }}>
+      <Link href={href} className="mm-btn mm-btn--primary" style={{ width: '100%' }}>
         Ver perfil
-      </Button>
+      </Link>
     </div>
   );
 }

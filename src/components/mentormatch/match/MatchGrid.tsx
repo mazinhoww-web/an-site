@@ -9,33 +9,30 @@ import {
   Skeleton,
   Stagger,
   StaggerItem,
-  ToastProvider,
 } from '@/mentormatch/design-system';
 import { MentorCard } from './MentorCard';
-import { MentorProfileModal } from './MentorProfileModal';
 import type { MatchMentor, SkillOption } from './types';
 
 const PAGE_SIZE = 12;
 const GRID_CLASS = 'grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 min-[1440px]:grid-cols-4';
 
 interface MatchGridProps {
+  slug: string;
   tenantId: string;
   brandColor?: string | null;
   theme?: 'light' | 'dark';
   skills: SkillOption[];
 }
 
-export function MatchGrid({ tenantId, brandColor, theme = 'light', skills }: MatchGridProps) {
+export function MatchGrid({ slug, tenantId, brandColor, theme = 'light', skills }: MatchGridProps) {
   return (
     <MentorMatchThemeRoot brand={brandColor} theme={theme} style={{ minHeight: '100%' }}>
-      <ToastProvider>
-        <MatchGridInner tenantId={tenantId} skills={skills} />
-      </ToastProvider>
+      <MatchGridInner slug={slug} tenantId={tenantId} skills={skills} />
     </MentorMatchThemeRoot>
   );
 }
 
-function MatchGridInner({ tenantId, skills }: { tenantId: string; skills: SkillOption[] }) {
+function MatchGridInner({ slug, tenantId, skills }: { slug: string; tenantId: string; skills: SkillOption[] }) {
   const [q, setQ] = useState('');
   const [skill, setSkill] = useState('');
   const [area, setArea] = useState('');
@@ -45,8 +42,6 @@ function MatchGridInner({ tenantId, skills }: { tenantId: string; skills: SkillO
   const [mentors, setMentors] = useState<MatchMentor[]>([]);
   const [state, setState] = useState<'loading' | 'ok' | 'error'>('loading');
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState<MatchMentor | null>(null);
-  const [requested, setRequested] = useState<Set<string>>(new Set());
 
   // Server-side filters: q (debounced) + skill.
   useEffect(() => {
@@ -203,7 +198,7 @@ function MatchGridInner({ tenantId, skills }: { tenantId: string; skills: SkillO
           <Stagger key={`${page}-${q}-${skill}-${area}-${avail}`} className={GRID_CLASS}>
             {visible.map((m) => (
               <StaggerItem key={m.id}>
-                <MentorCard mentor={m} onView={() => setActive(m)} />
+                <MentorCard mentor={m} href={`/mentormatch/t/${slug}/mentors/${m.id}`} />
               </StaggerItem>
             ))}
           </Stagger>
@@ -223,13 +218,6 @@ function MatchGridInner({ tenantId, skills }: { tenantId: string; skills: SkillO
           )}
         </>
       )}
-
-      <MentorProfileModal
-        mentor={active}
-        onClose={() => setActive(null)}
-        alreadyRequested={active ? requested.has(active.id) : false}
-        onRequested={(id) => setRequested((prev) => new Set(prev).add(id))}
-      />
     </div>
   );
 }

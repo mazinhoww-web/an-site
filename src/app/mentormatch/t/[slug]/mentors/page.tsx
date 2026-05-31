@@ -20,5 +20,7 @@ export default async function MentorsPage({ params }: { params: { slug: string }
     .orderBy(asc(mmSkill.name));
   const skills = skillRows.map((s) => ({ id: s.id, name: s.name }));
 
-  return <MatchGrid tenantId={tenant.id} brandColor={tenant.brandColor} theme={theme} skills={skills} />;
+  return (
+    <MatchGrid slug={params.slug} tenantId={tenant.id} brandColor={tenant.brandColor} theme={theme} skills={skills} />
+  );
 }
