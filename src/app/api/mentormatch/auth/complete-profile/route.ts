@@ -55,21 +55,31 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Selecione ao menos uma habilidade valida' }, { status: 400 });
     }
 
-    const isTeaching = data.role === 'MENTOR';
+    // D-22: dual-role. `role` segue como papel primario; capacidades derivam do
+    // payload (wizard branded) ou de `role` (wizard legada). Skills do usuario
+    // sao "de ensino" quando ele pode mentorar.
+    const canMentor = data.canMentor ?? data.role === 'MENTOR';
+    const canMentee = data.canMentee ?? data.role === 'MENTEE';
+    const isTeaching = canMentor;
 
     const updatedUser = await db.transaction(async (tx) => {
       const upd = await tx
         .update(mmUser)
         .set({
           role: data.role,
+          canMentor,
+          canMentee,
           name: data.name,
           headline: data.headline ?? null,
+          position: data.position ?? null,
+          department: data.department ?? null,
           bio: data.bio ?? null,
           education: data.education ?? null,
           experience: data.experience ?? null,
           linkedin: data.linkedin ? data.linkedin : null,
           whatsapp: data.whatsapp ?? null,
           image: data.image ?? null,
+          maxMentees: data.maxMentees ?? current.maxMentees,
           tenantId,
           status: 'APPROVED',
           onboardingDone: true,

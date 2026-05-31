@@ -70,7 +70,11 @@ export const mmUser = pgTable(
     // bcrypt hash (cost 10). Credentials provider compares against this.
     password: text('password'),
     image: text('image'),
-    role: text('role'), // SUPER_ADMIN | ADMIN | MENTOR | MENTEE | null
+    role: text('role'), // SUPER_ADMIN | ADMIN | MENTOR | MENTEE | null (papel primario / dashboard ativo)
+    // D-22: capacidades de papel (dual-role). `role` segue como papel primario
+    // para routing/guards; estas flags habilitam atuar como mentor e/ou mentee.
+    canMentor: boolean('can_mentor').default(false).notNull(),
+    canMentee: boolean('can_mentee').default(false).notNull(),
     status: text('status').default('PENDING').notNull(), // PENDING|APPROVED|REJECTED|SUSPENDED
     bio: text('bio'),
     headline: text('headline'),
