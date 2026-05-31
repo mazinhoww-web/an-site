@@ -1,26 +1,25 @@
 import { notFound } from 'next/navigation';
 import { getActiveTenantBySlug } from '@/lib/mentormatch/auth-helpers';
-import { SettingsForm } from '@/components/mentormatch/admin/SettingsForm';
+import { resolveColorScheme } from '@/lib/mentormatch/color-scheme';
+import { AdminBrandingView } from '@/components/mentormatch/admin/AdminBrandingView';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminSettingsPage({ params }: { params: { slug: string } }) {
   const tenant = await getActiveTenantBySlug(params.slug);
   if (!tenant) notFound();
+  const theme = await resolveColorScheme();
+
   return (
-    <main className="space-y-6">
-      <h1 className="font-heading text-display-m">Configuracoes</h1>
-      <SettingsForm
-        initial={{
-          name: tenant.name,
-          slug: tenant.slug,
-          brandColor: tenant.brandColor,
-          secondaryColor: tenant.secondaryColor,
-          logoUrl: tenant.logoUrl,
-          themeKey: tenant.themeKey,
-          maxMenteesPerMentor: tenant.maxMenteesPerMentor,
-        }}
-      />
-    </main>
+    <AdminBrandingView
+      slug={tenant.slug}
+      theme={theme}
+      initial={{
+        name: tenant.name,
+        brandColor: tenant.brandColor,
+        logoUrl: tenant.logoUrl,
+        maxMenteesPerMentor: tenant.maxMenteesPerMentor,
+      }}
+    />
   );
 }

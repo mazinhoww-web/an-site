@@ -1,10 +1,11 @@
 import Link from 'next/link';
 
 const ITEMS: [string, string][] = [
+  ['', 'Painel'],
   ['users', 'Usuarios'],
   ['skills', 'Skills'],
   ['library', 'Biblioteca'],
-  ['settings', 'Settings'],
+  ['settings', 'Configuracoes'],
   ['reports', 'Relatorios'],
   ['export', 'Export'],
   ['invitations', 'Convites'],
@@ -16,7 +17,7 @@ export function AdminNav({ slug }: { slug: string }) {
       {ITEMS.map(([seg, label]) => (
         <Link
           key={seg}
-          href={`/mentormatch/t/${slug}/admin/${seg}`}
+          href={seg ? `/mentormatch/t/${slug}/admin/${seg}` : `/mentormatch/t/${slug}/admin`}
           className="rounded border border-hairline px-3 py-1.5 text-body-s text-ink hover:border-ink"
         >
           {label}
