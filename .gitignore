@@ -51,3 +51,6 @@ assets/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# DB backups (deploy)
+*.dump

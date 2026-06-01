@@ -41,11 +41,19 @@ function jar() {
   };
 }
 
+async function asJson<T>(res: Response, label: string): Promise<T> {
+  const ct = res.headers.get('content-type') ?? '';
+  if (!ct.includes('application/json')) {
+    throw new Error(`${label}: HTTP ${res.status} com resposta nao-JSON (${ct || 'sem content-type'}). O ambiente esta no ar e saudavel?`);
+  }
+  return (await res.json()) as T;
+}
+
 async function login(email: string, password: string): Promise<ReturnType<typeof jar>> {
   const j = jar();
   const csrfRes = await fetch(`${AUTH}/csrf`, { headers: { cookie: j.header() } });
   j.absorb(csrfRes);
-  const { csrfToken } = (await csrfRes.json()) as { csrfToken: string };
+  const { csrfToken } = await asJson<{ csrfToken: string }>(csrfRes, 'csrf');
   const body = new URLSearchParams({ csrfToken, email, password, tenantSlug: TENANT, json: 'true' });
   const res = await fetch(`${AUTH}/callback/credentials`, {
     method: 'POST',
