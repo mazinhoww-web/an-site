@@ -63,12 +63,17 @@ export async function GET(req: Request) {
 
   const status = new URL(req.url).searchParams.get('status');
   const mine = or(eq(mmConnection.mentorId, user.id), eq(mmConnection.menteeId, user.id));
-  const where = status ? and(mine, eq(mmConnection.status, status)) : mine;
+  // Defesa em profundidade: alem do escopo por ownership (mentorId/menteeId), filtra
+  // explicitamente pelo tenant do usuario, para que nenhuma linha cross-tenant
+  // possa retornar (independe de a query lembrar do escopo).
+  const conds = [mine];
+  if (user.tenantId) conds.push(eq(mmConnection.tenantId, user.tenantId));
+  if (status) conds.push(eq(mmConnection.status, status));
 
   const rows = await db
     .select()
     .from(mmConnection)
-    .where(where)
+    .where(and(...conds))
     .orderBy(desc(mmConnection.createdAt));
   return NextResponse.json(rows);
 }
@@ -185,6 +190,10 @@ export async function PATCH(req: Request) {
       const rows = await tx.select().from(mmConnection).where(eq(mmConnection.id, connectionId)).limit(1);
       const conn = rows[0];
       if (!conn) return { status: 404, body: { error: 'Conexao nao encontrada' } };
+      // Defesa em profundidade: a conexao tem de ser do tenant do usuario.
+      if (user.tenantId && conn.tenantId !== user.tenantId) {
+        return { status: 404, body: { error: 'Conexao nao encontrada' } };
+      }
 
       if (status === 'ACCEPTED' || status === 'REJECTED') {
         if (conn.mentorId !== user.id) {

@@ -1,10 +1,13 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { MentorMatchThemeRoot } from '@/mentormatch/design-system';
 import { NotificationsBell } from '@/components/mentormatch/layout/NotificationsBell';
 import { RoleSwitcher } from '@/components/mentormatch/layout/RoleSwitcher';
 
-// Dashboard chrome shared by all /t/[slug] pages: a header with the brand,
-// quick nav and the notifications bell. Guards live in the layout that renders this.
+// Chrome compartilhado por todas as paginas /t/[slug]: header com marca, nav
+// rapida e o sino de notificacoes. Guardas vivem no layout que renderiza isto.
+// Migrado para o DS (D022): escopo .mm + tema (dark) + --brand do tenant, para
+// que o chrome E o conteudo respondam ao toggle de tema e ao white-label.
 export function DashboardShell({
   slug,
   children,
@@ -19,17 +22,30 @@ export function DashboardShell({
   dual?: boolean;
 }) {
   return (
-    <div className="min-h-screen bg-bone text-ink">
-      <header className="border-b border-hairline bg-paper">
-        <div className="mx-auto flex max-w-container items-center justify-between px-6 py-4">
-          <Link href={`/mentormatch/t/${slug}`} className="font-heading text-h3">
+    <MentorMatchThemeRoot
+      theme={theme}
+      brand={brandColor}
+      style={{
+        minHeight: '100vh',
+        background: 'var(--bg)',
+        color: 'var(--text)',
+        fontFamily: 'var(--mm-font-sans)',
+      }}
+    >
+      <header style={{ borderBottom: '1px solid var(--border)', background: 'var(--surface)' }}>
+        <div
+          className="mx-auto flex items-center justify-between"
+          style={{ maxWidth: 1200, padding: '16px 24px' }}
+        >
+          <Link href={`/mentormatch/t/${slug}`} className="mm-h3" style={{ textDecoration: 'none' }}>
             MentorMatch
           </Link>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center" style={{ gap: 16 }}>
             {dual && <RoleSwitcher slug={slug} brandColor={brandColor} theme={theme} />}
             <Link
               href={`/mentormatch/t/${slug}/library`}
-              className="text-body-s text-ink hover:underline"
+              className="mm-body-small"
+              style={{ color: 'var(--text-secondary)' }}
             >
               Biblioteca
             </Link>
@@ -37,7 +53,9 @@ export function DashboardShell({
           </div>
         </div>
       </header>
-      <div className="mx-auto max-w-container px-6 py-10">{children}</div>
-    </div>
+      <div className="mx-auto" style={{ maxWidth: 1200, padding: '40px 24px' }}>
+        {children}
+      </div>
+    </MentorMatchThemeRoot>
   );
 }

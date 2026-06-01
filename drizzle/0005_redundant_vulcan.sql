@@ -1,0 +1,1 @@
+ALTER TABLE "mm_user" ADD COLUMN "consent_at" timestamp with time zone;

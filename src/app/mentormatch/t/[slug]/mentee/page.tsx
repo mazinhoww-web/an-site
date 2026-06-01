@@ -5,6 +5,7 @@ import { db } from '@/db';
 import { mmConnection, mmUser } from '@/lib/mentormatch/db/schema';
 import { getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { whatsappHref } from '@/lib/mentormatch/format';
+import { Badge } from '@/mentormatch/design-system';
 
 export const dynamic = 'force-dynamic';
 
@@ -36,55 +37,66 @@ export default async function MenteeDashboardPage({ params }: { params: { slug: 
   const currentWa = whatsappHref(currentMentor?.whatsapp);
 
   return (
-    <main className="space-y-10">
-      <header className="flex items-center justify-between">
-        <h1 className="font-heading text-display-m">Painel do mentorado</h1>
+    <main style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
+      <header className="flex items-center justify-between" style={{ gap: 16 }}>
+        <h1 className="mm-h1">Painel do mentorado</h1>
         <Link
           href={`/mentormatch/t/${params.slug}/mentors`}
-          className="rounded bg-ink px-4 py-2 text-body-s text-paper hover:bg-graphite"
+          className="mm-btn mm-btn--primary"
+          style={{ textDecoration: 'none' }}
         >
           Buscar mentores
         </Link>
       </header>
 
-      <section className="space-y-3">
-        <h2 className="font-heading text-h2">Seu mentor</h2>
+      <section style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <h2 className="mm-h2">Seu mentor</h2>
         {currentMentor ? (
-          <div className="flex items-center justify-between rounded border border-hairline bg-paper px-4 py-3">
-            <span className="text-body">
+          <div
+            className="mm-card flex items-center justify-between"
+            style={{ gap: 16 }}
+          >
+            <span className="mm-body">
               {currentMentor.name ?? 'Mentor'}{' '}
-              <span className="text-body-s text-graphite">{currentMentor.headline ?? ''}</span>
+              <span className="mm-body-small" style={{ color: 'var(--text-secondary)' }}>
+                {currentMentor.headline ?? ''}
+              </span>
             </span>
             {currentWa && (
-              <a href={currentWa} target="_blank" rel="noreferrer" className="text-body-s text-ink underline">
+              <a
+                href={currentWa}
+                target="_blank"
+                rel="noreferrer"
+                className="mm-btn mm-btn--secondary"
+                style={{ textDecoration: 'none' }}
+              >
                 WhatsApp
               </a>
             )}
           </div>
         ) : (
-          <p className="text-body-s text-graphite">
+          <p className="mm-body" style={{ color: 'var(--text-secondary)' }}>
             Voce ainda nao tem um mentor ativo. Use &quot;Buscar mentores&quot; para solicitar.
           </p>
         )}
       </section>
 
-      <section className="space-y-3">
-        <h2 className="font-heading text-h2">Suas solicitacoes</h2>
+      <section style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <h2 className="mm-h2">Suas solicitacoes</h2>
         {connections.length === 0 ? (
-          <p className="text-body-s text-graphite">Nenhuma solicitacao ainda.</p>
+          <p className="mm-body" style={{ color: 'var(--text-secondary)' }}>
+            Nenhuma solicitacao ainda.
+          </p>
         ) : (
-          <ul className="space-y-2">
+          <ul style={{ display: 'flex', flexDirection: 'column', gap: 8, listStyle: 'none', padding: 0, margin: 0 }}>
             {connections.map((c) => {
               const m = mentorById.get(c.mentorId);
               return (
-                <li
-                  key={c.id}
-                  className="flex items-center justify-between rounded border border-hairline bg-paper px-4 py-3"
-                >
-                  <span className="text-body">{m?.name ?? 'Mentor'}</span>
-                  <span className="font-mono text-mono-meta uppercase tracking-wide text-graphite">
+                <li key={c.id} className="mm-card flex items-center justify-between" style={{ gap: 16 }}>
+                  <span className="mm-body">{m?.name ?? 'Mentor'}</span>
+                  <Badge tone={c.status === 'ACCEPTED' ? 'success' : 'warning'}>
                     {STATUS_LABEL[c.status] ?? c.status}
-                  </span>
+                  </Badge>
                 </li>
               );
             })}

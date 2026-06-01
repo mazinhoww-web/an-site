@@ -9,8 +9,16 @@ export const mmRegisterSchema = z.object({
   email: z.string().email('Email invalido'),
   password: z.string().min(8, 'Minimo de 8 caracteres'),
   invitationToken: z.string().optional(),
+  // LGPD: consentimento explicito obrigatorio (aceite de termos/privacidade).
+  consent: z.literal(true, { message: 'E necessario aceitar os termos e a politica de privacidade' }),
 });
 export type MmRegisterInput = z.infer<typeof mmRegisterSchema>;
+
+// Exclusao de usuario (direito ao esquecimento - LGPD). Admin do tenant.
+export const mmUserDeleteSchema = z.object({
+  userId: z.string().uuid(),
+  tenantId: z.string().uuid(),
+});
 
 export const mmLoginSchema = z.object({
   email: z.string().email('Email invalido'),

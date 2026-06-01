@@ -38,41 +38,35 @@ export default function MmLoginPage() {
   }
 
   return (
-    <main className="mx-auto max-w-md px-6 py-20">
-      <h1 className="mb-6 font-heading text-display-m">Entrar</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-        <label className="block space-y-1.5">
-          <span className={labelCls}>Email</span>
-          <input type="email" autoComplete="email" className={inputCls} {...register('email')} />
-          {errors.email && <span className="block text-body-s text-error">{errors.email.message}</span>}
+    <main className="mx-auto" style={{ maxWidth: 420, padding: '80px 24px' }}>
+      <h1 className="mm-h1" style={{ marginBottom: 24 }}>Entrar</h1>
+      <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <label className="mm-field">
+          <span className="mm-label">Email</span>
+          <input type="email" autoComplete="email" className="mm-input" {...register('email')} />
+          {errors.email && <span className="mm-field__error">{errors.email.message}</span>}
         </label>
-        <label className="block space-y-1.5">
-          <span className={labelCls}>Senha</span>
-          <input type="password" autoComplete="current-password" className={inputCls} {...register('password')} />
-          {errors.password && <span className="block text-body-s text-error">{errors.password.message}</span>}
+        <label className="mm-field">
+          <span className="mm-label">Senha</span>
+          <input type="password" autoComplete="current-password" className="mm-input" {...register('password')} />
+          {errors.password && <span className="mm-field__error">{errors.password.message}</span>}
         </label>
-        {error && <p className="text-body-s text-error">{error}</p>}
-        <button type="submit" disabled={isSubmitting} className={btnCls}>
+        {error && <p className="mm-body-small" style={{ color: 'var(--danger)' }}>{error}</p>}
+        <button type="submit" disabled={isSubmitting} className="mm-btn mm-btn--primary">
           {isSubmitting ? 'Entrando...' : 'Entrar'}
         </button>
       </form>
-      <p className="mt-6 text-body-s text-graphite">
+      <p className="mm-body-small" style={{ marginTop: 24, color: 'var(--text-secondary)' }}>
         Nao tem conta?{' '}
-        <Link href="/mentormatch/register" className="text-ink underline">
+        <Link href="/mentormatch/register" style={{ color: 'var(--brand)' }}>
           Criar conta
         </Link>
       </p>
-      <p className="mt-2 text-body-s text-graphite">
-        <Link href="/mentormatch/forgot-password" className="text-ink underline">
+      <p className="mm-body-small" style={{ marginTop: 8, color: 'var(--text-secondary)' }}>
+        <Link href="/mentormatch/forgot-password" style={{ color: 'var(--brand)' }}>
           Esqueci a senha
         </Link>
       </p>
     </main>
   );
 }
-
-const labelCls = 'font-mono text-mono-meta uppercase tracking-wide text-graphite';
-const inputCls =
-  'w-full rounded border border-hairline bg-paper px-3 py-2 text-body text-ink outline-none focus:border-ink';
-const btnCls =
-  'rounded bg-ink px-6 py-3 font-heading text-body text-paper transition hover:bg-graphite disabled:opacity-60';

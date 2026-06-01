@@ -26,6 +26,12 @@ export default async function TenantDashboardLayout({
     notFound();
   }
 
+  // Conta aguardando aprovacao do admin (auto-cadastro). Nao acessa o dashboard
+  // ate ser aprovada; bounce para a tela de pendencia (fora deste subtree).
+  if (user.role !== 'SUPER_ADMIN' && user.status === 'PENDING') {
+    redirect('/mentormatch/pendente');
+  }
+
   // Injeta a marca do tenant em runtime no subtree do app (--brand + --mm-primary).
   const theme = await resolveColorScheme();
   const dual = Boolean(user.canMentor && user.canMentee);

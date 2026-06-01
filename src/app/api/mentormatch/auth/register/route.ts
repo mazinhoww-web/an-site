@@ -73,6 +73,7 @@ export async function POST(req: Request) {
             status: 'APPROVED',
             role: invite.role,
             tenantId: invite.tenantId,
+            consentAt: new Date(),
           })
           .returning();
         await tx.update(mmInvitation).set({ used: true }).where(eq(mmInvitation.id, invite.id));
@@ -92,7 +93,7 @@ export async function POST(req: Request) {
     }
     const inserted = await db
       .insert(mmUser)
-      .values({ name, email, password: hash, status: 'PENDING' })
+      .values({ name, email, password: hash, status: 'PENDING', consentAt: new Date() })
       .returning();
     const user = inserted[0]!;
     return NextResponse.json({ id: user.id, email: user.email }, { status: 201 });

@@ -10,6 +10,8 @@ export async function resolvePostLoginHref(user: MmDbUser): Promise<string> {
   if (user.role === 'SUPER_ADMIN') return '/mentormatch/admin';
   if (!user.role || !user.tenantId) return '/mentormatch/select-profile';
   if (!user.onboardingDone) return `/mentormatch/onboarding/${user.role.toLowerCase()}`;
+  // Conta aguardando aprovacao do admin (auto-cadastro em tenant real).
+  if (user.status === 'PENDING') return '/mentormatch/pendente';
 
   const rows = await db
     .select()

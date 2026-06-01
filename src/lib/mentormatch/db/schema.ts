@@ -88,6 +88,8 @@ export const mmUser = pgTable(
     maxMentees: integer('max_mentees').default(4).notNull(),
     onboardingDone: boolean('onboarding_done').default(false).notNull(),
     tenantId: uuid('tenant_id').references(() => mmTenant.id),
+    // LGPD: timestamp do consentimento (aceite de termos/privacidade no cadastro).
+    consentAt: timestamp('consent_at', { withTimezone: true }),
     createdAt: timestamp('created_at').defaultNow(),
     updatedAt: timestamp('updated_at').defaultNow(),
   },
@@ -301,6 +303,15 @@ export const mmUsage = pgTable(
     ),
   }),
 );
+
+// Rate limiting duravel e compartilhado entre instancias (serverless). Usado
+// pelo limitador de auth (login/register/forgot/troca-senha) quando o KV nao
+// esta configurado. Chave: `rl:<escopo>:<ip>:<...>`. Janela via reset_at.
+export const mmRateLimit = pgTable('mm_rate_limit', {
+  key: text('key').primaryKey(),
+  count: integer('count').notNull().default(0),
+  resetAt: timestamp('reset_at', { withTimezone: true }).notNull(),
+});
 
 export const mmVerificationToken = pgTable(
   'mm_verification_token',

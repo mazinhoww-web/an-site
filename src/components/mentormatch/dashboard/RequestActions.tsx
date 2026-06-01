@@ -33,12 +33,12 @@ export function RequestActions({ connectionId }: { connectionId: string }) {
   }
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center" style={{ gap: 8 }}>
       <button
         type="button"
         disabled={pending}
         onClick={() => respond('ACCEPTED')}
-        className="rounded bg-ink px-4 py-1.5 text-body-s text-paper hover:bg-graphite disabled:opacity-60"
+        className="mm-btn mm-btn--primary"
       >
         Aceitar
       </button>
@@ -46,11 +46,15 @@ export function RequestActions({ connectionId }: { connectionId: string }) {
         type="button"
         disabled={pending}
         onClick={() => respond('REJECTED')}
-        className="rounded border border-hairline px-4 py-1.5 text-body-s text-ink hover:border-ink disabled:opacity-60"
+        className="mm-btn mm-btn--secondary"
       >
         Recusar
       </button>
-      {error && <span className="text-body-s text-error">{error}</span>}
+      {error && (
+        <span className="mm-body-small" style={{ color: 'var(--danger)' }}>
+          {error}
+        </span>
+      )}
     </div>
   );
 }
