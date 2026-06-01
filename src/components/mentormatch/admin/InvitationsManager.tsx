@@ -1,10 +1,30 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
+import { Badge, Button, Input, MentorMatchThemeRoot, Reveal, ToastProvider, useToast } from '@/mentormatch/design-system';
 
 type Invite = { id: string; email: string; role: string; used: boolean; expired: boolean };
 
-export function InvitationsManager({ tenantId }: { tenantId: string }) {
+interface Props {
+  tenantId: string;
+  brandColor?: string | null;
+  theme?: 'light' | 'dark';
+}
+
+const ROLE_LABEL: Record<string, string> = { MENTEE: 'Mentorado', MENTOR: 'Mentor', ADMIN: 'Admin' };
+
+export function InvitationsManager(props: Props) {
+  return (
+    <MentorMatchThemeRoot brand={props.brandColor} theme={props.theme} style={{ minHeight: '100%', padding: '8px 0 40px' }}>
+      <ToastProvider>
+        <Inner tenantId={props.tenantId} />
+      </ToastProvider>
+    </MentorMatchThemeRoot>
+  );
+}
+
+function Inner({ tenantId }: { tenantId: string }) {
+  const { toast } = useToast();
   const [invites, setInvites] = useState<Invite[]>([]);
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('MENTEE');
@@ -35,52 +55,63 @@ export function InvitationsManager({ tenantId }: { tenantId: string }) {
       return;
     }
     setEmail('');
+    toast({ title: 'Convite enviado', description: email, tone: 'success' });
     void load();
   }
 
   async function revoke(id: string) {
     await fetch(`/api/mentormatch/invitations?id=${id}`, { method: 'DELETE' }).catch(() => {});
+    toast({ title: 'Convite revogado', tone: 'info' });
     void load();
   }
 
   return (
-    <div className="space-y-5">
-      <div className="flex flex-wrap items-end gap-3">
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="email@empresa.com"
-          className={input}
-        />
-        <select value={role} onChange={(e) => setRole(e.target.value)} className={input}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 720 }}>
+      <Reveal>
+        <h1 className="mm-h1">Convites</h1>
+        <p className="mm-body-small">Convide membros para o programa.</p>
+      </Reveal>
+
+      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', gap: 10 }}>
+        <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@empresa.com" style={{ maxWidth: 260 }} />
+        <select className="mm-input" value={role} onChange={(e) => setRole(e.target.value)} style={{ maxWidth: 160 }}>
           <option value="MENTEE">Mentorado</option>
           <option value="MENTOR">Mentor</option>
           <option value="ADMIN">Admin</option>
         </select>
-        <button type="button" onClick={() => void create()} className={btnPrimary}>
-          Convidar
-        </button>
+        <Button onClick={() => void create()}>Convidar</Button>
       </div>
-      {error && <p className="text-body-s text-error">{error}</p>}
-      <ul className="space-y-2">
-        {invites.length === 0 && <li className="text-body-s text-graphite">Nenhum convite.</li>}
+      {error && (
+        <p className="mm-field__error" role="alert">
+          {error}
+        </p>
+      )}
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {invites.length === 0 && (
+          <p className="mm-body-small" style={{ color: 'var(--text-muted)' }}>
+            Nenhum convite.
+          </p>
+        )}
         {invites.map((i) => (
-          <li key={i.id} className="flex items-center justify-between rounded border border-hairline bg-paper px-4 py-2">
-            <span className="text-body-s">
-              {i.email} <span className="font-mono text-mono-meta text-graphite">{i.role}</span>{' '}
-              <span className="text-graphite">{i.used ? 'usado' : i.expired ? 'expirado' : 'pendente'}</span>
-            </span>
-            <button type="button" onClick={() => void revoke(i.id)} className={btn}>
+          <div key={i.id} className="mm-card" style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px' }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <span className="mm-body-strong">{i.email}</span>{' '}
+              <span className="mm-body-small">{ROLE_LABEL[i.role] ?? i.role}</span>
+            </div>
+            {i.used ? (
+              <Badge tone="success">Usado</Badge>
+            ) : i.expired ? (
+              <Badge tone="danger">Expirado</Badge>
+            ) : (
+              <Badge tone="warning">Pendente</Badge>
+            )}
+            <Button variant="ghost" onClick={() => void revoke(i.id)} style={{ height: 32, padding: '0 12px', fontSize: 13, color: 'var(--danger)' }}>
               Revogar
-            </button>
-          </li>
+            </Button>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
-
-const input = 'rounded border border-hairline bg-paper px-3 py-2 text-body text-ink outline-none focus:border-ink';
-const btn = 'rounded border border-hairline px-3 py-1.5 text-body-s text-ink hover:border-ink';
-const btnPrimary = 'rounded bg-ink px-4 py-2 text-body-s text-paper hover:bg-graphite';
