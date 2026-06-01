@@ -12,6 +12,7 @@ import {
   emailMenteeWaitlistPromoted,
   emailMentorNewRequest,
 } from '@/lib/mentormatch/notify-email';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -163,7 +164,7 @@ export async function POST(req: Request) {
     if (result.status < 300 && post.fn) await post.fn().catch(() => {});
     return NextResponse.json(result.body, { status: result.status });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'connections#POST', userId: user.id, error });
+    alert5xx('connections#POST', error, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }
@@ -255,7 +256,7 @@ export async function PATCH(req: Request) {
     if (result.status < 300) for (const j of post.jobs) await j().catch(() => {});
     return NextResponse.json(result.body, { status: result.status });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'connections#PATCH', userId: user.id, error });
+    alert5xx('connections#PATCH', error, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }

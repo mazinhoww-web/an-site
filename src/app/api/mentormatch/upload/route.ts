@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { put } from '@vercel/blob';
 import { getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { fileTypeFromName } from '@/lib/mentormatch/format';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -49,7 +50,7 @@ export async function POST(req: Request) {
     });
     return NextResponse.json({ url: blob.url, fileSize: file.size, fileType: fileTypeFromName(file.name) });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'upload#POST', userId: user.id, error });
+    alert5xx('upload#POST', error, { userId: user.id });
     return NextResponse.json({ error: 'Falha no upload' }, { status: 500 });
   }
 }

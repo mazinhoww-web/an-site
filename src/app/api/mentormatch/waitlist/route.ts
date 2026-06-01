@@ -5,6 +5,7 @@ import { mmUser, mmWaitlistEntry } from '@/lib/mentormatch/db/schema';
 import { getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { runSerializable } from '@/lib/mentormatch/tx';
 import { mmWaitlistDeleteSchema, mmWaitlistReorderSchema } from '@/lib/mentormatch/validators';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -64,7 +65,7 @@ export async function PATCH(req: Request) {
     });
     return NextResponse.json(result.body, { status: result.status });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'waitlist#PATCH', userId: user.id, error });
+    alert5xx('waitlist#PATCH', error, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }
@@ -97,7 +98,7 @@ export async function DELETE(req: Request) {
     });
     return NextResponse.json(result.body, { status: result.status });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'waitlist#DELETE', userId: user.id, error });
+    alert5xx('waitlist#DELETE', error, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }

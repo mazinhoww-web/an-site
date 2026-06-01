@@ -4,6 +4,7 @@ import { db } from '@/db';
 import { mmPlan } from '@/lib/mentormatch/db/schema';
 import { getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { mmPlanUpdateSchema } from '@/lib/mentormatch/validators';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -49,7 +50,7 @@ export async function PATCH(req: Request) {
       .returning();
     return NextResponse.json(updated[0]);
   } catch (error_) {
-    console.error('[MM_API_ERROR]', { endpoint: 'admin/plans#PATCH', error: error_ });
+    alert5xx('admin/plans#PATCH', error_);
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }

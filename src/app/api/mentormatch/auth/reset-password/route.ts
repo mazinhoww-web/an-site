@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs';
 import { db } from '@/db';
 import { mmUser, mmVerificationToken } from '@/lib/mentormatch/db/schema';
 import { mmResetPasswordSchema } from '@/lib/mentormatch/validators';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -36,7 +37,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'auth/reset-password', error });
+    alert5xx('auth/reset-password', error);
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }

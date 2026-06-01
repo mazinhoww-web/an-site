@@ -4,6 +4,7 @@ import { db } from '@/db';
 import { mmTenant } from '@/lib/mentormatch/db/schema';
 import { canAdminTenant, getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { mmSettingsPatchSchema } from '@/lib/mentormatch/validators';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -70,7 +71,7 @@ export async function PATCH(req: Request) {
       maxMenteesPerMentor: t.maxMenteesPerMentor,
     });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'admin/settings#PATCH', userId: user.id, error });
+    alert5xx('admin/settings#PATCH', error, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }

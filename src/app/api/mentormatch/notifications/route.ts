@@ -4,6 +4,7 @@ import { db } from '@/db';
 import { mmNotification } from '@/lib/mentormatch/db/schema';
 import { getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { mmNotificationPatchSchema } from '@/lib/mentormatch/validators';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -44,7 +45,7 @@ export async function PATCH(req: Request) {
     }
     return NextResponse.json({ ok: true });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'notifications#PATCH', userId: user.id, error });
+    alert5xx('notifications#PATCH', error, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }

@@ -7,6 +7,7 @@ import { getTenantsOverview } from '@/lib/mentormatch/admin-stats';
 import { runSerializable } from '@/lib/mentormatch/tx';
 import { MM_DEFAULT_SKILLS } from '@/lib/mentormatch/constants';
 import { mmTenantCreateSchema, mmTenantUpdateSchema } from '@/lib/mentormatch/validators';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -66,7 +67,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(tenant, { status: 201 });
   } catch (err) {
-    console.error('[MM_API_ERROR]', { endpoint: 'admin/tenants#POST', userId: user.id, error: err });
+    alert5xx('admin/tenants#POST', err, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }
@@ -115,7 +116,7 @@ export async function PATCH(req: Request) {
 
     return NextResponse.json(updated);
   } catch (err) {
-    console.error('[MM_API_ERROR]', { endpoint: 'admin/tenants#PATCH', userId: user.id, error: err });
+    alert5xx('admin/tenants#PATCH', err, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }

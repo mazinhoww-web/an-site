@@ -64,6 +64,26 @@ pnpm seed:prod
 - **Sentry (recomendado):** `pnpm add @sentry/nextjs`, configurar com `SENTRY_DSN`, e
   rotear `captureError`/`alert*` para `Sentry.captureException` (seam comentado no
   arquivo). Logs estruturados funcionam sem Sentry.
+- **Cobertura:** todos os route handlers `mm_*` chamam `alert5xx('<endpoint>', error)`
+  no catch — qualquer 500 ("Erro interno") vira log estruturado `error:<endpoint>` +
+  webhook, com a mensagem real do Postgres. É assim que se descobre a causa de um
+  cadastro/login que falha em produção.
+
+## 5b. Diagnóstico de go-live — `GET /api/mentormatch/health`
+Endpoint protegido por `MM_DIAG_TOKEN` (sem a env → 404, fica desligado). Confirma
+em segundos, sem `psql`, se um 500 vem de **schema desatualizado** ou **seed**:
+```bash
+curl -s "https://aurimarnogueira.com.br/api/mentormatch/health?token=$MM_DIAG_TOKEN" | jq
+```
+Retorna (sem PII): `db` up/error, `mmUserColumns` (colunas críticas D-22
+`can_mentor`/`can_mentee` presentes), `tenants` (slug/brand/active) e `counts`
+(users, super_admins, test_accounts). Leitura:
+- `mmUserColumns.missing` não-vazio → **rode as migrations** (`drizzle-kit push --force`).
+  Drizzle emite a lista explícita de colunas; faltando uma, todo SELECT/INSERT em
+  `mm_user` quebra → 500 no cadastro.
+- só `sicredi` (#33820D) em `tenants` e `test_accounts: 0` → seed de produção correto.
+  Presença de `default` (#6366f1) ou `test_accounts > 0` → seed de **dev** vazou para
+  produção; limpar antes do go-live.
 
 ## 6. Smoke test em produção — DONE
 Com contas **reais** (não seed). Crie/aprove no painel: 1 admin (já é o seed),

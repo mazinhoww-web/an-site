@@ -6,6 +6,7 @@ import { mmLibraryItem } from '@/lib/mentormatch/db/schema';
 import { canAdminTenant, getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { fileTypeFromName } from '@/lib/mentormatch/format';
 import { mmLibraryCreateSchema } from '@/lib/mentormatch/validators';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -59,7 +60,7 @@ export async function POST(req: Request) {
       .returning();
     return NextResponse.json(inserted[0], { status: 201 });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'library#POST', userId: user.id, error });
+    alert5xx('library#POST', error, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }
@@ -86,7 +87,7 @@ export async function DELETE(req: Request) {
     }
     return NextResponse.json({ ok: true });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'library#DELETE', userId: user.id, error });
+    alert5xx('library#DELETE', error, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }

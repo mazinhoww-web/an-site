@@ -6,6 +6,7 @@ import { mmUser } from '@/lib/mentormatch/db/schema';
 import { getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { rateLimit } from '@/lib/rate-limit';
 import { mmChangePasswordSchema } from '@/lib/mentormatch/validators';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -42,7 +43,7 @@ export async function POST(req: Request) {
     await db.update(mmUser).set({ password: hash, updatedAt: new Date() }).where(eq(mmUser.id, user.id));
     return NextResponse.json({ ok: true });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'users/me/password#POST', userId: user.id, error });
+    alert5xx('users/me/password#POST', error, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }
