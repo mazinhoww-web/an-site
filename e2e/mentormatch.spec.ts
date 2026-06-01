@@ -126,3 +126,38 @@ test('sessao de um tenant em rota de outro = 404, sem vazar existencia (D023.1/3
   const res = await request.get('/mentormatch/t/sicredi/mentors', { maxRedirects: 0 });
   expect(res.status()).toBe(404);
 });
+
+test('troca de senha: atual errada falha; correta troca; nova autentica e antiga nao (R19/D023.8)', async () => {
+  const email = `mentee3@${SLUG}.test`;
+  const OLD = 'test1234';
+  const NEW = 'novasenha-9182';
+  const url = '/api/mentormatch/users/me/password';
+
+  const ctx = await playwrightRequest.newContext({ baseURL: BASE_URL });
+  await mmLogin(ctx, email, OLD, SLUG);
+
+  // Senha atual errada -> 400.
+  const wrong = await ctx.post(url, { data: { currentPassword: 'errada-000', newPassword: NEW } });
+  expect(wrong.status()).toBe(400);
+
+  // Senha atual correta -> troca.
+  const okRes = await ctx.post(url, { data: { currentPassword: OLD, newPassword: NEW } });
+  expect(okRes.ok()).toBeTruthy();
+
+  // Nova senha autentica no proximo login.
+  const cNew = await playwrightRequest.newContext({ baseURL: BASE_URL });
+  await mmLogin(cNew, email, NEW, SLUG);
+  expect((await mmSession(cNew)).user?.id).toBeTruthy();
+  await cNew.dispose();
+
+  // Senha antiga nao loga mais.
+  const cOld = await playwrightRequest.newContext({ baseURL: BASE_URL });
+  await mmLogin(cOld, email, OLD, SLUG);
+  expect((await mmSession(cOld)).user?.id).toBeFalsy();
+  await cOld.dispose();
+
+  // Restaura (idempotencia entre execucoes).
+  const restore = await ctx.post(url, { data: { currentPassword: NEW, newPassword: OLD } });
+  expect(restore.ok()).toBeTruthy();
+  await ctx.dispose();
+});
