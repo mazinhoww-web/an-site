@@ -8,7 +8,31 @@ todas as rotas de API, schema, auth, telas, e tres varreduras profundas independ
 
 ---
 
-## VEREDITO FINAL: NO GO
+## ATUALIZACAO (2026-06-01, pos-correcoes)
+
+Itens P0/P1 do veredito original foram corrigidos e validados por E2E real (Postgres
+efemero + seed; suite 30/30 verde; typecheck/lint/build verdes). Resolvido:
+
+- LGPD WhatsApp pre-match (P0): removido do payload PENDING; revelado so pos-aceite. E2E prova.
+- LGPD consentimento (P1): coluna `consent_at` + checkbox obrigatorio + validacao no cadastro.
+- LGPD erasure (P1): `DELETE /admin/users` transacional (limpa conexoes/fila/notif/skills,
+  anonimiza autoria) + acao na UI admin. E2E prova exclusao + bloqueio de login.
+- Login brute-force (P1): rate limit no `authorize` + limitador em camadas KV -> Postgres
+  (`mm_rate_limit`) -> memoria (nao falha aberto). E2E prova lockout.
+- Auto-adesao de tenant (P1): self-cadastro sem convite em tenant real entra PENDING (aprovacao
+  admin); default/demo aberto. Tela `/mentormatch/pendente` + guard. E2E prova.
+- UX/DS (P1): chrome + dashboards de usuario final + auth + landings migrados ao DS; dark mode
+  no chrome; zero token an-site/Sprint-1 no modulo; `error.tsx` premium.
+- Hardening P2/P3: convite sem PII, upload sem svg + rate limit + 400 em malformado,
+  predicado de tenant em `connections`.
+
+Pendente para fechar o GO: Lighthouse medido no preview (P1, ambiental) e backup/Sentry de prod.
+Veredito revisado: de NO GO para GO WITH RISKS quando este branch mergear; GO apos Lighthouse
+provado e observabilidade de prod ligada.
+
+---
+
+## VEREDITO FINAL (auditoria original): NO GO
 
 Motivo em uma linha: o produto funciona ponta a ponta e o isolamento multi-tenant na camada
 de dados e solido e coberto por E2E, mas existem violacoes confirmadas de requisitos travados
