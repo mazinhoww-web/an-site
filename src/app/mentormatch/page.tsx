@@ -3,16 +3,20 @@ import type { Metadata } from 'next';
 import { asc } from 'drizzle-orm';
 import { db } from '@/db';
 import { mmPlan } from '@/lib/mentormatch/db/schema';
+import { MentorMatchThemeRoot, Badge } from '@/mentormatch/design-system';
+import { resolveColorScheme } from '@/lib/mentormatch/color-scheme';
 import { ClearTenantCookie } from '@/components/mentormatch/landing/ClearTenantCookie';
+
+const SECTION: React.CSSProperties = { maxWidth: 1200, margin: '0 auto', padding: '64px 24px' };
 
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'MentorMatch — Programas de Mentoria que Escalam',
+  title: 'MentorMatch: Programas de Mentoria que Escalam',
   description:
     'Plataforma white-label para empresas criarem programas internos de mentoria com matching inteligente, fila de espera e relatorios.',
   openGraph: {
-    title: 'MentorMatch — Programas de Mentoria que Escalam',
+    title: 'MentorMatch: Programas de Mentoria que Escalam',
     description:
       'Plataforma white-label para empresas criarem programas internos de mentoria.',
   },
@@ -53,74 +57,75 @@ export default async function MentorMatchLandingPage() {
   const plans = rows.length
     ? rows.map((p) => ({ name: p.name, slug: p.slug, priceMonthly: p.priceMonthly }))
     : FALLBACK_PLANS;
+  const theme = await resolveColorScheme();
 
   return (
-    <div className="theme-dark min-h-screen bg-bone text-ink">
+    <MentorMatchThemeRoot
+      theme={theme}
+      style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)' }}
+    >
       <ClearTenantCookie />
 
       {/* HERO */}
-      <section className="mx-auto max-w-container px-6 py-24">
-        <h1 className="max-w-3xl font-heading text-display-xl">
-          MentorMatch — Programas de Mentoria que Escalam
+      <section style={{ ...SECTION, paddingTop: 96, paddingBottom: 96 }}>
+        <h1 className="mm-display" style={{ maxWidth: 760 }}>
+          MentorMatch: programas de mentoria que escalam
         </h1>
-        <p className="mt-6 max-w-2xl text-body-l text-graphite">
+        <p className="mm-body" style={{ marginTop: 24, maxWidth: 640, color: 'var(--text-secondary)', fontSize: 18 }}>
           Plataforma white-label para empresas criarem programas internos de mentoria com matching
           inteligente, fila de espera e relatorios.
         </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/mentormatch/default" className="rounded bg-ink px-6 py-3 font-heading text-body text-paper hover:bg-graphite">
+        <div className="flex flex-wrap" style={{ marginTop: 32, gap: 12 }}>
+          <Link href="/mentormatch/default" className="mm-btn mm-btn--primary" style={{ textDecoration: 'none' }}>
             Ver demonstracao
           </Link>
-          <Link href="/contato" className="rounded border border-hairline px-6 py-3 font-heading text-body text-ink hover:border-ink">
+          <Link href="/contato" className="mm-btn mm-btn--secondary" style={{ textDecoration: 'none' }}>
             Solicitar demonstracao
           </Link>
         </div>
       </section>
 
       {/* RECURSOS */}
-      <section className="mx-auto max-w-container px-6 py-16">
-        <h2 className="mb-8 font-heading text-h1">Recursos</h2>
+      <section style={SECTION}>
+        <h2 className="mm-h1" style={{ marginBottom: 32 }}>Recursos</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map(([title, desc]) => (
-            <article key={title} className="rounded border border-hairline bg-paper p-6">
-              <h3 className="font-heading text-h3">{title}</h3>
-              <p className="mt-2 text-body-s text-graphite">{desc}</p>
+            <article key={title} className="mm-card">
+              <h3 className="mm-h3">{title}</h3>
+              <p className="mm-body-small" style={{ marginTop: 8, color: 'var(--text-secondary)' }}>{desc}</p>
             </article>
           ))}
         </div>
       </section>
 
       {/* COMO FUNCIONA */}
-      <section className="mx-auto max-w-container px-6 py-16">
-        <h2 className="mb-8 font-heading text-h1">Como funciona</h2>
-        <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section style={SECTION}>
+        <h2 className="mm-h1" style={{ marginBottom: 32 }}>Como funciona</h2>
+        <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
           {STEPS.map(([n, desc]) => (
-            <li key={n} className="rounded border border-hairline bg-paper p-6">
-              <span className="font-heading text-display-m">{n}</span>
-              <p className="mt-2 text-body-s text-graphite">{desc}</p>
+            <li key={n} className="mm-card">
+              <span className="mm-display" style={{ color: 'var(--brand)' }}>{n}</span>
+              <p className="mm-body-small" style={{ marginTop: 8, color: 'var(--text-secondary)' }}>{desc}</p>
             </li>
           ))}
         </ol>
       </section>
 
       {/* PLANOS */}
-      <section className="mx-auto max-w-container px-6 py-16">
-        <h2 className="mb-8 font-heading text-h1">Planos</h2>
+      <section style={SECTION}>
+        <h2 className="mm-h1" style={{ marginBottom: 32 }}>Planos</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {plans.map((p) => {
             const popular = p.slug === 'starter';
             return (
-              <article
-                key={p.slug}
-                className={`rounded border bg-paper p-6 ${popular ? 'border-ink' : 'border-hairline'}`}
-              >
+              <article key={p.slug} className="mm-card" style={popular ? { borderColor: 'var(--brand)' } : undefined}>
                 {popular && (
-                  <span className="mb-2 inline-block rounded bg-lime px-2 py-0.5 font-mono text-mono-meta text-ink">
-                    Mais popular
+                  <span style={{ display: 'inline-block', marginBottom: 8 }}>
+                    <Badge tone="info">Mais popular</Badge>
                   </span>
                 )}
-                <h3 className="font-heading text-h3">{p.name}</h3>
-                <p className="mt-2 font-heading text-h2">{priceLabel(p.slug, p.priceMonthly)}</p>
+                <h3 className="mm-h3">{p.name}</h3>
+                <p className="mm-h2" style={{ marginTop: 8 }}>{priceLabel(p.slug, p.priceMonthly)}</p>
               </article>
             );
           })}
@@ -128,21 +133,23 @@ export default async function MentorMatchLandingPage() {
       </section>
 
       {/* CONTATO */}
-      <section className="mx-auto max-w-container px-6 py-16">
-        <h2 className="mb-4 font-heading text-h1">Quer levar o MentorMatch para sua empresa?</h2>
-        <p className="mb-6 text-body text-graphite">Fale com a gente e configuramos seu programa.</p>
-        <Link href="/contato" className="rounded bg-ink px-6 py-3 font-heading text-body text-paper hover:bg-graphite">
+      <section style={SECTION}>
+        <h2 className="mm-h1" style={{ marginBottom: 16 }}>Quer levar o MentorMatch para sua empresa?</h2>
+        <p className="mm-body" style={{ marginBottom: 24, color: 'var(--text-secondary)' }}>
+          Fale com a gente e configuramos seu programa.
+        </p>
+        <Link href="/contato" className="mm-btn mm-btn--primary" style={{ textDecoration: 'none' }}>
           Solicitar demonstracao
         </Link>
       </section>
 
-      <footer className="border-t border-hairline">
-        <div className="mx-auto max-w-container px-6 py-8 text-body-s text-graphite">
-          <Link href="/" className="hover:underline">
+      <footer style={{ borderTop: '1px solid var(--border)' }}>
+        <div style={{ ...SECTION, padding: '32px 24px' }}>
+          <Link href="/" className="mm-body-small" style={{ color: 'var(--text-secondary)' }}>
             Aurimar Nogueira
           </Link>
         </div>
       </footer>
-    </div>
+    </MentorMatchThemeRoot>
   );
 }

@@ -7,7 +7,7 @@ const VARIANT_COLOR: Record<ToastVariant, string> = {
   success: 'var(--green)',
   error: 'var(--red)',
   warning: 'var(--amber)',
-  info: 'var(--accent)',
+  info: 'var(--brand)',
 };
 
 function VariantIcon({ variant }: { variant: ToastVariant }) {

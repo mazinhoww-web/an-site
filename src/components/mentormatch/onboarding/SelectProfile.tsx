@@ -15,20 +15,26 @@ export function SelectProfile() {
   }
 
   return (
-    <main className="mx-auto flex max-w-2xl flex-col gap-8 px-6 py-20">
-      <header className="space-y-2">
-        <h1 className="font-heading text-display-m">Como voce quer participar?</h1>
-        <p className="text-body text-graphite">Escolha seu papel no programa de mentoria.</p>
+    <main
+      className="mx-auto flex flex-col"
+      style={{ maxWidth: 640, gap: 32, padding: '80px 24px' }}
+    >
+      <header style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <h1 className="mm-h1">Como voce quer participar?</h1>
+        <p className="mm-body" style={{ color: 'var(--text-secondary)' }}>
+          Escolha seu papel no programa de mentoria.
+        </p>
       </header>
       <div className="grid gap-4 sm:grid-cols-2">
         <button
           type="button"
           onClick={() => choose('MENTOR')}
           disabled={pending !== null}
-          className="rounded border border-hairline bg-paper p-6 text-left transition hover:border-ink disabled:opacity-60"
+          className="mm-card mm-card--interactive"
+          style={{ textAlign: 'left', cursor: 'pointer' }}
         >
-          <span className="font-heading text-h3">Quero ser Mentor</span>
-          <span className="mt-2 block text-body-s text-graphite">
+          <span className="mm-h3">Quero ser Mentor</span>
+          <span className="mm-body-small" style={{ display: 'block', marginTop: 8, color: 'var(--text-secondary)' }}>
             Compartilhar experiencia e orientar mentorados.
           </span>
         </button>
@@ -36,10 +42,11 @@ export function SelectProfile() {
           type="button"
           onClick={() => choose('MENTEE')}
           disabled={pending !== null}
-          className="rounded border border-hairline bg-paper p-6 text-left transition hover:border-ink disabled:opacity-60"
+          className="mm-card mm-card--interactive"
+          style={{ textAlign: 'left', cursor: 'pointer' }}
         >
-          <span className="font-heading text-h3">Quero ser Mentorado</span>
-          <span className="mt-2 block text-body-s text-graphite">
+          <span className="mm-h3">Quero ser Mentorado</span>
+          <span className="mm-body-small" style={{ display: 'block', marginTop: 8, color: 'var(--text-secondary)' }}>
             Encontrar um mentor e evoluir na carreira.
           </span>
         </button>

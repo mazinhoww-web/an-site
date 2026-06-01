@@ -25,34 +25,29 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <main className="mx-auto max-w-md px-6 py-20">
-      <h1 className="mb-6 font-heading text-display-m">Esqueci a senha</h1>
+    <main className="mx-auto" style={{ maxWidth: 420, padding: '80px 24px' }}>
+      <h1 className="mm-h1" style={{ marginBottom: 24 }}>Esqueci a senha</h1>
       {done ? (
-        <p className="text-body text-ink">
+        <p className="mm-body">
           Se houver uma conta com esse email, enviamos um link para redefinir a senha.
         </p>
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-          <label className="block space-y-1.5">
-            <span className={labelCls}>Email</span>
-            <input type="email" autoComplete="email" className={inputCls} {...register('email')} />
-            {errors.email && <span className="block text-body-s text-error">{errors.email.message}</span>}
+        <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <label className="mm-field">
+            <span className="mm-label">Email</span>
+            <input type="email" autoComplete="email" className="mm-input" {...register('email')} />
+            {errors.email && <span className="mm-field__error">{errors.email.message}</span>}
           </label>
-          <button type="submit" disabled={isSubmitting} className={btnCls}>
+          <button type="submit" disabled={isSubmitting} className="mm-btn mm-btn--primary">
             {isSubmitting ? 'Enviando...' : 'Enviar link'}
           </button>
         </form>
       )}
-      <p className="mt-6 text-body-s text-graphite">
-        <Link href="/mentormatch/login" className="text-ink underline">
+      <p className="mm-body-small" style={{ marginTop: 24, color: 'var(--text-secondary)' }}>
+        <Link href="/mentormatch/login" style={{ color: 'var(--brand)' }}>
           Voltar ao login
         </Link>
       </p>
     </main>
   );
 }
-
-const labelCls = 'font-mono text-mono-meta uppercase tracking-wide text-graphite';
-const inputCls =
-  'w-full rounded border border-hairline bg-paper px-3 py-2 text-body text-ink outline-none focus:border-ink';
-const btnCls = 'rounded bg-ink px-6 py-3 font-heading text-body text-paper hover:bg-graphite disabled:opacity-60';
