@@ -168,6 +168,18 @@ export const mmResetPasswordSchema = z.object({
 });
 export type MmResetPasswordInput = z.infer<typeof mmResetPasswordSchema>;
 
+// R19 — troca de senha do usuario logado (confere a atual no servidor).
+export const mmChangePasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1, 'Informe a senha atual'),
+    newPassword: z.string().min(8, 'Minimo de 8 caracteres'),
+  })
+  .refine((d) => d.newPassword !== d.currentPassword, {
+    message: 'A nova senha deve ser diferente da atual',
+    path: ['newPassword'],
+  });
+export type MmChangePasswordInput = z.infer<typeof mmChangePasswordSchema>;
+
 export const mmProfilePatchSchema = z.object({
   name: z.string().min(2).max(120).optional(),
   headline: z.string().max(160).optional(),
