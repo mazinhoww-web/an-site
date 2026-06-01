@@ -4,6 +4,7 @@ import { and, eq } from 'drizzle-orm';
 import { db } from '@/db';
 import { mmTenant, mmUser, mmVerificationToken } from '@/lib/mentormatch/db/schema';
 import { sendPasswordResetEmail } from '@/lib/mentormatch/email';
+import { rateLimit } from '@/lib/rate-limit';
 import { mmForgotPasswordSchema } from '@/lib/mentormatch/validators';
 
 export const dynamic = 'force-dynamic';
@@ -14,6 +15,15 @@ const RESET_TTL_MS = 60 * 60 * 1000; // 60 min
 // a tenant via the mm-tenant cookie when present (email is unique per tenant —
 // D-05); the reset token's identifier is the userId (unambiguous on reset).
 export async function POST(req: Request) {
+  // Rate-limit por IP (best-effort; no-op sem KV). Resposta 200 sempre.
+  const fwd = req.headers.get('x-forwarded-for');
+  const ip = fwd ? fwd.split(',')[0]!.trim() : 'unknown';
+  try {
+    await rateLimit(`mm-forgot:${ip}`, 5, 600);
+  } catch {
+    return NextResponse.json({ ok: true });
+  }
+
   const body = await req.json().catch(() => null);
   const parsed = mmForgotPasswordSchema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ ok: true }); // do not reveal
