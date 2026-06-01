@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { MentorMatchThemeRoot, Reveal, Stagger, StaggerItem } from '@/mentormatch/design-system';
 
 type Reports = {
   totalUsers: number;
@@ -12,7 +13,21 @@ type Reports = {
   topSkills: { name: string; count: number }[];
 };
 
-export function ReportsView({ tenantId }: { tenantId: string }) {
+interface Props {
+  tenantId: string;
+  brandColor?: string | null;
+  theme?: 'light' | 'dark';
+}
+
+export function ReportsView(props: Props) {
+  return (
+    <MentorMatchThemeRoot brand={props.brandColor} theme={props.theme} style={{ minHeight: '100%', padding: '8px 0 40px' }}>
+      <Inner tenantId={props.tenantId} />
+    </MentorMatchThemeRoot>
+  );
+}
+
+function Inner({ tenantId }: { tenantId: string }) {
   const [data, setData] = useState<Reports | null>(null);
   const [state, setState] = useState<'loading' | 'ok' | 'error'>('loading');
 
@@ -26,54 +41,70 @@ export function ReportsView({ tenantId }: { tenantId: string }) {
       .catch(() => setState('error'));
   }, [tenantId]);
 
-  if (state === 'loading') return <p className="text-body-s text-graphite">Carregando...</p>;
-  if (state === 'error' || !data) return <p className="text-body-s text-error">Falha ao carregar relatorios.</p>;
+  if (state === 'loading') return <p className="mm-body-small">Carregando...</p>;
+  if (state === 'error' || !data)
+    return (
+      <p className="mm-field__error" role="alert">
+        Falha ao carregar relatorios.
+      </p>
+    );
 
   return (
-    <div className="space-y-8">
-      <div className="grid gap-4 sm:grid-cols-4">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+      <Reveal>
+        <h1 className="mm-h1">Relatorios</h1>
+        <p className="mm-body-small">Indicadores do programa.</p>
+      </Reveal>
+
+      <Stagger className="grid grid-cols-2 gap-6 lg:grid-cols-4">
         <Stat label="Usuarios" value={data.totalUsers} />
         <Stat label="Mentores" value={data.totalMentors} />
         <Stat label="Mentorados" value={data.totalMentees} />
         <Stat label="Conexoes ativas" value={data.activeConnections} />
-      </div>
+      </Stagger>
 
-      <section className="space-y-2">
-        <h2 className="font-heading text-h3">Conexoes por mes</h2>
-        <ul className="flex flex-wrap gap-3">
+      <section style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <h2 className="mm-h3">Conexoes por mes</h2>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
           {data.connectionsByMonth.map((m) => (
-            <li key={m.month} className="rounded border border-hairline bg-paper px-3 py-2 text-body-s">
-              <span className="font-mono text-mono-meta text-graphite">{m.month}</span> · {m.count}
-            </li>
+            <span key={m.month} className="mm-chip">
+              <span className="mm-mono" style={{ color: 'var(--text-muted)' }}>{m.month}</span> · {m.count}
+            </span>
           ))}
-        </ul>
+        </div>
       </section>
 
-      <section className="space-y-2">
-        <h2 className="font-heading text-h3">Top habilidades</h2>
+      <section style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <h2 className="mm-h3">Top habilidades</h2>
         {data.topSkills.length === 0 ? (
-          <p className="text-body-s text-graphite">Sem dados.</p>
+          <p className="mm-body-small" style={{ color: 'var(--text-muted)' }}>
+            Sem dados.
+          </p>
         ) : (
-          <ul className="space-y-1">
-            {data.topSkills.map((s) => (
-              <li key={s.name} className="text-body-s">
-                {s.name} <span className="text-graphite">· {s.count}</span>
-              </li>
-            ))}
-          </ul>
+          data.topSkills.map((s) => (
+            <p key={s.name} className="mm-body">
+              {s.name} <span className="mm-body-small">· {s.count}</span>
+            </p>
+          ))
         )}
       </section>
 
-      <p className="text-body-s text-graphite">Taxa de aceite: {data.acceptanceRate}%</p>
+      <p className="mm-body-small">Taxa de aceite: {data.acceptanceRate}%</p>
     </div>
   );
 }
 
 function Stat({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded border border-hairline bg-paper p-5">
-      <p className="font-heading text-display-m">{value}</p>
-      <p className="font-mono text-mono-meta uppercase tracking-wide text-graphite">{label}</p>
-    </div>
+    <StaggerItem>
+      <div className="mm-card" style={{ padding: 22 }}>
+        <div className="mm-h1" style={{ color: 'var(--brand)', lineHeight: 1.1 }}>
+          {value}
+        </div>
+        <div className="mm-label" style={{ marginTop: 6 }}>
+          {label}
+        </div>
+      </div>
+    </StaggerItem>
   );
 }

@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getActiveTenantBySlug } from '@/lib/mentormatch/auth-helpers';
+import { resolveColorScheme } from '@/lib/mentormatch/color-scheme';
 import { LibraryManager } from '@/components/mentormatch/admin/LibraryManager';
 
 export const dynamic = 'force-dynamic';
@@ -7,10 +8,6 @@ export const dynamic = 'force-dynamic';
 export default async function AdminLibraryPage({ params }: { params: { slug: string } }) {
   const tenant = await getActiveTenantBySlug(params.slug);
   if (!tenant) notFound();
-  return (
-    <main className="space-y-6">
-      <h1 className="font-heading text-display-m">Biblioteca</h1>
-      <LibraryManager tenantId={tenant.id} />
-    </main>
-  );
+  const theme = await resolveColorScheme();
+  return <LibraryManager tenantId={tenant.id} brandColor={tenant.brandColor} theme={theme} />;
 }
