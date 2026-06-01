@@ -4,6 +4,7 @@ import { db } from '@/db';
 import { mmSkill, mmUserSkill } from '@/lib/mentormatch/db/schema';
 import { canAdminTenant, getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { mmSkillCreateSchema, mmSkillUpdateSchema } from '@/lib/mentormatch/validators';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -54,7 +55,7 @@ export async function POST(req: Request) {
       .returning();
     return NextResponse.json(inserted[0], { status: 201 });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'skills#POST', userId: user.id, error });
+    alert5xx('skills#POST', error, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }
@@ -99,7 +100,7 @@ export async function PATCH(req: Request) {
       .returning();
     return NextResponse.json(updated[0]);
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'skills#PATCH', userId: user.id, error });
+    alert5xx('skills#PATCH', error, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }
@@ -127,7 +128,7 @@ export async function DELETE(req: Request) {
     await db.delete(mmSkill).where(eq(mmSkill.id, id));
     return NextResponse.json({ ok: true, softDeleted: false });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'skills#DELETE', userId: user.id, error });
+    alert5xx('skills#DELETE', error, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }

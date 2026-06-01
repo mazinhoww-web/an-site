@@ -6,6 +6,7 @@ import { mmInvitation, mmUser } from '@/lib/mentormatch/db/schema';
 import { runSerializable } from '@/lib/mentormatch/tx';
 import { rateLimit } from '@/lib/rate-limit';
 import { mmRegisterSchema } from '@/lib/mentormatch/validators';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -97,7 +98,7 @@ export async function POST(req: Request) {
     const user = inserted[0]!;
     return NextResponse.json({ id: user.id, email: user.email }, { status: 201 });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'auth/register', error });
+    alert5xx('auth/register', error);
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }

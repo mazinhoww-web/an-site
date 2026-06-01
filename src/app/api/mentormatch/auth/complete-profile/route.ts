@@ -6,6 +6,7 @@ import { mmAuth } from '@/lib/mentormatch/auth';
 import { resolveOnboardingTenant } from '@/lib/mentormatch/tenant';
 import { resolvePostLoginHref } from '@/lib/mentormatch/dashboard-href';
 import { mmCompleteProfileSchema } from '@/lib/mentormatch/validators';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -112,7 +113,7 @@ export async function POST(req: Request) {
       redirectTo,
     });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'auth/complete-profile', userId, error });
+    alert5xx('auth/complete-profile', error, { userId });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }

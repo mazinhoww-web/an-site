@@ -5,6 +5,7 @@ import { mmInvitation, mmTenant } from '@/lib/mentormatch/db/schema';
 import { canAdminTenant, getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { sendInvitationEmail } from '@/lib/mentormatch/email';
 import { mmInvitationCreateSchema } from '@/lib/mentormatch/validators';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -77,7 +78,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(inserted[0], { status: 201 });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'invitations#POST', userId: user.id, error });
+    alert5xx('invitations#POST', error, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }

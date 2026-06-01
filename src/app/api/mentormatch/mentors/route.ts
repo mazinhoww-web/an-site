@@ -3,6 +3,7 @@ import { and, eq, ilike, inArray, or } from 'drizzle-orm';
 import { db } from '@/db';
 import { mmConnection, mmSkill, mmUser, mmUserSkill } from '@/lib/mentormatch/db/schema';
 import { getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -92,7 +93,7 @@ export async function GET(req: Request) {
     }));
     return NextResponse.json(result);
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'mentors#GET', userId: user.id, error });
+    alert5xx('mentors#GET', error, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }

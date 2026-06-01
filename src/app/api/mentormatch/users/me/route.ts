@@ -4,6 +4,7 @@ import { db } from '@/db';
 import { mmUser } from '@/lib/mentormatch/db/schema';
 import { getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { mmProfilePatchSchema } from '@/lib/mentormatch/validators';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -61,7 +62,7 @@ export async function PATCH(req: Request) {
       .returning();
     return NextResponse.json(publicUser(updated[0]!));
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'users/me#PATCH', userId: user.id, error });
+    alert5xx('users/me#PATCH', error, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }

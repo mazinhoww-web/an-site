@@ -6,6 +6,7 @@ import { mmTenant, mmUser, mmVerificationToken } from '@/lib/mentormatch/db/sche
 import { sendPasswordResetEmail } from '@/lib/mentormatch/email';
 import { rateLimit } from '@/lib/rate-limit';
 import { mmForgotPasswordSchema } from '@/lib/mentormatch/validators';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -57,7 +58,7 @@ export async function POST(req: Request) {
       await sendPasswordResetEmail(user.email, token);
     }
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'auth/forgot-password', error });
+    alert5xx('auth/forgot-password', error);
   }
   return NextResponse.json({ ok: true });
 }

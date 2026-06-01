@@ -7,6 +7,7 @@ import { runSerializable } from '@/lib/mentormatch/tx';
 import { createNotification } from '@/lib/mentormatch/notifications';
 import { sendAccountApprovedEmail } from '@/lib/mentormatch/email';
 import { mmUserStatusPatchSchema } from '@/lib/mentormatch/validators';
+import { alert5xx } from '@/lib/mentormatch/observability';
 
 export const dynamic = 'force-dynamic';
 
@@ -88,7 +89,7 @@ export async function PATCH(req: Request) {
     }
     return NextResponse.json({ ok: true });
   } catch (error) {
-    console.error('[MM_API_ERROR]', { endpoint: 'admin/users#PATCH', userId: user.id, error });
+    alert5xx('admin/users#PATCH', error, { userId: user.id });
     return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
   }
 }
