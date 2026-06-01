@@ -127,6 +127,65 @@ test('sessao de um tenant em rota de outro = 404, sem vazar existencia (D023.1/3
   expect(res.status()).toBe(404);
 });
 
+test('role-switcher: usuario dual acessa as duas visoes; mentee puro nao acessa mentor (D023.8)', async ({ request }) => {
+  // Marcador exclusivo da visao de mentor (a de mentorado nao tem este texto).
+  const MENTOR_MARK = 'Gerencie solicitacoes';
+  await mmLogin(request, `dual@${SLUG}.test`, 'test1234', SLUG);
+  const mentorHtml = await (await request.get(`/mentormatch/t/${SLUG}/mentor`)).text();
+  const menteeHtml = await (await request.get(`/mentormatch/t/${SLUG}/mentee`)).text();
+  // Dual ve a visao de mentor em /mentor e uma visao DIFERENTE em /mentee.
+  expect(mentorHtml).toContain(MENTOR_MARK);
+  expect(menteeHtml).not.toContain(MENTOR_MARK);
+
+  // Mentee puro nao acessa a visao de mentor (guard redireciona).
+  const pure = await playwrightRequest.newContext({ baseURL: BASE_URL });
+  await mmLogin(pure, `mentee1@${SLUG}.test`, 'test1234', SLUG);
+  const blockedHtml = await (await pure.get(`/mentormatch/t/${SLUG}/mentor`)).text();
+  expect(blockedHtml).not.toContain(MENTOR_MARK);
+  await pure.dispose();
+});
+
+test('emails: recusa e promocao de waitlist disparam email branded capturado (D023.8)', async ({ request }) => {
+  await request.delete('/api/mentormatch/qa-emails');
+
+  // Recusa: mentor1 recusa uma solicitacao pendente.
+  const mentor1 = await playwrightRequest.newContext({ baseURL: BASE_URL });
+  await mmLogin(mentor1, `mentor1@${SLUG}.test`, 'test1234', SLUG);
+  const c1 = (await (await mentor1.get('/api/mentormatch/connections')).json()) as { id: string; status: string }[];
+  const pending = c1.find((c) => c.status === 'PENDING')!;
+  expect((await mentor1.patch('/api/mentormatch/connections', { data: { connectionId: pending.id, status: 'REJECTED' } })).ok()).toBeTruthy();
+  await mentor1.dispose();
+
+  // Promocao: mentor6 (lotado + fila) conclui uma mentoria -> promove o 1o da fila.
+  const mentor6 = await playwrightRequest.newContext({ baseURL: BASE_URL });
+  await mmLogin(mentor6, `mentor6@${SLUG}.test`, 'test1234', SLUG);
+  const c6 = (await (await mentor6.get('/api/mentormatch/connections')).json()) as { id: string; status: string }[];
+  const accepted = c6.find((c) => c.status === 'ACCEPTED')!;
+  expect((await mentor6.patch('/api/mentormatch/connections', { data: { connectionId: accepted.id, status: 'COMPLETED' } })).ok()).toBeTruthy();
+  await mentor6.dispose();
+
+  const emails = (await (await request.get('/api/mentormatch/qa-emails')).json()) as { subject: string }[];
+  expect(emails.some((e) => /solicitacao/i.test(e.subject))).toBeTruthy(); // recusa
+  expect(emails.some((e) => /avancou na fila/i.test(e.subject))).toBeTruthy(); // promocao
+});
+
+test('waitlist write: mentor reordena e remove; persiste no banco (R8/R9/D023.8)', async ({ request }) => {
+  await mmLogin(request, `mentor3@${SLUG}.test`, 'test1234', SLUG);
+  const before = (await (await request.get('/api/mentormatch/waitlist')).json()) as { id: string; position: number }[];
+  expect(before.length).toBeGreaterThanOrEqual(2);
+
+  // Reordena: troca as duas primeiras posicoes.
+  const entries = before.map((e, i) => ({ id: e.id, position: i === 0 ? 2 : i === 1 ? 1 : i + 1 }));
+  expect((await request.patch('/api/mentormatch/waitlist', { data: { entries } })).ok()).toBeTruthy();
+  const after = (await (await request.get('/api/mentormatch/waitlist')).json()) as { id: string }[];
+  expect(after[0]!.id).toBe(before[1]!.id);
+
+  // Remove o primeiro -> persiste.
+  expect((await request.delete('/api/mentormatch/waitlist', { data: { id: after[0]!.id } })).ok()).toBeTruthy();
+  const final = (await (await request.get('/api/mentormatch/waitlist')).json()) as unknown[];
+  expect(final.length).toBe(before.length - 1);
+});
+
 test('troca de senha: atual errada falha; correta troca; nova autentica e antiga nao (R19/D023.8)', async () => {
   const email = `mentee3@${SLUG}.test`;
   const OLD = 'test1234';
