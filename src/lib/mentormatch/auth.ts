@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs';
 import { z } from 'zod';
 import { db } from '@/db';
 import { mmTenant, mmUser } from '@/lib/mentormatch/db/schema';
+import { rateLimit } from '@/lib/rate-limit';
 import type { MMRole, MMSessionUser, MMTokenClaims, MMUserStatus } from '@/types/mentormatch';
 
 // ---------------------------------------------------------------------------
@@ -25,6 +26,12 @@ const credentialsSchema = z.object({
 });
 
 const isProd = process.env.NODE_ENV === 'production';
+
+function clientIpFromRequest(req: Request | undefined): string {
+  const fwd = req?.headers?.get('x-forwarded-for');
+  if (fwd) return fwd.split(',')[0]!.trim();
+  return req?.headers?.get('x-real-ip')?.trim() || 'unknown';
+}
 
 // D023.1: login SEMPRE dentro do slug. O usuario e resolvido pela chave
 // (email, tenantId-do-slug), NUNCA so por email. Sem tenantSlug valido nao ha
@@ -93,10 +100,20 @@ export const {
         password: {},
         tenantSlug: {},
       },
-      async authorize(raw) {
+      async authorize(raw, request) {
         const parsed = credentialsSchema.safeParse(raw);
         if (!parsed.success) return null;
         const { email, password, tenantSlug } = parsed.data;
+
+        // Guarda anti brute-force: limita tentativas por IP+email+tenant.
+        // Best-effort (KV -> fallback em memoria). Excedeu -> falha como
+        // credencial invalida (nao revela o motivo do bloqueio).
+        const ip = clientIpFromRequest(request as Request | undefined);
+        try {
+          await rateLimit(`mm-login:${ip}:${email.toLowerCase()}:${tenantSlug ?? ''}`, 10, 600);
+        } catch {
+          return null;
+        }
 
         const user = await findMmUserForLogin(email.toLowerCase(), tenantSlug);
         if (!user?.password) return null;

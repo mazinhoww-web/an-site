@@ -302,6 +302,15 @@ export const mmUsage = pgTable(
   }),
 );
 
+// Rate limiting duravel e compartilhado entre instancias (serverless). Usado
+// pelo limitador de auth (login/register/forgot/troca-senha) quando o KV nao
+// esta configurado. Chave: `rl:<escopo>:<ip>:<...>`. Janela via reset_at.
+export const mmRateLimit = pgTable('mm_rate_limit', {
+  key: text('key').primaryKey(),
+  count: integer('count').notNull().default(0),
+  resetAt: timestamp('reset_at', { withTimezone: true }).notNull(),
+});
+
 export const mmVerificationToken = pgTable(
   'mm_verification_token',
   {

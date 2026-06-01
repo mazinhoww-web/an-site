@@ -3,7 +3,7 @@ import { and, eq, inArray, ne, sql } from 'drizzle-orm';
 import { db } from '@/db';
 import { mmSkill, mmUser, mmUserSkill } from '@/lib/mentormatch/db/schema';
 import { mmAuth } from '@/lib/mentormatch/auth';
-import { resolveOnboardingTenant } from '@/lib/mentormatch/tenant';
+import { MM_DEFAULT_TENANT_SLUG, resolveOnboardingTenant } from '@/lib/mentormatch/tenant';
 import { resolvePostLoginHref } from '@/lib/mentormatch/dashboard-href';
 import { mmCompleteProfileSchema } from '@/lib/mentormatch/validators';
 
@@ -29,11 +29,16 @@ export async function POST(req: Request) {
     if (!current) return NextResponse.json({ error: 'Usuario nao encontrado' }, { status: 404 });
 
     // Tenant: keep an invite-assigned tenant; otherwise resolve cookie/default.
+    // selfJoinPending: auto-cadastro (sem convite) em tenant REAL entra como
+    // PENDING e exige aprovacao do admin. Convite => current.tenantId ja setado
+    // => APPROVED. Tenant default/demo segue aberto (APPROVED).
     let tenantId = current.tenantId;
+    let selfJoinPending = false;
     if (!tenantId) {
       const tenant = await resolveOnboardingTenant();
       if (!tenant) return NextResponse.json({ error: 'Tenant nao encontrado' }, { status: 400 });
       tenantId = tenant.id;
+      selfJoinPending = tenant.slug !== MM_DEFAULT_TENANT_SLUG;
       // D-05: block only a duplicate within the SAME tenant.
       const clash = await db
         .select()
@@ -44,6 +49,7 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: 'Email ja cadastrado neste tenant' }, { status: 409 });
       }
     }
+    const nextStatus = selfJoinPending ? 'PENDING' : 'APPROVED';
 
     // Only accept skills that belong to this tenant and are active.
     const validSkills = await db
@@ -81,7 +87,7 @@ export async function POST(req: Request) {
           image: data.image ?? null,
           maxMentees: data.maxMentees ?? current.maxMentees,
           tenantId,
-          status: 'APPROVED',
+          status: nextStatus,
           onboardingDone: true,
           updatedAt: new Date(),
         })
