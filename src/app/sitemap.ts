@@ -6,6 +6,21 @@ import { getAllPalestras } from '@/lib/palestras';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://aurimarnogueira.com.br';
 
+// Gerado a pedido (nao no build): evita falha de prerender quando o banco nao
+// esta disponivel no ambiente de build. Em producao roda com o DB presente.
+export const dynamic = 'force-dynamic';
+
+// Best-effort: se o banco falhar, o sitemap degrada para as paginas estaticas
+// em vez de quebrar o build/deploy.
+async function safe<T>(fn: () => Promise<T[]>): Promise<T[]> {
+  try {
+    return await fn();
+  } catch (error) {
+    console.error('[SITEMAP] query falhou, degradando', error);
+    return [];
+  }
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
@@ -24,10 +39,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/agora`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
   ];
 
-  const publishedSkills = await db
-    .select({ slug: skills.slug, updatedAt: skills.updatedAt })
-    .from(skills)
-    .where(eq(skills.published, true));
+  const publishedSkills = await safe(() =>
+    db.select({ slug: skills.slug, updatedAt: skills.updatedAt }).from(skills).where(eq(skills.published, true)),
+  );
 
   const skillEntries: MetadataRoute.Sitemap = publishedSkills.map((s) => ({
     url: `${BASE_URL}/skills/${s.slug}`,
@@ -36,10 +50,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  const publishedEvents = await db
-    .select({ slug: events.slug, updatedAt: events.updatedAt })
-    .from(events)
-    .where(eq(events.published, true));
+  const publishedEvents = await safe(() =>
+    db.select({ slug: events.slug, updatedAt: events.updatedAt }).from(events).where(eq(events.published, true)),
+  );
 
   const eventEntries: MetadataRoute.Sitemap = publishedEvents.map((e) => ({
     url: `${BASE_URL}/eventos/${e.slug}`,
@@ -48,7 +61,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  const palestras = await getAllPalestras();
+  const palestras = await safe(() => getAllPalestras());
 
   const palestraEntries: MetadataRoute.Sitemap = palestras.map((p) => ({
     url: `${BASE_URL}/palestras/${p.slug}`,

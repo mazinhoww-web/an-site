@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import { alertEmailFailure } from '@/lib/mentormatch/observability';
 
 // MentorMatch transactional email. Best-effort: the client is created lazily and
 // only when an API key is present, so a missing key never crashes module load /
@@ -77,7 +78,7 @@ export async function sendNotificationEmail(opts: {
       html: brandedShell(opts),
     });
   } catch (error) {
-    console.error('[MM_EMAIL_ERROR]', { kind: 'notification', to: opts.to, error });
+    alertEmailFailure('notification', opts.to, error);
   }
 }
 
@@ -112,7 +113,7 @@ export async function sendAccountApprovedEmail(to: string, name: string | null, 
       ),
     });
   } catch (error) {
-    console.error('[MM_EMAIL_ERROR]', { kind: 'account_approved', to, error });
+    alertEmailFailure('account_approved', to, error);
   }
 }
 
@@ -134,7 +135,7 @@ export async function sendPasswordResetEmail(to: string, token: string) {
       ),
     });
   } catch (error) {
-    console.error('[MM_EMAIL_ERROR]', { kind: 'password_reset', to, error });
+    alertEmailFailure('password_reset', to, error);
   }
 }
 
@@ -161,6 +162,6 @@ export async function sendInvitationEmail(
       ),
     });
   } catch (error) {
-    console.error('[MM_EMAIL_ERROR]', { kind: 'invitation', to, error });
+    alertEmailFailure('invitation', to, error);
   }
 }
