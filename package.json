@@ -16,7 +16,9 @@
     "db:seed-mm": "dotenv -e .env.local -- tsx src/lib/mentormatch/db/seed.ts",
     "analyze": "ANALYZE=true next build",
     "seed": "tsx scripts/seed-mentormatch.ts",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "seed:prod": "tsx scripts/seed-production.ts",
+    "smoke": "tsx scripts/smoke.ts"
   },
   "dependencies": {
     "@auth/core": "^0.34.3",
