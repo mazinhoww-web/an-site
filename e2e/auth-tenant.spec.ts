@@ -53,7 +53,7 @@ test('auto-cadastro em tenant real -> PENDING e dashboard faz bounce p/ /pendent
 
   const ctx = await ctxWithTenantCookie('sicredi');
   const reg = await ctx.post('/api/mentormatch/auth/register', {
-    data: { name: 'Self Join', email, password: 'test1234' },
+    data: { name: 'Self Join', email, password: 'test1234', consent: true },
   });
   expect(reg.status()).toBe(201);
 
@@ -81,7 +81,7 @@ test('auto-cadastro no tenant default/demo segue aberto (APPROVED)', async () =>
   expect(
     (
       await ctx.post('/api/mentormatch/auth/register', {
-        data: { name: 'Open Join', email, password: 'test1234' },
+        data: { name: 'Open Join', email, password: 'test1234', consent: true },
       })
     ).status(),
   ).toBe(201);

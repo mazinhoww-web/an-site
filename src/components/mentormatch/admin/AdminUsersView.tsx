@@ -1,6 +1,6 @@
 'use client';
 
-import { Loader2, Search, UserCheck, UserPlus, UserX } from 'lucide-react';
+import { Loader2, Search, Trash2, UserCheck, UserPlus, UserX } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import {
   Badge,
@@ -61,6 +61,26 @@ function Inner({ tenantId, initialUsers }: Props) {
   const [q, setQ] = useState('');
   const [busy, setBusy] = useState<string | null>(null);
   const [inviteOpen, setInviteOpen] = useState(false);
+  const [toDelete, setToDelete] = useState<AdminUser | null>(null);
+  const [deleting, setDeleting] = useState(false);
+
+  async function deleteUser(u: AdminUser) {
+    setDeleting(true);
+    const res = await fetch('/api/mentormatch/admin/users', {
+      method: 'DELETE',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ userId: u.id, tenantId }),
+    });
+    setDeleting(false);
+    if (!res.ok) {
+      const d = (await res.json().catch(() => null)) as { error?: string } | null;
+      toast({ title: d?.error ?? 'Falha ao excluir', tone: 'danger' });
+      return;
+    }
+    setUsers((list) => list.filter((x) => x.id !== u.id));
+    setToDelete(null);
+    toast({ title: 'Usuario excluido', description: 'Dados removidos (LGPD).', tone: 'success' });
+  }
 
   const filtered = useMemo(() => {
     const t = q.trim().toLowerCase();
@@ -166,6 +186,17 @@ function Inner({ tenantId, initialUsers }: Props) {
                         <UserCheck size={16} />
                       )}
                     </button>
+                    {u.role !== 'SUPER_ADMIN' && (
+                      <button
+                        type="button"
+                        className="mm-icon-btn"
+                        aria-label="Excluir usuario"
+                        onClick={() => setToDelete(u)}
+                        style={{ color: 'var(--danger)', marginLeft: 4 }}
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))
@@ -175,6 +206,36 @@ function Inner({ tenantId, initialUsers }: Props) {
       </div>
 
       <InviteModal open={inviteOpen} onClose={() => setInviteOpen(false)} tenantId={tenantId} />
+
+      <Modal open={toDelete !== null} onClose={() => (deleting ? undefined : setToDelete(null))}>
+        <div style={{ padding: 32, display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <h2 className="mm-h2">Excluir usuario</h2>
+          <p className="mm-body" style={{ color: 'var(--text-secondary)' }}>
+            Esta acao remove definitivamente {toDelete?.name ?? toDelete?.email} e seus
+            dados (conexoes, fila, notificacoes). Nao pode ser desfeita.
+          </p>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10 }}>
+            <Button variant="ghost" onClick={() => setToDelete(null)} disabled={deleting}>
+              Cancelar
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => toDelete && deleteUser(toDelete)}
+              disabled={deleting}
+              style={{ color: 'var(--danger)', borderColor: 'var(--danger)' }}
+            >
+              {deleting ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" />
+                  Excluindo...
+                </>
+              ) : (
+                'Excluir definitivamente'
+              )}
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

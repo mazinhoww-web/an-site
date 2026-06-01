@@ -88,6 +88,8 @@ export const mmUser = pgTable(
     maxMentees: integer('max_mentees').default(4).notNull(),
     onboardingDone: boolean('onboarding_done').default(false).notNull(),
     tenantId: uuid('tenant_id').references(() => mmTenant.id),
+    // LGPD: timestamp do consentimento (aceite de termos/privacidade no cadastro).
+    consentAt: timestamp('consent_at', { withTimezone: true }),
     createdAt: timestamp('created_at').defaultNow(),
     updatedAt: timestamp('updated_at').defaultNow(),
   },

@@ -76,6 +76,14 @@ export default function MmRegisterPage() {
           <input type="password" autoComplete="new-password" className="mm-input" {...register('password')} />
           {errors.password && <span className="mm-field__error">{errors.password.message}</span>}
         </label>
+        <label className="mm-body-small" style={{ display: 'flex', gap: 8, alignItems: 'flex-start', color: 'var(--text-secondary)' }}>
+          <input type="checkbox" {...register('consent')} style={{ marginTop: 3 }} />
+          <span>
+            Li e aceito os Termos de Uso e a Politica de Privacidade, e autorizo o
+            tratamento dos meus dados para participar do programa de mentoria.
+          </span>
+        </label>
+        {errors.consent && <span className="mm-field__error">{errors.consent.message}</span>}
         {error && <p className="mm-body-small" style={{ color: 'var(--danger)' }}>{error}</p>}
         <button type="submit" disabled={isSubmitting} className="mm-btn mm-btn--primary">
           {isSubmitting ? 'Criando...' : 'Criar conta'}

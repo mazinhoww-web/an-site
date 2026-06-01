@@ -2,10 +2,13 @@ import { NextResponse } from 'next/server';
 import { put } from '@vercel/blob';
 import { getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { fileTypeFromName } from '@/lib/mentormatch/format';
+import { rateLimit } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 const MAX_BYTES = 10 * 1024 * 1024; // 10MB
+// Hardening: `svg` removido da allow-list (vetor de XSS — SVG pode carregar
+// script). Demais formatos de documento/imagem/video mantidos.
 const ALLOWED_EXT = new Set([
   'pdf',
   'mp4',
@@ -20,17 +23,28 @@ const ALLOWED_EXT = new Set([
   'jpg',
   'jpeg',
   'webp',
-  'svg',
 ]);
 
 // Uploads to Vercel Blob (public) and returns the URL + inferred fileType.
-// Used by the library and tenant-logo flows.
+// Used by the library and tenant-logo flows (e avatar no onboarding).
 export async function POST(req: Request) {
   const user = await getMmUserFromDb();
   if (!user) return NextResponse.json({ error: 'Nao autenticado' }, { status: 401 });
 
+  // Hardening: limita uploads por usuario (anti-abuso do blob publico).
   try {
-    const form = await req.formData();
+    await rateLimit(`mm-upload:${user.id}`, 30, 3600);
+  } catch {
+    return NextResponse.json({ error: 'Muitos uploads. Tente novamente mais tarde.' }, { status: 429 });
+  }
+
+  // Parsing do multipart isolado: requisicao malformada -> 400 (nao 500).
+  const form = await req.formData().catch(() => null);
+  if (!form) {
+    return NextResponse.json({ error: 'Requisicao invalida (esperado multipart/form-data)' }, { status: 400 });
+  }
+
+  try {
     const file = form.get('file');
     if (!(file instanceof File)) {
       return NextResponse.json({ error: 'Arquivo ausente' }, { status: 400 });

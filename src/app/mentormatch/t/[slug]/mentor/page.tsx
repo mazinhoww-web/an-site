@@ -43,6 +43,9 @@ export default async function MentorDashboardPage({ params }: { params: { slug: 
   const users = ids.length ? await db.select().from(mmUser).where(inArray(mmUser.id, ids)) : [];
   const byId = new Map(users.map((u) => [u.id, u]));
 
+  // LGPD: solicitacoes PENDING NAO expoem o WhatsApp do mentorado. O contato so
+  // e revelado apos o aceite (ver `actives` abaixo). Nao serializar o numero no
+  // payload antes do match, mesmo que a UI nao o renderize.
   const requests = pending.map((c) => {
     const m = byId.get(c.menteeId);
     return {
@@ -53,7 +56,6 @@ export default async function MentorDashboardPage({ params }: { params: { slug: 
         name: m?.name ?? null,
         headline: m?.headline ?? null,
         image: m?.image ?? null,
-        whatsapp: whatsappHref(m?.whatsapp),
       },
     };
   });
