@@ -26,38 +26,36 @@ const credentialsSchema = z.object({
 
 const isProd = process.env.NODE_ENV === 'production';
 
+// D023.1: login SEMPRE dentro do slug. O usuario e resolvido pela chave
+// (email, tenantId-do-slug), NUNCA so por email. Sem tenantSlug valido nao ha
+// login (evita resolver conta de outro tenant / vazar isolamento).
 async function findMmUserForLogin(email: string, tenantSlug?: string) {
-  if (tenantSlug) {
-    const tenant = await db
-      .select({ id: mmTenant.id })
-      .from(mmTenant)
-      .where(and(eq(mmTenant.slug, tenantSlug), eq(mmTenant.active, true)))
-      .limit(1);
-    // Unknown/inactive tenant in the cookie must not block login: fall back to
-    // resolving by email alone instead of failing the sign-in.
-    if (tenant[0]) {
-      // Prefer the account already assigned to this tenant.
-      const inTenant = await db
-        .select()
-        .from(mmUser)
-        .where(and(eq(mmUser.email, email), eq(mmUser.tenantId, tenant[0].id)))
-        .limit(1);
-      if (inTenant[0]) return inTenant[0];
-      // Fall back to a not-yet-assigned account (public registration mid-
-      // onboarding). complete-profile claims it for this same tenant via the
-      // mm-tenant cookie, so a tenantId IS NULL account belongs to this flow.
-      const unassigned = await db
-        .select()
-        .from(mmUser)
-        .where(and(eq(mmUser.email, email), isNull(mmUser.tenantId)))
-        .limit(1);
-      if (unassigned[0]) return unassigned[0];
-      return null;
-    }
-  }
-  // No tenant context (e.g. super admin): resolve by email alone.
-  const rows = await db.select().from(mmUser).where(eq(mmUser.email, email)).limit(1);
-  return rows[0] ?? null;
+  if (!tenantSlug) return null;
+
+  const tenant = await db
+    .select({ id: mmTenant.id })
+    .from(mmTenant)
+    .where(and(eq(mmTenant.slug, tenantSlug), eq(mmTenant.active, true)))
+    .limit(1);
+  if (!tenant[0]) return null;
+
+  // Conta ja atribuida a ESTE tenant.
+  const inTenant = await db
+    .select()
+    .from(mmUser)
+    .where(and(eq(mmUser.email, email), eq(mmUser.tenantId, tenant[0].id)))
+    .limit(1);
+  if (inTenant[0]) return inTenant[0];
+
+  // Conta ainda nao atribuida (registro publico mid-onboarding). complete-profile
+  // a reivindica para este tenant via cookie mm-tenant. Continua dentro do fluxo
+  // do slug — nunca resolve conta de outro tenant.
+  const unassigned = await db
+    .select()
+    .from(mmUser)
+    .where(and(eq(mmUser.email, email), isNull(mmUser.tenantId)))
+    .limit(1);
+  return unassigned[0] ?? null;
 }
 
 export const {

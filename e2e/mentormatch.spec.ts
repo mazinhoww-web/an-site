@@ -98,3 +98,31 @@ test('isolamento de tenant: mentorado de A nao acessa mentores de B (G1/D023.6)'
   const res = await request.get(`/api/mentormatch/mentors?tenantId=${otherTenantId}`);
   expect(res.status()).toBe(403);
 });
+
+test('mesmo email em tenants diferentes = contas distintas e isoladas (D023.1)', async () => {
+  const a = await playwrightRequest.newContext({ baseURL: BASE_URL });
+  const b = await playwrightRequest.newContext({ baseURL: BASE_URL });
+  await mmLogin(a, 'shared@mm.test', 'test1234', 'default');
+  await mmLogin(b, 'shared@mm.test', 'test1234', 'sicredi');
+  const sa = await mmSession(a);
+  const sb = await mmSession(b);
+  expect(sa.user?.tenantSlug).toBe('default');
+  expect(sb.user?.tenantSlug).toBe('sicredi');
+  expect(sa.user?.tenantId).toBeTruthy();
+  expect(sa.user?.tenantId).not.toBe(sb.user?.tenantId);
+  expect(sa.user?.id).not.toBe(sb.user?.id);
+  await a.dispose();
+  await b.dispose();
+});
+
+test('login sem tenantSlug e rejeitado — nao resolve por email-so (D023.1)', async ({ request }) => {
+  await mmLogin(request, 'shared@mm.test', 'test1234', '');
+  const s = await mmSession(request);
+  expect(s.user?.id).toBeFalsy();
+});
+
+test('sessao de um tenant em rota de outro = 404, sem vazar existencia (D023.1/3)', async ({ request }) => {
+  await mmLogin(request, `mentee1@${SLUG}.test`, 'test1234', SLUG);
+  const res = await request.get('/mentormatch/t/sicredi/mentors', { maxRedirects: 0 });
+  expect(res.status()).toBe(404);
+});

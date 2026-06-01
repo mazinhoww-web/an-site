@@ -1,7 +1,6 @@
 import { notFound, redirect } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { getActiveTenantBySlug, getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
-import { resolvePostLoginHref } from '@/lib/mentormatch/dashboard-href';
 import { tenantBrandStyle } from '@/lib/mentormatch/tenant-theme';
 import { resolveColorScheme } from '@/lib/mentormatch/color-scheme';
 import { DashboardShell } from '@/components/mentormatch/layout/DashboardShell';
@@ -21,8 +20,10 @@ export default async function TenantDashboardLayout({
   const tenant = await getActiveTenantBySlug(params.slug);
   if (!tenant) notFound();
 
+  // D023.1/3: sessao de outro tenant acessando /t/[slug]/* = 404 (nao 403, nao
+  // redirect) — nao vaza a existencia do tenant. SUPER_ADMIN passa (D-07).
   if (user.role !== 'SUPER_ADMIN' && user.tenantId !== tenant.id) {
-    redirect(await resolvePostLoginHref(user));
+    notFound();
   }
 
   // Injeta a marca do tenant em runtime no subtree do app (--brand + --mm-primary).

@@ -34,5 +34,6 @@ export async function mmLogin(
 
 export async function mmSession(request: APIRequestContext): Promise<MmSession> {
   const res = await request.get(`${AUTH}/session`);
-  return (await res.json()) as MmSession;
+  // NextAuth devolve `null` quando nao ha sessao — normaliza para {} para os testes.
+  return ((await res.json()) ?? {}) as MmSession;
 }

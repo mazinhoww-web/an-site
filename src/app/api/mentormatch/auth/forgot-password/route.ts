@@ -23,6 +23,9 @@ export async function POST(req: Request) {
     const jar = await cookies();
     const slug = jar.get('mm-tenant')?.value;
 
+    // D023.1: reset tambem e scoped ao tenant (email e unico por tenant — D-05).
+    // Sem tenant no contexto NAO resolvemos por email-so. Resposta segue 200
+    // sempre (nao revela existencia).
     let user;
     if (slug) {
       const t = await db.select().from(mmTenant).where(eq(mmTenant.slug, slug)).limit(1);
@@ -34,10 +37,6 @@ export async function POST(req: Request) {
           .limit(1);
         user = rows[0];
       }
-    }
-    if (!user) {
-      const rows = await db.select().from(mmUser).where(eq(mmUser.email, email)).limit(1);
-      user = rows[0];
     }
 
     if (user) {
