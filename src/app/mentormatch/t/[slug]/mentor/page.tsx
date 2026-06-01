@@ -13,7 +13,7 @@ export const dynamic = 'force-dynamic';
 export default async function MentorDashboardPage({ params }: { params: { slug: string } }) {
   const user = await getMmUserFromDb();
   if (!user) redirect('/mentormatch/login');
-  if (user.role !== 'MENTOR') redirect(await resolvePostLoginHref(user));
+  if (user.role !== 'MENTOR' && !user.canMentor) redirect(await resolvePostLoginHref(user));
 
   const tenant = await getActiveTenantBySlug(params.slug);
   if (!tenant) notFound();

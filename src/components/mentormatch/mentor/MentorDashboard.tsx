@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { Check, Loader2, MessageCircle, X } from 'lucide-react';
+import { Check, ChevronDown, ChevronUp, Loader2, MessageCircle, Trash2, X } from 'lucide-react';
 import { useState } from 'react';
 import {
   Badge,
@@ -189,7 +189,7 @@ function Inner({ requests: r0, actives: a0, waitlist, maxMentees }: MentorDashbo
         <RequestsTab requests={requests} busyId={busyId} onAccept={accept} onReject={reject} />
       )}
       {tab === 'actives' && <ActivesTab actives={actives} />}
-      {tab === 'waitlist' && <WaitlistTab waitlist={waitlist} />}
+      {tab === 'waitlist' && <WaitlistTab initial={waitlist} />}
     </div>
   );
 }
@@ -294,11 +294,61 @@ function ActivesTab({ actives }: { actives: ActiveItem[] }) {
   );
 }
 
-function WaitlistTab({ waitlist }: { waitlist: WaitlistItem[] }) {
-  if (waitlist.length === 0) return <EmptyHint text="Ninguem na fila de espera." />;
+function WaitlistTab({ initial }: { initial: WaitlistItem[] }) {
+  const { toast } = useToast();
+  const [items, setItems] = useState(initial);
+  const [busy, setBusy] = useState(false);
+
+  async function refresh() {
+    const r = await fetch('/api/mentormatch/waitlist', { cache: 'no-store' });
+    if (!r.ok) return;
+    const rows = (await r.json()) as { id: string; position: number; mentee: { name: string | null; headline: string | null } | null }[];
+    setItems(rows.map((e) => ({ id: e.id, position: e.position, mentee: { name: e.mentee?.name ?? null, headline: e.mentee?.headline ?? null } })));
+  }
+
+  async function move(idx: number, dir: -1 | 1) {
+    const j = idx + dir;
+    if (j < 0 || j >= items.length) return;
+    const next = [...items];
+    const a = next[idx]!;
+    const b = next[j]!;
+    next[idx] = b;
+    next[j] = a;
+    const entries = next.map((e, i) => ({ id: e.id, position: i + 1 }));
+    setBusy(true);
+    const res = await fetch('/api/mentormatch/waitlist', {
+      method: 'PATCH',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ entries }),
+    });
+    setBusy(false);
+    if (!res.ok) {
+      toast({ title: 'Falha ao reordenar', tone: 'danger' });
+      return;
+    }
+    setItems(next.map((e, i) => ({ ...e, position: i + 1 })));
+  }
+
+  async function remove(id: string) {
+    setBusy(true);
+    const res = await fetch('/api/mentormatch/waitlist', {
+      method: 'DELETE',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
+    setBusy(false);
+    if (!res.ok) {
+      toast({ title: 'Falha ao remover', tone: 'danger' });
+      return;
+    }
+    toast({ title: 'Removido da fila', tone: 'success' });
+    await refresh();
+  }
+
+  if (items.length === 0) return <EmptyHint text="Ninguem na fila de espera." />;
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-      {waitlist.map((e) => (
+      {items.map((e, idx) => (
         <div key={e.id} className="mm-card" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <span
             style={{
@@ -316,10 +366,25 @@ function WaitlistTab({ waitlist }: { waitlist: WaitlistItem[] }) {
           >
             {e.position}
           </span>
-          <div>
+          <div style={{ flex: 1, minWidth: 0 }}>
             <p className="mm-body-strong">{e.mentee.name ?? 'Mentorado'}</p>
             {e.mentee.headline && <p className="mm-body-small">{e.mentee.headline}</p>}
           </div>
+          <button type="button" className="mm-icon-btn" aria-label="Subir" disabled={busy || idx === 0} onClick={() => move(idx, -1)}>
+            <ChevronUp size={16} />
+          </button>
+          <button
+            type="button"
+            className="mm-icon-btn"
+            aria-label="Descer"
+            disabled={busy || idx === items.length - 1}
+            onClick={() => move(idx, 1)}
+          >
+            <ChevronDown size={16} />
+          </button>
+          <button type="button" className="mm-icon-btn" aria-label="Remover" disabled={busy} onClick={() => remove(e.id)} style={{ color: 'var(--danger)' }}>
+            <Trash2 size={16} />
+          </button>
         </div>
       ))}
     </div>

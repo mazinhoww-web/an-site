@@ -6,7 +6,12 @@ import { getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { runSerializable } from '@/lib/mentormatch/tx';
 import { createNotification, type MmTx } from '@/lib/mentormatch/notifications';
 import { mmConnectionRequestSchema, mmConnectionRespondSchema } from '@/lib/mentormatch/validators';
-import { emailMenteeAccepted, emailMentorNewRequest } from '@/lib/mentormatch/notify-email';
+import {
+  emailMenteeAccepted,
+  emailMenteeRejected,
+  emailMenteeWaitlistPromoted,
+  emailMentorNewRequest,
+} from '@/lib/mentormatch/notify-email';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,7 +20,7 @@ type ApiResult = { status: number; body: unknown };
 // R6/R7: when a slot frees (REJECT/COMPLETE/CANCEL), pull the first waitlist
 // entry into a PENDING connection, notify the mentee, remove the entry and
 // keep the remaining positions contiguous.
-async function promoteFromWaitlist(tx: MmTx, mentorId: string, tenantId: string) {
+async function promoteFromWaitlist(tx: MmTx, mentorId: string, tenantId: string): Promise<string | null> {
   const first = await tx
     .select()
     .from(mmWaitlistEntry)
@@ -23,7 +28,7 @@ async function promoteFromWaitlist(tx: MmTx, mentorId: string, tenantId: string)
     .orderBy(asc(mmWaitlistEntry.position))
     .limit(1);
   const entry = first[0];
-  if (!entry) return;
+  if (!entry) return null;
 
   await tx.insert(mmConnection).values({
     mentorId,
@@ -48,6 +53,7 @@ async function promoteFromWaitlist(tx: MmTx, mentorId: string, tenantId: string)
     .update(mmWaitlistEntry)
     .set({ position: sql`${mmWaitlistEntry.position} - 1` })
     .where(and(eq(mmWaitlistEntry.mentorId, mentorId), gt(mmWaitlistEntry.position, entry.position)));
+  return entry.menteeId;
 }
 
 // GET — connections of the current user (as mentor or mentee). ?status filter.
@@ -172,7 +178,7 @@ export async function PATCH(req: Request) {
   const parsed = mmConnectionRespondSchema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: 'Dados invalidos' }, { status: 400 });
   const { connectionId, status } = parsed.data;
-  const post: { fn: (() => Promise<void>) | null } = { fn: null };
+  const post: { jobs: (() => Promise<void>)[] } = { jobs: [] };
 
   try {
     const result = await runSerializable<ApiResult>(async (tx) => {
@@ -208,7 +214,7 @@ export async function PATCH(req: Request) {
             },
             tx,
           );
-          post.fn = () => emailMenteeAccepted(conn.menteeId, conn.tenantId);
+          post.jobs.push(() => emailMenteeAccepted(conn.menteeId, conn.tenantId));
           return { status: 200, body: { ok: true } };
         }
         // REJECTED
@@ -227,7 +233,9 @@ export async function PATCH(req: Request) {
           },
           tx,
         );
-        await promoteFromWaitlist(tx, conn.mentorId, conn.tenantId); // R6
+        post.jobs.push(() => emailMenteeRejected(conn.menteeId, conn.tenantId));
+        const promotedR = await promoteFromWaitlist(tx, conn.mentorId, conn.tenantId); // R6
+        if (promotedR) post.jobs.push(() => emailMenteeWaitlistPromoted(promotedR, conn.tenantId));
         return { status: 200, body: { ok: true } };
       }
 
@@ -239,11 +247,12 @@ export async function PATCH(req: Request) {
         .update(mmConnection)
         .set({ status, endedAt: new Date(), updatedAt: new Date() })
         .where(eq(mmConnection.id, connectionId));
-      await promoteFromWaitlist(tx, conn.mentorId, conn.tenantId); // R6
+      const promotedC = await promoteFromWaitlist(tx, conn.mentorId, conn.tenantId); // R6
+      if (promotedC) post.jobs.push(() => emailMenteeWaitlistPromoted(promotedC, conn.tenantId));
       return { status: 200, body: { ok: true } };
     });
 
-    if (result.status < 300 && post.fn) await post.fn().catch(() => {});
+    if (result.status < 300) for (const j of post.jobs) await j().catch(() => {});
     return NextResponse.json(result.body, { status: result.status });
   } catch (error) {
     console.error('[MM_API_ERROR]', { endpoint: 'connections#PATCH', userId: user.id, error });

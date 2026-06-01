@@ -61,6 +61,11 @@ export async function sendNotificationEmail(opts: {
   ctaUrl?: string;
   ctaLabel?: string;
 }): Promise<void> {
+  // Captura para E2E (MM_EMAIL_CAPTURE=1): registra em memoria em vez de enviar.
+  if (process.env.MM_EMAIL_CAPTURE === '1') {
+    capturedEmails.push({ to: opts.to, subject: opts.subject, title: opts.title, at: Date.now() });
+    return;
+  }
   const resend = getResend();
   if (!resend) return;
   try {
@@ -74,6 +79,21 @@ export async function sendNotificationEmail(opts: {
   } catch (error) {
     console.error('[MM_EMAIL_ERROR]', { kind: 'notification', to: opts.to, error });
   }
+}
+
+// --- Captura em memoria para E2E (so ativa com MM_EMAIL_CAPTURE=1) ----------
+export interface CapturedEmail {
+  to: string;
+  subject: string;
+  title: string;
+  at: number;
+}
+const capturedEmails: CapturedEmail[] = [];
+export function getCapturedEmails(): CapturedEmail[] {
+  return capturedEmails;
+}
+export function clearCapturedEmails(): void {
+  capturedEmails.length = 0;
 }
 
 export async function sendAccountApprovedEmail(to: string, name: string | null, tenantName: string) {

@@ -49,3 +49,35 @@ export async function emailMenteeAccepted(menteeId: string, tenantId: string) {
     ctaLabel: 'Ver meu mentor',
   });
 }
+
+/** Notifica o mentorado (email) que sua solicitacao foi recusada. */
+export async function emailMenteeRejected(menteeId: string, tenantId: string) {
+  const { email, tenant } = await recipientAndTenant(menteeId, tenantId);
+  if (!email || !tenant) return;
+  await sendNotificationEmail({
+    to: email,
+    tenantName: tenant.name,
+    brandColor: tenant.brandColor,
+    subject: `Atualizacao da sua solicitacao — ${tenant.name}`,
+    title: 'Sua solicitacao foi recusada',
+    bodyHtml: `<p>O mentor nao pode aceitar sua solicitacao desta vez. Explore outros mentores no painel.</p>`,
+    ctaUrl: `${appUrl}/mentormatch/t/${tenant.slug}/mentors`,
+    ctaLabel: 'Ver mentores',
+  });
+}
+
+/** Notifica o mentorado (email) que avancou da lista de espera para uma solicitacao ativa. */
+export async function emailMenteeWaitlistPromoted(menteeId: string, tenantId: string) {
+  const { email, tenant } = await recipientAndTenant(menteeId, tenantId);
+  if (!email || !tenant) return;
+  await sendNotificationEmail({
+    to: email,
+    tenantName: tenant.name,
+    brandColor: tenant.brandColor,
+    subject: `Voce avancou na fila — ${tenant.name}`,
+    title: 'Uma vaga abriu para voce',
+    bodyHtml: `<p>O mentor abriu uma vaga e sua solicitacao avancou da lista de espera. Aguarde a confirmacao.</p>`,
+    ctaUrl: `${appUrl}/mentormatch/t/${tenant.slug}/mentee`,
+    ctaLabel: 'Ver minhas solicitacoes',
+  });
+}

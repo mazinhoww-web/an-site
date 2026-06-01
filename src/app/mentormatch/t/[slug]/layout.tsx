@@ -28,9 +28,10 @@ export default async function TenantDashboardLayout({
 
   // Injeta a marca do tenant em runtime no subtree do app (--brand + --mm-primary).
   const theme = await resolveColorScheme();
+  const dual = Boolean(user.canMentor && user.canMentee);
   return (
     <div style={tenantBrandStyle(tenant)}>
-      <DashboardShell slug={params.slug} brandColor={tenant.brandColor} theme={theme}>
+      <DashboardShell slug={params.slug} brandColor={tenant.brandColor} theme={theme} dual={dual}>
         {children}
       </DashboardShell>
     </div>

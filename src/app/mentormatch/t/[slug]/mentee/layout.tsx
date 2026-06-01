@@ -15,7 +15,8 @@ export default async function MenteeLayout({
   const user = await getMmUserFromDb();
   if (!user) redirect('/mentormatch/login');
 
-  if (user.role === 'MENTEE') return <>{children}</>;
-  if (user.role === 'MENTOR') redirect(`/mentormatch/t/${params.slug}/mentor`);
+  // D023.8: dual-role. Acessa a visao de mentorado quem e MENTEE ou tem canMentee.
+  if (user.role === 'MENTEE' || user.canMentee) return <>{children}</>;
+  if (user.role === 'MENTOR' || user.canMentor) redirect(`/mentormatch/t/${params.slug}/mentor`);
   redirect(await resolvePostLoginHref(user));
 }

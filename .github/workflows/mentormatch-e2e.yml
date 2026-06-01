@@ -32,6 +32,7 @@ jobs:
       NEXTAUTH_URL: http://localhost:3000
       AUTH_TRUST_HOST: 'true'
       NEXT_PUBLIC_APP_URL: http://localhost:3000
+      MM_EMAIL_CAPTURE: "1"
       SUPER_ADMIN_EMAIL: super@mm.test
       SUPER_ADMIN_PASSWORD: super1234
     steps:

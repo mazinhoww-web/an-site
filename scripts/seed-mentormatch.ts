@@ -177,7 +177,8 @@ const TENANTS = [
 // Capacidades alvo por mentor (maxMentees default 4): 0/4, 2/4, 4/4, 0/4, 2/4, 4/4.
 const ACCEPTED = [0, 2, 4, 0, 2, 4];
 const PENDING = [2, 0, 0, 0, 0, 0];
-const WAITLIST = [0, 0, 0, 0, 0, 3];
+// mentor3 e mentor6 (lotados) tem fila — mentor6 p/ teste de promocao, mentor3 p/ write.
+const WAITLIST = [0, 0, 3, 0, 0, 3];
 
 async function seedTenant(t: (typeof TENANTS)[number], planId: string) {
   const tenantId = await ensureTenant(t, planId);
@@ -258,6 +259,19 @@ async function seedTenant(t: (typeof TENANTS)[number], planId: string) {
     tenantId,
     canMentee: true,
     headline: `Conta ${t.slug}`,
+  });
+
+  // Usuario DUAL (canMentor && canMentee) — base para o E2E de role-switcher.
+  await ensureUser({
+    email: `dual@${t.slug}.test`,
+    name: `Dual ${t.slug}`,
+    password: PWD.user,
+    role: 'MENTOR',
+    tenantId,
+    canMentor: true,
+    canMentee: true,
+    headline: 'Atua como mentor e mentorado',
+    department: 'Produto',
   });
 
   // Notificacao de match aceito para um mentee.
