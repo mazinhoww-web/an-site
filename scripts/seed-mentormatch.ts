@@ -248,6 +248,18 @@ async function seedTenant(t: (typeof TENANTS)[number], planId: string) {
     }
   }
 
+  // Conta de MESMO email nos dois tenants (contas distintas e isoladas) — base
+  // para o E2E de isolamento cross-tenant (D023.1). Nome difere por tenant.
+  await ensureUser({
+    email: 'shared@mm.test',
+    name: `Compartilhado ${t.slug}`,
+    password: PWD.user,
+    role: 'MENTEE',
+    tenantId,
+    canMentee: true,
+    headline: `Conta ${t.slug}`,
+  });
+
   // Notificacao de match aceito para um mentee.
   await ensureNotification(
     mentees[0]!,
