@@ -1,10 +1,28 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
+import { Badge, Button, Input, MentorMatchThemeRoot, Reveal, ToastProvider, useToast } from '@/mentormatch/design-system';
 
 type Skill = { id: string; name: string; category: string | null; usageCount: number; isActive: boolean };
 
-export function SkillsManager({ tenantId }: { tenantId: string }) {
+interface Props {
+  tenantId: string;
+  brandColor?: string | null;
+  theme?: 'light' | 'dark';
+}
+
+export function SkillsManager(props: Props) {
+  return (
+    <MentorMatchThemeRoot brand={props.brandColor} theme={props.theme} style={{ minHeight: '100%', padding: '8px 0 40px' }}>
+      <ToastProvider>
+        <Inner tenantId={props.tenantId} />
+      </ToastProvider>
+    </MentorMatchThemeRoot>
+  );
+}
+
+function Inner({ tenantId }: { tenantId: string }) {
+  const { toast } = useToast();
   const [skills, setSkills] = useState<Skill[]>([]);
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
@@ -46,6 +64,7 @@ export function SkillsManager({ tenantId }: { tenantId: string }) {
     }
     setName('');
     setCategory('');
+    toast({ title: 'Habilidade adicionada', tone: 'success' });
     void load();
   }
 
@@ -60,48 +79,64 @@ export function SkillsManager({ tenantId }: { tenantId: string }) {
 
   async function remove(id: string) {
     await fetch(`/api/mentormatch/skills?id=${id}`, { method: 'DELETE' }).catch(() => {});
+    toast({ title: 'Habilidade removida', tone: 'info' });
     void load();
   }
 
   return (
-    <div className="space-y-5">
-      <div className="flex flex-wrap items-end gap-3">
-        <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nome" className={input} />
-        <input value={category} onChange={(e) => setCategory(e.target.value)} placeholder="Categoria (opcional)" className={input} />
-        <button type="button" onClick={() => void create()} className={btnPrimary}>
-          Adicionar
-        </button>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 720 }}>
+      <Reveal>
+        <h1 className="mm-h1">Habilidades</h1>
+        <p className="mm-body-small">Catalogo de skills do tenant.</p>
+      </Reveal>
+
+      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', gap: 10 }}>
+        <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nome" style={{ maxWidth: 220 }} />
+        <Input value={category} onChange={(e) => setCategory(e.target.value)} placeholder="Categoria (opcional)" style={{ maxWidth: 220 }} />
+        <Button onClick={() => void create()}>Adicionar</Button>
       </div>
-      {error && <p className="text-body-s text-error">{error}</p>}
+      {error && (
+        <p className="mm-field__error" role="alert">
+          {error}
+        </p>
+      )}
+
       {loading ? (
-        <p className="text-body-s text-graphite">Carregando...</p>
+        <p className="mm-body-small">Carregando...</p>
+      ) : skills.length === 0 ? (
+        <p className="mm-body-small" style={{ color: 'var(--text-muted)' }}>
+          Nenhuma habilidade ainda.
+        </p>
       ) : (
-        <ul className="space-y-2">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {skills.map((s) => (
-            <li
+            <div
               key={s.id}
-              className={`flex items-center justify-between rounded border border-hairline bg-paper px-4 py-2 ${s.isActive ? '' : 'opacity-60'}`}
+              className="mm-card"
+              style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', opacity: s.isActive ? 1 : 0.6 }}
             >
-              <span className="text-body-s">
-                {s.name} <span className="text-graphite">{s.category ?? ''}</span>{' '}
-                <span className="font-mono text-mono-meta text-graphite">uso {s.usageCount}</span>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <span className="mm-body-strong">{s.name}</span>{' '}
+                {s.category && <span className="mm-body-small">{s.category}</span>}
+              </div>
+              <span className="mm-body-small mm-mono" style={{ color: 'var(--text-muted)' }}>
+                uso {s.usageCount}
               </span>
-              <span className="flex gap-2">
-                <button type="button" onClick={() => void toggle(s)} className={btn}>
-                  {s.isActive ? 'Desativar' : 'Ativar'}
-                </button>
-                <button type="button" onClick={() => void remove(s.id)} className={btn}>
-                  Excluir
-                </button>
-              </span>
-            </li>
+              {s.isActive ? <Badge tone="success">Ativa</Badge> : <Badge tone="warning">Inativa</Badge>}
+              <Button variant="ghost" onClick={() => void toggle(s)} style={{ height: 32, padding: '0 12px', fontSize: 13 }}>
+                {s.isActive ? 'Desativar' : 'Ativar'}
+              </Button>
+              <Button
+                variant="ghost"
+                onClick={() => void remove(s.id)}
+                style={{ height: 32, padding: '0 12px', fontSize: 13, color: 'var(--danger)' }}
+              >
+                Excluir
+              </Button>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
 }
-
-const input = 'rounded border border-hairline bg-paper px-3 py-2 text-body text-ink outline-none focus:border-ink';
-const btn = 'rounded border border-hairline px-3 py-1.5 text-body-s text-ink hover:border-ink';
-const btnPrimary = 'rounded bg-ink px-4 py-2 text-body-s text-paper hover:bg-graphite';

@@ -1,4 +1,8 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { MentorMatchThemeRoot } from '@/mentormatch/design-system';
 
 const ITEMS: [string, string][] = [
   ['', 'Painel'],
@@ -11,18 +15,47 @@ const ITEMS: [string, string][] = [
   ['invitations', 'Convites'],
 ];
 
-export function AdminNav({ slug }: { slug: string }) {
+interface Props {
+  slug: string;
+  brandColor?: string | null;
+  theme?: 'light' | 'dark';
+}
+
+export function AdminNav({ slug, brandColor, theme = 'light' }: Props) {
+  const pathname = usePathname();
+  const base = `/mentormatch/t/${slug}/admin`;
+
   return (
-    <nav className="mb-8 flex flex-wrap gap-2 border-b border-hairline pb-4">
-      {ITEMS.map(([seg, label]) => (
-        <Link
-          key={seg}
-          href={seg ? `/mentormatch/t/${slug}/admin/${seg}` : `/mentormatch/t/${slug}/admin`}
-          className="rounded border border-hairline px-3 py-1.5 text-body-s text-ink hover:border-ink"
-        >
-          {label}
-        </Link>
-      ))}
-    </nav>
+    <MentorMatchThemeRoot brand={brandColor} theme={theme} style={{ display: 'block', background: 'transparent' }}>
+      <nav
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 8,
+          paddingBottom: 16,
+          marginBottom: 24,
+          borderBottom: '1px solid var(--border)',
+        }}
+      >
+        {ITEMS.map(([seg, label]) => {
+          const href = seg ? `${base}/${seg}` : base;
+          const active = seg ? pathname?.startsWith(`${base}/${seg}`) : pathname === base;
+          return (
+            <Link
+              key={seg || 'painel'}
+              href={href}
+              className="mm-chip"
+              style={
+                active
+                  ? { background: 'var(--brand-soft)', color: 'var(--brand)', borderColor: 'var(--brand)' }
+                  : undefined
+              }
+            >
+              {label}
+            </Link>
+          );
+        })}
+      </nav>
+    </MentorMatchThemeRoot>
   );
 }
