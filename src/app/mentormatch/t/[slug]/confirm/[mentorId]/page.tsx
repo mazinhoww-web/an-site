@@ -33,12 +33,16 @@ export default async function ConfirmPage({
   if (!mentor) notFound();
 
   return (
-    <main className="mx-auto max-w-2xl space-y-6">
-      <header className="space-y-1">
-        <h1 className="font-heading text-display-m">{mentor.name ?? 'Mentor'}</h1>
-        {mentor.headline && <p className="text-body text-graphite">{mentor.headline}</p>}
+    <main className="mx-auto" style={{ maxWidth: 640, display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <header style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+        <h1 className="mm-h1">{mentor.name ?? 'Mentor'}</h1>
+        {mentor.headline && (
+          <p className="mm-body" style={{ color: 'var(--text-secondary)' }}>
+            {mentor.headline}
+          </p>
+        )}
       </header>
-      {mentor.bio && <p className="text-body text-ink">{mentor.bio}</p>}
+      {mentor.bio && <p className="mm-body">{mentor.bio}</p>}
       <RequestForm mentorId={mentor.id} />
     </main>
   );

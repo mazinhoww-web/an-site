@@ -44,37 +44,48 @@ export function RequestForm({ mentorId }: { mentorId: string }) {
   }
 
   if (state === 'created') {
-    return <p className="text-body text-success">Solicitacao enviada. Aguarde a resposta do mentor.</p>;
+    return (
+      <p className="mm-body" style={{ color: 'var(--success)' }}>
+        Solicitacao enviada. Aguarde a resposta do mentor.
+      </p>
+    );
   }
   if (state === 'waitlisted') {
     return (
-      <p className="text-body text-ink">
+      <p className="mm-body">
         Mentor lotado. Voce entrou na fila de espera{position ? ` na posicao ${position}` : ''}.
       </p>
     );
   }
 
   return (
-    <div className="space-y-3">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <textarea
         rows={5}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Apresente-se e diga o que busca na mentoria (10 a 500 caracteres)."
-        className="w-full rounded border border-hairline bg-paper px-3 py-2 text-body text-ink outline-none focus:border-ink"
+        className="mm-input"
+        style={{ width: '100%', resize: 'vertical' }}
       />
       <div className="flex items-center justify-between">
-        <span className="font-mono text-mono-meta text-graphite">{message.length}/500</span>
+        <span className="mm-mono" style={{ color: 'var(--text-muted)' }}>
+          {message.length}/500
+        </span>
         <button
           type="button"
           disabled={state === 'submitting'}
           onClick={() => void submit()}
-          className="rounded bg-ink px-6 py-2 text-body text-paper hover:bg-graphite disabled:opacity-60"
+          className="mm-btn mm-btn--primary"
         >
           {state === 'submitting' ? 'Enviando...' : 'Enviar solicitacao'}
         </button>
       </div>
-      {error && <p className="text-body-s text-error">{error}</p>}
+      {error && (
+        <p className="mm-body-small" style={{ color: 'var(--danger)' }}>
+          {error}
+        </p>
+      )}
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation';
 import { and, desc, eq, inArray } from 'drizzle-orm';
 import { db } from '@/db';
 import { mmConnection, mmUser } from '@/lib/mentormatch/db/schema';
+import { Inbox } from 'lucide-react';
 import { getMmUserFromDb } from '@/lib/mentormatch/auth-helpers';
 import { resolvePostLoginHref } from '@/lib/mentormatch/dashboard-href';
 import { RequestActions } from '@/components/mentormatch/dashboard/RequestActions';
@@ -26,24 +27,39 @@ export default async function RequestsPage() {
   const menteeById = new Map(mentees.map((m) => [m.id, m]));
 
   return (
-    <main className="space-y-8">
-      <h1 className="font-heading text-display-m">Solicitacoes</h1>
+    <main style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+      <h1 className="mm-h1">Solicitacoes</h1>
       {pending.length === 0 ? (
-        <p className="text-body-s text-graphite">Nenhuma solicitacao pendente.</p>
+        <div className="mm-empty">
+          <span className="mm-empty__icon" aria-hidden>
+            <Inbox size={28} />
+          </span>
+          <h3 className="mm-h3">Nenhuma solicitacao pendente</h3>
+          <p className="mm-body" style={{ color: 'var(--text-secondary)', maxWidth: 420 }}>
+            Quando um mentorado solicitar mentoria, o pedido aparece aqui para voce
+            aceitar ou recusar.
+          </p>
+        </div>
       ) : (
-        <ul className="space-y-3">
+        <ul style={{ display: 'flex', flexDirection: 'column', gap: 12, listStyle: 'none', padding: 0, margin: 0 }}>
           {pending.map((c) => {
             const m = menteeById.get(c.menteeId);
             return (
-              <li key={c.id} className="rounded border border-hairline bg-paper p-4">
-                <div className="mb-2 flex items-center justify-between">
-                  <span className="text-body">
+              <li key={c.id} className="mm-card">
+                <div className="flex items-center justify-between" style={{ marginBottom: 8, gap: 16 }}>
+                  <span className="mm-body">
                     {m?.name ?? 'Mentee'}{' '}
-                    <span className="text-body-s text-graphite">{m?.headline ?? ''}</span>
+                    <span className="mm-body-small" style={{ color: 'var(--text-secondary)' }}>
+                      {m?.headline ?? ''}
+                    </span>
                   </span>
                   <RequestActions connectionId={c.id} />
                 </div>
-                {c.message && <p className="text-body-s text-ink">{c.message}</p>}
+                {c.message && (
+                  <p className="mm-body-small" style={{ color: 'var(--text-secondary)' }}>
+                    {c.message}
+                  </p>
+                )}
               </li>
             );
           })}
