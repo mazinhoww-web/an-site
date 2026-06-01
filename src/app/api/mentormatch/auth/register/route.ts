@@ -4,11 +4,17 @@ import bcrypt from 'bcryptjs';
 import { db } from '@/db';
 import { mmInvitation, mmUser } from '@/lib/mentormatch/db/schema';
 import { runSerializable } from '@/lib/mentormatch/tx';
+import { rateLimit } from '@/lib/rate-limit';
 import { mmRegisterSchema } from '@/lib/mentormatch/validators';
 
 export const dynamic = 'force-dynamic';
 
 const BCRYPT_COST = 10;
+
+function clientIp(req: Request): string {
+  const fwd = req.headers.get('x-forwarded-for');
+  return fwd ? fwd.split(',')[0]!.trim() : 'unknown';
+}
 
 // Public registration (R11).
 // - With a valid invitation (exists, !used, !expired, email matches): the user
@@ -17,6 +23,12 @@ const BCRYPT_COST = 10;
 // - Without an invitation: PENDING, no role/tenant; conflict by (email, tenantId
 //   IS NULL). Tenant is assigned later at complete-profile.
 export async function POST(req: Request) {
+  try {
+    await rateLimit(`mm-register:${clientIp(req)}`, 10, 600);
+  } catch {
+    return NextResponse.json({ error: 'Muitas tentativas. Tente novamente em alguns minutos.' }, { status: 429 });
+  }
+
   const body = await req.json().catch(() => null);
   const parsed = mmRegisterSchema.safeParse(body);
   if (!parsed.success) {
