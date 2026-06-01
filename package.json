@@ -18,7 +18,8 @@
     "seed": "tsx scripts/seed-mentormatch.ts",
     "test:e2e": "playwright test",
     "seed:prod": "tsx scripts/seed-production.ts",
-    "smoke": "tsx scripts/smoke.ts"
+    "smoke": "tsx scripts/smoke.ts",
+    "release:prod": "bash scripts/deploy-prod.sh"
   },
   "dependencies": {
     "@auth/core": "^0.34.3",
